@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="그룹_5300" data-name="그룹 5300" transform="translate(-186 -956)">
+    <g id="사각형_2605" data-name="사각형 2605" transform="translate(203 965)" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="26" height="26" stroke="none"/>
+      <rect x="0.5" y="0.5" width="25" height="25" fill="none"/>
+    </g>
+    <g id="사각형_2577" data-name="사각형 2577" transform="translate(186 956)" fill="#fff" stroke="#b2b2b2" stroke-width="1">
+      <rect width="60" height="60" rx="10" stroke="none"/>
+      <rect x="0.5" y="0.5" width="59" height="59" rx="9.5" fill="none"/>
+    </g>
+    <text id="동영상" transform="translate(216 1004)" fill="#707070" font-size="12" font-family="SamsungOneKorean-400, 'SamsungOneKorean 400'" letter-spacing="-0.005em"><tspan x="-16.147" y="0">동영상</tspan></text>
+    <g id="ic-video-s" transform="translate(-228.273 514.116)">
+      <rect id="사각형_2606" data-name="사각형 2606" width="24" height="24" transform="translate(432.273 451.884)" fill="none"/>
+      <path id="패스_2090" data-name="패스 2090" d="M454.362,459.408l-3.028,1.792-.68.4v-1.492a3.188,3.188,0,0,0-3.148-3.227H436.422a3.188,3.188,0,0,0-3.148,3.227v7.78a3.188,3.188,0,0,0,3.148,3.227h11.085a3.188,3.188,0,0,0,3.148-3.227V466.4l.68.4,3.028,1.792a.792.792,0,0,0,1.189-.7v-7.78A.792.792,0,0,0,454.362,459.408Z" transform="translate(-0.096 0)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <g id="타원_144" data-name="타원 144" transform="translate(438.751 460.272)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+        <circle cx="3.728" cy="3.728" r="3.728" stroke="none"/>
+        <circle cx="3.728" cy="3.728" r="2.978" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

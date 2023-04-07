@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가입연령 확인</title>
+  <head>
+    <style type="text/css">
+    [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],
+    .ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){
+      display:none !important;
+      }
+      ng\:form{
+        display:block;
+        }
+    .ng-animate-shim{
+      visibility:hidden;
+      }
+    .ng-anchor{
+      position:absolute;
+      }
+      </style>
+  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/NZrMWHVy58-S9gVvad9HVGxk/recaptcha__ko.js" crossorigin="anonymous" integrity="sha384-DK/d6TkEhKTTBR6JnFWnkgYKtP8/o5LaQ2vuRBd6lQDoITNwuo6qLmUt5lsn6HW9"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-5C6SNNV"></script>
+  <script>var PAGEPATH = '/accounts/idntn/userVerifyKoreanRepresentative.js';</script>
+  
+  <link rel="stylesheet" href="https://account.samsung.com/accounts/v1/resources/js/common/angular-block-ui/angular-block-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="https://account.samsung.com/accounts/v1/resources/css/v2/angular-material.css">
+  <link rel="stylesheet" type="text/css" href="https://account.samsung.com/accounts/v1/resources/one-ui/css/default.css">
+  
+  <link type="image/x-icon" rel="shortcut icon" href="https://account.samsung.com/favicon.ico">
+  <script type="text/javascript">
+    //<![CDATA[
+    var wipLogicalPath = "/accounts/v1";
+    var wipResourcesVerDt = "";
+    var wipCancelURI = "https://www.samsung.com/sec//sec/monitors/gaming-monitors/?state=wmcxCJDsDG2EKdvVllchda88Z1";
+    var wipGoBackURI = "https://www.samsung.com/sec//sec/monitors/gaming-monitors/?state=wmcxCJDsDG2EKdvVllchda88Z1";
+    var loLangCD = "ko";
+    var loCntyCD = "KR";
+    var isTextRightAlign = false;
+    var isTextFirstFamilyName = true;
+    var isTextFirstDateYear = true;
+    var wipAcsChnlEnum = "WEB";
+    var wipViewTypeEnum = "v2";
+    var userGeoIPCnty3dgtCd = "KOR";
+    var userAcsCnty3dgtCd = "KOR";
+    var userCnty3dgtCd = "";
+    var wipUriEnum = "userVerifyKoreanRepresentative";
+    var APPNAME = "SECKDPWEB";
+    var sJSESSIONID = "4056199b-57a7-443f-bb37-05a72604a2fc";
+    var wipCsrf = {'token': '7706d9d1-ec46-4539-ba18-77e38e57083a', 'headerName': 'X-CSRF-TOKEN'};
+    var wipResourcesUrl = "https://account.samsung.com/accounts/v1/resources";
+    var isGAEnabled = true;
+    var googleRecaptchaApiUrl = "https://www.google.com";
+    var action = "userVerifyKoreanRepresentative";
+    var isRecaptchaEnabled = true;
+    var recaptchaSiteKey = "6LeI5F8iAAAAACfMal3lra4jEWUbkVGlnys_5CWG";
+    var isFromChina = false;
+    //]]>
+  
+    if (isGAEnabled) {
+      var containerId;
+      if (wipResourcesUrl.indexOf("sad") !== -1) {
+        containerId = 'GTM-KCH2BM6';
+      } else if (wipResourcesUrl.indexOf("stg") !== -1) {
+        containerId = 'GTM-W3S5ZM6';
+      } else {
+        containerId = 'GTM-5C6SNNV';
+      }
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start':
+            new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', containerId);
+    }
+  
+    var createPostMessage = function () {
+  
+      var sendPostMessage = function () {
+        console.log("");
+      }
+  
+      if (APPNAME.indexOf("samsung_com_us") !== -1) {
+        if (document.getElementsByClassName('wrapper')[0]) {
+          var pageType = "signin";
+          if (document.querySelector('form[name="signUpForm"]')) {
+            pageType = "signup";
+          } else if (document.querySelector('form[name=findIdForm]')) {
+            pageType = "findid";
+          } else if (document.querySelector('form[name=rstPwd]')) {
+            pageType = "resetpwd";
+          } else {
+            pageType = "others";
+          }
+          sendPostMessage = function () {
+            window.parent.postMessage({
+              pageType: pageType
+            }, '*');
+          }
+        }
+      }
+      sendPostMessage();
+    }
+  
+  </script>
+  
+  <!-- js loading -->
+  <script src="https://account.samsung.com/accounts/v1/resources/js/common/wip.js"></script>
+  <script src="https://account.samsung.com/accounts/v1/resources/js/v2/app.js"></script>
+  <script src="https://account.samsung.com/accounts/v1/resources/js/v2/run.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/config.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/controller.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/directive.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/filter.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/loading.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/provider.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/service.js"></script>
+  <script src="/accounts/v1/resources/js/v2/cmm/util.js"></script>
+  <script src="/accounts/v1/resources/js/v2/biz/accounts/idntn/userVerifyKoreanRepresentative.js"></script>
+  
+  <script src="https://account.samsung.com/accounts/v1/resources/js/common/qrcode-generator/qrcode.js"></script>
+  <script src="https://account.samsung.com/accounts/v1/resources/js/common/qrcode-generator/qrcode_UTF8.js"></script>
+  <script src="https://account.samsung.com/accounts/v1/resources/js/common/angular-qrcode/angular-qrcode.js"></script>
+  
+  <!-- Samsung analytics -->
+  
+  
+  <script>
+    var userAgent = navigator.userAgent.toLowerCase();
+    var isIE = false;
+    var sessionId = "4056199b-57a7-443f-bb37-05a72604a2fc";
+    var transactionId = "1680116507";
+    var countryCode = "KOR";
+    var samsungAnalyticsEnabled = false;
+    var pageName = "userVerifyKoreanRepresentative";
+  
+    let pageLogging = function (callback) {
+      if (samsungAnalyticsEnabled && !isIE) {
+        window.sa('set', 'pageName', pageName);
+        window.sa('set', 'customDimension', 'sessionId', sessionId);
+        window.sa('set', 'customDimension', 'transactionId', transactionId);
+        window.sa('set', 'customDimension', 'countryCode', countryCode);
+        window.sa('send', 'pv', undefined, {
+          onSuccess: {
+            analysis: callback
+          },
+          onError: {
+            analysis: callback
+          },
+          timeout: 1000
+        });
+      } else {
+        typeof callback === 'function' && callback();
+      }
+    }
+  
+    let eventLogging = function (eventName, callback) {
+      if (samsungAnalyticsEnabled && !isIE) {
+        window.sa('set', 'pageName', pageName);
+        window.sa('set', 'eventName', pageName + '_' + eventName);
+        window.sa('set', 'customDimension', 'sessionId', sessionId);
+        window.sa('set', 'customDimension', 'transactionId', transactionId);
+        window.sa('set', 'customDimension', 'countryCode', countryCode);
+        window.sa('send', 'ev', undefined, {
+          onSuccess: {
+            analysis: callback
+          },
+          onError: {
+            analysis: callback
+          },
+          timeout: 1000
+        });
+      } else {
+        typeof callback === 'function' && callback();
+      }
+    }
+  </script>
+  <script>
+    window.onload = pageLogging();
+  </script>
+  
+  <!-- Recaptcha enterprise -->
+  
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeI5F8iAAAAACfMal3lra4jEWUbkVGlnys_5CWG"></script>
+  
+  
+  <!-- Datadome -->
+  <script>
+    window.ddjskey = "EB9956AFB353D5DA3AE0A48993A8C5";
+    window.ddoptions = {ajaxListenerPath: true};
+  </script>
+  <script src="https://js.datadome.co/tags.js"></script>
+  
+  <script type="text/javascript">
+    window.document.title = '가입 연령 확인 | 삼성 계정';
+  </script></head>
+</head>
+<body>
+  
+</body>
+</html>

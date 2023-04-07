@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="42" height="26" viewBox="0 0 42 26">
+  <g id="icon_사용가능쿠폰" transform="translate(-577 -250)">
+    <path id="패스_2137" data-name="패스 2137" d="M613.672,628.8h-5.378c0,.9-.666,2.767-2.5,2.767-.027,0-.054,0-.081,0-1.642,0-2.416-1.889-2.416-2.762H573.312a.868.868,0,0,0-.82.909v24.182a.868.868,0,0,0,.82.909H603.3a2.619,2.619,0,0,1,2.416-2.762c.027,0,.053,0,.081,0,1.83,0,2.5,1.863,2.5,2.767h5.378a.868.868,0,0,0,.82-.909V629.711A.868.868,0,0,0,613.672,628.8Z" transform="translate(4.508 -378.802)" fill="#2189ff"/>
+    <line id="선_512" data-name="선 512" y2="20" transform="translate(610.5 254)" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="2"/>
+    <g id="타원_116" data-name="타원 116" transform="translate(585 257)" fill="none" stroke="#fff" stroke-width="2">
+      <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+      <circle cx="3.5" cy="3.5" r="2.5" fill="none"/>
+    </g>
+    <g id="타원_117" data-name="타원 117" transform="translate(594 263)" fill="none" stroke="#fff" stroke-width="2">
+      <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+      <circle cx="3.5" cy="3.5" r="2.5" fill="none"/>
+    </g>
+    <g id="사각형_3092" data-name="사각형 3092" transform="translate(595.885 256.505) rotate(30)" fill="none" stroke="#fff" stroke-width="1">
+      <rect width="2" height="15" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1" height="14" fill="none"/>
+    </g>
+  </g>
+</svg>

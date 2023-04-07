@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <g id="img_icon_01" transform="translate(-372 -1732)">
+    <rect id="사각형_1860" data-name="사각형 1860" width="96" height="96" transform="translate(372 1732)" fill="none"/>
+    <g id="그룹_3359" data-name="그룹 3359" transform="translate(-793.215 1395.669)">
+      <g id="그룹_3348" data-name="그룹 3348">
+        <rect id="사각형_2037" data-name="사각형 2037" width="57.447" height="73" rx="8.5" transform="translate(1184.215 349.331)" stroke-width="2" stroke="#000" stroke-linecap="round" stroke-linejoin="round" fill="#fff"/>
+      </g>
+      <g id="그룹_3349" data-name="그룹 3349">
+        <rect id="사각형_2038" data-name="사각형 2038" width="41.708" height="17" rx="2.787" transform="translate(1192.085 396.331)" stroke-width="2" stroke="#000" stroke-linecap="round" stroke-linejoin="round" fill="#1428a0"/>
+      </g>
+      <g id="그룹_3350" data-name="그룹 3350">
+        <path id="패스_1730" data-name="패스 1730" d="M1218.945,351.767h-12.012a2.718,2.718,0,0,1-2.718-2.718h0a2.718,2.718,0,0,1,2.718-2.718h12.012a2.717,2.717,0,0,1,2.718,2.718h0A2.718,2.718,0,0,1,1218.945,351.767Z" fill="#bfdbf6" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="그룹_3354" data-name="그룹 3354">
+        <g id="그룹_3351" data-name="그룹 3351">
+          <line id="선_509" data-name="선 509" x2="29.279" transform="translate(1202.37 364.914)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <line id="선_510" data-name="선 510" x2="1.558" transform="translate(1194.229 364.914)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+        <g id="그룹_3352" data-name="그룹 3352">
+          <line id="선_511" data-name="선 511" x2="29.279" transform="translate(1202.37 373.914)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <line id="선_512" data-name="선 512" x2="1.558" transform="translate(1194.229 373.914)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+        <g id="그룹_3353" data-name="그룹 3353">
+          <line id="선_513" data-name="선 513" x2="29.279" transform="translate(1202.37 382.914)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <line id="선_514" data-name="선 514" x2="1.558" transform="translate(1194.229 382.914)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </g>
+      </g>
+      <g id="그룹_3358" data-name="그룹 3358">
+        <g id="그룹_3355" data-name="그룹 3355">
+          <text id="ZE" transform="translate(1198.719 408.068)" fill="#fff" font-size="10" font-family="SamsungSharpSans-Bold, Samsung Sharp Sans" font-weight="700"><tspan x="0" y="0" letter-spacing="0.1em">Z</tspan><tspan y="0">E</tspan></text>
+        </g>
+        <g id="그룹_3356" data-name="그룹 3356">
+          <text id="R" transform="translate(1211.369 408.068)" fill="#fff" font-size="10" font-family="SamsungSharpSans-Bold, Samsung Sharp Sans" font-weight="700"><tspan x="0" y="0">R</tspan></text>
+        </g>
+        <g id="그룹_3357" data-name="그룹 3357">
+          <text id="O" transform="translate(1218.259 408.068)" fill="#fff" font-size="10" font-family="SamsungSharpSans-Bold, Samsung Sharp Sans" font-weight="700"><tspan x="0" y="0">O</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

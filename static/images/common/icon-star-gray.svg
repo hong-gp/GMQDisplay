@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="14.321" viewBox="0 0 16 14.321">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="16" height="14.321" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="반복_그리드_1" data-name="반복 그리드 1" clip-path="url(#clip-path)">
+    <g transform="translate(-572 -396.744)">
+      <path id="star" d="M486,217.656l2.472,4.715,5.528.756-4,3.669.944,5.181L486,229.53l-4.944,2.447L482,226.8l-4-3.669,5.527-.756Z" transform="translate(94 179.088)" fill="#d9d9d9"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="그룹_1791" data-name="그룹 1791" transform="translate(-448 -1617)">
+    <rect id="사각형_1096" data-name="사각형 1096" width="30" height="30" transform="translate(448 1617)" fill="none"/>
+    <g id="그룹_1705" data-name="그룹 1705" transform="translate(-852.135 1532.819)">
+      <rect id="사각형_1112" data-name="사각형 1112" width="21.257" height="25.322" rx="2.7" transform="translate(1304.506 86.859)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.2"/>
+      <circle id="타원_127" data-name="타원 127" cx="7.471" cy="7.471" r="7.471" transform="translate(1307.664 93.262)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.2"/>
+      <line id="선_385" data-name="선 385" x2="20.69" transform="translate(1304.79 90.963)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.2"/>
+      <line id="선_386" data-name="선 386" x2="3.448" transform="translate(1307.664 88.951)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.2"/>
+      <path id="사각형_1113" data-name="사각형 1113" d="M1.862,0H6.183A1.862,1.862,0,0,1,8.046,1.862v.819A4.023,4.023,0,0,1,4.023,6.7h0A4.023,4.023,0,0,1,0,2.682V1.862A1.862,1.862,0,0,1,1.862,0Z" transform="translate(1311.112 96.231)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.2"/>
+    </g>
+  </g>
+</svg>

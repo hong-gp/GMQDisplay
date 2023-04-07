@@ -1,0 +1,11 @@
+<svg id="Group_6347" data-name="Group 6347" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="26" viewBox="0 0 20 26">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_444" data-name="Path 444" d="M-1074.657-231.215a10.219,10.219,0,0,0-10,10.424c0,.119,0,.24.009.361a10.742,10.742,0,0,0,.8,3.759c2.048,5.936,8.422,11.175,8.443,11.2a.99.99,0,0,0,.523.256h.444a.942.942,0,0,0,.523-.256c.021-.025,6.4-5.265,8.443-11.2a10.745,10.745,0,0,0,.8-3.759c0-.121.009-.242.009-.361A10.219,10.219,0,0,0-1074.657-231.215Z" transform="translate(1084.657 231.215)" fill="#3856ee" clip-rule="evenodd"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_2" data-name="Mask Group 2" clip-path="url(#clip-path)">
+    <path id="Path_443" data-name="Path 443" d="M-1074.657-231.215a10.219,10.219,0,0,0-10,10.424c0,.119,0,.24.009.361a10.742,10.742,0,0,0,.8,3.759c2.048,5.936,7.338,12.8,8.443,14.2a.668.668,0,0,0,.523.256h.444a.668.668,0,0,0,.523-.256c1.105-1.4,6.4-8.265,8.443-14.2a10.745,10.745,0,0,0,.8-3.759c0-.121.009-.242.009-.361A10.219,10.219,0,0,0-1074.657-231.215Z" transform="translate(1084.657 231.215)" fill="#3856ee" fill-rule="evenodd"/>
+  </g>
+  <ellipse id="Ellipse_110" data-name="Ellipse 110" cx="6.358" cy="6.5" rx="6.358" ry="6.5" transform="translate(3.6 4)" fill="#fff"/>
+</svg>

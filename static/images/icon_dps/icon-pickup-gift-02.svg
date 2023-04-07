@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="65" viewBox="0 0 80 65">
+  <g id="그룹_2115" data-name="그룹 2115" transform="translate(-737 -1354)">
+    <g id="그룹_1842" data-name="그룹 1842" transform="translate(-1194.685 2825.427)">
+      <g id="그룹_1839" data-name="그룹 1839">
+        <path id="패스_658" data-name="패스 658" d="M1947.829-1423.153l4.995,9.861a1.571,1.571,0,0,0,1.235.852l1.293.137a1.61,1.61,0,0,0,1.761-1.844l-1.413-9.236a4.284,4.284,0,0,1,1.541-3.98l8.264-6.682a1.62,1.62,0,0,1,2.428.462l10.6,18.733a.9.9,0,0,0,1.223.339l3.643-2.06a1.48,1.48,0,0,0,.738-1.484l-3.576-26.728a2.319,2.319,0,0,1,.841-2.111l13.588-10.987c2.825-2.284,3.17-5.957,3.147-7.8a1.477,1.477,0,0,0-1.153-1.426c-1.792-.407-5.456-.839-8.281,1.445l-13.589,10.987a2.323,2.323,0,0,1-2.24.38l-25.386-9.093a1.48,1.48,0,0,0-1.607.411l-2.777,3.13a.9.9,0,0,0,.076,1.267l16.1,14.283a1.62,1.62,0,0,1-.057,2.471l-8.264,6.682a4.285,4.285,0,0,1-4.215.674l-8.734-3.316a1.61,1.61,0,0,0-2.173,1.336l-.137,1.293a1.572,1.572,0,0,0,.575,1.386l8.6,6.949A11.23,11.23,0,0,1,1947.829-1423.153Z" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+        <line id="선_416" data-name="선 416" x1="5.592" y2="5.807" transform="translate(1945.979 -1457.5)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        <line id="선_417" data-name="선 417" x1="10.407" y2="10.986" transform="translate(1945.086 -1454.24)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      </g>
+      <line id="선_418" data-name="선 418" y1="13.832" x2="17.108" transform="translate(1949.851 -1441.65)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <line id="선_419" data-name="선 419" y1="7.545" x2="9.331" transform="translate(1977.068 -1457.368)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <g id="그룹_1841" data-name="그룹 1841">
+        <g id="그룹_1840" data-name="그룹 1840">
+          <path id="패스_659" data-name="패스 659" d="M2008-1429l-4-8h-23l-4,8h4v11.194a5.805,5.805,0,0,0,5.806,5.806h3.039l2.846,4.928,2.845-4.928h2.658a5.805,5.805,0,0,0,5.806-5.806V-1429Z" fill="#4da0fb"/>
+          <path id="패스_660" data-name="패스 660" d="M1989.035-1425.035l2.576,2.576L1997-1428" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        </g>
+      </g>
+    </g>
+    <rect id="사각형_1648" data-name="사각형 1648" width="80" height="65" transform="translate(737 1354)" fill="none"/>
+  </g>
+</svg>

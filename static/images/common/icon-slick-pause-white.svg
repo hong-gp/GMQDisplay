@@ -1,0 +1,5 @@
+<svg id="Controls_pause" data-name="Controls / pause" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect id="Container" width="32" height="32" fill="none"/>
+  <rect id="Rectangle" width="2" height="12" transform="translate(18 10)" fill="#fff"/>
+  <rect id="Rectangle-2" data-name="Rectangle" width="2" height="12" transform="translate(12 10)" fill="#fff"/>
+</svg>

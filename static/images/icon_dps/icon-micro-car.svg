@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23.5" viewBox="0 0 23 23.5">
+  <g id="그룹_1971" data-name="그룹 1971" transform="translate(-1015 -5843)">
+    <rect id="사각형_1444" data-name="사각형 1444" width="23" height="23.5" transform="translate(1015 5843)" fill="none"/>
+    <g id="그룹_1908" data-name="그룹 1908" transform="translate(990.274 5204.988)">
+      <rect id="사각형_1448" data-name="사각형 1448" width="20" height="7" rx="1.167" transform="translate(26.226 649.012)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/>
+      <g id="그룹_1906" data-name="그룹 1906" transform="translate(28.374 656.055)">
+        <path id="사각형_1449" data-name="사각형 1449" d="M0,0H4.832a0,0,0,0,1,0,0V1.895A1.125,1.125,0,0,1,3.707,3.02H1.125A1.125,1.125,0,0,1,0,1.895V0A0,0,0,0,1,0,0Z" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+        <path id="사각형_1450" data-name="사각형 1450" d="M0,0H4.832a0,0,0,0,1,0,0V1.895A1.125,1.125,0,0,1,3.707,3.02H1.125A1.125,1.125,0,0,1,0,1.895V0A0,0,0,0,1,0,0Z" transform="translate(10.871)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      </g>
+      <g id="그룹_1907" data-name="그룹 1907" transform="translate(29.28 651.704)">
+        <line id="선_436" data-name="선 436" x2="5" transform="translate(4.445 0.808)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/>
+        <circle id="타원_161" data-name="타원 161" cx="0.4" cy="0.4" r="0.4" transform="translate(0 0.108)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/>
+        <circle id="타원_162" data-name="타원 162" cx="0.4" cy="0.4" r="0.4" transform="translate(13.287 0.108)" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/>
+      </g>
+      <path id="패스_682" data-name="패스 682" d="M40.633,641.5H31.4a1.976,1.976,0,0,0-1.875,1.352l-1.966,5.9h16.91l-1.965-5.9A1.976,1.976,0,0,0,40.633,641.5Z" transform="translate(0.208)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

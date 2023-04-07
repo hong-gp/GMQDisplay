@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17">
+  <defs>
+    <pattern id="pattern" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" viewBox="0 0 23 23">
+      <image width="23" height="23" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAQAAABKIxwrAAAAAW9yTlQBz6J3mgAAARpJREFUOMuVlDFOw0AQRZ9WkTskThEJcQKgMw4gYXruQE/HNWwgPgEXiCuokOiSgpgCWYiSyo6U/lNYK9beVRL+72be7o69MwuuDAkZcxpEw5yMBCP+7CpliTwvSX084j6AWj8QuXjEbAMsxKxb0OlxCyzE1OKX/cSNCj2p0Hi4IBVgeHeDr7JaK+7jFWZEzKH7ez6AN1pOOOeWZzd1wClk4VrvJNXDaGY4JqgL4GUYPILG33msWlLpn9kSKqQMw0LB3Wv9hOF2xDf7wxI/2Qt/0BfkO9yodQ6JH177V9T5DAyVj0vXPlxhuj4fJOIQLK5sR053qLv4T7+Xbr9DtPGEoj9NdlarAFqFZtW+BBNyFqwQKxbkTPovwS9urqDUWNQ7agAAAABJRU5ErkJggg=="/>
+    </pattern>
+  </defs>
+  <rect id="ico_tooltip_on" width="17" height="17" fill="url(#pattern)"/>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="55" height="48" viewBox="0 0 55 48">
+  <g id="그룹_2222" data-name="그룹 2222" transform="translate(-1365 -1161)">
+    <rect id="사각형_1716" data-name="사각형 1716" width="55" height="48" transform="translate(1365 1161)" fill="none" opacity="0.13"/>
+    <g id="그룹_2209" data-name="그룹 2209" transform="translate(1372.989 1165)">
+      <rect id="사각형_1703" data-name="사각형 1703" width="30" height="39" fill="#eaeaea"/>
+      <rect id="사각형_1704" data-name="사각형 1704" width="30" height="1" transform="translate(0 39)" fill="#c9c9c9"/>
+      <rect id="사각형_1705" data-name="사각형 1705" width="20" height="2" transform="translate(5 6)" fill="#3e6093"/>
+      <rect id="사각형_1706" data-name="사각형 1706" width="20" height="2" transform="translate(5 12.667)" fill="#3e6093"/>
+      <rect id="사각형_1707" data-name="사각형 1707" width="17" height="2" transform="translate(5 19.333)" fill="#3e6093"/>
+      <rect id="사각형_1708" data-name="사각형 1708" width="12" height="2" transform="translate(5 26)" fill="#3e6093"/>
+      <g id="그룹_2208" data-name="그룹 2208" transform="translate(21.112 6.794)">
+        <rect id="사각형_1709" data-name="사각형 1709" width="5" height="27" transform="translate(13.916 0) rotate(28.721)" fill="#7396e8"/>
+        <rect id="사각형_1710" data-name="사각형 1710" width="3" height="27" transform="translate(14.793 0.481) rotate(28.721)" fill="#5675bb"/>
+        <line id="선_437" data-name="선 437" transform="translate(0 28.864)" fill="#7396e8"/>
+        <path id="패스_727" data-name="패스 727" d="M1959.323-885.818l4.107-2.293-4.385-2.4Z" transform="translate(-1958.112 914.206)" fill="#eadab5"/>
+        <path id="패스_728" data-name="패스 728" d="M1959.323-885.818l1.031-.576-1.1-.6Z" transform="translate(-1958.112 914.206)" fill="#454545"/>
+        <rect id="사각형_1711" data-name="사각형 1711" width="0.016" height="5" transform="translate(0.933 23.692) rotate(-61.279)" fill="#eadab5"/>
+        <path id="패스_729" data-name="패스 729" d="M1959.047-890.531l.1.862.781-.378" transform="translate(-1958.112 914.206)" fill="#7396e8"/>
+        <path id="패스_730" data-name="패스 730" d="M1959.924-890.05l.1.862.781-.378" transform="translate(-1958.112 914.206)" fill="#5675bb"/>
+        <path id="패스_731" data-name="패스 731" d="M1960.8-889.57l.1.862.781-.378" transform="translate(-1958.112 914.206)" fill="#5675bb"/>
+        <path id="패스_732" data-name="패스 732" d="M1961.678-889.089l.1.862.781-.378" transform="translate(-1958.112 914.206)" fill="#5675bb"/>
+        <path id="패스_733" data-name="패스 733" d="M1962.555-888.608l.1.862.781-.378" transform="translate(-1958.112 914.206)" fill="#7396e8"/>
+      </g>
+    </g>
+  </g>
+</svg>

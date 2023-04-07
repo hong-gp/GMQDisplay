@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="ic_findServiceCenter" transform="translate(-1175 -868)">
+    <g id="사각형_929" data-name="사각형 929" transform="translate(1175 868)" fill="#fff" stroke="#707070" stroke-width="1" opacity="0">
+      <rect width="40" height="40" stroke="none"/>
+      <rect x="0.5" y="0.5" width="39" height="39" fill="none"/>
+    </g>
+    <g id="그룹_1315" data-name="그룹 1315" transform="translate(442.41 716.062)">
+      <path id="패스_390" data-name="패스 390" d="M763.781,172.187a14.347,14.347,0,0,0,1.257-5.025,12.224,12.224,0,1,0-24.448,0c0,6.2,9.782,19.656,10.9,21.168a1.647,1.647,0,0,0,2.652,0c.2-.269.671-.915,1.314-1.831m-2.434-14.53a4.395,4.395,0,1,1,4.395-4.395A4.395,4.395,0,0,1,753.02,171.969Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <g id="그룹_727" data-name="그룹 727">
+        <g id="타원_101" data-name="타원 101" transform="translate(756.54 175.123)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <circle cx="5.735" cy="5.735" r="5.735" stroke="none"/>
+          <circle cx="5.735" cy="5.735" r="4.735" fill="none"/>
+        </g>
+        <line id="선_217" data-name="선 217" x2="3.822" y2="3.798" transform="translate(766.178 184.778)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

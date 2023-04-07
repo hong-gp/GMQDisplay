@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23">
+  <g id="그룹_1969" data-name="그룹 1969" transform="translate(-1015 -6016)">
+    <g id="그룹_1617" data-name="그룹 1617" transform="translate(991.047 5397.854)">
+      <rect id="사각형_1048" data-name="사각형 1048" width="17.907" height="15.668" rx="1.417" transform="translate(26.5 620.148)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      <rect id="사각형_1049" data-name="사각형 1049" width="17.907" height="7.205" transform="translate(26.5 622.984)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="사각형_1050" data-name="사각형 1050" d="M0,0H4.8a0,0,0,0,1,0,0V1.877A1.125,1.125,0,0,1,3.678,3H1.125A1.125,1.125,0,0,1,0,1.877V0A0,0,0,0,1,0,0Z" transform="translate(27.701 635.893)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      <path id="사각형_1051" data-name="사각형 1051" d="M0,0H4.8a0,0,0,0,1,0,0V1.877A1.125,1.125,0,0,1,3.678,3H1.125A1.125,1.125,0,0,1,0,1.877V0A0,0,0,0,1,0,0Z" transform="translate(38.508 635.893)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+    </g>
+    <rect id="사각형_1446" data-name="사각형 1446" width="23" height="23" transform="translate(1015 6016)" fill="none"/>
+  </g>
+</svg>

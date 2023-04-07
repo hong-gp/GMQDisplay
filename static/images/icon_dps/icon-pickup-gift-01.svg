@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="65" viewBox="0 0 80 65">
+  <g id="그룹_2114" data-name="그룹 2114" transform="translate(-389 -1354)">
+    <g id="그룹_1830" data-name="그룹 1830" transform="translate(-1446 2976)">
+      <rect id="사각형_1209" data-name="사각형 1209" width="50" height="40" rx="3.75" transform="translate(1844 -1615)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      <line id="선_406" data-name="선 406" y2="7" transform="translate(1852 -1619)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      <line id="선_407" data-name="선 407" y2="7" transform="translate(1886 -1619)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      <line id="선_408" data-name="선 408" x2="50" transform="translate(1844 -1608)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+      <g id="그룹_1829" data-name="그룹 1829">
+        <path id="패스_651" data-name="패스 651" d="M1907-1579l-4-8h-23l-4,8h4v11.194a5.805,5.805,0,0,0,5.806,5.806h3.039l2.846,4.928,2.845-4.928h2.658a5.805,5.805,0,0,0,5.806-5.806V-1579Z" fill="#4da0fb"/>
+        <path id="패스_652" data-name="패스 652" d="M1888.035-1575.035l2.576,2.576L1896-1578" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      </g>
+      <text id="_1" data-name="1" transform="translate(1862.999 -1583.484)" font-size="25.208" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">1</tspan></text>
+    </g>
+    <rect id="사각형_1647" data-name="사각형 1647" width="80" height="65" transform="translate(389 1354)" fill="none"/>
+  </g>
+</svg>

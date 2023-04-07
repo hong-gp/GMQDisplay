@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="그룹_5320" data-name="그룹 5320" transform="translate(-114 -980)">
+    <g id="사각형_2576" data-name="사각형 2576" transform="translate(114 980)" fill="#fff" stroke="#b2b2b2" stroke-width="1">
+      <rect width="60" height="60" rx="10" stroke="none"/>
+      <rect x="0.5" y="0.5" width="59" height="59" rx="9.5" fill="none"/>
+    </g>
+    <text id="카메라" transform="translate(144 1028)" fill="#707070" font-size="12" font-family="SamsungOneKorean-400, 'SamsungOneKorean 400'" letter-spacing="-0.005em"><tspan x="-16.147" y="0">카메라</tspan></text>
+    <g id="ic-camera-s" transform="translate(0 8)">
+      <rect id="사각형_544" data-name="사각형 544" width="24" height="24" transform="translate(132 982)" fill="none"/>
+      <g id="그룹_1305" data-name="그룹 1305" transform="translate(133.729 986.393)">
+        <path id="패스_459" data-name="패스 459" d="M248.013,327.854l-.389-.847a1.87,1.87,0,0,0-1.723-.977h-6.989a1.868,1.868,0,0,0-1.723.977l-.389.847a1.87,1.87,0,0,1-1.723.977h-1.233a1.7,1.7,0,0,0-1.842,1.51V339.8a1.7,1.7,0,0,0,1.842,1.51h17.127a1.7,1.7,0,0,0,1.842-1.51v-9.454a1.7,1.7,0,0,0-1.842-1.51h-1.233A1.868,1.868,0,0,1,248.013,327.854Z" transform="translate(-232 -326.031)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        <circle id="타원_116" data-name="타원 116" cx="3.564" cy="3.564" r="3.564" transform="translate(6.666 4.837)" stroke-width="1.5" stroke="#000" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

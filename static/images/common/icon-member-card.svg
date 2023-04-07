@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="31.576" viewBox="0 0 38 31.576">
+  <g id="icn_멤버십카드" transform="translate(-716.077 -1049.504)" opacity="0.5">
+    <rect id="Rectangle_2007" data-name="Rectangle 2007" width="28.805" height="21.408" rx="4" transform="translate(725.272 1059.456)" fill="#d8d8d8"/>
+    <rect id="Rectangle_2008" data-name="Rectangle 2008" width="3.822" height="28.805" transform="translate(725.272 1067.728) rotate(-90)" fill="#fff" opacity="0.8"/>
+    <circle id="Ellipse_204" data-name="Ellipse 204" cx="8.156" cy="8.156" r="8.156" transform="translate(718.762 1049.504)" fill="#8dc6e2"/>
+    <path id="Path_1012" data-name="Path 1012" d="M737.771,1087.2c0-5.549-4.356-18.537-8.849-18.537h-4.008c-4.492,0-8.821,11.311-8.821,16.859a1.411,1.411,0,0,0,1.571,1.677h20.106" transform="translate(0 -6.117)" fill="#8dc6e2"/>
+    <path id="Path_1013" data-name="Path 1013" d="M736.245,1064.185a8.149,8.149,0,0,0-4.88-14.68,8.227,8.227,0,0,0-1.361.122,8.142,8.142,0,0,1,3.518,14.558c3.309,3.67,5.973,12.557,5.973,16.9h2.723C742.218,1076.741,739.554,1067.854,736.245,1064.185Z" transform="translate(-4.447 0)" opacity="0.1"/>
+  </g>
+</svg>

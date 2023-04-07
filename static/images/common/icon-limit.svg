@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="icon_1_누적_구매_금액" data-name="icon_1_누적 구매 금액" transform="translate(-572 -782)">
+    <g id="그룹_4918" data-name="그룹 4918" transform="translate(572 785)">
+      <rect id="사각형_2007" data-name="사각형 2007" width="21.983" height="15.451" rx="4" transform="translate(7.017 7.183)" fill="#d8d8d8"/>
+      <rect id="사각형_2008" data-name="사각형 2008" width="2.759" height="21.983" transform="translate(7.017 13.153) rotate(-90)" fill="#fff" opacity="0.8"/>
+      <ellipse id="타원_204" data-name="타원 204" cx="6.224" cy="5.887" rx="6.224" ry="5.887" transform="translate(2.049 0)" fill="#8dc6e2"/>
+      <path id="패스_1012" data-name="패스 1012" d="M732.633,1082.04c0-4-3.325-13.379-6.753-13.379h-3.059c-3.428,0-6.732,8.164-6.732,12.168,0,0-.22,1.21,1.2,1.21h15.344" transform="translate(-716.077 -1059.25)" fill="#8dc6e2"/>
+      <path id="패스_1013" data-name="패스 1013" d="M734.767,1060.1a5.774,5.774,0,0,0,2.5-4.709,6.063,6.063,0,0,0-6.225-5.887,6.628,6.628,0,0,0-1.039.088,5.991,5.991,0,0,1,5.186,5.8,5.774,5.774,0,0,1-2.5,4.709c2.526,2.649,4.558,9.063,4.558,12.194h2.078C739.325,1069.163,737.293,1062.748,734.767,1060.1Z" transform="translate(-722.77 -1049.504)" opacity="0.1"/>
+    </g>
+    <rect id="사각형_2325" data-name="사각형 2325" width="30" height="30" transform="translate(572 782)" fill="none"/>
+  </g>
+</svg>

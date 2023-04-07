@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="61" height="61" viewBox="0 0 61 61">
+  <g id="그룹_5510" data-name="그룹 5510" transform="translate(-559.995 -159.869)">
+    <circle id="타원_67" data-name="타원 67" cx="30" cy="30" r="30" transform="translate(560.495 160.369)" fill="none" stroke="#000724" stroke-miterlimit="10" stroke-width="1"/>
+    <circle id="타원_68" data-name="타원 68" cx="25" cy="25" r="25" transform="translate(565.495 165.369)" fill="none" stroke="#000724" stroke-miterlimit="10" stroke-width="0.5"/>
+    <path id="패스_444" data-name="패스 444" d="M581.576,170.181l1.777,5.469h5.75l-4.652,3.38,1.777,5.469-4.652-3.38-4.652,3.38,1.777-5.469-4.652-3.38h5.75Z" transform="translate(9.418 5.689)" fill="#000724"/>
+    <text id="CHECK" transform="translate(590.995 202.187)" font-size="8" font-family="SamsungOneKorean-400, 'SamsungOneKorean 400'" letter-spacing="0.025em" style="isolation: isolate"><tspan x="-12.431" y="0">CHECK</tspan></text>
+  </g>
+</svg>

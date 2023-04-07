@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="58.5" height="43.5" viewBox="0 0 58.5 43.5">
+  <g id="그룹_2110" data-name="그룹 2110" transform="translate(-1570.25 1693.75)">
+    <path id="사각형_1190" data-name="사각형 1190" d="M4.667,0H52.333A4.667,4.667,0,0,1,57,4.667V42a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4.667A4.667,4.667,0,0,1,4.667,0Z" transform="translate(1571 -1693)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+    <line id="선_400" data-name="선 400" x2="57" transform="translate(1571 -1683)" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="1.5"/>
+    <rect id="사각형_1191" data-name="사각형 1191" width="3" height="3" transform="translate(1576 -1689)"/>
+    <rect id="사각형_1192" data-name="사각형 1192" width="3" height="3" transform="translate(1581 -1689)"/>
+    <rect id="사각형_1193" data-name="사각형 1193" width="3" height="3" transform="translate(1586 -1689)"/>
+    <path id="패스_647" data-name="패스 647" d="M1606-1662h-15v-12h18.115a1.256,1.256,0,0,1,1.16,1.74Z" fill="none" stroke="#4da0fb" stroke-miterlimit="10" stroke-width="1.5"/>
+    <line id="선_401" data-name="선 401" x2="18" transform="translate(1591 -1670)" fill="none" stroke="#4da0fb" stroke-miterlimit="10" stroke-width="1.5"/>
+    <circle id="타원_130" data-name="타원 130" cx="2" cy="2" r="2" transform="translate(1591 -1660)" fill="#4da0fb"/>
+    <circle id="타원_131" data-name="타원 131" cx="2" cy="2" r="2" transform="translate(1602 -1660)" fill="#4da0fb"/>
+    <line id="선_402" data-name="선 402" x1="3" y1="3" transform="translate(1588 -1677)" fill="none" stroke="#4da0fb" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

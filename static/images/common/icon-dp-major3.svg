@@ -1,0 +1,15 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="icon_1" data-name="icon/1">
+    <rect id="icon_3_background" data-name="icon/3 background" width="40" height="40" fill="none"/>
+    <g id="Group_17" data-name="Group 17" transform="translate(2.5 2.5)">
+      <path id="Stroke_1" data-name="Stroke 1" d="M5.877,14.314H0V0H5.877a1.6,1.6,0,0,1,1.6,1.6V12.716A1.6,1.6,0,0,1,5.877,14.314Z" transform="translate(0 19.751)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Stroke_3" data-name="Stroke 3" d="M0,0H4.9l4.55,2.022h4.607a1.7,1.7,0,0,1,1.973,1.837,1.975,1.975,0,0,1-1.973,2.1h-7" transform="translate(7.793 22.619)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Stroke_5" data-name="Stroke 5" d="M0,7.2,8.6,9.829a7.05,7.05,0,0,0,2.312.509,9.241,9.241,0,0,0,2.527-.509L26.3,3.619a2.106,2.106,0,0,0,.359-2.78A1.945,1.945,0,0,0,24.306.148L15.22,3.427" transform="translate(7.474 24.957)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Stroke_7" data-name="Stroke 7" d="M14.987,0V8.844H0V.041" transform="translate(11.648 9.573)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Stroke_9" data-name="Stroke 9" d="M14.987,0H5L0,7.091a2.5,2.5,0,0,0,5,0,2.5,2.5,0,1,0,5,0,2.5,2.5,0,1,0,4.99,0,2.5,2.5,0,0,0,5,0Z" transform="translate(9.148 0.689)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Stroke_11" data-name="Stroke 11" d="M.266,0V7.091" transform="translate(23.87 0.689)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Stroke_13" data-name="Stroke 13" d="M.266,0V7.091" transform="translate(18.875 0.689)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+      <path id="Stroke_15" data-name="Stroke 15" d="M.266,0V7.709" transform="translate(13.877 0.689)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

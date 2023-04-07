@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Map / Pin / Other / Focused</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Map-/-Pin-/-Other-/-Focused" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Store-Dot">
+            <rect id="Bounds" x="0" y="0" width="56" height="56"></rect>
+            <ellipse id="Shadow" fill="#9E9E9E" cx="28" cy="52" rx="6" ry="2"></ellipse>
+            <path d="M28,48.650851 C28.9522328,46.3330676 30.0660654,44.0197734 31.3413953,41.7109862 C32.3868259,39.818396 33.5623712,38.0813796 35.0200385,36.2002642 C35.8021153,35.1909962 38.6247408,31.7668697 39.2104237,31.0122252 C42.2079605,27.1499395 43.5,24.1458712 43.5,19.9722222 C43.5,11.3621279 36.602567,4.5 28,4.5 C19.397433,4.5 12.5,11.3621279 12.5,19.9722222 C12.5,24.1458712 13.7920395,27.1499395 16.7895763,31.0122252 C17.3752592,31.7668697 20.1978847,35.1909962 20.9799615,36.2002642 C22.4376288,38.0813796 23.6131741,39.818396 24.6586047,41.7109862 C25.9339346,44.0197734 27.0477672,46.3330676 28,48.650851 Z" id="Fills" stroke="#FFFFFF" fill="#00838F"></path>
+        </g>
+    </g>
+</svg>

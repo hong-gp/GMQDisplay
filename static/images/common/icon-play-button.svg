@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="90" viewBox="0 0 90 90">
+  <defs>
+    <filter id="타원_116" x="0" y="0" width="90" height="90" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="다각형_1" x="24" y="16" width="50" height="58" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-2"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Play_Button" data-name="Play Button" transform="translate(15 15)">
+    <g transform="matrix(1, 0, 0, 1, -15, -15)" filter="url(#타원_116)">
+      <g id="타원_116-2" data-name="타원 116" transform="translate(15 15)" fill="none" stroke="#fff" stroke-width="2">
+        <circle cx="30" cy="30" r="30" stroke="none"/>
+        <circle cx="30" cy="30" r="29" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -15, -15)" filter="url(#다각형_1)">
+      <g id="다각형_1-2" data-name="다각형 1" transform="translate(59 31) rotate(90)" fill="none">
+        <path d="M12.362,2.341a2,2,0,0,1,3.277,0L25.8,16.853A2,2,0,0,1,24.159,20H3.841A2,2,0,0,1,2.2,16.853Z" stroke="none"/>
+        <path d="M 13.99999046325684 3.487583160400391 L 13.99999046325684 3.487583160400391 C 13.99999046325684 3.487583160400391 13.99998950958252 3.487583160400391 13.99999046325684 3.487583160400391 L 3.841320037841797 17.9999942779541 C 3.841320037841797 17.9999942779541 3.841320037841797 17.99999618530273 3.841318130493164 17.99999618530273 C 3.841320037841797 17.99999809265137 3.84132194519043 18 3.841310501098633 18.00000381469727 L 24.15867233276367 18.00000381469727 C 24.15867614746094 17.99999618530273 24.1586799621582 17.99999046325684 24.15868949890137 17.9999942779541 L 13.99999046325684 3.487583160400391 M 13.99999904632568 1.487583160400391 C 14.62018013000488 1.487583160400391 15.24036026000977 1.771944046020508 15.63846015930176 2.340663909912109 L 25.79714965820313 16.85307312011719 C 26.72504043579102 18.17863464355469 25.77672958374023 20.00000381469727 24.15868949890137 20.00000381469727 L 3.841310501098633 20.00000381469727 C 2.223260879516602 20.00000381469727 1.274959564208984 18.17863464355469 2.202850341796875 16.85307312011719 L 12.36153030395508 2.340663909912109 C 12.75963497161865 1.771944046020508 13.37981796264648 1.487583160400391 13.99999904632568 1.487583160400391 Z" stroke="none" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

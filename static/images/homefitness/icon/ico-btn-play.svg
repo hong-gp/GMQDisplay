@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="92" height="92" viewBox="0 0 92 92">
+  <defs>
+    <filter id="circle" x="0" y="0" width="92" height="92" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.149"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="path" x="30" y="23" width="36" height="46" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="ico-btn-play" transform="translate(9 9)">
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#circle)">
+      <g id="circle-2" data-name="circle" transform="translate(9 9)" fill="none" stroke="#fff" stroke-width="2">
+        <circle cx="37" cy="37" r="37" stroke="none"/>
+        <circle cx="37" cy="37" r="36" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -9, -9)" filter="url(#path)">
+      <path id="path-2" data-name="path" d="M13.828,1.373a1.266,1.266,0,0,1,1.824,0L28.594,17.808c.411.521-.1,1.176-.912,1.176H1.8c-.815,0-1.323-.655-.912-1.176Z" transform="translate(57.98 31.26) rotate(90)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

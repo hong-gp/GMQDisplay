@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="31.955" viewBox="0 0 46 31.955">
+  <g id="icon_3_멤버십카드" transform="translate(-1356.474 1443.649)">
+    <g id="Group_2907" data-name="Group 2907" transform="translate(1356.474 -1443.649)">
+      <rect id="Rectangle_2011" data-name="Rectangle 2011" width="46" height="31.955" rx="2.802" fill="#2dbcb6"/>
+      <rect id="Rectangle_2012" data-name="Rectangle 2012" width="8.622" height="8.622" transform="translate(6 9.754)" fill="#158980"/>
+      <g id="Group_2906" data-name="Group 2906" transform="translate(6.5 25.582)" opacity="0.3">
+        <path id="Path_1038" data-name="Path 1038" d="M1380.472-1408.431h0c0,.329.417.595.931.595h10.156c.514,0,.931-.266.931-.595h0c0-.329-.417-.595-.931-.595H1381.4C1380.889-1409.026,1380.472-1408.76,1380.472-1408.431Z" transform="translate(-1369.673 1409.026)" fill="#fff"/>
+        <path id="Path_1039" data-name="Path 1039" d="M1408.057-1409.026h-11.4c-.514,0-.931.266-.931.595h0c0,.329.417.595.931.595h11.4c.514,0,.931-.266.931-.595h0C1408.988-1408.76,1408.571-1409.026,1408.057-1409.026Z" transform="translate(-1375.988 1409.026)" fill="#fff"/>
+        <path id="Path_1040" data-name="Path 1040" d="M1362.974-1408.431h0c0,.329.417.595.931.595h12.4c.514,0,.931-.266.931-.595h0c0-.329-.417-.595-.931-.595h-12.4C1363.391-1409.026,1362.974-1408.76,1362.974-1408.431Z" transform="translate(-1362.974 1409.026)" fill="#fff"/>
+      </g>
+      <circle id="Ellipse_206" data-name="Ellipse 206" cx="2.884" cy="2.884" r="2.884" transform="translate(33.732 5.349)" fill="#fff" opacity="0.3"/>
+    </g>
+  </g>
+</svg>

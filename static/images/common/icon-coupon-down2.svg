@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="42" height="26" viewBox="0 0 42 26">
+  <g id="icon_다운로드가능쿠폰" transform="translate(-1051 -250)">
+    <path id="패스_2138" data-name="패스 2138" d="M613.672,628.8h-5.378c0,.9-.666,2.767-2.5,2.767-.027,0-.054,0-.081,0-1.642,0-2.416-1.889-2.416-2.762H573.312a.868.868,0,0,0-.82.909v24.182a.868.868,0,0,0,.82.909H603.3a2.619,2.619,0,0,1,2.416-2.762c.027,0,.053,0,.081,0,1.83,0,2.5,1.863,2.5,2.767h5.378a.868.868,0,0,0,.82-.909V629.711A.868.868,0,0,0,613.672,628.8Z" transform="translate(478.508 -378.802)" fill="#2189ff"/>
+    <g id="사각형_3080" data-name="사각형 3080" transform="translate(1074 268) rotate(90)" fill="#91bacf" stroke="#fff" stroke-width="1">
+      <rect width="2" height="12" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1" height="11" fill="none"/>
+    </g>
+    <g id="사각형_3081" data-name="사각형 3081" transform="translate(1069 265) rotate(180)" fill="#91bacf" stroke="#fff" stroke-width="1">
+      <rect width="2" height="10" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1" height="9" fill="none"/>
+    </g>
+    <g id="사각형_3082" data-name="사각형 3082" transform="translate(1068.232 266.364) rotate(-135)" fill="#91bacf" stroke="#fff" stroke-width="1">
+      <rect width="2" height="7" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1" height="6" fill="none"/>
+    </g>
+    <g id="사각형_3083" data-name="사각형 3083" transform="translate(1069.182 264.95) rotate(135)" fill="#91bacf" stroke="#fff" stroke-width="1">
+      <rect width="2" height="7" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1" height="6" fill="none"/>
+    </g>
+    <line id="선_511" data-name="선 511" y2="20" transform="translate(1084.5 254)" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="2"/>
+  </g>
+</svg>

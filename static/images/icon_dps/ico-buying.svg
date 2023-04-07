@@ -1,0 +1,45 @@
+<svg id="그룹_1" data-name="그룹 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="229" height="200" viewBox="0 0 229 200">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0.01;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+        stroke-width: 8px;
+      }
+
+      .cls-2 {
+        stroke: #5675bb;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-6, .cls-7 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3, .cls-5 {
+        fill: #e1e1e1;
+      }
+
+      .cls-4 {
+        stroke: #7b9ff1;
+      }
+
+      .cls-6 {
+        fill: #b0b0b0;
+      }
+
+      .cls-7 {
+        fill: #c8c8c8;
+      }
+    </style>
+  </defs>
+  <image id="배경_복사" data-name="배경 복사" class="cls-1" width="229" height="200" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOUAAADICAYAAAAX+yb+AAACXUlEQVR4nO3TQREAIAzAsAH+NQ8bfSQWej27+wbIuFJAiykhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAkxpoQYU0KMKSHGlBBjSogxJcSYEmJMCTGmhBhTQowpIcaUEGNKiDElxJgSYkwJMaaEGFNCjCkhxpQQY0qIMSXEmBJiTAklM/MBTooEkEW+XgEAAAAASUVORK5CYII="/>
+  <path id="사각형_11_복사" data-name="사각형 11 복사" class="cls-2" d="M117,11h1a20,20,0,0,1,20,20V91a20,20,0,0,1-20,20h-1A20,20,0,0,1,97,91V31A20,20,0,0,1,117,11Z"/>
+  <path id="사각형_3" data-name="사각형 3" class="cls-3" d="M47.685,49.164h133.19V191.233H47.685V49.164Z"/>
+  <path id="사각형_11" data-name="사각형 11" class="cls-4" d="M102,11h1a20,20,0,0,1,20,20V91a20,20,0,0,1-20,20h-1A20,20,0,0,1,82,91V31A20,20,0,0,1,102,11Z"/>
+  <rect id="사각형_12" data-name="사각형 12" class="cls-5" x="77" y="63" width="57" height="52"/>
+  <path id="사각형_3_복사" data-name="사각형 3 복사" class="cls-6" d="M168.556,49.164h14V191.171h-14V49.164Z"/>
+  <path id="사각형_3_복사_2" data-name="사각형 3 복사 2" class="cls-7" d="M155.237,49.164h14V191.171h-14V49.164Z"/>
+</svg>

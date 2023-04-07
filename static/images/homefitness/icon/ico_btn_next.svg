@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="ico_btn_next" transform="translate(-1290 49)">
+    <rect id="area_btn" width="16" height="16" transform="translate(1290 -49)" fill="none"/>
+    <path id="path" d="M623.611,156.027l4.5-4-4.5-4" transform="translate(672.889 -193.527)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+  </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 40 20">
+  <g id="그룹_3636" data-name="그룹 3636" transform="translate(-957 -1826)">
+    <g id="Icon" transform="translate(977 1826)">
+      <path id="Icon_Bold_Navigation_Up_highest" data-name="Icon / Bold / Navigation / Up_highest" d="M8.406,18.062V3.221l5.552,5.635,1.187-1.17L7.573,0,0,7.686l1.187,1.17L6.739,3.221V18.062Z" transform="translate(2.427 0.969)"/>
+    </g>
+    <g id="Icon-2" data-name="Icon" transform="translate(957 1826)">
+      <path id="Icon_Bold_Navigation_Down_lowest" data-name="Icon / Bold / Navigation / Down_lowest" d="M8.406,0V14.841l5.552-5.635,1.187,1.17L7.573,18.062,0,10.377l1.187-1.17,5.552,5.635V0Z" transform="translate(2.427 0.969)"/>
+    </g>
+  </g>
+</svg>

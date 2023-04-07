@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.258" height="21.5" viewBox="0 0 21.258 21.5">
+  <g id="그룹_973" data-name="그룹 973" transform="translate(-305.371 -178.583)">
+    <line id="선_316" data-name="선 316" x2="19.758" transform="translate(306.121 184.127)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <g id="그룹_972" data-name="그룹 972">
+      <path id="사각형_527" data-name="사각형 527" d="M0,0H14.134a0,0,0,0,1,0,0V12.706a2.5,2.5,0,0,1-2.5,2.5H2.5a2.5,2.5,0,0,1-2.5-2.5V0A0,0,0,0,1,0,0Z" transform="translate(308.933 184.127)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <line id="선_317" data-name="선 317" y2="9.513" transform="translate(316 186.974)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <line id="선_318" data-name="선 318" y2="9.513" transform="translate(312.783 186.974)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <line id="선_319" data-name="선 319" y2="9.513" transform="translate(319.217 186.974)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    </g>
+    <path id="패스_436" data-name="패스 436" d="M312.656,184.127v-1.449A3.345,3.345,0,0,1,316,179.333h0a3.345,3.345,0,0,1,3.344,3.345v1.449" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

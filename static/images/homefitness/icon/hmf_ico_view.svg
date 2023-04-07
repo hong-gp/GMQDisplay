@@ -1,0 +1,5 @@
+<svg id="hmf_ico_view" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18">
+  <rect id="area_ic" width="20" height="18" fill="#fff" opacity="0"/>
+  <path id="path" d="M8.5,0c6,0,8.5,5.5,8.5,5.5S14.5,11,8.5,11,0,5.5,0,5.5,2.5,0,8.5,0Z" transform="translate(1.5 4)" fill="none" stroke="#707070" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+  <path id="circle" d="M4,0A4,4,0,1,0,8,4,4,4,0,0,0,4,0" transform="translate(6 5.5)" fill="none" stroke="#707070" stroke-width="1"/>
+</svg>

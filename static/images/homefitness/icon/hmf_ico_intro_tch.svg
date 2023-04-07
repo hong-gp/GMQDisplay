@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37" height="26" viewBox="0 0 37 26">
+  <g id="ic_mark" transform="translate(-1026 -325)">
+    <rect id="area_ic" width="37" height="26" transform="translate(1026 325)" fill="#fff" opacity="0"/>
+    <g id="ic_mark-2" data-name="ic_mark">
+      <path id="path" d="M1038,339h7v12h-13V339c0-5.5,3.314-11.667,15-12v2.5S1038,330.5,1038,339Z" transform="translate(-5 -1)" fill="#d9d9d9" stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="path-2" data-name="path" d="M1038,339h7v12h-13V339c0-5.5,3.314-11.667,15-12v2.5S1038,330.5,1038,339Z" transform="translate(15 -1)" fill="#d9d9d9" stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

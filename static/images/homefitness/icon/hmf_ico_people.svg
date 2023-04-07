@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <g id="ic_people" transform="translate(-3.25 13.75)">
+    <rect id="area_ic" width="18" height="18" transform="translate(3.25 -13.75)" fill="#fff"/>
+    <g id="ic_people-2" data-name="ic_people" transform="translate(3 -14)">
+      <g id="plus" transform="translate(0.25 -0.75)">
+        <line id="선_510" data-name="선 510" x2="6" transform="translate(11 12)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+        <line id="선_511" data-name="선 511" y2="6" transform="translate(14 9)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      </g>
+      <g id="human">
+        <g id="head" transform="translate(0.25)" fill="none" stroke-linecap="round" stroke-miterlimit="10">
+          <path d="M6,.25a4,4,0,1,1-4,4H2A4.008,4.008,0,0,1,6,.25Z" stroke="none"/>
+          <path d="M 6.001695156097412 1.750002384185791 C 4.624710559844971 1.753531455993652 3.50248908996582 2.876081943511963 3.5 4.250999927520752 C 3.5 5.628950119018555 4.621940135955811 6.75 6.000999927520752 6.75 C 7.378950119018555 6.75 8.5 5.628060340881348 8.5 4.249000072479248 C 8.5 2.871974945068359 7.379483699798584 1.751505851745605 6.001695156097412 1.750002384185791 M 5.999000072479248 0.25 C 8.208000183105469 0.25 10 2.039999961853027 10 4.249000072479248 C 10 6.458000183105469 8.210000038146973 8.25 6.000999927520752 8.25 C 3.791999816894531 8.25 2 6.460000038146973 2 4.250999927520752 L 2 4.25 C 2.003999710083008 2.043000221252441 3.791999816894531 0.255000114440918 5.999000072479248 0.25 Z" stroke="none" fill="#000"/>
+        </g>
+        <path id="body" d="M10.75,17.25H2.25c-1.017,0-1,.01-1-1v-1.5a4.942,4.942,0,0,1,5-5c2.842.005.813,0,.813,0" fill="none" stroke="#000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

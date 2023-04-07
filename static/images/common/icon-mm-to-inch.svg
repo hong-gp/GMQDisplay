@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64.284" height="37" viewBox="0 0 64.284 37">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="사각형_3590" data-name="사각형 3590" width="35" height="14" transform="translate(2.5 23)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="사각형_3589" data-name="사각형 3589" width="37" height="15" transform="translate(21.5 4)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="icon_60x37__mm_추가" data-name="icon(60x37)_mm_추가" transform="translate(2.142)">
+    <g id="마스크_그룹_269" data-name="마스크 그룹 269" clip-path="url(#clip-path)">
+      <text id="mm" transform="translate(2 19.5)" fill="#212425" font-size="18" font-family="SamsungSharpSans-Bold, Samsung Sharp Sans" font-weight="700" letter-spacing="-0.03em"><tspan x="0.306" y="17">mm</tspan></text>
+    </g>
+    <g id="마스크_그룹_268" data-name="마스크 그룹 268" transform="translate(0 -4)" clip-path="url(#clip-path-2)">
+      <text id="Inch" transform="translate(21.49)" fill="#212425" font-size="18.5" font-family="SamsungSharpSans-Bold, Samsung Sharp Sans" font-weight="700" letter-spacing="-0.03em"><tspan x="0.5" y="18">Inch</tspan></text>
+    </g>
+    <g id="구성_요소_129_1" data-name="구성 요소 129 – 1" transform="translate(44.385 19.498)">
+      <path id="패스_1959" data-name="패스 1959" d="M-17368.105-16808.816s3.264,1.1,7.18-3.309,4.178-7.309,4.178-7.309" transform="translate(17368.105 16822.502)" fill="none" stroke="#212425" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <path id="패스_1960" data-name="패스 1960" d="M0,4.145,4.045,0,8,4.145" transform="matrix(0.891, 0.454, -0.454, 0.891, 8.487, 0)" fill="none" stroke="#212425" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+    </g>
+    <g id="구성_요소_129_2" data-name="구성 요소 129 – 2" transform="translate(15.615 16.498) rotate(180)">
+      <path id="패스_1959-2" data-name="패스 1959" d="M-17368.105-16808.816s3.264,1.1,7.18-3.309,4.178-7.309,4.178-7.309" transform="translate(17368.105 16822.502)" fill="none" stroke="#212425" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+      <path id="패스_1960-2" data-name="패스 1960" d="M0,0,4.045-4.145,8,0" transform="matrix(0.891, 0.454, -0.454, 0.891, 6.605, 3.694)" fill="none" stroke="#212425" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+    </g>
+  </g>
+</svg>

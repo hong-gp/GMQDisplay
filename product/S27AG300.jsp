@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.text.*" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 
@@ -419,38 +422,39 @@
 			});
 
 			function getSessionInfo() {
-				$.ajax({
-					url: "/xhr/member/getSession"
-					, type: "POST"
-					, success: function (result) {
-						result = JSON.parse(result);
-						if (result.mbrNo == "0") {
-							$("input[name=useLogin]").val("N");
-							$(".link-login i").addClass("ico-people");
-							$(".loginAfter").remove();
-							$(".loginBefore").remove();
+		$.ajax({
+			url : "../xhr/loginCheck.jsp",
+			type : "POST",
+			success : function(result) {
+				if(result == true) {
+					$("input[name=useLogin]").val("Y");
+					$(".link-login i").addClass("ico-people-logged");
+					$(".loginBefore").remove();
+					$(".loginAfter").remove();
+					
+					// session.mbrNm 세팅
+					//$(".sessionInfoMbrNm").text(result.mbrNm);
+					
+					setLoginGnbMenu();
 
-							setLogoutGnbMenu();
-
-						} else {
-							$("input[name=useLogin]").val("Y");
-							$(".link-login i").addClass("ico-people-logged");
-							$(".loginBefore").remove();
-							$(".loginAfter").remove();
-
-							// session.mbrNm 세팅
-							//$(".sessionInfoMbrNm").text(result.mbrNm);
-
-							setLoginGnbMenu();
-
-							var htmlMo = "<a href=\"https://account.samsung.com/\" target=\"_blank\" title=\"새창열림\">안녕하세요!</a>";
-							var htmlPc = "안녕하세요!";
-							$(".loginAfter .welcomeMsg").html(htmlMo);
-							$(".loginAfter .greet-txt").html(htmlPc);
-						}
-					}
-				});
+					var htmlMo = "<a href=\"https://account.GMQDisplay.com/\" target=\"_blank\" title=\"새창열림\">안녕하세요!</a>";
+					var htmlPc = "안녕하세요!";
+					$(".loginAfter .welcomeMsg").html(htmlMo);
+					$(".loginAfter .greet-txt").html(htmlPc);
+				} else {
+					$("input[name=useLogin]").val("N");
+					$(".link-login i").addClass("ico-people");
+					$(".loginAfter").remove();
+					$(".loginBefore").remove();
+					
+					setLogoutGnbMenu();
+				}
+			},
+			error : function() {
+				console.log("서버 오류가 발생했습니다.");
 			}
+		});
+	}
 
 			function appLogin(token, userId) {
 				$.ajax({
@@ -529,7 +533,7 @@
 					//pc
 					var htmlLoginBefore = '<div class="gnbSubRound loginBefore"><div>';
 					htmlLoginBefore += '<dl>';
-					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\'login\'>로그인</a></dt>';
+					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'../login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></dt>';
 					htmlLoginBefore += '';
 					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/signUp/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\'sign up\'>회원가입</a></dt>';
 					htmlLoginBefore += '';
@@ -568,7 +572,7 @@
 					htmlMoLoginAfter += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
 					htmlMoLoginAfter += '';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-logout">';
-					htmlMoLoginAfter += '<a href="../logout.jsp;" data-omni=\'logout\'>로그아웃</a></li>';
+					htmlMoLoginAfter += '<a href="javascript:doLogout();" data-omni=\'logout\'>로그아웃</a></li>';
 					htmlMoLoginAfter += '</ul>';
 
 					$("#useLogin").after(htmlMoLoginAfter);
@@ -585,7 +589,7 @@
 					htmlLoginAfter += '';
 					htmlLoginAfter += '<dd><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dd>';
 					htmlLoginAfter += '';
-					htmlLoginAfter += '<dd><a href="../logout.jsp;" data-omni=\'logout\'>로그아웃</a></dd>';
+					htmlLoginAfter += '<dd><a href="javascript:doLogout();" data-omni=\'logout\'>로그아웃</a></dd>';
 					htmlLoginAfter += '</dl>';
 					htmlLoginAfter += '</div></div>';
 
@@ -623,24 +627,17 @@
 			}
 
 			function getWritableMyComment() {
-				$.ajax({
-					url: "/xhr/review/loadWritableMyCommentListCount"
-					, type: "POST"
-					, dataType: "json"
-					, contentType: "application/json; charset=utf-8"
-					, success: function (result) {
-						$('.writableCnt').text(result.cmntCnt);
-					}
-					, error: function (request, status, error) {
-
-						// TODO : exception message 처리
-						//alert("나의 작성 가능 상품평 수량 조회 Code : " + request.status);
-						// alert("Code : "+ request.status + "\n" + "message : " + request.responseText);
-						// 공백
-						// alert("Error : " + error);
-					}
-				});
+		$.ajax({
+			url: "../xhr/checkReview.jsp",
+			type: "GET",
+			success: function(result){
+				$('.writableCnt').text(result);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(textStatus, errorThrown);
 			}
+		});
+	}
 		</script>
 		<input type="hidden" id="loginYn" value="" />
 		<header id="header">
@@ -1275,32 +1272,7 @@
 								class="link-login" data-omni="login">
 								<i class="icon ico-large ico-people">로그인</i>
 							</a>
-							<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu" style="display: none;">
-								<div class="gnbSubRound loginBefore">
-									<div>
-										<dl>
-											<dt>
-												<a href="#"
-													onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/indexLogin/?returnUrl=/monitors/gaming-monitors/');return false;"
-													data-omni="login" aria-selected="false">로그인</a>
-											</dt>
-											<dt><a href=""
-													onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/signUp/?returnUrl=/monitors/gaming-monitors/');return false;"
-													data-omni="sign up" aria-selected="false">회원가입</a></dt>
-											<dt><a href="/mypage/order/indexDeliveryList/" data-omni="orders"
-													aria-selected="false">주문/배송조회</a></dt>
-											<dt><a href="/customer/myDigitalReservationSearch/"
-													data-omni="store reservation" aria-selected="false">매장상담 예약 신청
-													조회</a></dt>
-											<dt><a href=""
-													onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/');return false;"
-													data-omni="login" aria-selected="false">쿠폰존</a></dt>
-											<dt>
-												<a href="#" data-omni="event" aria-selected="false">GMQD 회원 혜택</a>
-											</dt>
-										</dl>
-									</div>
-								</div>
+							<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu"></div>
 						</li>
 						<li>
 							<a href="javascript:void(0);" class="link-m-nav" data-omni="gnb:open" role="button">
@@ -2992,7 +2964,7 @@
 											<!-- s : 2020-12-03 이미지 삭제 및 em 태그 추가 -->
 											<!-- 360도 보기 상태에서 확대보기를 클릭하면 btn360 에 act removeClass 해줘야 함. -->
 											<span class="btn-bigView"><button type="button" class="btnBig"
-													data-focus="dataFocus06"><!-- <img src="/sec/static/_images/common/icon_big-view.svg" alt="확대 이미지 보기"> --><em
+													data-focus="dataFocus06"><!-- <img src="../static/images/common/icon_big-view.svg" alt="확대 이미지 보기"> --><em
 														class="blind">확대 이미지 보기</em></button></span>
 											<!-- e: 2020-12-03 -->
 										</div>
@@ -4475,7 +4447,7 @@
 													<li>
 														<a href="javascript:void(0);" class="pd-copylink"
 															onkeydown="tabKeyCnt();">
-															<img src="/sec/static/_images/common/icon-copylink.svg"
+															<img src="../static/images/common/icon-copylink.svg"
 																alt="링크복사 아이콘">
 															<span>링크복사</span>
 														</a>
@@ -4493,7 +4465,7 @@
 													<li>
 														<a href="javascript:void(0);" class="pd-sns-kakao"
 															title="새 창으로 열림">
-															<img src="/sec/static/_images/common/sns-kakao@3x.png"
+															<img src="../static/images/common/sns-kakao@3x.png"
 																alt="카카오톡 아이콘(공유하기)">
 															<span>카카오톡</span>
 														</a>
@@ -4501,7 +4473,7 @@
 													<li>
 														<a href="javascript:void(0);" class="pd-sns-facebook"
 															title="새 창으로 열림">
-															<img src="/sec/static/_images/common/sns-facebook@3x.png"
+															<img src="../static/images/common/sns-facebook@3x.png"
 																alt="페이스북 아이콘">
 															<span>페이스북</span>
 														</a>
@@ -4510,7 +4482,7 @@
 													<li>
 														<a href="javascript:void(0);" class="pd-picking-gift"
 															title="새 창으로 열림">
-															<img src="/sec/static/_images/common/icon_pickingGift.png"
+															<img src="../static/images/common/icon_pickingGift.png"
 																alt="선물 아이콘">
 															<span>선물 조르기</span>
 														</a>
@@ -9937,19 +9909,19 @@
 								});
 
 								/* 작성하기 취소 */
-								$(goodsComment.vWrapId).on('click', 'button[name=cancelWrite]', function () {
+								/* $(goodsComment.vWrapId).on('click', 'button[name=cancelWrite]', function () {
 									//$("#listArea").show();
 									$("#listArea .review-content-body").show();
 									$("#writeArea").children().remove();
 									$("div[name=write-validate]").css('display', 'none');
-
+								
 									// 상품평 가이드 버튼 숨김
 									$("#commentGuideBtnArea").css('display', 'none');
 									// 상품평 작성 버튼 출력
 									$("#commentWriteBtnArea").css('display', '');
-
+								
 									return false;
-								});
+								}); */
 
 								/* 작성하기 - 평점 선택 */
 								$("#writeArea", goodsComment.vWrapId).on('click', '.review-wt-ratings>.review-starating button', function () {
@@ -10075,6 +10047,7 @@
 
 										return false;
 									}
+									alert("버튼이 클릭되었습니다!");
 
 									// 이벤트 상품평 유효성 검사
 									if (!!$("#entryEventNo").val() && $("#chk-enter-all").is(':checked') && !eventValidation()) {
@@ -10185,7 +10158,7 @@
 										}
 										ajax.call(options);
 									}
-
+									
 								});
 
 								/* 첨부파일 추가 */
@@ -10987,7 +10960,6 @@
 							return window.open(url);
 
 						}
-
 					</script>
 					<div class="fixWidth" id="comment-information">
 						<input type="hidden" id="onlineStoreOnlyYn" value="N" name="N">
@@ -11224,7 +11196,7 @@
 											<div class="button-review-write" id="commentWriteBtnArea">
 												<span class="title-bubble">상품평을 작성하고 베스트 리뷰어에 도전해 보세요!</span>
 												<a href="javascript:;" class="btn btn-d btn-type1" id="commentWrite"
-													data-omni="write review" data-insertcheck='Y'><span>상품평
+													data-omni="write review" data-insertcheck='Y' onClick="fnWrite()"><span>상품평
 														작성</span></a>
 											</div>
 											<!-- 상품평 작성 버튼 -->
@@ -11333,10 +11305,48 @@
 								</div>
 								<!-- e : 상품평 리스트 -->
 								<!-- s : 상품평 작성 -->
-								<div class="layer-content" id="writeArea" style="display:flex;">
+<%
+	request.setCharacterEncoding("utf-8");
+	
+	String id = (String)session.getAttribute("sid");
+	String name = "";
+
+	if (id == null) {
+%>
+<script>
+	function fnWrite() {
+		alert("로그인 이후 상품평을 작성할 수 있습니다.");
+	}
+</script>
+<%
+	} else {
+		try {
+			String db_url = "jdbc:mysql://localhost:3306/gpqd";
+			String db_id = "root";
+			String db_password = "1234";
+
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(db_url, db_id, db_password);
+
+			String sql = "SELECT * FROM user WHERE userID=?"; 
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				name = rs.getString("userName");
+			}
+		} catch (Exception e) {
+			out.print(e);
+		}
+%>
+		<script>
+			function fnWrite() {
+				$("#writeArea").css("display", "flex");
+			}
+		</script>
+								<div class="layer-content" id="writeArea" style="display: none;">
 									<!-- s : 221221 상품평 작성  -->
-
-
 									<div class="review-wt-form">
 										<input type="hidden" name="compNo" value="">
 										<input type="hidden" name="stId" value="1">
@@ -11350,7 +11360,7 @@
 										<input type="hidden" id="insertMdlCode" name="insertMdlCode" value="">
 										<input type="hidden" id="insertBuySiteCd" name="insertBuySiteCd" value="20">
 										<div class="review-wt-head">
-											<p><span id="reviewFormName">홍경표</span> <b>님,</b> 상품은 어떠셨나요?</p>
+											<p><span id="reviewFormName"><%=name%></span> <b>님,</b> 상품은 어떠셨나요?</p>
 										</div>
 										<div class="review-wt-product" style="display: none;">
 											<div class="product-img">
@@ -11422,68 +11432,68 @@
 													<div class="review-keywords">
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G01">
-															<img src="/sec/static/_images/emoji/emoji-01.png"
-																alt="/sec/static/_images/emoji/emoji-01.png">
+															<img src="../static/images/emoji/emoji-01.png"
+																alt="../static/images/emoji/emoji-01.png">
 															<span>성능이 좋아요</span>
 														</button>
 														<button type="button" class="btn-review-keyword"
 															name="goodsCmntKwd" value="G02">
-															<img src="/sec/static/_images/emoji/emoji-02.png"
-																alt="/sec/static/_images/emoji/emoji-02.png">
+															<img src="../static/images/emoji/emoji-02.png"
+																alt="../static/images/emoji/emoji-02.png">
 															<span>사용하기 편리해요</span>
 														</button>
 														<button type="button" class="btn-review-keyword"
 															name="goodsCmntKwd" value="G03">
-															<img src="/sec/static/_images/emoji/emoji-04.png"
-																alt="/sec/static/_images/emoji/emoji-04.png">
+															<img src="../static/images/emoji/emoji-04.png"
+																alt="../static/images/emoji/emoji-04.png">
 															<span>디자인이 마음에 들어요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G04">
-															<img src="/sec/static/_images/emoji/emoji-10.png"
-																alt="/sec/static/_images/emoji/emoji-10.png">
+															<img src="../static/images/emoji/emoji-10.png"
+																alt="../static/images/emoji/emoji-10.png">
 															<span>배송이 빨라요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G05">
-															<img src="/sec/static/_images/emoji/emoji-03.png"
-																alt="/sec/static/_images/emoji/emoji-03.png">
+															<img src="../static/images/emoji/emoji-03.png"
+																alt="../static/images/emoji/emoji-03.png">
 															<span>튼튼해요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G06">
-															<img src="/sec/static/_images/emoji/emoji-09.png"
-																alt="/sec/static/_images/emoji/emoji-09.png">
+															<img src="../static/images/emoji/emoji-09.png"
+																alt="../static/images/emoji/emoji-09.png">
 															<span>가격이 합리적이에요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G07">
-															<img src="/sec/static/_images/emoji/emoji-05.png"
-																alt="/sec/static/_images/emoji/emoji-05.png">
+															<img src="../static/images/emoji/emoji-05.png"
+																alt="../static/images/emoji/emoji-05.png">
 															<span>색상이 마음에 들어요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G08">
-															<img src="/sec/static/_images/emoji/emoji-06.png"
-																alt="/sec/static/_images/emoji/emoji-06.png">
+															<img src="../static/images/emoji/emoji-06.png"
+																alt="../static/images/emoji/emoji-06.png">
 															<span>크기가 적당해요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G09">
-															<img src="/sec/static/_images/emoji/emoji-07.png"
-																alt="/sec/static/_images/emoji/emoji-07.png">
+															<img src="../static/images/emoji/emoji-07.png"
+																alt="../static/images/emoji/emoji-07.png">
 															<span>소재가 마음에 들어요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															name="goodsCmntKwd" value="G10">
-															<img src="/sec/static/_images/emoji/emoji-08.png"
-																alt="/sec/static/_images/emoji/emoji-08.png">
+															<img src="../static/images/emoji/emoji-08.png"
+																alt="../static/images/emoji/emoji-08.png">
 															<span>설치기사님이 친절해요</span>
 														</button>
 														<button type="button" class="btn-review-keyword "
 															id="removeKeyword" name="goodsCmntKwd" value="G99">
-															<img src="/sec/static/_images/emoji/emoji-11.png"
-																alt="/sec/static/_images/emoji/emoji-11.png">
+															<img src="../static/images/emoji/emoji-11.png"
+																alt="../static/images/emoji/emoji-11.png">
 															<span>원하는 선택지가 없어요</span>
 														</button>
 
@@ -11913,7 +11923,7 @@
 										</div>
 										<div class="btn-box">
 											<button type="button" class="btn btn-l btn-type1" id="cancelWrite"
-												name="cancelWrite" data-focus-next="popupReviewWrite">취소</button>
+												name="cancelWrite" data-focus-next="popupReviewWrite" onClick="fnCancelWrite()">취소</button>
 											<button type="button" id="insertWrite" class="btn btn-l btn-type2"
 												name="insertWrite">등록</button>
 										</div>
@@ -11923,6 +11933,9 @@
 
 									<!-- e : 221221 상품평 작성 -->
 								</div>
+<%
+	}
+%>
 								<!-- e : 상품평 작성 -->
 							</div>
 						</div>
@@ -12499,6 +12512,9 @@
 		</button>
 	</div>
 	<script>
+	function fnCancelWrite() {
+		$("#writeArea").hide();
+	}
 		floatSticky();
 
 		function firstRecentGoods() {
@@ -12580,6 +12596,7 @@
 				window.open("https://www.secbuy.com/irj/servlet/prt/portal/prtroot/com.sec.gsrm.com.cybervoc.BoardComponent?submissionId=introductionGuest&boardId=E0009&entrance=samsung.com", "popup", "width=830,height=600");
 			}
 		}
+
 	</script>
 	<script type="text/javascript" src="https://wcs.naver.net/wcslog.js"></script>
 	<script type="text/javascript">

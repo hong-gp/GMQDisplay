@@ -1,0 +1,38 @@
+.line_cookies { line-height: 20px; padding-top: 10px; padding-bottom: 10px; position: relative; z-index: 12; border-bottom: 1px solid #ccc; -webkit-box-shadow: 0 0 0 1px #fff; box-shadow: 0 0 0 1px #fff; }
+
+@media screen and (max-width: 800px) { .line_cookies { font-size: 14px; padding-left: 10px; padding-right: 10px; } }
+
+.line_cookies .container .text { display: inline-block; vertical-align: middle;  width:1200px;  /* modify by sophia width: calc( 100% - 320px);*/ }
+
+@media screen and (max-width: 800px) { .line_cookies .container .text { width: calc( 100% - 200px); } }
+
+@media screen and (max-width: 600px) { .line_cookies .container .text { width: calc( 100% - 50px); } }
+
+.line_cookies .cookies_more { display: inline-block; vertical-align: middle; color: #492582; text-decoration: underline; /*float: right;*/ margin-right: 50px; }
+
+@media screen and (max-width: 600px) { .line_cookies .cookies_more { float: none; } }
+
+.line_cookies .btn_close { display: inline-block; vertical-align: middle; float: right; }
+
+.line_cookies .cookiebtn_close{border-style: solid; color:#492582;/*float:right;*/margin-right:50px; border-color: #492582; border-width: 1px;opacity:1; background:#eee} 
+
+@media screen and (max-width: 800px) { body.zh-fonts .line_cookies, body.zh-tw .line_cookies, body.jp .line_cookies { font-size: 12.6px; } }
+
+@media screen and (max-width: 800px) {
+    html .container {
+    width: 100%;
+    }
+}
+
+html .container {
+    min-width: 320px;
+    max-width: 1220px;
+    width: 100%;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}

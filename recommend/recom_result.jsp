@@ -802,7 +802,7 @@ $.views.tags('script',{   // 스크립트
 <input type="hidden" id="loginYn" value="" />
 <header id="header">
 	<div class="s-inner">
-		<a href="index.html" class="logo">
+		<a href="../index.html" class="logo">
 					<img type="image/svg+xml" src="../static/images/common/logo_gmqd_black.png" alt="GMQD 엄선">
 				</a>
 			<div class="new-gnb">
@@ -2423,7 +2423,7 @@ try {
 												<span class="expect">적립 예정 포인트</span><strong class="point"><%=Integer.parseInt(rs2.getString("Msale"))/100%>P</strong>
 											</div>
 											<div class="cta"><!-- 200723 href 속성 삭제 -->
-												<button class="btn btn-type1 btn-rcmd-prdt" onclick="netFunnel_Action_PF('../product/<%=rs2.getString("Mno")%>.html');return false;" data-omni="KQ85QNB800F|KQ75QNB800FXKR">자세히 보기</button>
+												<button class="btn btn-type1 btn-rcmd-prdt" onclick="netFunnel_Action_PF('../product/<%=rs2.getString("Mno")%>.jsp');return false;" data-omni="KQ85QNB800F|KQ75QNB800FXKR">자세히 보기</button>
 											</div>
 										</div>
 										<div class="compare">

@@ -1,0 +1,68 @@
+	.cookies-tip {
+	  min-width: 320px;	
+	  background: #4D4F52;
+	  color: #fff;
+	  /*font-size: 0.875rem;*/
+	  text-align: left;
+	  font-family: Arial,"Montserrat","微軟正黑體", sans-serif;
+	  position: fixed;
+	  z-index: 99;
+	  bottom: 0;
+	  width: 100%;
+	  padding-top: 20px ;
+	  padding-bottom: 23px;
+	  z-index: 1000;
+	}
+	.cookies-tip .tip-content {
+		margin:auto;
+		max-width: 1280px;
+		padding:0 20px;
+	}
+	.cookies-tip .tip-content .btn-content {
+		display: block;
+		margin-top: 20px;
+	}
+	.cookies-tip .tip-content .btn-content span {
+		display: inline-block;
+	}
+	.cookies-tip .tip-content .settinglink {
+		margin-right: 40px;
+		display: inline-block;
+	}
+	@media only screen and (max-width: 1024px) {
+	  .cookies-tip {
+		text-align: left;
+	  }
+	}
+	.cookies-tip a {
+	  font-family: "Montserrat","微軟正黑體",Arial, sans-serif;
+	  color: #fff;
+	  text-decoration: underline;
+	}
+	.cookies-tip .close {
+	  display: inline-block;	
+	  color: #fff;
+	  text-decoration: none;
+	  font-family: "Montserrat","微軟正黑體",Arial, sans-serif;
+	  font-weight: 300;
+	  padding: 5px 20px;
+	  background-color: #000;
+	  margin-right: 80px;
+
+	}
+	@media only screen and (max-width: 800px) {
+		.cookies-tip {
+			padding-top: 30px ;
+			padding-bottom: 0px;
+		}
+		.cookies-tip .close {
+			margin-bottom:20px;
+			margin-right: 60px;
+		}
+		.cookies-tip .tip-content .btn-content {
+			margin-top: 15px;
+		}
+		.cookies-tip .tip-content .btn-content span {
+			padding-bottom: 30px;
+		}
+	}

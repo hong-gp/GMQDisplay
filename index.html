@@ -403,22 +403,12 @@ logger("prd");
 			//getCartCntHidden();
 		}
 	});
-
 	function getSessionInfo() {
 		$.ajax({
-			 url : "/xhr/member/getSession"
-			,type : "POST"
-			,success : function(result) {
-				result = JSON.parse(result);
-				if (result.mbrNo == "0") {
-					$("input[name=useLogin]").val("N");
-					$(".link-login i").addClass("ico-people");
-					$(".loginAfter").remove();
-					$(".loginBefore").remove();
-					
-					setLogoutGnbMenu();
-					
-				} else {
+			url : "./xhr/loginCheck.jsp",
+			type : "POST",
+			success : function(result) {
+				if(result == true) {
 					$("input[name=useLogin]").val("Y");
 					$(".link-login i").addClass("ico-people-logged");
 					$(".loginBefore").remove();
@@ -433,7 +423,17 @@ logger("prd");
 					var htmlPc = "안녕하세요!";
 					$(".loginAfter .welcomeMsg").html(htmlMo);
 					$(".loginAfter .greet-txt").html(htmlPc);
+				} else {
+					$("input[name=useLogin]").val("N");
+					$(".link-login i").addClass("ico-people");
+					$(".loginAfter").remove();
+					$(".loginBefore").remove();
+					
+					setLogoutGnbMenu();
 				}
+			},
+			error : function() {
+				console.log("서버 오류가 발생했습니다.");
 			}
 		});
 	}
@@ -515,7 +515,7 @@ logger("prd");
 			//pc
 			var htmlLoginBefore = '<div class="gnbSubRound loginBefore"><div>';
 			htmlLoginBefore += '<dl>';
-			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\'login\'>로그인</a></dt>';
+			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'./login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></dt>';
 			htmlLoginBefore += '';
 			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/signUp/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\'sign up\'>회원가입</a></dt>';
 			htmlLoginBefore += '';
@@ -554,7 +554,7 @@ logger("prd");
 			htmlMoLoginAfter += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
 			htmlMoLoginAfter += '';
 			htmlMoLoginAfter += '<li class="mob-onlyMenu-logout">';
-			htmlMoLoginAfter += '<a href="javascript:doLogout();" data-omni=\'logout\'>로그아웃</a></li>';
+			htmlMoLoginAfter += '<a href="logout.jsp;" data-omni=\'logout\'>로그아웃</a></li>';
 			htmlMoLoginAfter += '</ul>';
 			
 			$("#useLogin").after(htmlMoLoginAfter);
@@ -571,7 +571,7 @@ logger("prd");
 			htmlLoginAfter += '';
 			htmlLoginAfter += '<dd><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dd>';
 			htmlLoginAfter += '';
-			htmlLoginAfter += '<dd><a href="javascript:doLogout();" data-omni=\'logout\'>로그아웃</a></dd>';
+			htmlLoginAfter += '<dd><a href="logout.jsp;" data-omni=\'logout\'>로그아웃</a></dd>';
 			htmlLoginAfter += '</dl>';
 			htmlLoginAfter += '</div></div>';
 									
@@ -607,8 +607,21 @@ logger("prd");
 			}
 		});
 	}
-	
+
 	function getWritableMyComment() {
+		$.ajax({
+			url: "./xhr/checkReview.jsp",
+			type: "POST",
+			success: function(result){
+				$('.writableCnt').text(result);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(textStatus, errorThrown);
+			}
+		});
+	}
+	
+	/* function getWritableMyComment() {
 		$.ajax({
 			url : "/xhr/review/loadWritableMyCommentListCount"
 			, type : "POST"
@@ -626,7 +639,7 @@ logger("prd");
 				// alert("Error : " + error);
 			}
 		});
-	}
+	} */
 </script>
 <input type="hidden" id="loginYn" value="" />
 <header id="header">
@@ -1092,19 +1105,12 @@ logger("prd");
 					</div>
 				</li>
 				<li>
-					<input type="hidden" name="useLogin" id="useLogin" value="로그인" />
-					<a href="javascript:void(0);" aria-controls="login-menu" aria-selected="false" class="link-login" data-omni="login">
+					<input type="hidden" name="useLogin" id="useLogin" value="" />
+					<a href="javascript:;" aria-controls="login-menu" aria-selected="false" class="link-login" data-omni="login">
 						<i class="icon ico-large ico-people">로그인</i>
 					</a>
-					<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu" style="display: none;">
-					<div class="gnbSubRound loginBefore"><div>
-						<dl><dt>
-							<a href="#" onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/indexLogin/?returnUrl=/monitors/gaming-monitors/');return false;" data-omni="login" aria-selected="false">로그인</a></dt><dt><a href="" onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/signUp/?returnUrl=/monitors/gaming-monitors/');return false;" data-omni="sign up" aria-selected="false">회원가입</a></dt><dt><a href="/mypage/order/indexDeliveryList/" data-omni="orders" aria-selected="false">주문/배송조회</a></dt><dt><a href="/customer/myDigitalReservationSearch/" data-omni="store reservation" aria-selected="false">매장상담 예약 신청 조회</a></dt><dt><a href="" onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/');return false;" data-omni="login" aria-selected="false">쿠폰존</a></dt>
-							<dt>
-								<a href="#" data-omni="event" aria-selected="false">GMQD 회원 혜택</a></dt>
-						</dl>
-					</div>
-				</div>
+					<!-- 로드인 메뉴 -->
+					<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu"></div>
 				</li>
 				<li>
 					<a href="javascript:void(0);" class="link-m-nav" data-omni="gnb:open" role="button">

@@ -1,0 +1,1 @@
+function getQookerBestGoodsList(){var stContextPath=$("#viewStContextPath").val();var goodsList="";var options={url:stContextPath+"xhr/order/getQookerBestGoodsList",dataType:"json",type:"POST",async:false,complete:function(result){goodsList=result.responseText}};$.ajax(options);return goodsList};

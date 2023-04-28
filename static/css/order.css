@@ -33,7 +33,7 @@
 .order-content .payment-area .payment-listup > li > span { width:50%; line-height: 21px; font-size:16px; color:#707070; letter-spacing:0; }
 .order-content .payment-area .payment-listup > li > .text { color:#000; text-align:right; line-height:21px; }
 .order-content .payment-area .payment-listup > li > .text > strong { font-weight:normal; line-height:inherit; vertical-align:bottom; }
-.order-content .payment-area .payment-listup .color-sb { color:#2188FF !important; }
+.order-content .payment-area .payment-listup .color-sb { color:#e7141a !important; }
 .order-content .payment-area .payment-listup .color-sb > strong { color:inherit; }
 .order-content .payment-area .cost-listup { padding-top:33px; }
 .order-content .payment-area .cost-listup > li { display:flex; }
@@ -42,8 +42,8 @@
 .order-content .payment-area .cost-listup > li > span .btn-tooltip { position:relative; display:inline-block; right:initial; top:initial; margin-left:3px; transform:none; }
 .order-content .payment-area .cost-listup > li > span > strong { font-size:18px; color:inherit; line-height:23px; }
 .order-content .payment-area .cost-listup > li > span > span { color:inherit; }
-.order-content .payment-area .cost-listup > li > span > em {color:#2188FF; font-weight:normal; }
-.order-content .payment-area .cost-listup > li > span.color-sb { color:#2188FF; }
+.order-content .payment-area .cost-listup > li > span > em {color:#e7141a; font-weight:normal; }
+.order-content .payment-area .cost-listup > li > span.color-sb { color:#e7141a; }
 .order-content .payment-area .cost-listup > li > .text { text-align:right; }
 .order-content .payment-area .cost-listup > li > .text:not(.color-sb) { font-weight:bold; }
 .order-content .payment-area .cost-listup > li > .text > strong { font-family:"Samsung Sharp Sans"; font-size:24px; font-weight:bold; vertical-align:baseline; }
@@ -70,7 +70,7 @@
 .order-info-detail .error-msg, .input-obj .error-msg { padding-top:6px; }
 
 /* 주문 layout */
-.order-content { position:relative; max-width:1440px; padding:50px 410px 0 24px; }
+.order-content { position:relative; max-width:1440px; padding:50px 410px 0 24px;}
 .order-content.content { min-height:704px; } /* 주문 페이지에만 적용 */ 
 .layer-pop .order-content { min-height:initial; }
 .order-content > .tit-box { margin-bottom:40px; }
@@ -110,7 +110,7 @@
 .order-content .order-spec-group .ico-group-t > span { display:inline-block; height:auto; line-height:1.34em; letter-spacing:0; border-radius:0; }
 .order-content .order-spec-group .ico-group-t > span ~ span { margin-left:6px; }
 .order-content .order-spec-group .ico-group-t .ico-b,
-.order-content .order-spec-group .ico-group-t .ico-t { min-width:auto; padding:0; color:#2188FF; font-weight:700; vertical-align:top; border:0; }
+.order-content .order-spec-group .ico-group-t .ico-t { min-width:auto; padding:0; color:#e7141a; font-weight:700; vertical-align:top; border:0; }
 .order-content .order-spec-group .ico-group-t .ico-t > .btn-tooltip,
 .order-content .order-spec-group .ico-group-t .ico-t > .tooltip { float:right; width:20px; height:15px; font-size:1px; color:transparent; opacity:0.6; background:url("../images/common/icon-tooltip4.svg") no-repeat center center; background-size:auto 100%;}
 .order-content .order-spec-group .o-title { word-break:keep-all; overflow:hidden; }
@@ -420,7 +420,7 @@
 .order-info-detail .inp-form { display:inline-block; width:68%; }
 .order-info-detail .inp-form > .chk-form { display:inline-block; width:40%; vertical-align:top; }
 
-.order-info-detail em { font-size:inherit; color:#2188FF; }
+.order-info-detail em { font-size:inherit; color:#e7141a; }
 .order-info-detail .clear-both { clear:both; }
 .order-info-detail .inp-block { display:block; }
 .order-info-detail .inp-block > label { position:absolute; display:block; left:0; top:0; margin-bottom:11px; color:#000; }
@@ -2031,7 +2031,7 @@
 /* 21-11-25 point division */
 .point-division dt { margin-bottom: 12px; width: 100%; }
 .point-division dd { position: absolute; right: 0; margin-bottom: 5px; padding-top: 12px; width: calc(100% + 236px); text-align: right; color: #707070; }
-.point-division dd .detail-point { font-size: inherit; color: #2188FF; vertical-align: baseline; }
+.point-division dd .detail-point { font-size: inherit; color: #e7141a; vertical-align: baseline; }
 .point-division .point-inline-2 { vertical-align: top; }
 .point-division .txt-info { position: static; margin-top: 15px; }
 @media screen and (max-width: 1440px) and (min-width: 1101px) {
@@ -2047,7 +2047,7 @@
 }
 @media (max-width: 800px) {
 	.point-division dd { position: static; font-size: 14px; width: 100%; }
-	.point-division dd .detail-point { color: #2188FF !important; }
+	.point-division dd .detail-point { color: #e7141a !important; }
 	.point-division .txt-info { position: absolute; margin-top: 0; }
 }
 /* 2022-01-13 트레이드인 */
@@ -2123,7 +2123,7 @@
 .order-content .scplus-order-list .scplus .order-spec-group .ico-group { width: 50%; text-align: right; }
 .order-content .scplus-order-list .scplus .order-spec-group .list { width: 50%; }
 .order-content .scplus-order-list .order-tbl .order-spec { display: inherit; width: 100%; }
-.order-content .scplus-order-list .order-tbl.scplus .order-plan p { color: #2188FF; }
+.order-content .scplus-order-list .order-tbl.scplus .order-plan p { color: #e7141a; }
 .order-content .scplus-order-list .order-tbl.scplus .order-plan .scplus-o-title-box { margin-top: 12px; }
 
 /* 22-06-16 Gift Box */
@@ -2448,14 +2448,14 @@
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription { border-top: 2px solid #000; }
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set { position: relative; }
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl-head { width: 100%; overflow: hidden; margin-top: 12px; margin-bottom: -24px; }
-.box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl-head .s-text { float: left; width: 144px; font-size: 12px; font-weight: 700; text-align: left; color: #2188FF; padding-right: 24px; }
+.box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl-head .s-text { float: left; width: 144px; font-size: 12px; font-weight: 700; text-align: left; color: #e7141a; padding-right: 24px; }
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl-head .period { float: right; font-size: 12px; color: #707070; }
-.box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl-head .period .color-b { font-size: 12px; color: #2188FF; font-weight: 700; vertical-align: top; }
+.box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl-head .period .color-b { font-size: 12px; color: #e7141a; font-weight: 700; vertical-align: top; }
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl { flex-wrap: wrap; }
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl .order-td.order-func.btn_full { width: 100%; padding: 0 0; }
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-spec-group .o-label.btn_r { overflow: hidden; }
 .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-spec-group .o-label.btn_r button { float: right; font-size: 12px; }
-.box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order_msg_box { text-align: center; color: #2188FF; font-weight: 700; margin-top: 10px; padding: 20px; border-radius: 10px; background: #eee; }
+.box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order_msg_box { text-align: center; color: #e7141a; font-weight: 700; margin-top: 10px; padding: 20px; border-radius: 10px; background: #eee; }
 
 @media (max-width: 1440px) and (min-width: 1101px) {
     .box-tab-point-content .tab-content.ordered-list-contents .order-area.subscription .wrap-order-set .order-tbl-head .s-text { width: 10vw; padding-right: 1.6667vw; }
@@ -2479,8 +2479,8 @@
 
 .tooltip-content .scp_btn_box { margin-top: 10px; }
 .tooltip-content .scp_btn_box.btn_r { text-align: right; }
-.btn-underline.color-sb { border-bottom: 1px solid #2188FF; }
-.color-sb { color:#2188FF !important; }
+.btn-underline.color-sb { border-bottom: 1px solid #e7141a; }
+.color-sb { color:#e7141a !important; }
 
 @media (max-width: 800px) {
     .scplus-banner-box.type_02 { padding: 24px 12px 0; }
@@ -2595,9 +2595,9 @@
 .order-content.type_01 .payment-area { top:70px }
 .order-content.type_01 .payment-area { top: 50px; margin-bottom: 0; }
 .order-content.type_01 .payment-area .cost-listup > li > span {}
-.order-content.type_01 .payment-area .cost-listup.box02 { color: #2188FF; }
-.order-content.type_01 .payment-area .cost-listup.box02 > li > span { color: #2188FF; margin-top: 2px; }
-.order-content.type_01 .payment-area .cost-listup.box02 dt { color: #2188FF; }
+.order-content.type_01 .payment-area .cost-listup.box02 { color: #e7141a; }
+.order-content.type_01 .payment-area .cost-listup.box02 > li > span { color: #e7141a; margin-top: 2px; }
+.order-content.type_01 .payment-area .cost-listup.box02 dt { color: #e7141a; }
 .order-content.type_01 .payment-area .cost-listup.box02 dt span { font-size: 12px; margin-right: 5px; }
 .order-content.type_01 .payment-area .cost-listup.box02 .list { width: 100%; }
 .order-content.type_01 .payment-area .cost-listup.box03 { margin-top: 28px; padding-top: 33px; border-top: 1px solid #eaeaea; }

@@ -1156,7 +1156,7 @@ flex:none;}  /* 2022-05-17 */
 
 /* s: 220929 */
 #footer.footer_b2c .sitemap-links > ul{display: flex;}
-#footer.footer_b2c .sitemap-links > ul > li { width:16.6%; padding:38px 24px 30px; box-sizing:border-box; border-left:1px solid #d9d9d9; height: 690px;}
+#footer.footer_b2c .sitemap-links > ul > li { width:16.6%; padding:38px 24px 30px; box-sizing:border-box; border-left:1px solid #d9d9d9; height: 400px;}
 #footer.footer_b2c .sitemap-links > ul > li:last-of-type { border-right: 1px solid #d9d9d9;}
 #footer.footer_b2c .sitemap-links > ul > li h3 { margin-bottom: 22px; line-height:23px; font-weight:bold; font-size:18px; color:#000; position: unset; }
 #footer.footer_b2c .sitemap-links > ul > li h3 a { display:block; font:inherit; pointer-events:none; }
@@ -1537,13 +1537,13 @@ flex:none;}  /* 2022-05-17 */
 .nav-lnb-rounded .list-menu .slick-list { overflow:visible; }
 .nav-lnb-rounded .list-menu .list .menu { border-top:1px solid #555; }
 .nav-lnb-rounded .list-menu .list .menu > a { display:block; position:relative; line-height:38px; font-size:14px; color:#000; letter-spacing:0; }
-.nav-lnb-rounded .list-menu .list .menu > a:after { content:""; position:absolute; top:50%; right:0; width:16px; height:16px; transform:translateY(-50%); background:url(../images/common/icon-arrow-down16x16.svg) no-repeat; background-size:16px auto; }
+.nav-lnb-rounded .list-menu .list .menu > a:after { content:""; position:absolute; top:50%; right:0; width:16px; height:16px; transform:translateY(-50%); /*background:url(../images/common/icon-arrow-down16x16.svg) no-repeat; background-size:16px auto;*/ }
 .nav-lnb-rounded .list-menu .list .menu > ul { display:none; padding:8px 0; border-top:1px solid #eee; }
 .nav-lnb-rounded .list-menu .list .menu > ul > li > a { display:block; line-height:30px; padding:0 12px; font-size:12px; color:#313131; letter-spacing:0; }
 .nav-lnb-rounded .list-menu .list .menu > ul > li > a:hover { background:#fff; }
 .nav-lnb-rounded .list-menu .list .menu.active { border-bottom:none; }
 .nav-lnb-rounded .list-menu .list .menu.active > a { font-weight:bold; }
-.nav-lnb-rounded .list-menu .list .menu.active > a:after { background-image:url(../images/common/icon-arrow-up16x16.svg); }
+.nav-lnb-rounded .list-menu .list .menu.active > a:after { /*background-image:url(../images/common/icon-arrow-up16x16.svg);*/ }
 .nav-lnb-rounded .list-menu .list .menu.active > ul > li.current > a { font-weight:bold; }
 .member-bg .nav-lnb-rounded,
 .member-bg .nav-lnb-rounded .bg,

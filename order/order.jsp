@@ -1,4 +1,8 @@
-
+<%@ page contentType="text/html;charset=utf-8" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.text.*" %>
+<%@ page import="java.util.*" %>
+<%String id = (String)session.getAttribute("sid");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="ko">
@@ -16,14 +20,14 @@
 	<link rel="shortcut icon" type="image/x-icon" href="https://static-ux.mustit.co.kr/img/front/mustit_favicon.ico">
 	<link href="https://static-ux.mustit.co.kr/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/lib/bootstrap/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/common/reset.css?v=1680035330"> <!-- reset.css -->
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/header.css?v=1680035330"> <!-- 리뉴얼 헤더 -->
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/common.css?v=1680035330"> <!-- common.css -->
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/button.css?v=1680035330"> <!-- button.css -->
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/font.css?v=1680035330"> <!-- font.css -->
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/layer.css?v=1680035330"><!-- 레이어팝업 -->
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/common/slide.css">
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/dist/service_desktop.css?v=1682322910">
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/common/reset.css?v=1680035330"> <!-- reset.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/header.css?v=1680035330"> <!-- 리뉴얼 헤더 -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/common.css?v=1680035330"> <!-- common.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/button.css?v=1680035330"> <!-- button.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/font.css?v=1680035330"> <!-- font.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/layer.css?v=1680035330"><!-- 레이어팝업 -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/common/slide.css">
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/dist/service_desktop.css?v=1682322910">
 			<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/order.css?v=1680035330">
 		<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/common/join_styles.css?v=1680035330">
 	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/new_main.css?v=1680035330"> <!-- main.css -->
@@ -123,9 +127,6 @@
 <script src="../static/script/component.js"></script>
 <script src="../static/script/clipboard.min.js"></script>
 <script type="text/javascript" src="../static/script/picturePolyfill.min.js"></script>
-
-
-
 
 	<style>
 		.ui-autocomplete {
@@ -499,685 +500,801 @@ logger("prd");
 	
 	function getCartList(){
 		var options = {
-			url : '/xhr/order/gnbCartList' ,
-			dataType : "html" ,
-			done : function(data){
-					$(".gnb-cartList").html(data);
+			url : '/xhr/order/function getCartList() {
+				var options = {
+					url: '../xhr/gnbCartList.jsp',
+					dataType: "html",
+					success: function (data) {
+						$(".gnb-cartList").html(data);
+					}
 				}
+				$.ajax(options);
 			}
-		ajax.call(options);
-	}
 
-	// 뒤로가기 시 이벤트
-	$(window).bind("pageshow", function(event){
-		if(event.originalEvent.persisted || window.performance && window.performance.navigation.type == 2){
-			getCartCnt();
-			//getCartCntHidden();
-		}
-	});
-	function getSessionInfo() {
-		$.ajax({
-			url : "./xhr/loginCheck.jsp",
-			type : "POST",
-			success : function(result) {
-				if(result == true) {
-					$("input[name=useLogin]").val("Y");
-					$(".link-login i").addClass("ico-people-logged");
-					$(".loginBefore").remove();
-					$(".loginAfter").remove();
-					
-					// session.mbrNm 세팅
-					//$(".sessionInfoMbrNm").text(result.mbrNm);
-					
-					setLoginGnbMenu();
+			// 뒤로가기 시 이벤트
+			$(window).bind("pageshow", function (event) {
+				if (event.originalEvent.persisted || window.performance && window.performance.navigation.type == 2) {
+					getCartCnt();
+					//getCartCntHidden();
+				}
+			});
+			function getSessionInfo() {
+				$.ajax({
+					url: "../xhr/loginCheck.jsp",
+					type: "POST",
+					success: function (result) {
+						if (result == true) {
+							$("input[name=useLogin]").val("Y");
+							$(".link-login i").addClass("ico-people-logged");
+							$(".loginBefore").remove();
+							$(".loginAfter").remove();
 
-					var htmlMo = "<a href=\"https://account.GMQDisplay.com/\" target=\"_blank\" title=\"새창열림\">안녕하세요!</a>";
-					var htmlPc = "안녕하세요!";
-					$(".loginAfter .welcomeMsg").html(htmlMo);
-					$(".loginAfter .greet-txt").html(htmlPc);
+							// session.mbrNm 세팅
+							//$(".sessionInfoMbrNm").text(result.mbrNm);
+
+							setLoginGnbMenu();
+
+							var htmlMo = "<a href=\"https://account.GMQDisplay.com/\" target=\"_blank\" title=\"새창열림\">안녕하세요!</a>";
+							var htmlPc = "안녕하세요!";
+							$(".loginAfter .welcomeMsg").html(htmlMo);
+							$(".loginAfter .greet-txt").html(htmlPc);
+						} else {
+							$("input[name=useLogin]").val("N");
+							$(".link-login i").addClass("ico-people");
+							$(".loginAfter").remove();
+							$(".loginBefore").remove();
+
+							setLogoutGnbMenu();
+						}
+					},
+					error: function () {
+						console.log("서버 오류가 발생했습니다.");
+					}
+				});
+			}
+
+			function appLogin(token, userId) {
+				$.ajax({
+					url: "/xhr/member/loginSucces"
+					, type: "POST"
+					, data: {
+						token: token,
+						userId: userId
+					}
+					, success: function (result) {
+						if (result.result === 'Y') {
+							getSessionInfo();
+						}
+						if (result.joinYn === 'Y') {
+							var param = {
+								galcamsMbr: result.gcsMbrYn,
+								loginSucces: result.result,
+								attrModel: {
+									user_id: userId,
+									under14: result.under14
+								}
+							};
+							window.secapp.loginSucces(JSON.stringify(param));
+							var eventParam = {
+								eventName: "App_signUp"
+								, attrModel: {
+									service_id: 'SDC'
+								}
+							};
+							window.secapp.customEvent(JSON.stringify(eventParam));
+						} else {
+							var param = {
+								galcamsMbr: result.gcsMbrYn,
+								loginSucces: result.result
+							};
+							window.secapp.loginSucces(JSON.stringify(param));
+						}
+						if (result.result === 'Y' && result.adbrixYn == 'Y') {
+							var eventParam = {
+								eventName: "App_login"
+								, attrModel: {
+									service_id: 'SDC'
+								}
+							};
+							window.secapp.customEvent(JSON.stringify(eventParam));
+						}
+					}
+				});
+			}
+
+			// 로그아웃 상태 GNB 메뉴 세팅
+			function setLogoutGnbMenu() {
+				if (device.agent.indexOf("mobi") >= 0 || device.isGnb === false) {
+					// mobile web
+					var htmlMoLoginBefore = '<ul class="mob-onlyMenu loginBefore">';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-login">';
+					htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/../login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-join">';
+					htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'../login_info/Sign.html\');return false;\" data-omni=\"sign up\">회원가입</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-tracking">';
+					htmlMoLoginBefore += '<a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></li>';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-stoConsult">';
+					htmlMoLoginBefore += '<a href="/customer/myDigitalReservationSearch/" data-omni=\'store reservation\'>매장상담예약신청 조회</a></li>';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-cpnZone">';
+					htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/\');return false;" data-omni=\'login\'>쿠폰존</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-benefit">';
+					htmlMoLoginBefore += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '</ul>';
+
+					$("#useLogin").after(htmlMoLoginBefore);
 				} else {
-					$("input[name=useLogin]").val("N");
-					$(".link-login i").addClass("ico-people");
-					$(".loginAfter").remove();
-					$(".loginBefore").remove();
-					
-					setLogoutGnbMenu();
+					//pc
+					var htmlLoginBefore = '<div class="gnbSubRound loginBefore"><div>';
+					htmlLoginBefore += '<dl>';
+					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'../login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'../login_info/Sign.html\');return false;\" data-omni=\'sign up\'>회원가입</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '<dt><a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송조회</a></dt>';
+					htmlLoginBefore += '<dt><a href="/customer/myDigitalReservationSearch/" data-omni=\'store reservation\'>매장상담 예약 신청 조회</a></dt>';
+					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/\');return false;" data-omni=\'login\'>쿠폰존</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '<dt><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '</dl>';
+					htmlLoginBefore += '</div></div>';
+
+					$("#login-menu").html(htmlLoginBefore);
 				}
-			},
-			error : function() {
-				console.log("서버 오류가 발생했습니다.");
 			}
-		});
-	}
-	
-	function appLogin(token, userId) {
-		$.ajax({
-			url : "/xhr/member/loginSucces"
-			,type : "POST"
-			,data : {
-				token : token,
-				userId : userId
-			}
-			,success : function(result) {
-				if(result.result === 'Y'){
-					getSessionInfo();
-				}
-				if(result.joinYn === 'Y'){
-					var param = {
-						 galcamsMbr: result.gcsMbrYn,
-						 loginSucces: result.result,
-						 attrModel:{
-							  user_id:userId,
-							  under14:result.under14
-						   }
-						 };
-					window.secapp.loginSucces(JSON.stringify(param));
-					var eventParam = {
-							eventName : "App_signUp"
-							, attrModel : {
-								service_id: 'SDC'
-							}
-					};
-					window.secapp.customEvent(JSON.stringify(eventParam));
+
+			// 로그인 상태 GNB 메뉴 세팅
+			function setLoginGnbMenu() {
+				if (device.agent.indexOf("mobi") >= 0 || device.isGnb === false) {
+					//mobile web
+					var htmlMoLoginAfter = '<ul class="mob-onlyMenu loginAfter">';
+					htmlMoLoginAfter += '<li class="welcomeMsg">';
+					htmlMoLoginAfter += '<a href="https://account.samsung.com/" target="_blank" title="새창열림">안녕하세요!</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-myinfo">';
+					htmlMoLoginAfter += '<a href="../mypage/myinfo.jsp" data-omni=\'my account\'>나의 정보</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-myDeviceList">';
+					htmlMoLoginAfter += '<a href="/mypage/info/indexMyDeviceList/" data-omni=\'my divice\'>나의 제품 관리</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-prdctRvw">';
+					htmlMoLoginAfter += '<a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 :<span class="cmt-num writableCnt"></span>건</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-tracking">';
+					htmlMoLoginAfter += '<a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-cpnZone">';
+					htmlMoLoginAfter += '<a href="/mypage/coupon/indexMyCoupon/" data-omni=\'coupon zone\'>나의 적립금</a></li>';
+					htmlMoLoginAfter += '';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-benefit">';
+					htmlMoLoginAfter += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
+					htmlMoLoginAfter += '';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-logout">';
+					htmlMoLoginAfter += '<a href="../xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></li>';
+					htmlMoLoginAfter += '</ul>';
+
+					$("#useLogin").after(htmlMoLoginAfter);
 				} else {
-					var param = {
-						 galcamsMbr: result.gcsMbrYn,
-						 loginSucces: result.result
-						 };
-					window.secapp.loginSucces(JSON.stringify(param));
-				}
-				if(result.result === 'Y' && result.adbrixYn == 'Y'){
-					var eventParam = {
-							eventName : "App_login"
-							, attrModel : {
-								service_id: 'SDC'
-							}
-			    	};
-					window.secapp.customEvent(JSON.stringify(eventParam));
-				}
-			}
-		});
-	}
-	
-	// 로그아웃 상태 GNB 메뉴 세팅
-	function setLogoutGnbMenu() { 
-		if(device.agent.indexOf("mobi") >= 0 || device.isGnb === false){
-			// mobile web
-			var htmlMoLoginBefore = '<ul class="mob-onlyMenu loginBefore">';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-login">';
-			htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'./login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-join">';
-			htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'./login_info/Sign.html\');return false;\" data-omni=\"Sign\">회원가입</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-tracking">';
-			htmlMoLoginBefore += '<a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></li>';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-stoConsult">';
-			htmlMoLoginBefore += '<a href="/customer/myDigitalReservationSearch/" data-omni=\'store reservation\'>매장상담예약신청 조회</a></li>';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-cpnZone">';
-			htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/login_info/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/\');return false;" data-omni=\'login\'>쿠폰존</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-benefit">';
-			htmlMoLoginBefore += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '</ul>';
-			
-			$("#useLogin").after(htmlMoLoginBefore);
-		} else {
-			//pc
-			var htmlLoginBefore = '<div class="gnbSubRound loginBefore"><div>';
-			htmlLoginBefore += '<dl>';
-			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'./login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'./login_info/Sign.html\');return false;\" data-omni=\'Sign\'>회원가입</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '<dt><a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송조회</a></dt>';
-			htmlLoginBefore += '<dt><a href="/customer/myDigitalReservationSearch/" data-omni=\'store reservation\'>매장상담 예약 신청 조회</a></dt>';
-			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/login_info/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/\');return false;" data-omni=\'login\'>쿠폰존</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '<dt><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '</dl>';
-			htmlLoginBefore += '</div></div>';
-			
-			$("#login-menu").html(htmlLoginBefore);
-		}
-	}
-	
-	// 로그인 상태 GNB 메뉴 세팅
-	function setLoginGnbMenu() {
-		if(device.agent.indexOf("mobi") >= 0 || device.isGnb === false){
-			//mobile web
-			var htmlMoLoginAfter = '<ul class="mob-onlyMenu loginAfter">';
-			htmlMoLoginAfter += '<li class="welcomeMsg">';
-			htmlMoLoginAfter += '<a href="https://account.samsung.com/" target="_blank" title="새창열림">안녕하세요!</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-myinfo">';
-			htmlMoLoginAfter += '<a href="/membership/point/" data-omni=\'my account\'>나의 정보</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-myDeviceList">';
-			htmlMoLoginAfter += '<a href="/mypage/info/indexMyDeviceList/" data-omni=\'my divice\'>나의 제품 관리</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-prdctRvw">';
-			htmlMoLoginAfter += '<a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 :<span class="cmt-num writableCnt"></span>건</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-tracking">';
-			htmlMoLoginAfter += '<a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-cpnZone">';
-			htmlMoLoginAfter += '<a href="/mypage/coupon/indexMyCoupon/" data-omni=\'coupon zone\'>나의 적립금</a></li>';
-			htmlMoLoginAfter += '';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-benefit">';
-			htmlMoLoginAfter += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
-			htmlMoLoginAfter += '';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-logout">';
-			htmlMoLoginAfter += '<a href="logout.jsp;" data-omni=\'logout\'>로그아웃</a></li>';
-			htmlMoLoginAfter += '</ul>';
-			
-			$("#useLogin").after(htmlMoLoginAfter);
-		} else {
-			//pc
-			var htmlLoginAfter = '<div class="gnbSubRound loginAfter"><div>';
-			htmlLoginAfter += '<dl>';
-			htmlLoginAfter += '<dt><a href="https://account.samsung.com/" target="_blank" title="새창열림"><span class="greet-txt">안녕하세요!</span></a></dt>';
-			htmlLoginAfter += '<dd><a href="/membership/point/" data-omni=\'my account\'>나의 정보</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/info/indexMyDeviceList/" data-omni=\'my divice\'>나의 제품 관리</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 : <span class="cmt-num writableCnt"></span> 건</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/coupon/indexMyCoupon/" data-omni=\'coupon zone\'>쿠폰존</a></dd>';
-			htmlLoginAfter += '';
-			htmlLoginAfter += '<dd><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dd>';
-			htmlLoginAfter += '';
-			htmlLoginAfter += '<dd><a href="logout.jsp;" data-omni=\'logout\'>로그아웃</a></dd>';
-			htmlLoginAfter += '</dl>';
-			htmlLoginAfter += '</div></div>';
-									
-			$("#login-menu").html(htmlLoginAfter);						
-		}
-	}
-	
+					//pc
+					var htmlLoginAfter = '<div class="gnbSubRound loginAfter"><div>';
+					htmlLoginAfter += '<dl>';
+					htmlLoginAfter += '<dt><a href="https://account.samsung.com/" target="_blank" title="새창열림"><span class="greet-txt">안녕하세요!</span></a></dt>';
+					htmlLoginAfter += '<dd><a href="../mypage/myinfo.jsp" data-omni=\'my account\'>나의 정보</a></dd>';
+					htmlLoginAfter += '<dd><a href="/mypage/info/indexMyDeviceList/" data-omni=\'my divice\'>나의 제품 관리</a></dd>';
+					htmlLoginAfter += '<dd><a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 : <span class="cmt-num writableCnt"></span> 건</a></dd>';
+					htmlLoginAfter += '<dd><a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></dd>';
+					htmlLoginAfter += '<dd><a href="/mypage/coupon/indexMyCoupon/" data-omni=\'coupon zone\'>쿠폰존</a></dd>';
+					htmlLoginAfter += '';
+					htmlLoginAfter += '<dd><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dd>';
+					htmlLoginAfter += '';
+					htmlLoginAfter += '<dd><a href="../xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></dd>';
+					htmlLoginAfter += '</dl>';
+					htmlLoginAfter += '</div></div>';
 
-	function getCartCnt() {
-		$.ajax({
-			 url : "/xhr/order/gnbCartCount"
-			,type : "POST"
-			,success : function(result) {
-				if (result > 0) {
-					$('.cart-inner-count').show();
-					$('.cart-inner-count').text(result);
-				}
-				else {
-					$('.cart-inner-count').hide();
+					$("#login-menu").html(htmlLoginAfter);
 				}
 			}
-		});
-	}		
 
-	function getApiMemid(sessionInfo) {
-		var jsonResult = JSON.stringify(sessionInfo);
-		$.ajax({
-			 url : "/xhr/member/getMemberShipNo"
-			, type : "POST"
-			, data : { mbrNo : sessionInfo.mbrNo, loginId : sessionInfo.loginId}
-			, success : function(result) {
-				apiFlag = result.updateCnt;
-			}
-		});
-	}
 
-	function getWritableMyComment() {
-		$.ajax({
-			url: "./xhr/checkReview.jsp",
-			type: "POST",
-			success: function(result){
-				$('.writableCnt').text(result);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				console.log(textStatus, errorThrown);
+			function getCartCnt() {
+				$.ajax({
+					url: "/xhr/order/gnbCartCount"
+					, type: "POST"
+					, success: function (result) {
+						if (result > 0) {
+							$('.cart-inner-count').show();
+							$('.cart-inner-count').text(result);
+						}
+						else {
+							$('.cart-inner-count').hide();
+						}
+					}
+				});
 			}
-		});
-	}
-	
-	/* function getWritableMyComment() {
-		$.ajax({
-			url : "/xhr/review/loadWritableMyCommentListCount"
-			, type : "POST"
-			, dataType : "json"
-			, contentType : "application/json; charset=utf-8"
-			, success : function(result) {
-				$('.writableCnt').text(result.cmntCnt);
+
+			function getApiMemid(sessionInfo) {
+				var jsonResult = JSON.stringify(sessionInfo);
+				$.ajax({
+					url: "/xhr/member/getMemberShipNo"
+					, type: "POST"
+					, data: { mbrNo: sessionInfo.mbrNo, loginId: sessionInfo.loginId }
+					, success: function (result) {
+						apiFlag = result.updateCnt;
+					}
+				});
 			}
-			, error : function(request, status, error) {
-				
-				// TODO : exception message 처리
-				//alert("나의 작성 가능 상품평 수량 조회 Code : " + request.status);
-				// alert("Code : "+ request.status + "\n" + "message : " + request.responseText);
-				// 공백
-				// alert("Error : " + error);
+
+			function getWritableMyComment() {
+				$.ajax({
+					url: "../xhr/checkReview.jsp",
+					type: "POST",
+					success: function (result) {
+						$('.writableCnt').text(result);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.log(textStatus, errorThrown);
+					}
+				});
 			}
-		});
-	} */
-</script>
-<!-- 헤더 -->
-<input type="hidden" id="loginYn" value="" />
-<header id="header">
-	<div class="s-inner">
-		<a href="index.html" class="logo">
+
+			/* function getWritableMyComment() {
+				$.ajax({
+					url : "/xhr/review/loadWritableMyCommentListCount"
+					, type : "POST"
+					, dataType : "json"
+					, contentType : "application/json; charset=utf-8"
+					, success : function(result) {
+						$('.writableCnt').text(result.cmntCnt);
+					}
+					, error : function(request, status, error) {
+						
+						// TODO : exception message 처리
+						//alert("나의 작성 가능 상품평 수량 조회 Code : " + request.status);
+						// alert("Code : "+ request.status + "\n" + "message : " + request.responseText);
+						// 공백
+						// alert("Error : " + error);
+					}
+				});
+			} */
+		</script>
+		<input type="hidden" id="loginYn" value="" />
+		<header id="header">
+			<div class="s-inner">
+				<a href="../index.html" class="logo">
 					<img type="image/svg+xml" src="../static/images/common/logo_gmqd_black.png" alt="GMQD 엄선" />
 				</a>
-			<div class="new-gnb">
-            <button type="button" class="gnb-back" data-omni="gnb:back">이전 메뉴 보기</button>
-            <button type="button" class="gnb-close" data-omni="gnb:close">GNB 닫기</button>
-			<nav class="gnb">
-				<ul class="gnb1depth">
-					<li class="">
-								<a href="#" aria-controls="700033426-menu" aria-selected="false" data-omni="Product" >게이밍 모니터</a>
+				<div class="new-gnb">
+					<button type="button" class="gnb-back" data-omni="gnb:back">이전 메뉴 보기</button>
+					<button type="button" class="gnb-close" data-omni="gnb:close">GNB 닫기</button>
+					<nav class="gnb">
+						<ul class="gnb1depth">
+							<li class="">
+								<a href="#" aria-controls="700033426-menu" aria-selected="false" data-omni="Product">게이밍
+									모니터</a>
 								<div class="gnb2depth">
 									<div class="inner">
 										<ul class="list">
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="Product:new" >신제품<span class="flag-new">NEW</span></a>
-													<div class="gnb3depth new-prd-list">
-														<div class="prd-list-wrap">
-																<div class="main-prd">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:GMQD 게이밍 모니터">
-																					<span class="pic-wrap">
-																						<img src="./static/images/gmqd_bg_logo.png" alt="">
-																				<span class="pc-pic lozad" data-background-image="/s"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/ba1119ba-5dc4-4b2f-94d5-494e3a51bf95.jpg?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">게이밍 모니터 울트라 4K <br> 최초 런칭 딜타임 </span>
-																				<span class="desc theme-blk">즉시 할인 8% + <br>카드사별 6만원 결제일할인</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-1">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:GMQD Book3 Series">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/0abb6285-7482-4831-a1d7-36ab892c9c0a.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/0d774285-1b04-46d3-af5f-6256d7804a2d.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>GMQD Book3 Series<br>런칭</span>
-																				</span>
-																				<span class="desc theme-blk">강력한 성능의 GMQD 북3<br>카드사별 최대 19만원 결제일할인!  </span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-2">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:Neo QLED">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/48caf28f-2aa0-4d2d-a073-f350e85db6c6.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/960c690e-f83f-484a-a1ec-28ac9a5f9c94.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>Neo QLED I OLED<br>런칭</span>
-																				</span>
-																				<span class="desc theme-blk">초고화질·초대형 TV의 기준<br>런칭 기념 특별한 혜택!</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-3">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:bespoke refrigerator">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/b32c2088-6a51-4046-bf87-94d159152d91.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/03368012-947e-4989-aabd-6407af7f6d5a.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>게이밍 모니터<br>신제품 체험단 모집</span>
-																				</span>
-																				<span class="desc theme-blk">최대 41% 할인 쿠폰 포함<br>최대 243만원 상당 혜택</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-4">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:2023 NEW bespoke-jet-2023">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/39a70a6b-2c4d-40ae-86e9-8ab994400232.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/35ee9a07-af0b-45c4-9ce5-1cea793ad2e4.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>맞춤형 AI<br>런칭 체험단</span>
-																				</span>
-																				<span class="desc theme-blk">지금 체험단 참여하면<br>최대 67만원 상당의 혜택이!</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-5">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:bespoke airsolution">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/a3a1d985-75e7-4e3e-9528-ab42be51b618.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/3bce182f-7f0d-42c2-bb54-65326fb480be.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>게이밍 모니터 <br>갤러리 런칭 체험단</span>
-																				</span>
-																				<span class="desc theme-blk">지금 체험단 참여하면<br>최대 35% 할인 혜택을!</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-6">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:samsungcareplus">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/b1e3cc88-29df-4d81-87ca-a0622a43716c.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/66a8cd06-bc37-4827-aa3f-380aaad1e75e.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>GMQD 엄선케어플러스</span>
-																				</span>
-																				<span class="desc theme-blk">가전제품 전문세척 | 이전설치 + <br>가전케어 패키지 매월 6천원대</span>
-																			</span>
-																			</a>
-																		</div>
-																	</div>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
+												<a href="#" aria-selected="false" data-omni="Product:new">신제품<span
+														class="flag-new">NEW</span></a>
+												<div class="gnb3depth new-prd-list">
+													<div class="prd-list-wrap">
+														<div class="main-prd">
+															<a href="../product/G32C4X.jsp" class="rec-link" aria-selected="false"
+																data-omni="Product:new:GMQD 게이밍 모니터">
+																<span class="pic-wrap" style="background: url('../static/images/explain/G32C4X_1.png') no-repeat top center / cover; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="../static/images/product/G32C4X_1.png"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/ba1119ba-5dc4-4b2f-94d5-494e3a51bf95.jpg?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk" style="color: white;">MSI G32C4X 게이밍 200 HDR <br> 아이세이버 무결점 </span>
+																	<span class="desc theme-blk" style="color: #ddd;">1500R 커브드 패널 <br>프레임리스 디자인</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-1">
+															<a href="../product/27LGD4IPS.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:GMQD Book3 Series">
+																<span class="pic-wrap" style="background: url('../static/images/product/27LGD4IPS_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/0abb6285-7482-4831-a1d7-36ab892c9c0a.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/0d774285-1b04-46d3-af5f-6256d7804a2d.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk"">
+																		<span>크로스오버 QHD DCI-P3 4면 베젤리스 <br>무결점</span>
+																	</span>
+																	<span class="desc theme-blk">눈 보호 아이케어 기술<br>게임최적 프리싱크 어댑티브</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-2">
+															<a href="../product/G2712.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:Neo QLED">
+																<span class="pic-wrap" style="background: url('../static/images/product/G2712_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/48caf28f-2aa0-4d2d-a073-f350e85db6c6.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/960c690e-f83f-484a-a1ec-28ac9a5f9c94.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>MSI IPS 게이밍 170 아이세이버 <br>무결점</span>
+																	</span>
+																	<span class="desc theme-blk">170Hz 주사율<br>120Hz 콘솔 모드</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-3">
+															<a href="../product/2460G.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:bespoke refrigerator">
+																<span class="pic-wrap" style="background: url('../static/images/product/2460G_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/b32c2088-6a51-4046-bf87-94d159152d91.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/03368012-947e-4989-aabd-6407af7f6d5a.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>한성컴퓨터 ULTRON PLUS <br>리얼 144 게이밍</span>
+																	</span>
+																	<span class="desc theme-blk">10.1mm 얇은 두께<br>3면이 탁 트인 제로베젤</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-4">
+															<a href="../product/27UP850N.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:2023 NEW bespoke-jet-2023">
+																<span class="pic-wrap" style="background: url('../static/images/product/27UP850N_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/39a70a6b-2c4d-40ae-86e9-8ab994400232.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/35ee9a07-af0b-45c4-9ce5-1cea793ad2e4.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>LG전자 <br>27UP850N</span>
+																	</span>
+																	<span class="desc theme-blk">선명한 DisplayHDR™ 400<br>캘리브레이션 기능</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-5">
+															<a href="../product/28MQ780.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:bespoke airsolution">
+																<span class="pic-wrap" style="background: url('../static/images/product/28MQ780_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/a3a1d985-75e7-4e3e-9528-ab42be51b618.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/3bce182f-7f0d-42c2-bb54-65326fb480be.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>LG전자 울트라와이드 듀얼업 <br>28MQ780</span>
+																	</span>
+																	<span class="desc theme-blk">2배의 화면과 2배의 조작성<br>멀티태스킹에 최적</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-6">
+															<a href="../product/27G2SP.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:samsungcareplus">
+																<span class="pic-wrap" style="background: url('../static/images/product/27G2SP_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/b1e3cc88-29df-4d81-87ca-a0622a43716c.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/66a8cd06-bc37-4827-aa3f-380aaad1e75e.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>알파스캔 AOC  게이밍 165 프리싱크 무결점 </span>
+																	</span>
+																	<span class="desc theme-blk">Adaptive Sync<br>초슬림 베젤 화면</span>
+																</span>
+															</a>
+														</div>
 													</div>
-												</li>
+													<!-- 2dep banner -->
+													<!-- //2dep banner -->
+												</div>
+											</li>
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="Product:mobile" >전문가용용 모니터</a>
-													<div class="gnb3depth ">
-														<ul>
+												<a href="#" aria-selected="false" data-omni="Product:mobile">게임용 모니터</a>
+												<div class="gnb3depth ">
+													<ul>
+														<li class="">
+															<a href="#" aria-selected="false"
+																data-omni="Product:mobile:smartphones">FPS/RTS</a>
+															<div class="gnb4depth">
+																<ul>
 																	<li class="">
-																			<a href="#" aria-selected="false" data-omni="Product:mobile:smartphones">그래픽</a>
-																			<div class="gnb4depth">
-																					<ul>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:smartphones:smartphones recommendation" >인기 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:smartphones:all-smartphones" >전체 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:smartphones:mobile accessories" >추천 상품</a>
-																							</li>
-																						</ul>
-																				</div>
-																			</li>
+																		<a href="../monitors.html?sort=popularity&genre=fps/rts"
+																			target="_blank">인기 상품</a>
+																	</li>
 																	<li class="">
-																			<a href="#" aria-selected="false" data-omni="Product:mobile:GMQD Book">RPG/Sports/fights</a>
-																			<div class="gnb4depth">
-																					<ul>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:GMQD Book:Recommended GMQD Book" >인기 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:GMQD Book:All GMQD Book" >전체 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:GMQD Book:galaxybook-ultra" >추천 상품</a>
-																							</li>
-																				</div>
-																			</li>
+																		<a href="../monitors.html?genre=fps/rts"
+																			target="_blank" aria-selected="false">전체
+																			상품</a>
+																	</li>
 																	<li class="">
-																			<a href="#" aria-selected="false" data-omni="Product:mobile:buds" >
-																					</a>
-																			</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product::learn more">
-																<div class="img">
-																	<img src="/static/images/menu/menu01.jpg" alt="2023 Neo QLED I OLED 사전판매 체험단" class="lozad">
-																	</div>
-																<p class="txt">2023 Neo QLED I OLED 런칭</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product:Apply:learn more" class="link">
-																		<span>구매 혜택 보기</span>
-																		</a>
-																	</div>
+																		<a href="../monitors.html?recom=recom&genre=fps/rts"
+																			target="_blank" aria-selected="false">추천
+																			상품</a>
+																	</li>
+																</ul>
 															</div>
-														<!-- //2dep banner -->
+														</li>
+														<li class="">
+															<a href="#" aria-selected="false"
+																data-omni="Product:mobile:GMQD Book">RPG/Sports/fights</a>
+															<div class="gnb4depth">
+																<ul>
+																	<li class="">
+																		<a href="../monitors.html?sort=popularity&genre=rpg/sports/fighting"
+																			aria-selected="false">인기 상품</a>
+																	</li>
+																	<li class="">
+																		<a href="../monitors.html?genre=rpg/sports/fighting"
+																			target="_blank" aria-selected="false">전체
+																			상품</a>
+																	</li>
+																	<li class="">
+																		<a href="../monitors.html?recom=recom&genre=rpg/sports/fighting"
+																			aria-selected="false">추천 상품</a>
+																	</li>
+															</div>
+														</li>
+														<li class="">
+															<a href="#" aria-selected="false"
+																data-omni="Product:mobile:buds">
+															</a>
+														</li>
+													</ul>
+													<!-- 2dep banner -->
+													<div class="gnbBanner type2">
+														<a href="../gaming-monitor.html">
+															<div class="img" style="position: relative;">
+																<img src="../static/images/explain/IP2742_1.png" style="position: absolute; bottom: -50px;" alt="쓰리윈즈 인터픽셀 게이밍 IPS 165 피벗 무결점" class="lozad">
+															</div>
+															<p class="txt">게임용 모니터의 모든 것</p>
+														</a>
+														<div class="link-box flex--center">
+															<a href="../gaming-monitor.html" onclick="openCtaLink('', '');"
+																data-omni="feature image:Product:Apply:learn more"
+																class="link">
+																<span>더 많은 상품들 보러가기</span>
+															</a>
+														</div>
 													</div>
-												</li>
+													<!-- //2dep banner -->
+												</div>
+											</li>
 
-												<li class="">
-													<a href="#" aria-selected="false" data-omni="Product:mobile" >전문가용 모니터</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:Everything about the GMQD" >그래픽 작업용 게이밍 모니터</a>
-																</li>
-																<li class="">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:Everything about the GMQD" >사운드 작업용 게이밍 모니터</a>
-																</li>
-																<li class="">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:Everything about the GMQD" >비디오/콘솔용 게이밍 모니터</a>
-																</li>
-															</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product::learn more">
-																<div class="img">
-																	<img src="/static/images/menu/menu01.jpg" alt="2023 Neo QLED I OLED 사전판매 체험단" class="lozad">
-																	</div>
-																<p class="txt">전문가용 모니터의 모든것</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product:Apply:learn more" class="link">
-																		<span>더 많은 상품들 보러가기</span>
-																		</a>
-																	</div>
-															</div>
-														<!-- //2dep banner -->
-													</div>
-												</li>
 											<li class="">
-												<a href="#" aria-selected="false" data-omni="Product:new" >맞춤형 주변기기</a>
-													<div class="gnb3depth ">
-
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product::learn more">
-																<div class="img">
-																	<img src="/static/images/menu/menu01.jpg" alt="GMQD Book3 Series 런칭" class="lozad">
-																	</div>
-																<p class="txt">GMQD Book3 Series 런칭</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product:Buying benefit:learn more" class="link">
-																		<span>구매 혜택 보기</span>
-																		</a>
-																	</div>
+												<a href="#" aria-selected="false" data-omni="Product:mobile">전문가용
+													모니터</a>
+												<div class="gnb3depth ">
+													<ul>
+														<li class="">
+															<a href="../monitors.html?genre=graphic" target="_blank"
+																aria-selected="false"
+																data-omni="Product:mobile:Everything about the GMQD">그래픽
+																작업용 게이밍 모니터</a>
+														</li>
+														<li class="">
+															<a href="../monitors.html?genre=work" target="_blank"
+																aria-selected="false"
+																data-omni="Product:mobile:Everything about the GMQD">사운드
+																작업용 게이밍 모니터</a>
+														</li>
+														<li class="">
+															<a href="../monitors.html?genre=videogame" target="_blank"
+																aria-selected="false"
+																data-omni="Product:mobile:Everything about the GMQD">비디오/콘솔용
+																게이밍 모니터</a>
+														</li>
+													</ul>
+													<!-- 2dep banner -->
+													<div class="gnbBanner type2">
+														<a href="../expert-monitor.html">
+															<div class="img">
+																<img src="https://images.samsung.com/kdp/cms_contents/131599/d0f0bd10-1dab-40a0-ad9a-b4475dfc7827.jpg?$ORIGIN_JPG$"
+																	alt="전문가용 모니터의 모든 것" class="lozad">
 															</div>
-														<!-- //2dep banner -->
+															<p class="txt">전문가용 모니터의 모든 것</p>
+														</a>
+														<div class="link-box flex--center">
+															<a href="../expert-monitor.html" class="link">
+																<span>더 많은 상품들 보러가기</span>
+															</a>
+														</div>
 													</div>
-												</li>
-											</ul>
+													<!-- //2dep banner -->
+												</div>
+											</li>
+										</ul>
 									</div>
 								</div>
 							</li>
-						<li class="">
-								<a href="./recommend/index_game.html" aria-selected="false">추천·맞춤케어</a>
-										<div class="gnb2depth">
+							<li class="">
+								<a href="../recommend/index_game.html" aria-selected="false">추천케어</a>
+								<div class="gnb2depth">
 									<div class="inner">
 										<ul class="list">
-											</ul>
+										</ul>
 									</div>
 								</div>
 							</li>
-						<li class="">
-								<a href="#" aria-controls="700027213-menu" aria-selected="false" >이벤트</a>
+							<li class="">
+								<a href="../AI-Line/bespokestudio test.html" aria-selected="false">모니터 제작소</a>
+								<div class="gnb2depth">
+									<div class="inner">
+										<ul class="list">
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li class="">
+								<a href="#" aria-controls="700027213-menu" aria-selected="false">이벤트</a>
 								<div class="gnb2depth">
 									<div class="inner">
 										<ul class="list">
 											<li class=" direct">
-													<a href="javascript:void(0);" onclick="openCtaLink('https://www.samsung.com/bespokeshop/', '');" aria-selected="false" data-omni="e-Food-Mall:e-food hall HOME" >
-																	이벤트 HOME</a>
-															<div class="gnb3depth ">
-														<ul>
-																</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink();" data-omni="feature image:e-Food-Mall::learn more">
-																<div class="img">
-																	<img data-src="https://images.samsung.com/kdp/display/gnb/29d6faf0-26aa-4bf6-8605-cc4ace3dbade.jpg?$ORIGIN_JPG$" alt="셀럽 푸드 티켓팅 X 게이밍 모니터 큐커_자세히 보기" class="lozad">
-																	</div>
-																<p class="txt">셰프 푸드 티켓팅 X 게이밍 모니터 큐커</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink();" data-omni="feature image:e-Food-Mall:Learn more:learn more" class="link">
-																		<span>자세히 보기</span>
-																		</a>
-																	</div>
+												<a href="javascript:void(0);"
+													onclick="openCtaLink('https://www.samsung.com/bespokeshop/', '');"
+													aria-selected="false" data-omni="e-Food-Mall:e-food hall HOME">
+													이벤트 HOME</a>
+												<div class="gnb3depth ">
+													<ul>
+													</ul>
+													<!-- 2dep banner -->
+													<div class="gnbBanner type2">
+														<a href="javascript:void(0);" onclick="openCtaLink();"
+															data-omni="feature image:e-Food-Mall::learn more">
+															<div class="img">
+																<img data-src="https://images.samsung.com/kdp/display/gnb/29d6faf0-26aa-4bf6-8605-cc4ace3dbade.jpg?$ORIGIN_JPG$"
+																	alt="셀럽 푸드 티켓팅 X 게이밍 모니터 큐커_자세히 보기" class="lozad">
 															</div>
-														<!-- //2dep banner -->
+															<p class="txt">셰프 푸드 티켓팅 X 게이밍 모니터 큐커</p>
+														</a>
+														<div class="link-box flex--center">
+															<a href="javascript:void(0);" onclick="openCtaLink();"
+																data-omni="feature image:e-Food-Mall:Learn more:learn more"
+																class="link">
+																<span>자세히 보기</span>
+															</a>
+														</div>
 													</div>
-												</li>
+													<!-- //2dep banner -->
+												</div>
+											</li>
 											<li class=" direct">
-													<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="e-Food-Mall:subscription" >
-																	GMQD 멤버십 플랜</a>
-															<div class="gnb3depth ">
-														<ul>
-																</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:e-Food-Mall:Start My Plan Membership:learn more">
-																<div class="img">
-																	<img data-src="https://images.samsung.com/kdp/display/gnb/a75403ff-7df6-4af3-82f4-298f99472c68.jpg?$ORIGIN_JPG$" alt="산성전자 멤버십 PLAN 최대 72만 미식혜택 (2만원 X 36개월) 이벤트 영수증 구매 금액 65,000원 결제수단 제휴사신용카드 월 혜택 금액 20,000원(청구할인,캐시백 등 카드사별 상이)" class="lozad">
-																	</div>
-																<p class="txt">GMQD 제품 오너들의 <br> 평소처럼 쓰면서 카드값 아끼는 방법!</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:e-Food-Mall:Learn more:learn more" class="link">
-																		<span>GMQD 멤버십 플랜 시작하기</span>
-																		</a>
-																	</div>
+												<a href="javascript:void(0);" onclick="openCtaLink('', '');"
+													aria-selected="false" data-omni="e-Food-Mall:subscription">
+													GMQD 멤버십 플랜</a>
+												<div class="gnb3depth ">
+													<ul>
+													</ul>
+													<!-- 2dep banner -->
+													<div class="gnbBanner type2">
+														<a href="javascript:void(0);" onclick="openCtaLink('', '');"
+															data-omni="feature image:e-Food-Mall:Start My Plan Membership:learn more">
+															<div class="img">
+																<img data-src="https://images.samsung.com/kdp/display/gnb/a75403ff-7df6-4af3-82f4-298f99472c68.jpg?$ORIGIN_JPG$"
+																	alt="산성전자 멤버십 PLAN 최대 72만 미식혜택 (2만원 X 36개월) 이벤트 영수증 구매 금액 65,000원 결제수단 제휴사신용카드 월 혜택 금액 20,000원(청구할인,캐시백 등 카드사별 상이)"
+																	class="lozad">
 															</div>
-														<!-- //2dep banner -->
+															<p class="txt">GMQD 제품 오너들의 <br> 평소처럼 쓰면서 카드값 아끼는 방법!</p>
+														</a>
+														<div class="link-box flex--center">
+															<a href="javascript:void(0);" onclick="openCtaLink('', '');"
+																data-omni="feature image:e-Food-Mall:Learn more:learn more"
+																class="link">
+																<span>GMQD 멤버십 플랜 시작하기</span>
+															</a>
+														</div>
 													</div>
-												</li>
+													<!-- //2dep banner -->
+												</div>
+											</li>
 									</div>
 								</div>
 							</li>
-						<li class="">
-								<a href="#" onclick="openCtaLink('', '');" aria-controls="700000115-menu" aria-selected="false" data-omni="support" >고객서비스</a>
+							<li class="">
+								<a href="#" onclick="openCtaLink('', '');" aria-controls="700000115-menu"
+									aria-selected="false" data-omni="support">고객서비스</a>
 								<div class="gnb2depth">
 									<div class="inner">
 										<ul class="list">
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:support" >무엇을 도와드릴까요?</a>
-													<div class="gnb3depth">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" aria-selected="false" data-omni="support:support:support-learn-more" >
-																							무엇을 도와드릴까요?</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/solution', '_blank');" aria-selected="false" data-omni="support:support:self-solve">
-																							스스로 해결</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" data-omni="feature image:support:How can I help you?:learn more">
-																<div class="img">
-																	<img data-src="https://images.samsung.com/kdp/display/gnb/3823f581-fdc7-4936-8d3c-00cb35ada470.jpg?$ORIGIN_JPG$" alt="무엇을 도와드릴까요? 더 알아보기" class="lozad">
-																	</div>
-																<p class="txt">무엇을 도와드릴까요?</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" data-omni="feature image:support:Learn more:learn more" class="link">
-																		<span>더 알아보기</span>
-																		</a>
-																	</div>
+												<a href="#" aria-selected="false" data-omni="support:support">무엇을
+													도와드릴까요?</a>
+												<div class="gnb3depth">
+													<ul>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/support/', '');"
+																aria-selected="false"
+																data-omni="support:support:support-learn-more">
+																무엇을 도와드릴까요?</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림"
+																onclick="openCtaLink('https://www.samsungsvc.co.kr/solution', '_blank');"
+																aria-selected="false"
+																data-omni="support:support:self-solve">
+																스스로 해결</a>
+														</li>
+													</ul>
+													<!-- 2dep banner -->
+													<div class="gnbBanner type2">
+														<a href="javascript:void(0);"
+															onclick="openCtaLink('/support/', '');"
+															data-omni="feature image:support:How can I help you?:learn more">
+															<div class="img">
+																<img data-src="https://images.samsung.com/kdp/display/gnb/3823f581-fdc7-4936-8d3c-00cb35ada470.jpg?$ORIGIN_JPG$"
+																	alt="무엇을 도와드릴까요? 더 알아보기" class="lozad">
 															</div>
-														<!-- //2dep banner -->
+															<p class="txt">무엇을 도와드릴까요?</p>
+														</a>
+														<div class="link-box flex--center">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/support/', '');"
+																data-omni="feature image:support:Learn more:learn more"
+																class="link">
+																<span>더 알아보기</span>
+															</a>
+														</div>
 													</div>
-												</li>
+													<!-- //2dep banner -->
+												</div>
+											</li>
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:selfserve" >
-															제품 지원</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" aria-selected="false" data-omni="support:selfserve:Manual-download" >
-																							매뉴얼 & 다운로드</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/video', '_blank');" aria-selected="false" data-omni="support:selfserve:video guide">
-																							동영상 가이드</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/consult/remote', '_blank');" aria-selected="false" data-omni="support:selfserve:remote_service">
-																							원격 상담</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/consult/call', '_blank');" aria-selected="false" data-omni="support:selfserve:rescounselview">
-																							전화 상담 예약</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('http://www.g-sis.co.kr/', '_blank');" aria-selected="false" data-omni="support:selfserve:computeronline">
-																							컴퓨터 온라인 상담</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
-													</div>
-												</li>
+												<a href="#" aria-selected="false" data-omni="support:selfserve">
+													제품 지원</a>
+												<div class="gnb3depth ">
+													<ul>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/support/', '');"
+																aria-selected="false"
+																data-omni="support:selfserve:Manual-download">
+																매뉴얼 & 다운로드</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림"
+																onclick="openCtaLink('https://www.samsungsvc.co.kr/video', '_blank');"
+																aria-selected="false"
+																data-omni="support:selfserve:video guide">
+																동영상 가이드</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림"
+																onclick="openCtaLink('https://www.samsungsvc.co.kr/consult/remote', '_blank');"
+																aria-selected="false"
+																data-omni="support:selfserve:remote_service">
+																원격 상담</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림"
+																onclick="openCtaLink('https://www.samsungsvc.co.kr/consult/call', '_blank');"
+																aria-selected="false"
+																data-omni="support:selfserve:rescounselview">
+																전화 상담 예약</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림"
+																onclick="openCtaLink('http://www.g-sis.co.kr/', '_blank');"
+																aria-selected="false"
+																data-omni="support:selfserve:computeronline">
+																컴퓨터 온라인 상담</a>
+														</li>
+													</ul>
+													<!-- 2dep banner -->
+													<!-- //2dep banner -->
+												</div>
+											</li>
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:information" >
-															추천 부가정보</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/newsalert/', '');" aria-selected="false" data-omni="support:information:newsalert" >
-																							고객서비스 알림</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/warranty/', '');" aria-selected="false" data-omni="support:information:warranty" >
-																							워런티</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/faq/', '');" aria-selected="false" data-omni="support:information:GMQDisplay-faq" >
-																							GamingMonitorDisplay FAQ</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://r1.community.samsung.com/t5/Korea/ct-p/kr', '_blank');" aria-selected="false" data-omni="support:information:community">
-																							GMQD 엄선멤버스 커뮤니티</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/galaxy-battery/', '');" aria-selected="false" data-omni="support:information:galaxy-battery" >
-																							GMQD 배터리</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('https://www.samsung.com/maintenance-mode', '');" aria-selected="false" data-omni="support:information:maintenance-mode" >
-																							GMQD 수리모드</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
-													</div>
-												</li>
+												<a href="#" aria-selected="false" data-omni="support:information">
+													추천 부가정보</a>
+												<div class="gnb3depth ">
+													<ul>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/support/newsalert/', '');"
+																aria-selected="false"
+																data-omni="support:information:newsalert">
+																고객서비스 알림</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/support/warranty/', '');"
+																aria-selected="false"
+																data-omni="support:information:warranty">
+																워런티</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/faq/', '');"
+																aria-selected="false"
+																data-omni="support:information:GMQDisplay-faq">
+																GamingMonitorDisplay FAQ</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림"
+																onclick="openCtaLink('https://r1.community.samsung.com/t5/Korea/ct-p/kr', '_blank');"
+																aria-selected="false"
+																data-omni="support:information:community">
+																GMQD 엄선멤버스 커뮤니티</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/support/galaxy-battery/', '');"
+																aria-selected="false"
+																data-omni="support:information:galaxy-battery">
+																GMQD 배터리</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('https://www.samsung.com/maintenance-mode', '');"
+																aria-selected="false"
+																data-omni="support:information:maintenance-mode">
+																GMQD 수리모드</a>
+														</li>
+													</ul>
+													<!-- 2dep banner -->
+													<!-- //2dep banner -->
+												</div>
+											</li>
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:Service center" >
-															서비스 센터</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/digitalplaza/centerMain/', '');" aria-selected="false" data-omni="support:Service center:Service-center_plaza" >
-																							서비스센터 찾기</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('', '_blank');" aria-selected="false" data-omni="support:Service center:U service reservation">
-																							출장 서비스 예약</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('', '_blank');" aria-selected="false" data-omni="support:Service center:Product Inquiry">
-																							제품 문의</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
-													</div>
-												</li>
+												<a href="#" aria-selected="false" data-omni="support:Service center">
+													서비스 센터</a>
+												<div class="gnb3depth ">
+													<ul>
+														<li class="">
+															<a href="javascript:void(0);"
+																onclick="openCtaLink('/digitalplaza/centerMain/', '');"
+																aria-selected="false"
+																data-omni="support:Service center:Service-center_plaza">
+																서비스센터 찾기</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림" onclick="openCtaLink('', '_blank');"
+																aria-selected="false"
+																data-omni="support:Service center:U service reservation">
+																출장 서비스 예약</a>
+														</li>
+														<li class="">
+															<a href="javascript:void(0);" class="outlink "
+																title="새창으로 열림" onclick="openCtaLink('', '_blank');"
+																aria-selected="false"
+																data-omni="support:Service center:Product Inquiry">
+																제품 문의</a>
+														</li>
+													</ul>
+													<!-- 2dep banner -->
+													<!-- //2dep banner -->
+												</div>
+											</li>
 									</div>
 								</div>
 							</li>
-						<li class="blank">
+							<li class="blank">
 								<a aria-selected="false"></a>
 								<div class="gnb2depth">
 									<div class="inner">
@@ -1186,54 +1303,59 @@ logger("prd");
 									</div>
 								</div>
 							</li>
-				<!-- s: markup 추가 0713  모바일용 메뉴 추가 -->
-				<input type="hidden" name="useLogin" id="useLogin" value="" />
-				<!-- e: markup 추가 0713  모바일용 메뉴 추가 -->
-			</nav>
-		</div>
+							<!-- s: markup 추가 0713  모바일용 메뉴 추가 -->
+							<input type="hidden" name="useLogin" id="useLogin" value="" />
+							<!-- e: markup 추가 0713  모바일용 메뉴 추가 -->
+					</nav>
+				</div>
 
-		<div class="header-right gnbMenu">
-			<ul>
-				<li>
-					<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search" role="button">
-						<i class="icon ico-large ico-zoom">검색</i>
-					</a>
-				</li>
+				<div class="header-right gnbMenu">
+					<ul>
+						<li>
+							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
+								role="button">
+								<i class="icon ico-large ico-zoom">검색</i>
+							</a>
+						</li>
 
-				<li>
-					<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu" aria-selected="false" class="link-cart" data-omni="cart" role="button">
-						<i class="icon ico-large ico-cart">장바구니</i>
-						<span class="cart-inner-count"></span>
-					</a>
-					<div class="s-gnbSubWrap textSubWrap cartMenu" id="cart-menu">
-						<div class="gnbSubRound">
-							<div>
-								<ul class="gnb-cartList">
-								</ul>
-								<div class="btn-box">
-									<button type="button" class="btn btn-d btn-type2" onclick="NetFunnel_Action({action_id :'b2c_cart_view'},function(ev, ret){location.href='/cart/';});" data-omni="cart">장바구니 보기</button>
+						<li>
+							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
+								aria-selected="false" class="link-cart" data-omni="cart" role="button">
+								<i class="icon ico-large ico-cart">장바구니</i>
+								<span class="cart-inner-count"></span>
+							</a>
+							<div class="s-gnbSubWrap textSubWrap cartMenu" id="cart-menu">
+								<div class="gnbSubRound">
+									<div>
+										<ul class="gnb-cartList">
+										</ul>
+										<div class="btn-box">
+											<button type="button" class="btn btn-d btn-type2"
+												onclick="NetFunnel_Action({action_id :'b2c_cart_view'},function(ev, ret){location.href='/cart/';});"
+												data-omni="cart">장바구니 보기</button>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<input type="hidden" name="useLogin" id="useLogin" value="" />
-					<a href="javascript:;" aria-controls="login-menu" aria-selected="false" class="link-login" data-omni="login">
-						<i class="icon ico-large ico-people">로그인</i>
-					</a>
-					<!-- 로드인 메뉴 -->
-					<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu"></div>
-				</li>
-				<li>
-					<a href="javascript:void(0);" class="link-m-nav" data-omni="gnb:open" role="button">
-						<i class="icon ico-large ico-nav">전체메뉴</i>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</header>
+						</li>
+						<li>
+							<input type="hidden" name="useLogin" id="useLogin" value="" />
+							<a href="javascript:;" aria-controls="login-menu" aria-selected="false" class="link-login"
+								data-omni="login">
+								<i class="icon ico-large ico-people">로그인</i>
+							</a>
+							<!-- 로드인 메뉴 -->
+							<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu"></div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="link-m-nav" data-omni="gnb:open" role="button">
+								<i class="icon ico-large ico-nav">전체메뉴</i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
 	
 	<div id="layerNode_sug"></div>
 	
@@ -1330,7 +1452,26 @@ logger("prd");
 	<input type="hidden" name="paymethod" id="paymethod" value="">
 	<input type='hidden' name="payment_kind" id="payment_kind" value="">
 	<input type="hidden" name="payment_manage_no" value=""/>
+	<!-- 데이터 -->
+
 	<div class="order_table">
+		<%
+		String db_url = "jdbc:mysql://localhost:3306/gpqd";
+		String db_id = "root";
+		String db_password = "1234";
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con = DriverManager.getConnection(db_url, db_id, db_password);
+
+		try {
+			String sql = "SELECT * FROM user WHERE userID=?"; 
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String name = rs.getString("userName");
+		%>
 		<div class="mini_title">주문회원정보</div>
 		
 		<table class="mi-table mi-table-left mi-table-secondary">
@@ -1341,13 +1482,13 @@ logger("prd");
 			<tr>
 				<th>이름 <span class="mi-font-red">*</span></th>
 				<td>
-					<input type="text" name="name" value="" class="input-join" maxlength="50"/>
+					<input type="text" name="name" value="<%=name%>" class="input-join" maxlength="50"/>
 				</td>
 			</tr>
 			<tr>
 				<th>이메일 <span class="mi-font-red">*</span></th>
 				<td>
-					<input type="text"  name="email" value="" maxlength="50" class="input-join" />
+					<input type="text"  name="email" value="<%=id%>" maxlength="50" class="input-join"/>
 					<input type="hidden" name="phone" value="" />
 					<input type="hidden" name="hphone" value="" />
 				</td>
@@ -1373,6 +1514,12 @@ logger("prd");
 									</td>
 			</tr>
 		</table>
+		<%
+			}
+		} catch (Exception e) {
+			out.print(e);
+		}
+		%>
 		<div class="mi-font-red mi-font-basic margin_t_5">* 주문과 관련된 안내를 발송하는 정보이니, 정확하게 입력해주시기 바랍니다.</div>
 	</div>
 	
@@ -1683,175 +1830,342 @@ logger("prd");
 		.nuts_table.nuts1.separately tr th {border-bottom:1px solid #e3e3e3!important;}
 		.nuts_table.nuts1.separately td {border-top:0!important; border-bottom:1px solid #e3e3e3!important;}
 	</style>
-	<div class="order_table" style="margin-bottom:30px;">
-		<div class="mini_title">결제
-		<span id="noLoginTxt" class="join-strong-txt mi-font-basic mi-normal"></span>
-		</div>
-		
-		<div class="order_table margin_b_20">
-			<table class="mi-table mi-table-secondary">
+		<div class="order_table" style="margin-bottom:30px;">
+			<div class="mini_title">결제
+				<span id="noLoginTxt" class="join-strong-txt mi-font-basic mi-normal"></span>
+			</div>
+
+			<div class="order_table margin_b_20">
+				<table class="mi-table mi-table-secondary">
+					<colgroup>
+						<col width="*" />
+						<col width="132" />
+						<col width="132" />
+						<col width="132" />
+						<col width="132" />
+					</colgroup>
+					<tr>
+						<th>상품정보</th>
+						<th>수량</th>
+						<th>가격</th>
+						<th>할인금액</th>
+						<th>회원 할인가</th>
+					</tr>
+<%
+String[] Mnos = request.getParameterValues("cartIds");
+String[] counts = request.getParameterValues("buyQty");
+String Mno = request.getParameter("Mno");
+DecimalFormat df = new DecimalFormat("###,###");
+
+int total_price = 0;
+int total_sale = 0;
+int total = 0;
+
+String Mname = "";
+int Mprice = 0;
+int Msale = 0;
+int count = 0;
+int total_count = 0;
+
+try {
+	if (Mno != null) {
+		count = Integer.parseInt(request.getParameter("count"));
+		total_count = count;
+
+		String sql = "SELECT * FROM product WHERE Mno=?"; 
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, Mno);
+
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			Mname = rs.getString("Mname");
+			Mprice = rs.getInt("Mprice");
+			Msale = rs.getInt("Msale");
+
+			total_price = Mprice * count;
+			total_sale = (Mprice - Msale) * count;
+		}
+%>
+					<tr>
+						<td style="padding:20px 0 20px 0;">
+							<div class="mi-float-left mi-group-l10 mi-group-r10">
+								<input type="hidden" id="result_mileage_25699178" name="result_mileage_25699178" />
+								<input type="hidden" id="result_gift_25699178" name="result_gift_25699178" />
+								<input type="hidden" id="v_quan" name="quantity[]" value="1" />
+								<input type="hidden" name="baesong_type_25699178" value="2" />
+								<input type="hidden" name="baesongbi_25699178" value="127,560" />
+								<input type="hidden" name="baesongbi[]" data-pnum="42498852" value="127,560" />
+
+								<input type="hidden" name="baesongbi_is_flag[42498852]" value="" />
+								<input type="hidden" name="baesongbi_is_number[42498852]" value="" />
+								<input type="hidden" name="baesongbi_is[42498852]" value="0" />
+								<input type="hidden" name="baesongbi_direct_flag[42498852]" value="N" />
+								<input type="hidden" name="usedAddCoupon[25699178]" value="" />
+
+								<img src="/GMQDisplay-master/static/images/product/<%=Mno%>_1.png" alt="상품이미지"
+									style="width:110px; height:110px; border: 1px solid rgba(0,0,0,.08);" />
+							</div>
+							<div class="mi-relative mi-text-left" style="height:112px;">
+								<p class="mi-medium mi-font-black mi-bold">
+									<%=Mname%>
+								</p>
+								<p class="mi-font-basic mi-font-black">
+									<%=Mno%>
+								</p>
+							</div>
+						</td>
+						<td class="mi-font-mblack">
+							<div class="product_count">
+								<%=count%>
+							</div>
+						</td>
+						<td>
+							<p>
+								<span class="fs15 mi-font-mblack bold mi-roboto mi-valign-bottom">
+									<%=df.format(Mprice)%>
+								</span><span class="mi-font-mblack bold mi-font-basic mi-valign-bottom">원</span>
+							</p>
+						</td>
+
+						<td>
+							<p class="fs15 mi-font-mblack bold text-center margin_b_2 mi-roboto">
+								<%=df.format(Mprice - Msale)%><span>원</span>
+							</p>
+						</td>
+
+						<td>
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="quantity"
+								value="1" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852"
+								data-flag="checkUseDeliveryFeeEach" value="Y" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="baesong_type"
+								value="2" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="jeju" value="0" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="island_mountain"
+								value="0" />
+
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="product_is_jeju"
+								value="N" />
+
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852"
+								data-flag="product_island_mountain" value="N" />
+
+							<div class="mi-font-mblack fs13 bold">
+								<p class="bold fs13">
+									<%=df.format(Msale)%>
+								</p>
+							</div>
+
+
+							<!--배송방법 텍스트 노출-->
+							<div class="lh20">
+								<span class="mi-font-gray fs13 cg_block">국내 배송</span>
+							</div>
+						</td>
+					</tr>
+<%
+	} else {
+		for (int i = 0; i < Mnos.length; i++) {
+			String sql = "SELECT * FROM product WHERE Mno=?"; 
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, Mnos[i]);
+
+			ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			Mno = Mnos[i];
+			String sql2 = "SELECT * FROM cart WHERE Mno=?";
+			PreparedStatement pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setString(1, Mno);
+
+			ResultSet rs2 = pstmt2.executeQuery();
+			if (rs2.next()) { count = rs2.getInt("cart_count"); total_count += count; }
+
+			Mname = rs.getString("Mname");
+			Mprice = rs.getInt("Mprice");
+			Msale = rs.getInt("Msale");
+
+			total_price += (Mprice * count);
+			total_sale += (Mprice - Msale) * count;
+%>
+					<tr>
+						<td style="padding:20px 0 20px 0;">
+							<div class="mi-float-left mi-group-l10 mi-group-r10">
+								<input type="hidden" id="result_mileage_25699178" name="result_mileage_25699178" />
+								<input type="hidden" id="result_gift_25699178" name="result_gift_25699178" />
+								<input type="hidden" id="v_quan" name="quantity[]" value="1" />
+								<input type="hidden" name="baesong_type_25699178" value="2" />
+								<input type="hidden" name="baesongbi_25699178" value="127,560" />
+								<input type="hidden" name="baesongbi[]" data-pnum="42498852" value="127,560" />
+
+								<input type="hidden" name="baesongbi_is_flag[42498852]" value="" />
+								<input type="hidden" name="baesongbi_is_number[42498852]" value="" />
+								<input type="hidden" name="baesongbi_is[42498852]" value="0" />
+								<input type="hidden" name="baesongbi_direct_flag[42498852]" value="N" />
+								<input type="hidden" name="usedAddCoupon[25699178]" value="" />
+
+								<img src="/GMQDisplay-master/static/images/product/<%=Mno%>_1.png" alt="상품이미지"
+									style="width:110px; height:110px; border: 1px solid rgba(0,0,0,.08);" />
+							</div>
+							<div class="mi-relative mi-text-left" style="height:112px;">
+								<p class="mi-medium mi-font-black mi-bold">
+									<%=Mname%>
+								</p>
+								<p class="mi-font-basic mi-font-black">
+									<%=Mno%>
+								</p>
+							</div>
+						</td>
+						<td class="mi-font-mblack">
+							<div class="product_count">
+								<%=count%>
+							</div>
+						</td>
+						<td>
+							<p>
+								<span class="fs15 mi-font-mblack bold mi-roboto mi-valign-bottom">
+									<%=df.format(Mprice)%>
+								</span><span class="mi-font-mblack bold mi-font-basic mi-valign-bottom">원</span>
+							</p>
+						</td>
+
+						<td>
+							<p class="fs15 mi-font-mblack bold text-center margin_b_2 mi-roboto">
+								<%=df.format(Mprice - Msale)%><span>원</span>
+							</p>
+						</td>
+
+						<td>
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="quantity"
+								value="1" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852"
+								data-flag="checkUseDeliveryFeeEach" value="Y" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="baesong_type"
+								value="2" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="jeju" value="0" />
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="island_mountain"
+								value="0" />
+
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="product_is_jeju"
+								value="N" />
+
+							<input type="hidden" name="deliveryException[]" data-pnum="42498852"
+								data-flag="product_island_mountain" value="N" />
+
+							<div class="mi-font-mblack fs13 bold">
+								<p class="bold fs13">
+									<%=df.format(Msale)%>
+								</p>
+							</div>
+
+
+							<!--배송방법 텍스트 노출-->
+							<div class="lh20">
+								<span class="mi-font-gray fs13 cg_block">국내 배송</span>
+							</div>
+						</td>
+					</tr>
+<%
+			}
+		}
+	}
+	total += (total_price - total_sale);
+} catch (Exception e) {
+	out.print(e);
+}
+%>
+
+
+					<input type="hidden" name="chk_coupon_card" value="N" />
+					<input type="hidden" name="chk_coupon_bank" value="N" />
+					<input type="hidden" name="chk_directBuying_bank" value="N" />
+				</table>
+			</div>
+
+			<table class="mi-table mi-table-secondary order-result-table">
 				<colgroup>
-					<col width="*" />
-					<col width="132" />
-					<col width="132" />
-					<col width="132" />
-					<col width="132" />
+					<col width="160" />
+					<col width="20" />
+					<col width="160" />
+					<col width="20" />
+					<col width="160" />
+					<col width="20" />
+					<col width="160" />
+					<col width="20" />
+					<col width="160" />
+					<col width="20" />
+					<col width="160" />
 				</colgroup>
 				<tr>
-					<th>상품정보</th>
-					<th>수량</th>
-					<th>가격</th>
-					<th>할인금액</th>
-					<th>회원 할인가</th>
-				</tr>
-								
-								<tr>
-					<td style="padding:20px 0 20px 0;">
-										<div class="mi-float-left mi-group-l10 mi-group-r10">
-							<input type="hidden" id="result_mileage_25699178" name="result_mileage_25699178" />
-							<input type="hidden" id="result_gift_25699178" name="result_gift_25699178" />
-														<input type="hidden" id="v_quan" name="quantity[]" value="1" />
-							<input type="hidden" name="baesong_type_25699178" value="2"/>
-							<input type="hidden" name="baesongbi_25699178" value="127,560"/>
-							<input type="hidden" name="baesongbi[]" data-pnum="42498852" value="127,560" />
-							
-							<input type="hidden" name="baesongbi_is_flag[42498852]" value="" />
-							<input type="hidden" name="baesongbi_is_number[42498852]" value="" />
-							<input type="hidden" name="baesongbi_is[42498852]" value="0" />
-														<input type="hidden" name="baesongbi_direct_flag[42498852]" value="N" />
-														<input type="hidden" name="usedAddCoupon[25699178]" value="" />
-														
-							<img src="../static/images/product/24GN600_2.png" alt="상품이미지" style="width:110px; height:110px; border: 1px solid rgba(0,0,0,.08);" />
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+					<th>총 주문금액</th>
+					<th>&nbsp;</th>
+					<th>할인가능금액</th>
+					<th>&nbsp;</th>
+					<th>포인트 사용
+						<div class="detail_desc">
+							<img src="https://static-ux.mustit.co.kr/img/front/product/icon_point.gif" alt=""
+								class="mark cursor" onclick="detail(this);" />
+							<div class="detail">
+								<img src="https://static-ux.mustit.co.kr/img/front/order/img_detailPoint.gif"
+									class="mark_point" />
+								<p>상품 구매 후,</p>
+								<p>맴버쉽 포인트(1%) 지급됩니다.</p>
+								<p>
+									<a href="/mypage/my_point?search_date=12m" target="_blank">
+										<span class="detail_btn">자세히 보기 ></span>
+									</a>
+								</p>
+							</div>
 						</div>
-						<div class="mi-relative mi-text-left" style="height:112px;">
-							<p class="mi-medium mi-font-black mi-bold">한성컴퓨터	</p>
-							<p class="mi-font-basic mi-font-black">한성컴퓨터 ULTRON PLUS 리얼 144 게이밍</p>
-						</div>
-					</td>
-					<td class="mi-font-mblack">
-						<div class="product_count">
-							1						</div>
-					</td>
-					<td>
-						<p>
-							<span class="fs15 mi-font-mblack bold mi-roboto mi-valign-bottom">137,560</span><span class="mi-font-mblack bold mi-font-basic mi-valign-bottom">원</span>
-						</p>
-					</td>
+					</th>
 
-					<td>
-						<p class="fs15 mi-font-mblack bold text-center margin_b_2 mi-roboto">10,000<span>원</span></p>
-					</td>
-					
-					<td >
-						<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="quantity" value="1" />
-						<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="checkUseDeliveryFeeEach" value="Y" />
-												<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="baesong_type" value="2" />
-												<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="jeju" value="0" />
-						<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="island_mountain" value="0" />
-																		
-												<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="product_is_jeju" value="N" />
-												
-												<input type="hidden" name="deliveryException[]" data-pnum="42498852" data-flag="product_island_mountain" value="N" />
-												
-						<div class="mi-font-mblack fs13 bold">
-						<p class="bold fs13">127,560</p></div>
-						
-												
-						<!--배송방법 텍스트 노출-->
-						<div class="lh20">
-							<span class="mi-font-gray fs13 cg_block">국내 배송</span>
-						</div>
-					</td>
-				</tr>
-												
-								
-				<input type="hidden" name="chk_coupon_card" value="N" />
-				<input type="hidden" name="chk_coupon_bank" value="N" />
-				<input type="hidden" name="chk_directBuying_bank" value="N" />
-			</table>
-		</div>
-		
-		<table class="mi-table mi-table-secondary order-result-table">
-			<colgroup>
-				<col width="160" />
-				<col width="20" />
-				<col width="160" />
-				<col width="20" />
-				<col width="160" />
-				<col width="20" />
-				<col width="160" />
-				<col width="20" />
-				<col width="160" />
-				<col width="20" />
-				<col width="160" />
-			</colgroup>
-			<tr>
-				<th>&nbsp;</th>
-				<th>&nbsp;</th>
-				<th>총 주문금액</th>
-				<th>&nbsp;</th>
-				<th>할인가능금액</th>
-				<th>&nbsp;</th>
-				<th>포인트 사용
-				<div class="detail_desc">
-					<img src="https://static-ux.mustit.co.kr/img/front/product/icon_point.gif" alt="" class="mark cursor" onclick="detail(this);" />
-					<div class="detail">
-						<img src="https://static-ux.mustit.co.kr/img/front/order/img_detailPoint.gif" class="mark_point" />
-						<p>상품 구매 후,</p>
-						<p>맴버쉽 포인트(1%) 지급됩니다.</p>
-						<p>
-							<a href="/mypage/my_point?search_date=12m" target="_blank">
-								<span class="detail_btn">자세히 보기 ></span>
-							</a>
-						</p>
-					</div>
-				</div>
-				</th>
+					<th>&nbsp;</th>
+					<th class="mi-relative">총 배송비<img id="totalDelivCursor"
+							src="https://static-ux.mustit.co.kr/img/front/mypage/icon_buying_seller.gif" class="arr_img cursor"
+							onclick="show_total_deliv();" />
+						<div class="total_deliv_detail">
+							<div class="detail_row">
+								<span class="detail_cell box_gray_f8">일반</span>
+								<span class="detail_cell"><span id="deliveryPrePayPrice">3,000원</span></span><br>
+								<span class="detail_cell box_gray_f8">제주/도서산간 지역</span>
+								<span class="detail_cell"><span id="deliveryPrePayPrice">5,000원</span></span>
+							</div>
 
-				<th>&nbsp;</th>
-				<th class="mi-relative">총 배송비<img id="totalDelivCursor" src="https://static-ux.mustit.co.kr/img/front/mypage/icon_buying_seller.gif" class="arr_img cursor" onclick="show_total_deliv();"/>
-					<div class="total_deliv_detail">
-						<div class="detail_row">
-							<span class="detail_cell box_gray_f8">일반</span>
-							<span class="detail_cell"><span id="deliveryPrePayPrice">3,000원</span></span><br>
-						<span class="detail_cell box_gray_f8">제주/도서산간 지역</span>
-							<span class="detail_cell"><span id="deliveryPrePayPrice">5,000원</span></span>
+							<div class="detail_row" style="display:none;">
+								<span class="detail_cell box_gray_f8">제주</span>
+								<span class="detail_cell"><span id="deliveryJJPayPrice">0</span>원</span>
+							</div>
+
+							<div class="detail_row" style="display:none;">
+								<span class="detail_cell box_gray_f8">도서산간</span>
+								<span class="detail_cell"><span id="deliveryIMPayPrice">0</span>원</span>
+							</div>
+
+							<div class="detail_row" style="display:none;">
+								<span class="detail_cell box_gray_f8">깜짝배송</span>
+								<span class="detail_cell"><span id="deliveryQuickPrice">0</span>원</span>
+							</div>
 						</div>
-						
-						<div class="detail_row" style="display:none;">
-							<span class="detail_cell box_gray_f8">제주</span>
-							<span class="detail_cell"><span id="deliveryJJPayPrice">0</span>원</span>
-						</div>
-						
-						<div class="detail_row" style="display:none;">
-							<span class="detail_cell box_gray_f8">도서산간</span>
-							<span class="detail_cell"><span id="deliveryIMPayPrice">0</span>원</span>
-						</div>
-						
-						<div class="detail_row" style="display:none;">
-							<span class="detail_cell box_gray_f8">깜짝배송</span>
-							<span class="detail_cell"><span id="deliveryQuickPrice">0</span>원</span>
-						</div>
-					</div>
-				</th>
-				<th>&nbsp;</th>
-				<th>최종 결제 금액</th>
-			</tr>
-			<tr>	
-				<td class="border_r_none">&nbsp;</td>
-				<td class="border_r_none">&nbsp;</td>
-				<td class="border_r_none">
-					<span class="fs20 c_black bold mi-helvetica" id="real_price">137,560원</span>
-				</td>
-				<td class="padding_0 border_r_none">
-					<img src="https://static-ux.mustit.co.kr/img/front/icon/icon-minus.png" alt="MINUS" style="width:20px">
-				</td>
-				<td class="border_r_none">
-					<span class="fs20 c_black bold mi-helvetica" id="sale_total">10,000원</span>
-				</td>
-				<td class="padding_0 border_r_none">
-					<img src="https://static-ux.mustit.co.kr/img/front/icon/icon-minus.png" alt="MINUS" style="width:20px">
-				</td>
+					</th>
+					<th>&nbsp;</th>
+					<th>최종 결제 금액</th>
+				</tr>
+				<tr>
+					<td class="border_r_none">&nbsp;</td>
+					<td class="border_r_none">&nbsp;</td>
+					<td class="border_r_none">
+						<span class="fs20 c_black bold mi-helvetica" id="real_price"><%=df.format(total_price)%> 원</span>
+					</td>
+					<td class="padding_0 border_r_none">
+						<img src="https://static-ux.mustit.co.kr/img/front/icon/icon-minus.png" alt="MINUS" style="width:20px">
+					</td>
+					<td class="border_r_none">
+						<span class="fs20 c_black bold mi-helvetica" id="sale_total"><%=df.format(total_sale)%> 원</span>
+					</td>
+					<td class="padding_0 border_r_none">
+						<img src="https://static-ux.mustit.co.kr/img/front/icon/icon-minus.png" alt="MINUS" style="width:20px">
+					</td>
 				<!--적립금-->
 				<td class="border_r_none">
 					<p>
@@ -1889,7 +2203,7 @@ logger("prd");
 				</td>
 				<!-- 최종 결정금액 -->
 				<td class="border_r_none">
-					<span class="mi-font-red bold h0 mi-helvetica gtag_price" id="total_price">130,560원	</span>
+					<span class="mi-font-red bold h0 mi-helvetica gtag_price" id="total_price"><%=df.format(total)%> 원</span>
 				</td>
 			</tr>
 		</table>
@@ -1902,7 +2216,23 @@ logger("prd");
 			.mi-checkbox-circle-label.mxn_order_checkbox:after {top:-webkit-calc(50% - 16px);}
 			.mxn-desc-title {padding: 15px 20px;background-color: #fff;border-bottom: 1px solid #ebebeb;position: relative;}
 		</style>
-		
+<script>
+	$(function (){
+	$("#payment_change_btn").click(function (){
+	$("#payment_list").toggle();
+	});
+	});
+	$(function (){
+	$("#tossPayment").click(function (){
+	$("#tossPay2").toggle();
+	});
+	});
+	$(function (){
+	$("#kakaoPay").click(function (){
+	$("#kakaoPay1").toggle();
+	});
+	});
+</script>
 		<!-- ?php echo "<xmp>"; print_r($order_payment_data); echo "</xmp>";? -->
 		<div id="wrapId" class="mi-after-clear mi-group-t20">
 			<div class="mi-float-left mi-border-whitegray mi-list-group mi-accordion" style="width:660px;border-bottom:0" id="wrap-mi-accordion">
@@ -1918,16 +2248,16 @@ logger("prd");
 										
 					<!-- 결제수단관리 배너 PC 이미지 -->
 		
-					<img src="https://image.mustit.co.kr/lib/upload/payment/58f85ccc3ced109a07d12f076b5f40de.png" style="position:absolute;top:-20px;left:20px;z-index:1;height:44px;"/>
+					
 				
 
 					<input type="hidden" name="isBannerImg" id="isBannerImg" value="OK">
-										<!--<img src="https://mustit-upload.s3.ap-northeast-2.amazonaws.com/pc/banner/banner-dummy-test.png" style="position:absolute;top:-20px;left:20px;z-index:1;height:44px;">-->
+					<!--<img src="https://mustit-upload.s3.ap-northeast-2.amazonaws.com/pc/banner/banner-dummy-test.png" style="position:absolute;top:-20px;left:20px;z-index:1;height:44px;">-->
 					<ul id="method_payment" class="mi-tab mi-tab-primary plus-h white-default mi-group-b15" data-tab-cnt="4">
-												<span class="mi-inline-block mi-box-ap5 mi-col-3">
+						<span class="mi-inline-block mi-box-ap5 mi-col-3">
 							<li class="mi-tab-item" style="width:100%;">
 								<label id="pay_s1">
-									<input type="radio" name="pay_choice" id="tossPayment" value="onlytoss" onclick="loadRule(tossPayment);" class="mi-hidden"  									data-gopaymethod="onlytoss"
+									<input type="radio" name="pay_choice" id="tossPayment" value="onlytoss" onclick="loadRule(tossPayment);" class="mi-hidden"  data-gopaymethod="onlytoss"
 									data-payment-name="토스페이"
 									data-paymethod="simple"
 									data-check-start-date="2020-08-12 16:00:00"
@@ -1944,17 +2274,17 @@ logger("prd");
 																
 							</li>
 						</span>
-												<span class="mi-inline-block mi-box-ap5 mi-col-3">
+							<span class="mi-inline-block mi-box-ap5 mi-col-3">
 							<li class="mi-tab-item" style="width:100%;">
 								<label id="pay_s2">
-									<input type="radio" name="pay_choice" id="card" value="card" onclick="loadRule(card);" class="mi-hidden"  									data-gopaymethod="card"
+									<input type="radio" name="pay_choice" id="card" value="card" onclick="loadRule(card);" class="mi-hidden"  		data-gopaymethod="card"
 									data-payment-name="카드결제"
 									data-paymethod="general"
 									data-check-start-date=""
 									data-check-end-date=""
 									data-payment-manage-no="1"
 									/>
-																		<span class="mi-tab-link border-red" style="padding:15px 0;font-size:14px;line-height:20px;">
+								<span class="mi-tab-link border-red" style="padding:15px 0;font-size:14px;line-height:20px;" id="card_choice">
 										<span>카드결제</span>	
 									</span>
 																		
@@ -1962,17 +2292,17 @@ logger("prd");
 																
 							</li>
 						</span>
-												<span class="mi-inline-block mi-box-ap5 mi-col-3">
+							<span class="mi-inline-block mi-box-ap5 mi-col-3">
 							<li class="mi-tab-item" style="width:100%;">
 								<label id="pay_s3">
-									<input type="radio" name="pay_choice" id="VBank" value="VBank" onclick="loadRule(VBank);" class="mi-hidden"  									data-gopaymethod="VBank"
+									<input type="radio" name="pay_choice" id="VBank" value="VBank" onclick="loadRule(VBank);" class="mi-hidden"  					data-gopaymethod="VBank"
 									data-payment-name="무통장입금"
 									data-paymethod="general"
 									data-check-start-date=""
 									data-check-end-date=""
 									data-payment-manage-no="2"
 									/>
-																		<span class="mi-tab-link border-red" style="padding:15px 0;font-size:14px;line-height:20px;">
+									<span class="mi-tab-link border-red" style="padding:15px 0;font-size:14px;line-height:20px;">
 										<span>무통장입금</span>	
 									</span>
 																		
@@ -1980,10 +2310,10 @@ logger("prd");
 																
 							</li>
 						</span>
-												<span class="mi-inline-block mi-box-ap5 mi-col-3">
+							<span class="mi-inline-block mi-box-ap5 mi-col-3">
 							<li class="mi-tab-item" style="width:100%;">
 								<label id="pay_s4">
-									<input type="radio" name="pay_choice" id="kakaoPay" value="onlykakaopay" onclick="loadRule(kakaoPay);" class="mi-hidden"  									data-gopaymethod="onlykakaopay"
+									<input type="radio" name="pay_choice" id="kakaoPay" value="onlykakaopay" onclick="loadRule(kakaoPay);" class="mi-hidden" data-gopaymethod="onlykakaopay"
 									data-payment-name="KakaoPay"
 									data-paymethod="simple"
 									data-check-start-date=""
@@ -2000,10 +2330,10 @@ logger("prd");
 																
 							</li>
 						</span>
-												<span class="mi-inline-block mi-box-ap5 mi-col-3">
+							<span class="mi-inline-block mi-box-ap5 mi-col-3">
 							<li class="mi-tab-item" style="width:100%;">
 								<label id="pay_s5">
-									<input type="radio" name="pay_choice" id="nPay" value="nPay" onclick="loadRule(nPay);" class="mi-hidden"  									data-gopaymethod="nPay"
+									<input type="radio" name="pay_choice" id="nPay" value="nPay" onclick="loadRule(nPay);" class="mi-hidden"  						data-gopaymethod="nPay"
 									data-payment-name="네이버페이"
 									data-paymethod="simple"
 									data-check-start-date="2022-06-18 00:05:00"
@@ -2043,7 +2373,7 @@ logger("prd");
 												<span class="mi-inline-block mi-box-ap5 mi-col-3">
 							<li class="mi-tab-item" style="width:100%;">
 								<label id="pay_s7">
-									<input type="radio" name="pay_choice" id="samsungPay" value="onlyssp" onclick="loadRule(samsungPay);" class="mi-hidden"  									data-gopaymethod="onlyssp"
+									<input type="radio" name="pay_choice" id="samsungPay" value="onlyssp" onclick="loadRule(samsungPay);" class="mi-hidden"  data-gopaymethod="onlyssp"
 									data-payment-name="삼성페이"
 									data-paymethod="simple"
 									data-check-start-date=""
@@ -2069,11 +2399,11 @@ logger("prd");
 								<span class="mi-checkbox-circle-label fs13">선택한 결제 수단을 다음에도 사용</span>
 							</label>
 						</div>
-																	</div>	
+					</div>	
 				</div>
 				<!-- 간편결제 종류 별 안내 텍스트 -->
 								<div class="guide_text">
-					<style>
+<style>
 	#simple_payment_guide {line-height:20px;}
 	#simple_payment_guide p {color:#141414;font-size:13px;}
 	#simple_payment_guide .point_text {color:#ec7930;}
@@ -2081,14 +2411,22 @@ logger("prd");
 	.bank_support_top {padding:20px 0 0;}
 	#monthpay:disabled{background: #eee;cursor: default;}
 </style>
-
+<script>
+	$(function (){
+	$("#card_choice").click(function (){
+	$("#card_choice1").toggle();
+	$("#card_choice2").toggle();
+	$("#card_choice3").toggle();
+	});
+	});
+</script>
 <div id="simple_payment_guide">
-	<div class="card_left card_choice_left card_payment mi-group-b10" style="float:none;display:none;">
-		<div class="card_choice mi-box-ap20" style="padding-bottom:0;">
-			<div class="mi-row">
-				<div id="inicis" name="inicis" class="mi-col-6 padding_r_5">
+	<div class="card_left card_choice_left card_payment mi-group-b10" style="float:none;display:none;" id="card_choice1" >
+		<div class="card_choice mi-box-ap20" style="padding-bottom:0;" >
+			<div class="mi-row" >
+				<div id="inicis" name="inicis" class="mi-col-6 padding_r_5" >
 					<label class="mi-select mi-select-border no-empty-value">
-						<select name="payment_card" id="payment_card">
+						<select name="payment_card" id="payment_card" >
 							<option value="">선택하세요</option>
 														<option value="9"
 								data-cardname="KB국민카드"
@@ -2180,11 +2518,11 @@ logger("prd");
 								data-sdate=""
 								data-edate=""
 							>광주카드</option>
-													</select>
+						</select>
 					</label>
 				</div>
 			
-				<div class="mi-col-6 padding_l_5 card_choice_month" style="display:none;">
+				<div class="mi-col-6 padding_l_5 card_choice_month" style="display:none;" id="card_choice2">
 					<label class="mi-select mi-select-border no-empty-value">
 						<select name="monthpay" id="monthpay">
 							<option value="">선택하세요</option>
@@ -2208,7 +2546,7 @@ logger("prd");
 		
 	</div>
 	
-	<div class="bank_payment bankBook bankBook VBank mi-box-ap20" style="display:none;border-bottom:1px solid #ebebeb;padding-top:0;">
+	<div class="bank_payment bankBook bankBook VBank mi-box-ap20" style="display:none;border-bottom:1px solid #ebebeb;padding-top:0;" id="card_choice3">
 		<style>
 			.mi-input-text:disabled {color:#141414;background-color:#f5f5f5}
 			.bank_payment input:-webkit-autofill {
@@ -2310,8 +2648,8 @@ logger("prd");
 		</div>
 	</div>
 	
-			<div class="tossPayment " style="display:none;padding:0px 20px 20px 20px;display:none;border-bottom:1px solid #ebebeb;">
-						<style>
+			<div class="tossPayment " style="display:none;padding:0px 20px 20px 20px;display:none;border-bottom:1px solid #ebebeb;" id="tossPay2">
+		<style>
 			#admin_text p {font-family:'SD Gothic Neo', 'Apple SD Gothic Neo' , sans-serif!important;font-size:13px!important;}
 			#admin_text span {font-family:'SD Gothic Neo', 'Apple SD Gothic Neo' , sans-serif!important;font-size:13px!important;}
 		</style>
@@ -2442,7 +2780,7 @@ logger("prd");
 			</div>
 		</div>
 			</div>
-				<div class="card " style="display:none;padding:0px 20px 20px 20px;display:none;border-bottom:1px solid #ebebeb;">
+				<div class="card " style="display:none;padding:0px 20px 20px 20px;border-bottom:1px solid #ebebeb;">
 						<!-- 카드사 무이자 이벤트 -->
 		<div id="cardEventArea" class="card card_payment card_corp_event">
 			<script>var promotionSliderStart = false</script>
@@ -2681,7 +3019,7 @@ logger("prd");
 </div>
 <p style="color:#a0a0a0; font-size:12px; margin-top:30px; background-color:#f5f5f5; height:40px; padding:0 10px; line-height:40px;">※ 카드사 및 금융감독기관에 의해 변경될 수 있습니다.</p >						
 			</div>
-						<div class="kakaoPay " style="display:none;padding:0px 20px 20px 20px;display:none;border-bottom:1px solid #ebebeb;">
+						<div class="kakaoPay " style="display:none;padding:0px 20px 20px 20px;display:none;border-bottom:1px solid #ebebeb;" id="kakaoPay1">
 						<style>
 			#admin_text p {font-family:'SD Gothic Neo', 'Apple SD Gothic Neo' , sans-serif!important;font-size:13px!important;}
 			#admin_text span {font-family:'SD Gothic Neo', 'Apple SD Gothic Neo' , sans-serif!important;font-size:13px!important;}
@@ -3614,13 +3952,7 @@ FAX: 02-312-3591
 						</div>
 					</div>
 					<div id="BuyerConsent" class="mi-pointer mi-box-ap15">
-						<div id="BuyerConsentAll">
-							<input type="checkbox" class="mi-hidden">
-							<label class="mi-checkbox-full">
-								<input type="checkbox" class="mi-hidden" id="all_agree" name="all_agree" onchange="allAgree(this)"/>
-								<span class="mi-checkbox-full-label mi-bold mi-font-darkblack mi-font-13 mi-text-interval-basic">모든 내용을 확인하였으며 전체 동의합니다.</span>
-							</label>
-						</div>
+
 						<div class="smallCheckIcon mi-group-t15 mi-group-l15">
 							<label class="mi-checkbox-circle mi-group-r30" style="margin-bottom:18px;">
 								<input type="checkbox" class="mi-hidden agree_rulls" name="agree_check1" value="Y" id="agree_check1">
@@ -3630,8 +3962,12 @@ FAX: 02-312-3591
 								<input type="checkbox" class="mi-hidden agree_rulls" name="agree_check2" value="Y" id="agree_check2">
 								<span class="mi-checkbox-circle-label mi-font-darkblack mi-font-13" style="line-height:22px;">개인정보 제 3자 제공 동의</span>
 							</label>
-													</div>
-					</div>
+						</div>
+							<label>
+								<input type="checkbox" class="mi-hidden" id="all_agree" name="all_agree" onchange="allAgree(this)" />
+								<span class="mi-checkbox-full-label mi-bold mi-font-darkblack mi-font-13 mi-text-interval-basic">모든 내용을 확인하였으며 전체 동의합니다.</span>
+							</label>
+						</div>
 					<script>
 						function allAgree(obj){
 								if($(obj).is(':checked')){
@@ -3682,11 +4018,36 @@ FAX: 02-312-3591
 						var agree_rulls = [];
 						agree_rulls.push('#agree_check1');
 						agree_rulls.push('#agree_check2');
-												purchaseAgree(".agree_rulls", $(".agree_rulls").length, "#all_agree");
-					</script>
+						purchaseAgree(".agree_rulls", $(".agree_rulls").length, "#all_agree");
+				
+					
+				function kakaopay() {
+				$.ajax({
+                method: "POST",
+                url: "https://kapi.kakao.com/v1/payment/ready",
+                data: {
+                    cid: "TC0ONETIME",
+                    partner_order_id: "GMQDisplay",
+                    partner_user_id: "<%=id%>",
+                    item_name: "GMQDisplay",
+                    quantity: "<%=total_count%>",
+                    total_amount: "<%=total%>",
+                    vat_amount: "200",
+                    tax_free_amount: "0",
+                    approval_url: "	http://localhost:8080/GMQDisplay-master/buy/succes.jsp",
+                    fail_url: " https://localhost:8080/kakaoPayFail?pg_token=8cf5a737f5fd9151f2ca>",
+                    cancel_url: " https://localhost:8080/kakaoPayCancel?pg_token=8cf5a737f5fd9151f2ca>"
+                },
+                headers: { Authorization: "KakaoAK b417dde18341e245cf145d50eae7f16f" }
+            })
+                .done(function (msg) {
+                    window.open(msg.next_redirect_pc_url);
+                });
+            }
+				</script>
 				</div>
-				<button type="submit" class="mi-btn mi-btn-red fs16 mi-image-full mi-bold mi-text-interval-lg mi-btn-size-xlg" id="submit_btn">
-					<span id="total_price_btn" class="h0 mi-font-white mi-text-interval-basic mi-inline-block mi-roboto">130,560</span>원 결제하기
+				<button type="button" class="mi-btn mi-btn-red fs16 mi-image-full mi-bold mi-text-interval-lg mi-btn-size-xlg" onclick="kakaopay()">
+					<span  class="h0 mi-font-white mi-text-interval-basic mi-inline-block mi-roboto"><%=df.format(total)%></span>원 결제하기
 				</button>
 			</div>
 		</div>	
@@ -3699,6 +4060,10 @@ FAX: 02-312-3591
 	</form>
 	<input type="hidden" id="isPgPromotion" value="">
 </div>
+
+
+
+
 <script>
 	$("#wrap-mi-accordion").accordionFunc('toggle');
 </script>
@@ -3707,6 +4072,7 @@ FAX: 02-312-3591
 
 <!-- 결제를 위한 영역 -->
 <iframe name="paypage" id="paypage" width="0" height="0"></iframe>
+
 <link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/lib/jquery-bxslider/jquery.bxslider.css" />
 <script type="text/javascript" src="https://static-ux.mustit.co.kr/lib/jquery-bxslider/jquery.bxslider.min.js"></script>
 <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js" type="text/javascript"></script>
@@ -4387,174 +4753,247 @@ var  promotionSliderStart = false;
 </div>
 
 <!-- 푸터 -->
-<div id="footer">
-	<div class="footer_n">
-		<div class="b_bottom_bf">
-		<!-- css 형태 -->
-			<div class="footer_top">
-				<div class="footer_left">
-										<span class="footer_nav_item">
-						<a href="http://corp.mustit.co.kr" 
-							class="role_btn "
-							target="_blank" 
-						>
-							회사소개						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/slogan" 
-							class="role_btn "
-							 
-						>
-							서비스소개						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/user_stipulation" 
-							class="role_btn "
-							 
-						>
-							이용약관						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/user_defend" 
-							class="role_btn mi-bold"
-							 
-						>
-							개인정보 처리방침						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/sitemap" 
-							class="role_btn "
-							 
-						>
-							사이트맵						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/contact_us" 
-							class="role_btn "
-							 
-						>
-							입점문의						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/affiliate_main" 
-							class="role_btn "
-							 
-						>
-							제휴 프로그램						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/user_forgery" 
-							class="role_btn "
-							 
-						>
-							위조품 처리정책						</a>
-					</span>
-										<span class="footer_nav_item">
-						<a href="/etc/intellectual_property" 
-							class="role_btn "
-							 
-						>
-							지식재산권센터 						</a>
-					</span>
-									</div>
-
-				<div class="footer_right">
-										<a href="https://www.facebook.com/mustit.co.kr" target="_blank" class="footer_sns_link">
-						<i class="footer-sns footer-sns-facebook"></i>
-					</a>
-										<a href="https://instagram.com/mustit_official" target="_blank" class="footer_sns_link">
-						<i class="footer-sns footer-sns-instagram"></i>
-					</a>
-										<a href="https://www.youtube.com/channel/UC9zA4kfRyDr2SvAntu-9V2w" target="_blank" class="footer_sns_link">
-						<i class="footer-sns footer-sns-youtube"></i>
-					</a>
-										<a href="https://pf.kakao.com/_pHxdvxl" target="_blank" class="footer_sns_link">
-						<i class="footer-sns footer-sns-kakaotalk"></i>
-					</a>
-										<a href="https://post.naver.com/mustit200" target="_blank" class="footer_sns_link">
-						<i class="footer-sns footer-sns-naver"></i>
-					</a>
-									</div>
-			</div>
-		</div>
-
-		<div class="footer_mid">
-			<div class="footer_left_contents">
-				<h3 class="mustit_footer_bi">
-					<img src="https://static-ux.mustit.co.kr/img/front/bi/bi_mustit_header.png" alt="MUST'IT" />
-				</h3>
-				<div class="footer_info_container">
-					<div class="footer_logo">
-						<h4 class="company">(주)머스트잇</h4>
-						<div class="company_info">
-							<p class="txt"><span>대표 : 조용민</span>  <span>소재지 : 서울시 강남구 압구정로 148, 머스트잇빌딩 (신사동)</span></p>
-							<p class="txt">
-								<span>사업자등록번호 : 101-86-75400</span><span>통신판매업신고 : 서울강남 03391호</span>
-								<button type="button" class="btn_showinfo" onclick="window.open('https:\/\/www.ftc.go.kr/bizCommPop.do?wrkr_no=1018675400 ','머스트잇 사업자정보','scrollbars=no,resizable=no,width=1280,height=814');">
-									사업자정보확인<img src="https://static-ux.mustit.co.kr/img/front/icon/icon_arrow_right_s.png" alt="바로가기" />
-								</button>
-							</p>
-							<p class="txt"><span>개인정보보호책임자 : 조영훈</span><span>E-MAIL : help@mustit.co.kr</span><span>호스팅 : 머스트잇</span></p>
-						</div>
-						<div class="company_noti">
-							(주)머스트잇에서는 진품만을 거래할 수 있으며, 불확실한 상품의 거래는 엄격히 제한됩니다.<br />
-							머스트잇은 통신판매중개자이며, 상품은 개별판매자가 등록한 것으로 상품 거래에 관한 의무와 책임은 판매자에게 있습니다.
-						</div>
-						<div class="copyright">COPYRIGHT 2011~2023 MUSTIT.CO.KR ALL RIGHT RESERVED.</div>
-						<div class="isms" onclick="window.open('https://static-upload.mustit.co.kr/document/isms/ISMS_KISA_2021_175.pdf','ISMS 인증서','scrollbars=no,resizable=no,width=1000,height=1000');">
-							<div class="img_wrap">
-								<img src="https://static-ux.mustit.co.kr/img/front/badge/badge_isms.png" alt="ISMS 인증" />
-							</div>
-							<div class="txt_box">
-								<p class="txt_certification">인증범위 : 온라인 쇼핑몰 서비스(머스트잇)</p>
-								<p class="txt_date">유효기간 : 2021.10.06 ~ 2024.10.05</p>
-							</div>
-						</div>
+<footer id="footer" class="footer_b2c">
+	<input type="hidden" id="goodsAdvCmntStYn" value="Y" />
+<!-- e : 220929  -->
+	<div class="footer-content">
+		<nav class="footer-inner sitemap-links">
+			<h2 class="hide">페이지 링크</h2>
+			<ul>
+<!-- s : 221025  -->
+				<li class="productLine1">
+					<h3>
+						<a href="javascript:void(0);">게이밍 모니터</a>
+					</h3>
+					<ul>
+						<li><a href="#" data-omni="product_smartphones">FPS</a></li>
+						<li><a href="#" data-omni="product_smartphones">RTS</a></li>
+						<li><a href="#" data-omni="product_tablets">RPG</a></li>
+						<li><a href="#" data-omni="product_watches">Sports</a></li>
+						<li><a href="#" data-omni="product_buds">fights</a></li>
+					</ul>					
+				</li>
+				<li class="productLine2">
+					<h3>이벤트</h3>
+					<ul>
+						<li><a href="./electric-range/bespoke-induction/index.html" data-omni="product_smartphones">기획전 모두보기</a></li>
+						<li><a href="./cooking-appliances/bespoke-oven/index.html" data-omni="product_cooking appliances">GMQD 단독</a></li>
+						<li><a href="./qooker/bespoke-qooker/index.html" data-omni="product_qooker">GMQD Live</a></li>
+					</ul>
+				</li>
+				<li>
+					<h3>
+						<a href="javascript:void(0);">고객서비스</a>
+					</h3>
+					<ul>
+						<li><a href="#" data-omni="faq_support">매뉴얼 & 다운로드</a></li>
+						<li><a href="#" data-omni="faq_faq">GMQD FAQ</a></li>
+						<li><a href="#" data-omni="faq_shop locator">매장 찾기</a></li>
+						<li><a href="#" data-omni="faq_service-locator">서비스센터 찾기</a></li>
+						<li><a href="./GMQDisplay-Care-Plus/CE/index.html" data-omni="faq_samsung care plus CE">GMQDisplay Care+</a></li>
+					</ul>
+				</li>
+				<li>
+					<h3>
+						<a href="javascript:void(0);">윤리&준법경영</a>
+					</h3>
+					<ul>
+						<li><a href="https://sec-audit.com/common/businessPrinciple/viewBusinessPrincMain.do?_menuId=AVyA0fTVACzV4mS0&amp;_menuF=true&amp;s_gbn=PA100001" data-omni="ethics and law_principle" class="link-outlink" title="새창으로 열림" target="_blank">경영원칙</a></li>
+						<li><a href="https://sec-audit.com/common/wrongReport/init.do?_menuId=AVyAoCSlAADV4mQ3&amp;_menuF=true&amp;s_gbn=PA100002" data-omni="ethics and law_wrong report" class="link-outlink" title="새창으로 열림" target="_blank">부정제보</a></li>
+						<li><a href="https://sec-compliance.net/gcc/gcc.do?method=gccReport&amp;langCd=ko_KR" data-omni="ethics and law_GCC" class="link-outlink" title="새창으로 열림" target="_blank">법위반제보</a></li>
+					</ul>
+				</li>
+				<!-- e : 221025 -->
+				<!-- s : 220929 -->
+				<li class="row2">
+					<ul>
+						<li>
+							<h3><a href="javascript:void(0);">사이트소개</a></h3>
+							<ul>
+								<li><a href="./about-us/company-info/index.html" data-omni="about-us_company-info">사이트 정보</a></li>
+								<li><a href="./about-us/business-area/index.html" data-omni="about-us_business-area">사이트 개요</a></li>
+								<li><a href="./about-us/brand-identity/index.html" data-omni="about-us_brand-identity">아이덴티티</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="row2">
+				<!-- e : 220929 -->
+					<ul>
+						<li>
+							<h3><a href="javascript:void(0);">회사소개</a></h3>
+							<ul>
+								<li><a href="./about-us/company-info/index.html" data-omni="about-us_company-info">기업정보</a></li>
+								<li><a href="./about-us/business-area/index.html" data-omni="about-us_business-area">사업정보</a></li>
+								<li><a href="./about-us/brand-identity/index.html" data-omni="about-us_brand-identity">브랜드 아이덴티티</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="footer-content">
+		<div class="footer-inner">
+			<div class="info-detail">
+				<p>
+					<span>GMQDisplay 주식회사 대표이사 : GMQDisplay </span>
+					<span class="mo-inline">사업자등록번호 : 000-00-00000</span>
+					<span class="comp-wrap"><a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1248100998&amp;apv_perm_no=" class="comp" title="새창 열림" target="_blank">사업자 정보확인</a></span>
+					<span>통신판매업 신고 : 0000-천안점-0000</span>
+				</p>
+				<p class="gap">
+					<span>사업장주소 : 31020 충청남도 천안시 서북구 성환읍 대학로 91번지</span>
+					<span>호스팅서비스사업자 : GMQDisplay(주)</span>
+					<span>대표번호 : 00-0000-0000</span>
+					<span>제품/서비스/멤버십: 0000-0000(통화요금 : 발신자부담)</span>
+					<span>구매문의 : 0000-0000</span>
+					<span>모니터 문의 : 0000-0000</span>
+				</p>
+				<p>본 사이트에서 판매되는 상품 중에는 등록된 개별 판매자가 판매하는 상품이 포함되어 있습니다. </p>
+					<!-- s : 22-12-21 소비자분쟁해결기준 CTA -->
+					<div class="dis-resol">
+						<p>개별 판매자 판매 상품의 경우 GMQDisplay(주)는 통신판매중개업자로서 통신판매의 당사자가 아니므로, 개별 판매자가 등록한 상품, 거래정보 및 거래 등에 대해 책임을 지지 않습니다.</p>
+						<a href="./dispute-resolution/index.html" class="comp" title="새창 열림" target="_blank">소비자분쟁해결기준</a>
 					</div>
-					<div class="footer_sen">
-						<div class="cs">
-							<h4 class="cs_center">고객센터</h4>
-							<p class="cs_number">1566-3516</p>
-							<p class="cs_time">
-								<span>AM 10:00 ~ PM 06:00</span><span>점심시간 12:30 ~ 13:30</span><span>(주말/공휴일 휴무)</span>
-							</p>
-							<p class="cs_noti">
-								상품, 배송, 재고 등의 문의는 상품페이지 하단 [상품문의 등록]을 이용하시면 판매자로부터 <br />더욱 정확한 답변을 받으실 수 있습니다.
-							</p>
-						</div>
-						<div class="etc_info">
-							<h4 class="etc_title">신한은행 채무지급보증 안내</h4>
-							<p class="etc_noti">
-								당사는 고객님이 현금 결제한 금액에 대해 신한은행과 채무지급보증 계약을 체결하여 <br />안전거래를 보장하고 있습니다.
-							</p>
-							<button type="button" class="btn_showinfo" onclick="window.open('https://static-ux.mustit.co.kr/img/front/footer/security_20220117.png','mark','scrollbars=no,resizable=no,width=450,height=600');">
-								서비스 가입 사실 확인<img src="https://static-ux.mustit.co.kr/img/front/icon/icon_arrow_right_s.png" alt="바로가기" />
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="footer_right_banners">
-				<div class="qr_app">
-					<span class="qr_img">
-						<img src="https://static-ux.mustit.co.kr/img/front/footer/mustit_app_qr_code_new.png" alt="머스트잇 앱 다운로드"/>
-					</span>
-					<span class="qr_txt">머스트잇을<br/>APP에서 만나보세요!</span>
-				</div>
-				<a href="/board/introduce_our_policies" target="_blank" class="footer_bnr">
-					<img src="https://static-ux.mustit.co.kr/img/front/banner/ban_footer_our_policies.jpg" alt="머스트잇 만의 정책 확인" />
-				</a>
-				<a href="/board/followup_care?contents=forgery_compensation" target="_blank" class="footer_bnr">
-					<img src="https://static-ux.mustit.co.kr/img/front/banner/ban_footer_guarantee.jpg" alt="정품구매보증. 200% 책임보상" />	
-				</a>
-				<a href="/etc/grand_prize_year" target="_blank" class="footer_bnr">
-					<img src="https://static-ux.mustit.co.kr/img/front/banner/ban_footer_winner.png" alt="2022 명품 쇼핑 플랫폼 브랜드 대상 수상" />	
-				</a>
+					<!-- e : 22-12-21 소비자분쟁해결기준 CTA -->
+				<p>본 사이트의 컨텐츠는 저작권법의 보호를 받는 바  무단 전재, 복사, 배포 등을 금합니다.</p>
 			</div>
 		</div>
 	</div>
+	<div class="footer-content">
+		<div class="footer-inner copyrightGroup">
+			<div class="copyrightBox">
+				<p class="copyright">Copyright &copy; 2023 GMQDisplay. All Rights Reserved.</p>
+				<div class="mark-box">
+					<a href="javascript/index.html" title="웹접근성 우수사이트 인증서 : 새창으로 열기" class="btn-mark btn-wa" data-popup-target="popupWA" data-omni="local logo_wa" >
+						<img class="pc-ver" src="./static/images/common/icon-footer-wa.svg" alt="웹접근성 우수사이트">
+						<img class="mo-ver" src="./static/images/common/icon-footer-wa-mo.jpg" alt="웹접근성 우수사이트">
+							웹접근성 우수사이트
+					</a>
+					<a href="javascript:openPrivacy();" 
+						title="개인정보 보호 우수사이트 인증서 : 새창으로 열기" class="btn-mark btn-eprivacy" data-omni="local logo_eprivacy">
+						<img src="./static/images/common/icon-footer-eprivacy.svg" alt="개인정보보호 우수사이트">개인정보보호 우수사이트
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-content">
+		<div class="footer-inner btnBottomGroup">
+			<div class="cs-btn">
+				<ul class="korean">
+					<li><a href="./function/ipredirection/ipredirectionLocalList/index.html">한국/한국어 </a></li><!-- 200918 추가 -->
+				</ul>
+				<ul>
+					<li><a href="javascript:void(0);" title="이메일 무단 수집거부" data-popup-target="popupGatherRefuse" data-omni="footer:bottom_email_security">이메일 무단 수집거부</a></li>
+					<li><a href="javascript:void(0);" title="아이디어 정책" data-popup-target="popupIdeaPolicy" data-omni="footer:bottom_idea security">아이디어 정책</a></li>
+					<li><a href="./info/sitemap/index.html" data-omni="footer:bottom_sitemap">사이트맵</a></li>
+				</ul>
+			</div>
+			<div class="clause-links">
+				<!-- s : Accessible Dropdown -->
+				<div id="dropClauseList01" class="wrap-droplist rounded clause-use">
+					<button class="droplist-button" aria-haspopup="listbox" aria-labelledby="dropServiceClauseTitle dropServiceClauseBtn" id="dropServiceClauseBtn" title="서비스별 이용약관">이용약관<span class="blind">하위 메뉴 있음</span></button>
+					<ul class="droplist" tabindex="-1" aria-labelledby="dropServiceClauseTitle" aria-activedescendant="optServiceClause01">
+						<!--aria-activedescendant에 선택된 li의 id 삽입 -->
+						<li id="optServiceClause02" class="droplist-item" data-omni="footer:terms_legal"><a href="https://account.samsung.com/membership/etc/specialTC.do?fileName=samsungkorea.html" target="_blank" title="새 창으로 열림">GMQDisplay 대표사이트 이용약관</a></li>
+						<li id="optServiceClause03" class="droplist-item" data-omni="footer:terms_conditions"><a href="./membership/terms/index.html">GMQDisplay멤버십 이용약관</a></li>
+						<li id="optServiceClause04" class="droplist-item" data-omni="footer:terms_contents"><a href="https://account.samsung.com/membership/policy/terms" target="_blank" title="새 창으로 열림">GMQDisplay 서비스 이용약관</a></li>
+					</ul>
+				</div>
+				<!-- s : Accessible Dropdown -->
+				<div id="dropClauseList02" class="wrap-droplist rounded  clause-private">
+					<button class="droplist-button" title="서비스별 개인정보처리방침">개인정보처리방침<span class="blind">하위 메뉴 있음</span></button>
+					<ul class="droplist" tabindex="-1" aria-labelledby="dropServicePrivateTitle" aria-activedescendant="optServicePrivate01">
+						<!--aria-activedescendant에 선택된 li의 id 삽입-->
+						<li id="optServicePrivate02" class="droplist-item"><a href="./info/privacy/01/index.html">GMQD 개인정보처리방침</a></li>
+						<li id="optServicePrivate03" class="droplist-item"><a href="./info/privacy/02/index.html">GMQD 이벤트 개인정보처리방침</a></li>
+						<li id="optServicePrivate04" class="droplist-item"><a href="./info/privacy/03/index.html">GMQDisplay멤버십 개인정보처리방침</a></li>
+						<li id="optServicePrivate05" class="droplist-item"><a href="./info/privacy/04/index.html">멤버십블루 개인정보처리방침</a></li>
+						<li id="optServicePrivate06" class="droplist-item"><a href="./info/privacy/05/index.html">경력채용 개인정보처리방침</a></li>
+					</ul>
+				</div>
+				<!-- e : Accessible Dropdown -->
+			</div>
+			<div class="link-box">
+				<div class="sns-btn">
+					<div class="wrap-sns">
+						<span class="tit">GMQDisplay의 다양한 소식을 만나보세요!</span>
+						<ul>
+							<li><a href="#" class="btn-fb" title="새창 열림" target="_blank">
+								<span class="blind">facebook</span></a></li>
+							<li><a href="#" class="btn-yt" title="새창 열림" target="_blank">
+								<span class="blind">youtube</span></a></li>
+							<li><a href="#" class="btn-ig" title="새창 열림" target="_blank">
+								<span class="blind">instagram</span></a></li>
+							<li><a href="#" class="btn-pf" title="새창 열림" target="_blank">
+								<span class="blind">카카오톡 플러스친구</span></a></li>
+							<li><a href="#" class="btn-tw" title="새창 열림" target="_blank">
+								<span class="blind">트위터</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+	
+<!-- s : 에너지 계산기 -->	
+<button id="energyBtn" style="display:none" type="button" data-popup-target="popupEnergy">팝업보기</button>   
+<div class="layer-pop layer-normal layer-energy-calculator" id="popupEnergy" tabindex=" 0"  data-popup-layer="popupEnergy" data-focus="popupEnergy">
 </div>
+<!-- e : 에너지 계산기 -->	
+<!-- s : 이메일 무단 수집거부 -->
+<div class="layer-pop layer-normal" id="popupGatherRefuse" tabindex="0" data-popup-layer="popupGatherRefuse" data-focus="popupGatherRefuse">
+	<div class="layer-header">
+		<h2>이메일 무단 수집거부</h2>
+	</div>
+	<div class="layer-content">
+		<div class="etc-divWrap">
+			<p>본 웹사이트는 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단 수집되는 것을 거부합니다.<br> 
+			이를 위반 시 『정보통신망 이용 촉진 및 정보보호 등에 관한 법률』등에 의해 처벌받을 수 있습니다.</p>
+		</div>
+	</div>
+	<button type="button" class="pop-close" data-focus-next="popupGatherRefuse">팝업닫기</button>
+</div>
+<!-- e : 이메일 무단 수집거부 -->
+
+<!-- s : 아이디어 정책 -->
+<div class="layer-pop layer-normal" id="popupIdeaPolicy" tabindex="0" data-popup-layer="popupIdeaPolicy" data-focus="popupIdeaPolicy">
+	<div class="layer-header">
+		<h2>아이디어 제안에 대한 정책</h2>
+	</div>
+	<div class="layer-content">
+		<div class="etc-divWrap">
+			<p>GMQDisplay 및 GMQDisplay 임직원은 당사가 공식적으로 요청하지 않았음에도 불구하고 여러분께서 일방적으로 당사에 제출하는 아이디어나 제안 등을 수령하거나 검토하지 않습니다.</p>
+			<p>이는 제출하신 내용이 당사 내부적으로 개발한 제품, 기술, 서비스와 유사할 경우 발생할 수 있는 오해와 분쟁을 방지하고 나아가 여러분의 창의적인 아이디어를 적극 보호하기 위함입니다.</p>
+			<p>이러한 취지를 이해하여 주시고 구체화되지 않은 아이디어나 콘셉트(Concept) 단계의 제안이 당사에 제출되지 않도록 하여 주시기 바랍니다.</p>
+		</div>
+	</div>
+	<button type="button" class="pop-close" data-focus-next="popupIdeaPolicy">팝업닫기</button>
+</div>
+<!-- e : 아이디어 정책 -->
+
+<!-- s : 웹접근성 우수사이트 인증서  -->
+<div class="layer-pop layer-default" id="popupWA" tabindex="0" data-popup-layer="popupWA" data-focus="popupWA">
+	<div class="layer-content">
+		<img class="pc-ver" src="./static/images/common/WA-2022.jpg" alt="웹접근성 우수사이트 인증서">
+        <img class="mo-ver" src="./static/images/common/WA-2022-mo.jpg" alt="웹접근성 우수사이트 인증서">
+	</div>
+	<button type="button" class="pop-close" data-focus-next="popupWA">팝업닫기</button>
+</div>
+<!-- e : 웹접근성 우수사이트 인증서  -->
+<!— e : 바닥글 영역 - b2c —>
+	</div>
+
+	<input type="hidden" id="viewStContextPath" value="/"/>
+
+	<script src="./static/script/masonry.min.js" async></script>
+	
+	<!— masonry js —>
+	<script src="./static/script/buynow.js" async></script>
+	<script type="text/javascript" src="https://resources.digital-cloud-west.medallia.com/wdcwest/145272/onsite/embed.js" async></script>
 
 
 <!-- 관리자가 아니면 쪽지 -->

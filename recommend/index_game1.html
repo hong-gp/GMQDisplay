@@ -2448,125 +2448,45 @@
 			});
 
 			function showNext() {
-				if (!chkOptSelected()) {
-					return;
-				} else {
-					var currentSection = document.querySelector('.opt-area:not([style*="none"])');
-					if (currentSection == document.getElementById("step_01")) {
-						// 새로운 li 엘리먼트를 생성합니다.
-						const newLi = document.createElement("li");
-						newLi.setAttribute("id", "selTag_1");
-
-						// <strong> 태그를 생성하고 텍스트 내용을 추가합니다.
-						const strong = document.createElement("strong");
-						const strongText = document.createTextNode("#1 주 사용도");
-						strong.appendChild(strongText);
-
-						// strong 태그를 <li> 엘리먼트 안에 추가합니다.
-						newLi.appendChild(strong);
-
-						// 텍스트 노드를 생성하고 <li> 엘리먼트 안에 추가합니다.
-						var test = $("input[name='optStep1']:checked").val();
-						const text = document.createTextNode(test);
-						newLi.appendChild(text);
-
-						// id가 "selTags"인 엘리먼트를 찾고 새로운 <li> 엘리먼트를 추가합니다.
-						const selTags = document.getElementById("selTags");
-						selTags.appendChild(newLi);
-					} else if (currentSection == document.getElementById("step_02")) {
-						// 새로운 li 엘리먼트를 생성합니다.
-						const newLi = document.createElement("li");
-						newLi.setAttribute("id", "selTag_2");
-
-						// <strong> 태그를 생성하고 텍스트 내용을 추가합니다.
-						const strong = document.createElement("strong");
-						const strongText = document.createTextNode("#2 화면 크기");
-						strong.appendChild(strongText);
-
-						// strong 태그를 <li> 엘리먼트 안에 추가합니다.
-						newLi.appendChild(strong);
-
-						// 텍스트 노드를 생성하고 <li> 엘리먼트 안에 추가합니다.
-						var test = $("input[name='optStep2']:checked").val();
-						const text = document.createTextNode(test);
-						newLi.appendChild(text);
-
-						// id가 "selTags"인 엘리먼트를 찾고 새로운 <li> 엘리먼트를 추가합니다.
-						const selTags = document.getElementById("selTags");
-						selTags.appendChild(newLi);
-					} else if (currentSection == document.getElementById("step_03")) {
-						// 새로운 li 엘리먼트를 생성합니다.
-						const newLi = document.createElement("li");
-						newLi.setAttribute("id", "selTag_3");
-
-						// <strong> 태그를 생성하고 텍스트 내용을 추가합니다.
-						const strong = document.createElement("strong");
-						const strongText = document.createTextNode("#3 패널 형태");
-						strong.appendChild(strongText);
-
-						// strong 태그를 <li> 엘리먼트 안에 추가합니다.
-						newLi.appendChild(strong);
-
-						// 텍스트 노드를 생성하고 <li> 엘리먼트 안에 추가합니다.
-						var test = $("input[name='optStep3']:checked").val();
-						const text = document.createTextNode(test);
-						newLi.appendChild(text);
-
-						// id가 "selTags"인 엘리먼트를 찾고 새로운 <li> 엘리먼트를 추가합니다.
-						const selTags = document.getElementById("selTags");
-						selTags.appendChild(newLi);
-					}
-				}
+				var currentSection = document.querySelector('.opt-area:not([style*="none"])');
 				var currentStep = document.querySelector('[data-current="true"]');
-				currentStep.setAttribute("data-current", "false");
-				if (currentStep.nextElementSibling !== null) {
+				var nextSection = currentSection.nextElementSibling;
+
+				if (nextSection) {
+					currentSection.style.display = "none";
+					nextSection.style.display = "block";
+					currentStep.setAttribute("data-current", "false");
 					currentStep.nextElementSibling.setAttribute("data-current", "true");
-				} else {
-					document.getElementById("step_01").setAttribute("data-current", "true");
+					updateDisplay();
 				}
-				updateDisplay();
 			}
 
 			function showPrevious() {
 				var currentSection = document.querySelector('.opt-area:not([style*="none"])');
-				if (currentSection == document.getElementById("step_02")) {
-					// id가 "selTag_1"인 엘리먼트를 찾습니다.
-					const selTag1 = document.getElementById("selTag_1");
-
-					// id가 "selTags"인 엘리먼트에서 selTag1을 제거합니다.
-					const selTags = document.getElementById("selTags");
-					selTags.removeChild(selTag1);
-				} else if (currentSection == document.getElementById("step_03")) {
-					// id가 "selTag_1"인 엘리먼트를 찾습니다.
-					const selTag2 = document.getElementById("selTag_2");
-
-					// id가 "selTags"인 엘리먼트에서 selTag1을 제거합니다.
-					const selTags = document.getElementById("selTags");
-					selTags.removeChild(selTag2);
-				}
-
 				var currentStep = document.querySelector('[data-current="true"]');
-				currentStep.setAttribute("data-current", "false");
-				if (currentStep.previousElementSibling !== null) {
+				var previousSection = currentSection.previousElementSibling;
+
+				if (previousSection) {
+					currentSection.style.display = "none";
+					previousSection.style.display = "block";
+					currentStep.setAttribute("data-current", "false");
 					currentStep.previousElementSibling.setAttribute("data-current", "true");
-				} else {
-					document.getElementById("step_03").setAttribute("data-current", "true");
+					updateDisplay();
 				}
-				updateDisplay();
 			}
 
 			function updateDisplay() {
 				var steps = document.querySelectorAll(".opt-area");
-				// $("section[id^='step_']")
-				for (var i = 0; i < steps.length; i++) {
+				for (var i = 0; i < 4; i++) {
 					if (steps[i].getAttribute("data-current") === "true") {
 						steps[i].style.display = "flex";
 					} else {
 						steps[i].style.display = "none";
 					}
 				}
+
 				var currentSection = document.querySelector('.opt-area:not([style*="none"])');
-				if (currentSection == document.getElementById("step_03")) {
+				if (currentSection == document.getElementById("step_04")) {
 					$("#btnNext").hide();
 					$("#btnComplt").show();
 				} else {
@@ -2981,6 +2901,84 @@
 												<input type="hidden" id="optDupYn_1" name="optDupYn" value="N">
 												<input type="hidden" id="optDupSelLmtCnt_1" name="optDupSelLmtCnt"
 													value="">
+											</ul>
+										</div>
+									</section>
+
+									<section id="step_04" class="opt-area" data-current="false" style="display: none;">
+										<div class="ttl">
+											<div class="txt">
+												<h1>#4&nbsp;가격</h1>
+												<h2>원하는 가격대를 선택해주세요!</h2>
+											</div>
+											<div class="img">
+												<img src="//images.samsung.com/kdp/recommend/ccd645b9-c5b4-4fc2-8a61-d550023e61a0.png"
+													alt="이미지">
+											</div>
+										</div>
+
+
+										<div class="opt">
+											<ul>
+												<li>
+													<input type="radio" id="optStep4_1" name="optStep4" value="10"
+														data-dispclsfnm="01" data-qstnm="10" data-omni="">
+													<label for="optStep4_1">
+														<div class="opt-card">
+															<h3>10만원대</h3>
+															<p class="sub">가장 저렴한 모니터</p>
+															<div class="chck">
+																<span class="blind">선택 됨</span>
+															</div>
+														</div>
+													</label>
+													<input type="hidden" id="" name="leafYn" value="N">
+												</li>
+												<li>
+													<input type="radio" id="optStep4_2" name="optStep4" value="20"
+														data-dispclsfnm="02" data-qstnm="20" data-omni=" ">
+													<label for="optStep4_2">
+														<div class="opt-card">
+															<h3>20만원대</h3>
+															<p class="sub">가성비 게이밍 모니터</p>
+															<div class="chck">
+																<span class="blind">선택 됨</span>
+															</div>
+														</div>
+													</label>
+													<input type="hidden" id="" name="leafYn" value="N">
+												</li>
+												<li>
+													<input type="radio" id="optStep4_3" name="optStep4" value="30"
+														data-dispclsfnm="사무직 직장인" data-qstnm="30" data-omni="office job">
+													<label for="optStep4_3">
+														<div class="opt-card">
+															<h3>30만원대</h3>
+															<p class="sub">가격과 성능을 챙긴 모니터</p>
+															<div class="chck">
+																<span class="blind">선택 됨</span>
+															</div>
+														</div>
+													</label>
+													<input type="hidden" id="leafYn_800029634" name="leafYn" value="N">
+												</li>
+												<li>
+													<input type="radio" id="optStep4_4" name="optStep4" value="40"
+														data-dispclsfnm="전문직 직장인" data-qstnm="40"
+														data-omni="specialized job">
+													<label for="optStep4_4">
+														<div class="opt-card">
+															<h3>가격 상관 없어요</h3>
+															<p class="sub">최고의 성능을 자랑하는 모니터</p>
+															<div class="chck">
+																<span class="blind">선택 됨</span>
+															</div>
+														</div>
+													</label>
+													<input type="hidden" id="leafYn_800029635" name="leafYn" value="N">
+												</li>
+												<input type="hidden" id="optDupYn_1" name="optDupYn" value="N">
+												<input type="hidden" id="optDupSelLmtCnt_1" name="optDupSelLmtCnt" value="">
 											</ul>
 										</div>
 									</section>

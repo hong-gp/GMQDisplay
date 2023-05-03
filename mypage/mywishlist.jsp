@@ -1997,9 +1997,15 @@
                                 <li class="menu" id="lnb1">
                                     <a href="./myinfo.jsp" onClick="location.href='./myinfo.jsp';">나의 정보</a>
                                 </li>
-                                <li class="menu active" id="lnb3">
+                                <li class="menu active" id="lnb2">
                                     <a href="./mywishlist.jsp" onClick="location.href='./mywishlist.jsp';">찜 목록</a>
                                 </li>
+								<li class="menu" id="lnb3">
+                                    <a href="./myDeliveryList.jsp" onClick="location.href='./myDeliveryList.jsp';">배송지 관리</a>
+                                </li>
+								<li class="menu" id="lnb4">
+									<a href="./report1.jsp" onClick="location.href='./report1.jsp';">1:1 문의 내역</a>
+								</li>
                             </ul>
                         </div>
                     </div>

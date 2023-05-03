@@ -1996,8 +1996,14 @@
 								<li class="menu active" id="lnb1">
 									<a href="./myinfo.jsp" onClick="location.href='./myinfo.jsp';">나의 정보</a>
 								</li>
-								<li class="menu" id="lnb3">
+								<li class="menu" id="lnb2">
 									<a href="./mywishlist.jsp" onClick="location.href='./mywishlist.jsp';">찜 목록</a>
+								</li>
+								<li class="menu" id="lnb3">
+                                    <a href="./myDeliveryList.jsp" onClick="location.href='./myDeliveryList.jsp';">배송지 관리</a>
+                                </li>
+								<li class="menu" id="lnb4">
+									<a href="./report1.jsp" onClick="location.href='./report1.jsp';">1:1 문의 내역</a>
 								</li>
 							</ul>
 						</div>
@@ -2069,7 +2075,7 @@
 								</ul>
 							</div>
 							<div class="member ship">
-								<a href="" class="link-arrow lrg" data-omni="info:my delivery view more">배송지 관리</a>
+								<a href="/GMQDisplay-master/mypage/myDeliveryList.jsp" class="link-arrow lrg" data-omni="info:my delivery view more">배송지 관리</a>
 								<ul>
 									<li><span class="tit"></span><span class="cont">등록된 배송지가 없습니다.</span></li>
 								</ul>

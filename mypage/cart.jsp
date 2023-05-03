@@ -2610,7 +2610,7 @@
 				</div>
 			</div>
 			<div id="editor"></div>
-			<form name="cart_form" id="cart_form">
+			<!--<form name="cart_form" id="cart_form">-->
 				<div class="content cart-content" data-sticky-container="">
 					<div class="tit-box cart-title">
 						<h1 class="txt-s20">장바구니</h1>
@@ -2648,13 +2648,36 @@
 								<label for="cart_check_box_all">전체선택</label>
 							</div>
 							<div class="opt-select-right">
-								<button type="button" data-type="main" id="selectCartDeleteBtn"
-									class="btn btn-s btn-type2">선택 삭제</button>
+								<!-- <button type="button" data-type="main" id="selectCartDeleteBtn" class="btn btn-s btn-type2">선택 삭제</button>-->
 							</div>
 							<script>
 							$(document).ready(function() {
-								$('#cart_check_box_all').click(function() {
-									$('input[name="cartIds"]').prop('checked', this.checked);
+								// 전체 선택 체크박스 클릭 이벤트 처리
+								$('input[name="cart_check_box_all"]').click(function() {
+									if($(this).is(":checked")) {
+										$('input[name="cartIds"]').prop("checked", true);
+									} else {
+										$('input[name="cartIds"]').prop("checked", false);
+									}
+								});
+
+								// 개별 체크박스 클릭 이벤트 처리
+								$('input[name="cartIds"]').click(function() {
+									// 개별 체크박스의 체크 여부 확인
+									var is_checked = true;
+									$('input[name="cartIds"]').each(function() {
+										if(!$(this).is(":checked")) {
+										  is_checked = false;
+										  return false;
+										}
+									});
+								  
+								  // 모든 개별 체크박스가 체크되어 있으면 전체 선택 체크박스 체크
+									if(is_checked) {
+										$('input[name="cart_check_box_all"]').prop("checked", true);
+									} else {
+										$('input[name="cart_check_box_all"]').prop("checked", false);
+									}
 								});
 							});
 
@@ -2680,6 +2703,7 @@
 						</div>
 						<!-- e : 전체선택 -->
 						<!-- s : 주문상품 -->
+						<form id="orderForm" method="post" action="/GMQDisplay-master/order/order.jsp">
 						<div class="cart-area main-cart benefit" data-type="main">
 							<h2 class="blind">주문상품</h2>
 <%
@@ -2708,7 +2732,7 @@
 	        		<span class="empty-text">장바구니에 담겨있는 상품이 없습니다.</span>
 				</div>
 	       		<div class="cart-btn-box" style="display:block;">
-	        		<a href="/sec/" class="btn btn-d btn-type1">홈으로</a>
+	        		<a href="/GMQDisplay-master/index.html" class="btn btn-d btn-type1">홈으로</a>
 	       		</div>
 			</div>
 <%
@@ -2737,9 +2761,9 @@
 								data-category-en-nm-path="pc ; monitors ; smart-monitors" data-goods-gbn-cd=""
 								data-sale-amt="900000" data-category-nm-path="PC/프린터 ; 모니터 ; 스마트 모니터">
 								<div class="chk-form-hidden cart-check">
-									<input type="checkbox" id="cartIds_0" name="cartIds" class="cart-data-hidden" value="<%=Mno%>">
+									<input type="checkbox" id="cartIds_<%=Mno%>" name="cartIds" class="cart-data-hidden" value="<%=Mno%>">
 									<!--input type="hidden" id="arcnYn_0" value="N"/-->
-									<label for="cartIds_0"><span><%=Mname%></span></label>
+									<label for="cartIds_<%=Mno%>"><span><%=Mname%></span></label>
 									<input type="hidden" class="salePsbCd" value="00">
 									<input type="hidden" class="item_no" value="100283780">
 									<input type="hidden" class="metaImgPath"
@@ -2778,15 +2802,14 @@
 								<div class="cart-td cart-count">
 									<span class="spinner-box cart-spinner">
 										<!-- B2B2C 체험단말이면 구매수량 변경 불가.   -->
-										<a href="#n" class="count count-miner" id="cart_qty_down_290184454682002097"
+										<a href="#n" class="count count-miner" id="cart_qty_down" data-mno="<%=Mno%>"
 											onclick="cartGoods.decreaseBuyQty('290184454682002097');">감소</a>
 										<label for="countCartPrd01" class="blind">구매수량</label>
-										<input type="text" class="number" maxlength="5"
-											id="cart_goods_buy_qty_290184454682002097" name="buyQty" value="<%=rs.getInt("cart_count")%>"
+										<input type="text" class="number" maxlength="5" data-mno="<%=Mno%>"
+											id="cart_goods_buy_qty" name="buyQty" value="<%=rs.getInt("cart_count")%>"
 											title="수량"
 											onfocusout="cartGoods.directModifyBuyQty('290184454682002097', this);">
-										<a href="#n" class="count count-plus" id="cart_qty_up_290184454682002097"
-											onclick="cartGoods.increaseBuyQty('290184454682002097', this);">증가</a>
+										<a href="#n" class="count count-plus" id="cart_qty_up" data-mno="<%=Mno%>">증가</a>
 									</span>
 									<input type="hidden" class="orgBuyQty" id="org_buy_qty_290184454682002097"
 										value="1">
@@ -2866,26 +2889,10 @@
 								<div class="cart-sns">
 									<!-- <button type="button" class="sns-heart goods-btn " data-cartId="290184454682002097" onclick="cartGoods.addWish(this); return false;"><span>좋아요</span></button>  -->
 									<button type="button" class="sns-delete cart_delete-btn accessibility-pop-open"
-										id="cartDeleteBtn" onclick="$('.layer-pop#popupMsg').show(); $('#mask').show();">
+										id="cartDeleteBtn" value="<%=Mno%>">
 										<span>선택제품삭제</span>
 									</button>
 								</div>
-								<form name="deleteCartForm<%=Mno%>" method="post" action="../xhr/deleteCart.jsp">
-									<input type="hidden" name="Mno" value="<%=Mno%>">
-								</form>
-								<!-- 추가된 부분 -->
-								<div id="mask" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 255; display: none;"></div>
-								<div class="layer-pop layer-default alert popup-msg" id="popupMsg" tabindex="0" data-popup-layer="popupMsg" data-focus="popupMsg" aria-hidden="false" style="display: none; z-index: 256;" data-zindex="256">
-									<div class="layer-content">
-										<p>선택한 제품을 장바구니에서 삭제하시겠습니까?</p>
-											<div class="btn-box double">
-													<a href="javascript:void(0);" class="btn btn-d btn-type1 cart-view" onclick="document.deleteCartForm<%=Mno%>.submit()">확인</a>
-													<a href="javascript:void(0);" class="btn btn-d btn-type2 cont-shpng" onclick="$('.layer-pop#popupMsg').hide(); $('#mask').hide();">취소</a>
-											</div>
-									</div>
-									<button type="button" class="pop-close" onclick="$('.layer-pop#popupMsg').hide(); $('#mask').hide();">툴팁 닫기</button>
-								</div>
-								<!-- 추가된 부분 -->
 
 								<div data-pkg-dlvr-no="1" style="display:none;">
 									삼성전자한국총괄<br>
@@ -2904,6 +2911,91 @@
 		out.print(e);
 	}
 %>
+</form>
+<script>
+function cartInfo() {
+	var Mnos = [];
+		$('input[name="cartIds"]:checked').each(function() {
+		Mnos.push($(this).val());
+	});
+
+	$.ajax({
+		type: "GET",
+		url: "/GMQDisplay-master/xhr/cart.jsp",
+		data: { Mno: Mnos.join("/") },
+		success: function(data) {
+			var total_count = $(data).filter('#total_count').text();
+			var total_price = $(data).filter('#total_price').text();
+			var total_sale = $(data).filter('#total_sale').text();
+			var total = $(data).filter('#total').text();
+
+			$("#goods_cnt").html(total_count);
+			$("#order_payment_total_goods_amt_view").html(total_price);
+			$("#order_payment_total_dc_amt_view").html(total_sale);
+			$("#order_payment_total_pay_amt_view").html(total);
+		}
+	});
+}
+
+$(document).ready(function() {
+	$('input[name="cart_check_box_all"]').trigger('click');
+	cartInfo();
+
+	var Mno = "";
+	$(".cart_delete-btn").click(function () {
+		$('.alert#deleteCartMsg').show();
+		$('body').append("<div id='mask'></div>");
+		Mno = $(this).val();
+	});
+
+	$(".cart-view").click(function () {
+		$.ajax({
+			url: '/GMQDisplay-master/xhr/deleteCart.jsp',
+			method: "GET",
+			data: { Mno: Mno }
+		})
+		.done(function( msg ) {
+			location.replace(location.href);
+			$("#mask").remove();
+			$('.alert#deleteCartMsg').hide();
+		});
+	});
+
+	$(".count-plus").click(function () {
+		var Mno = $(this).data('mno');
+		var countPrd = 1;
+		$.ajax({
+			method: "GET",
+			url: '/GMQDisplay-master/xhr/addCart.jsp',
+			data: { Mno: Mno, countPrd: countPrd }
+		})
+		.done(function( msg ) {
+			cartInfo();
+		});
+	});
+
+	$(".count-miner").click(function () {
+		var Mno = $(this).data('mno');
+		var countPrd = -1;
+		$.ajax({
+			method: "GET",
+			url: '/GMQDisplay-master/xhr/addCart.jsp',
+			data: { Mno: Mno, countPrd: countPrd }
+		})
+		.done(function( msg ) {
+			cartInfo();
+		});
+	});
+
+	$('input[type="checkbox"]').click(function () {
+		cartInfo();
+	});
+});
+/* var total_count = $(data).filter('#total_count').text();
+var total_price = $(data).filter('#total_price').text();
+var total_sale = $(data).filter('#total_sale').text();
+var total = $(data).filter('#total').text(); */
+</script>
 							<!-- e: 번들상품이 아닌 경우 -->
 
 							<!-- s: 번들상품인 경우 -->
@@ -2930,7 +3022,7 @@
 
 					<!-- s : 결제 정보 -->
 					<!--  20211105 진영 수정 닷컴의 경우 장바구니에 데이터 없으면 empty 클래스 추가   -->
-
+					
 					<div class="cart-payment-area ">
 						<!-- 닷컴이 아닌 경우 기존과 동일하게 -->
 						<h2 class="blind delivery-title">배송지 추가/변경</h2>
@@ -2990,20 +3082,22 @@
 						</ul>
 						<input type="hidden" id="mbrDlvraNo" name="mbrDlvraNo">
 						<!--<button type="button" class="btn btn-l btn-type3" onclick="NetFunnel_Action({action_id :'b2c_checkout'},function(ev, ret){checkArcnYn();});">주문하기</button>-->
-						<button id="btnCartOrder" type="button" class="btn btn-l btn-type3"
-							onclick="order.select();return false;">주문하기</button>
+						<button id="btnCartOrder" type="button" class="btn btn-l btn-type3">주문하기</button>
 						<!-- <button type="button" class="btn btn-l btn-type3" onclick="test();return false;">주문하기</button> -->
-
+<script>
+$(document).ready(function() {
+	$("#btnCartOrder").click(function () {
+		$("#orderForm").submit();
+	});
+});
+</script>
 						<!-- <ul class="sub-note-box">
                         <li>큐커 식품관 결제금액은 'My 큐커 플랜 삼성카드 약정' 이용실적에 포함되지 않습니다.</li>
                     </ul> -->
 
 					</div>
 					<!-- e : 결제 정보 -->
-			</form>
-			<!-- s : 공통 팝업(alert)  -->
-
-			<!-- e : 공통 팝업(alert)  -->
+			<!--</form>-->
 			<!-- s : 공통 팝업(alert)  -->
 			<div class="layer-pop layer-default alert" id="commonAlert2" tabindex="0" data-popup-layer="commonAlert2"
 				data-focus="commonAlert2">
@@ -3018,6 +3112,18 @@
 				</div>
 			</div>
 			<!-- e : 공통 팝업(alert)  -->
+			<!-- 추가된 부분 -->
+			<div class="layer-pop layer-default alert popup-msg" id="deleteCartMsg" tabindex="0" data-popup-layer="popupdata-focus="popupMsg" aria-hidden="false" style="display: none; z-index: 256;" data-zindex="256">
+				<div class="layer-content">
+					<p>선택한 제품을 장바구니에서 삭제하시겠습니까?</p>
+						<div class="btn-box double">
+								<a href="javascript:void(0);" class="btn btn-d btn-type1 cart-view">확인</a>
+								<a href="javascript:void(0);" class="btn btn-d btn-type2 cont-shpng" onclick="$('.layer-pop#deleteCartMsg').hide(); $('#mask').remove();">취소</a>
+						</div>
+				</div>
+				<button type="button" class="pop-close" onclick="$('.layer-pop#deleteCartMsg').hide(); $('#mask').remove();">툴팁 닫기</button>
+			</div>
+			<!-- 추가된 부분 -->
 			<!-- s : 공통 팝업(confirm)  -->
 			<div class="layer-pop layer-default" id="commonConfirm" tabindex="0" data-popup-layer="commonConfirm"
 				data-focus="commonConfirm">

@@ -31,7 +31,7 @@
 		Connection con = DriverManager.getConnection(db_url, db_id, db_password);
 
 		// 상품 조회
-		String sql = "SELECT * FROM cart WHERE userID=?"; 
+		String sql = "SELECT * FROM cart WHERE userID=? ORDER BY cart_count DESC LIMIT 3"; 
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
 

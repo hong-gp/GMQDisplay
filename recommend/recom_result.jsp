@@ -2354,6 +2354,23 @@ try {
 	String genre = request.getParameter("optStep1");
 	String size = request.getParameter("optStep2");
 	String form = request.getParameter("optStep3");
+	int price = Integer.parseInt(request.getParameter("optStep4"));
+	int max = 0;
+	int min = 0;
+
+	if (price == 10) {
+		max = 200000;
+		min = 100000;
+	} else if (price == 20) {
+		max = 300000;
+		min = 200000;
+	} else if (price == 30) {
+		max = 400000;
+		min = 300000;
+	} else {
+		max = 99999999;
+		min = 0;
+	}
 
 	String db_url = "jdbc:mysql://localhost:3306/gpqd";
 	String db_id = "root";
@@ -2362,11 +2379,13 @@ try {
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con = DriverManager.getConnection(db_url, db_id, db_password);
 
-	String sql = "SELECT * FROM product WHERE Mgenre=? AND Msize=? AND Mform=?"; 
+	String sql = "SELECT * FROM product WHERE Mgenre=? AND Msize=? AND Mform=? AND Mprice BETWEEN ? AND ?"; 
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	pstmt.setString(1, genre);
 	pstmt.setString(2, size);
 	pstmt.setString(3, form);
+	pstmt.setInt(4, min);
+	pstmt.setInt(5, max);
 
 	ResultSet rs = pstmt.executeQuery();
 	while(rs.next()) {
@@ -2540,19 +2559,20 @@ try {
 											</a>
 										</div>
 										<ul class="list-box slick-initialized slick-slider">
-											<div aria-live="polite" class="slick-list draggable">
+											<div class="slick-list draggable">
 												<div class="slick-track" style="opacity: 1; width: 660px; transform: translate3d(0px, 0px, 0px);">
 												<%
 												try {
 													String sql_review2 = "SELECT * FROM review WHERE Mno=? LIMIT 2";
 													PreparedStatement pstmt_review2 = con.prepareStatement(sql_review2);
 													pstmt_review2.setString(1, rs2.getString("Mno"));
+
 													ResultSet rs_review2 = pstmt_review2.executeQuery();
 													if (!rs_review2.next()) {
 												%>
-													<div style="text-align: center; margin-top: 50px;">
-														<h3>후기가 없습니다.</h3>
-													</div>
+														<div style="text-align: center; margin-top: 50px;">
+															<h3>후기가 없습니다.</h3>
+														</div>
 												<%
 													} else { 
 														do {
@@ -2572,23 +2592,10 @@ try {
 													}
 												} catch (Exception e) { out.print(e); }
 												%>
-											
-													<!-- <li class="slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" aria-describedby="slick-slide21" style="width: 330px;">
-														<a href="/sec/tvs/neo-qled-8k-qnb800fxkr-d2c/KQ75QNB800FXKR/?focus=review" title="상품평점" data-omni="productcomment" tabindex="-1">
-															<div class="item">
-																<div class="stars point-5">
-																	<p class="blind">툴팁보기(레이어열림)</p>
-																</div>
-																<p><%=rs2.getString("Mreview2")%><br><br></p>
-															</div>
-														</a>
-													</li> -->
 												</div>
 											</div>
 										</ul>
-										<!-- <div class="prgrs-bar">
-											<div class="inner" style="width: 50%;"></div>
-										</div> -->
+
 									</div>
 								</div>
 							</div>
@@ -5504,7 +5511,7 @@ try {
 					<strong>꼭 확인하세요!</strong>
 				</div>
 				<div class="wrap-disc">
-					- ‘자세히 보기’ 상품인 경우, 해당 상품은 현재 삼성닷컴에서 상품 정보만 확인이 가능합니다.</div>
+					* ‘자세히 보기’ 상품인 경우, 해당 상품은 현재 GMQ Display에서 상품 정보만 확인이 가능합니다. *</div>
 			</div>
 		</article>
 		
@@ -5518,6 +5525,13 @@ try {
 	String hashtag1 = request.getParameter("optStep1");
 	String hashtag2 = request.getParameter("optStep2");
 	String hashtag3 = request.getParameter("optStep3");
+	String hashtag4_value = request.getParameter("optStep4");
+	String hashtag4 = "";
+	if (hashtag4_value.equals("10")) hashtag4="10만원대";
+	else if (hashtag4_value.equals("20")) hashtag4="20만원대";
+	else if (hashtag4_value.equals("30")) hashtag4="30만원대";
+	else hashtag4="가격 상관없어요";
+	
 %>
 	<!-- e : 본문 영역 -->
     <script type="text/javascript">
@@ -5635,12 +5649,12 @@ try {
     			/*  추천 결과 공유 */
     			$('#shareResult').on('click', function(e) {    			
     				snsShare.kakaoTalkRecommendGooods(
-   						window.origin+"../recommend/sharerecommendresult/?firstDispClsfNo=800028667&hashTags=<%=hashtag1%>@<%=hashtag2%>@<%=hashtag3%>&upDispClsfNo=800028720&dispClsfNos=800028875"
+   						window.origin+"../recommend/sharerecommendresult/?firstDispClsfNo=800028667&hashTags=<%=hashtag1%>@<%=hashtag2%>@<%=hashtag3%>@<%=hashtag4%>&upDispClsfNo=800028720&dispClsfNos=800028875"
    					);
     			});
     		}
     		
-    		$.each('<%=hashtag1%>@<%=hashtag2%>@<%=hashtag3%>'.split('@'), function(idx, hashTag) {
+    		$.each('<%=hashtag1%>@<%=hashtag2%>@<%=hashtag3%>@<%=hashtag4%>'.split('@'), function(idx, hashTag) {
     			$('.result-info> dl').append("<dd><strong>#</strong>"+hashTag+"</dd>");
     		});	
     		

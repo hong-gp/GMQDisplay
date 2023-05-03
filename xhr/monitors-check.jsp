@@ -56,6 +56,11 @@
 		String[] hzArr = hz.split("/");
 
 		for (int i = 0; i < typeArray.length; i++) {
+			if (typeArray[i].equals("flat"))
+				 typeArray[i] = "평면";
+			else if (typeArray[i].equals("curve"))
+				 typeArray[i] = "커브드";
+
 			type += typeArray[i] + "/";
 		}
 		String[] typeArr = type.split("/");

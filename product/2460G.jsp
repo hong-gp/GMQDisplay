@@ -4433,7 +4433,7 @@ function Urlsend(sns) {
 												</dd>
 												</dl>
 <!-- 구매 수량 -->
-<form name="form" method="post" action="../buy/Buy.jsp">
+<form name="form" method="post" action="/GMQDisplay-master/order/order.jsp">
 	<input type="hidden" name="Mno" value="2460G" />
 	<dl class="count-show-box">
 		<dt>수량</dt>

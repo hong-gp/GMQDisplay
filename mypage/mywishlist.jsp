@@ -2391,16 +2391,15 @@
 
                                             <div class="boardlist-cart" id="boardlist-cart" data-ctpath="/" value="12">
                                                 <!-- 판매중지에서는 장바구니 담기 없어짐 -->
-                                                <button type="button" class="btn-cart" name="btn-cart"
-                                                    value="G000292151" data-content="장바구니에 추가되었습니다." data-yes="확인">
+                                                <button type="button" class="btn-cart" name="btn-cart" data-mno="<%=Mno%>" data-content="장바구니에 추가되었습니다." data-yes="확인">
                                                     <span>장바구니</span>
                                                 </button>
                                             </div>
                                             <div class="boardlist-delete">
                                                 <!-- 삭제버튼 -->
-                                                <button type="button" class="btn-delete" name="deleteHotList"
-                                                    onclick="deleteList({goodsId : 'G000292151'});"
-                                                    value="G000292151">갤럭시 A34 5G 자급제 삭제</button>
+                                                <button type="button" class="btn-delete" name="deleteHotList" data-mno="<%=Mno%>">
+													<%=Mname%> 삭제
+												</button>
                                             </div>
                                         </div>
                                     </div>
@@ -2413,6 +2412,37 @@
 								}
 							%>
                             </ul>
+<script>
+	$(document).on('click', '.btn-delete', function() {
+		var mno = $(this).attr('data-mno');
+		$.ajax({
+			type: 'POST',
+			url: '/GMQDisplay-master/xhr/deleteWishlist.jsp',
+			data: { mno: mno },
+			success: function(response) {
+				location.reload(true);
+			},
+			error: function(xhr, status, error) {
+				console.error(xhr.responseText);
+			}
+		});
+	});
+
+	$(document).on('click', '.btn-cart', function() {
+		var mno = $(this).attr('data-mno');
+		$.ajax({
+			type: 'POST',
+			url: '/GMQDisplay-master/xhr/addCart.jsp',
+			data: { Mno: mno, countPrd: "1" },
+			success: function(response) {
+				location.reload(true);
+			},
+			error: function(xhr, status, error) {
+				console.error(xhr.responseText);
+			}
+		});
+	});
+</script>
                         </div>
                         <div class="pageingWrap">
                             <div class="paging" id="interestPage"><span class="btn_first"><a class="btn_paging first"

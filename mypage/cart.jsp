@@ -2711,14 +2711,14 @@
 	int total_count = 0;
 	int total_price = 0;
 	int total_sale = 0;
+
+	String db_url = "jdbc:mysql://localhost:3306/gpqd";
+	String db_id = "root";
+	String db_password = "1234";
+
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con = DriverManager.getConnection(db_url, db_id, db_password);
 	try {
-		String db_url = "jdbc:mysql://localhost:3306/gpqd";
-		String db_id = "root";
-		String db_password = "1234";
-
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection(db_url, db_id, db_password);
-
 		String sql = "SELECT * FROM cart WHERE userID=?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
@@ -2944,7 +2944,7 @@ $(document).ready(function() {
 	var Mno = "";
 	$(".cart_delete-btn").click(function () {
 		$('.alert#deleteCartMsg').show();
-		$('body').append("<div id='mask'></div>");
+		$('body').append("<div id='mask' style='z-index: 255;'></div>");
 		Mno = $(this).val();
 	});
 
@@ -3026,15 +3026,43 @@ var total = $(data).filter('#total').text(); */
 					<div class="cart-payment-area ">
 						<!-- 닷컴이 아닌 경우 기존과 동일하게 -->
 						<h2 class="blind delivery-title">배송지 추가/변경</h2>
-						<div class="delivery-change" id="deliveryChange">
-							<div id="memberNoDeliveryAddress" style="">
-								<p class="entry-add">배송지를 등록해 주세요.</p>
-								<button type="button" class="btn btn-d btn-type1" id="dlvrInsertBtn"
-									name="dlvrInsertBtn" data-type="I" onclick="fnOnClickSaveBtn(this);">배송지 등록</button>
+						<%
+						try {
+							String sql3 = "SELECT * FROM deliveryList WHERE userID=? AND delivery_basic=true";
+							PreparedStatement pstmt3 = con.prepareStatement(sql3);
+							pstmt3.setString(1, id);
+							ResultSet rs3 = pstmt3.executeQuery();
+
+							if (!rs3.next()) {
+						%>
+							<div class="delivery-change" id="deliveryChange">
+								<div id="memberNoDeliveryAddress" style="">
+									<p class="entry-add">배송지를 등록해 주세요.</p>
+									<button type="button" class="btn btn-d btn-type1" id="dlvrInsertBtn" name="dlvrInsertBtn" data-type="I" onclick="location.href='/GMQDisplay-master/mypage/myDeliveryList.jsp'">
+										배송지 등록
+									</button>
+								</div>
 							</div>
-							<div id="memberDefaultDeliveryAddress" style="display:none"></div>
-							<div id="memberDeliveryAddress" style="display:none"></div>
-						</div>
+						<%
+							} else {
+						%>
+							<div class="delivery-change" id="deliveryChange">
+								<div id="memberDefaultDeliveryAddress" style="">
+									<p class="delivery-tit"><span id="spanAdrsNm">기본 배송지 : <%=rs3.getString("delivery_name")%></span></p>
+									<p class="delivery-txt"><span id="spanRoadAddr">(<%=rs3.getString("delivery_zip")%>) <%=rs3.getString("delivery_addr1")%></span></p>
+									<p class="delivery-txt"><span id="spanRoadDtlAddr"><%=rs3.getString("delivery_addr2")%></span></p>
+									<button type="button" id="spanAdrsEditBtn" class="btn btn-d btn-type1 accessibility-pop-open" onclick="location.href='/GMQDisplay-master/mypage/myDeliveryList.jsp'">
+										배송지 정보 추가/변경
+									</button>
+								</div>
+								<div id="memberDeliveryAddress" style="display:none"></div>
+							</div>
+						<%
+							}
+						} catch (Exception e) {
+							out.print(e);
+						}
+						%>
 
 						<input type="hidden" id="totalGoodsAmount" name="totGoodsAmt" value="0">
 						<input type="hidden" id="totalDeliveryFeeAmount" value="0">

@@ -15,13 +15,26 @@
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection(db_url, db_id, db_password);
 
-		// 상품 조회
 		String sql = "SELECT * FROM cart WHERE userID=? AND Mno=?"; 
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, Mno);
 
 		ResultSet rs = pstmt.executeQuery();
+
+		String sql3 = "SELECT * FROM wishlist WHERE userID=? AND Mno=?";
+		PreparedStatement pstmt3 = con.prepareStatement(sql3);
+		pstmt3.setString(1, id);
+		pstmt3.setString(2, Mno);
+		ResultSet rs3 = pstmt3.executeQuery();
+		if (rs3.next()) {
+			String sql4 = "DELETE FROM wishlist WHERE userID=? AND Mno=?";
+			PreparedStatement pstmt4 = con.prepareStatement(sql4);
+			pstmt4.setString(1, id);
+			pstmt4.setString(2, Mno);
+			pstmt4.executeUpdate();
+		}
+
 		if (!rs.next()) {
 			String sql2 = "INSERT INTO cart VALUES (?,?,?)";
 			PreparedStatement pstmt2 = con.prepareStatement(sql2);

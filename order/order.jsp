@@ -2,7 +2,12 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="java.util.*" %>
-<%String id = (String)session.getAttribute("sid");%>
+<%
+	String id = (String)session.getAttribute("sid");
+	
+	if (id == null)
+		response.sendRedirect("/GMQDisplay-master/login_info/login.html");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="ko">
@@ -17,7 +22,7 @@
 	<meta name="google-site-verification" content="kfz-w2PvI30cjijNzYanVGxHa3BA7uKnLfGLj4UILU0" />
 	
 
-	<link rel="shortcut icon" type="image/x-icon" href="https://static-ux.mustit.co.kr/img/front/mustit_favicon.ico">
+	<link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
 	<link href="https://static-ux.mustit.co.kr/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/lib/bootstrap/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/common/reset.css?v=1680035330"> <!-- reset.css -->
@@ -1413,46 +1418,7 @@ logger("prd");
 	</div>
 	
 		
-	<form id="frmOrder" action="/pg/INIsecurestart_order" method="POST" id="order" target="paypage" onsubmit="return MXN.orderCheckMxn(function() {
-		return step1_close_loader(step1_valid())
-	}, '')">
-	
-	<!-- 히든 폼 정리 -->
-	<input type="hidden" name="pg_company" id="pg_company" value="inicis" />
-	<input type="hidden" name="picked_card_name" id="picked_card_name" value="" />
-	<input type="hidden" name="gou_number" value="6823264931-564" />
-	<input type="hidden" name="use_point" value="" /> <!-- 적립금 사용금액-->
-	<input type="hidden" name="use_gift" value="" />  <!-- 상품권 사용금액-->
-	<input type="hidden" name="buy_type" value="1" />
-	<input type="hidden" id="cart_number_idx" name="cart_number" value="42498852" /> <!-- 상품 번호 (운영서버에선 쿠키로 하더라.)-->
-	<input type="hidden" name="numcode" value="25699178" /> <!-- 카트번호 -->
-	<input type="hidden" name="minishop_yn" value="" /> <!-- 미니샵 매출 여부 -->
-	<input type="hidden" name="hot_deal" value="" /> <!-- 핫딜 매출 여부 -->
-	<input type="hidden" name="pg_module" value="INIStdpay" /> <!-- PG(이니시스) 신규 모듈 연동 ( 2016-03-11 Ihyeon ) -->
-	<input type="hidden" name="quick_needed_money" value="0" /> <!-- 깜짝배송비(선불) -->
-	<input type="hidden" name="quick_later_money" value="0" /> <!-- 깜짝배송비(후불) -->
-	<input type="hidden" name="quick_start_addr[num]" value="" /><input type="hidden" name="quick_start_addr[sido]" value="" />
-	<input type="hidden" name="quick_start_addr[gugun]" value="" /><input type="hidden" name="quick_start_addr[dong]" value="" /><input type="hidden" name="quick_start_addr[latitude]" value="" />
-	<input type="hidden" name="quick_start_addr[longitude]" value="" /><input type="hidden" name="quick_start_addr[departure_place_number]" value="" />
-	<input type="hidden" name="quick_end_addr[num]" value="" /><input type="hidden" name="quick_end_addr[sido]" value="" />
-	<input type="hidden" name="quick_end_addr[gugun]" value="" /><input type="hidden" name="quick_end_addr[dong]" value="" />
-	<input type="hidden" name="quick_end_addr[latitude]" value="" /><input type="hidden" name="quick_end_addr[longitude]" value="" />
-	<input type="hidden" name="quick_fare[distance]" value="" /><input type="hidden" name="quick_fare[costTime]" value="" />
-	<input type="hidden" name="quick_fare[defaultFare]" value="" /><input type="hidden" name="quick_fare[weightFare]" value="" />
-	<input type="hidden" name="quick_fare[nightFare]" value="" /><input type="hidden" name="quick_fare[rainFare]" value="" />
-	<input type="hidden" name="quick_fare[holidayFare]" value="" /><input type="hidden" name="quick_fare[totalFare]" value="" />
-	<input type="hidden" name="quick_fare[discount]" value="0" />
-	
-	<input type="hidden" name="buyer_is_jeju_flag" value="" />
-	<input type="hidden" name="buyer_island_mountain_flag" value="" />
-	
-	<input type='hidden' name='NoStockCancelFlag' value="N" />
-	
-	<input type="hidden" name="gopaymethod" id="gopaymethod" value="">
-	<input type="hidden" name="paymethod" id="paymethod" value="">
-	<input type='hidden' name="payment_kind" id="payment_kind" value="">
-	<input type="hidden" name="payment_manage_no" value=""/>
-	<!-- 데이터 -->
+	<form id="frmOrder" action="/GMQDisplay-master/xhr/insertOrder.jsp" method="POST" id="order">
 
 	<div class="order_table">
 		<%
@@ -1496,7 +1462,7 @@ logger("prd");
 			<tr>
 								<th>휴대폰번호 <span class="mi-font-red">*</span></th>
 				<td>
-					<select id="per_cell" class="input-join select-mode" style="width:100px;" onfocusout="insertHphone();">
+					<select name="per_cell" id="per_cell" class="input-join select-mode" style="width:100px;" onfocusout="insertHphone();">
 						<option value="">선택</option>
 						<option value="010">010</option>
 						<option value="011">011</option>
@@ -1504,13 +1470,12 @@ logger("prd");
 						<option value="017">017</option>
 						<option value="018">018</option>
 						<option value="019">019</option>
-						
 					</select>
 					<script> $("#per_cell").val('010'); </script>
 					<span class="at">-</span>
-					<input type="text" id="per_cell2" value="" maxlength="4" class="input-join" style="width:100px;" onfocusout="insertHphone();" />
+					<input type="text" name="per_cell2" id="per_cell2" value="" maxlength="4" class="input-join" style="width:100px;" onfocusout="insertHphone();" />
 					<span class="at">-</span>
-					<input type="text" id="per_cell3" value="" maxlength="4" class="input-join" style="width:100px;" onfocusout="insertHphone();" />
+					<input type="text" name="per_cell3" id="per_cell3" value="" maxlength="4" class="input-join" style="width:100px;" onfocusout="insertHphone();" />
 									</td>
 			</tr>
 		</table>
@@ -1548,29 +1513,18 @@ logger("prd");
 					<input type="hidden" id="m_addr1" value="" />
 					<input type="hidden" id="m_addr2" value="" />
 					
-					<input type="radio" id="deliveryType_default" name="deliveryType" value="default" class="new_radio" onclick="ShipToBillPerson(this.form, this);" />
+					<input type="radio" id="deliveryType_default" name="deliveryType" value="default" class="new_radio" onclick="ShipToBillPerson(this.form, this);" checked />
 					<label for="deliveryType_default">기본 배송지</label>
 					<input type="radio" id="deliveryType_new" name="deliveryType" value="new" class="new_radio" style="margin-left:20px;" onclick="ShipToBillPerson(this.form, this);" />
 					<label for="deliveryType_new">새 배송지</label>
 
-					<input type="button" value="배송지 목록" id="btnDeliveryList" class="btn_nbwhite btn_addr_list" onclick="pickDeliveryArea('112585886');" />
+					<!--<input type="button" value="배송지 목록" id="btnDeliveryList" class="btn_nbwhite btn_addr_list" onclick="pickDeliveryArea('112585886');" />-->
 				</td>
 			</tr>
-						<tr>
+			<tr>
 				<th>이름 <span class="mi-font-red">*</span></th>
 				<td>
 					<input type="text" id="r_name" value=""  name="r_name" class="input-join" />
-					<script>
-						$('#r_name, #memberDeliveryType').change(function(){
-							var receiver_name=$('#r_name').val();
-							var orderer_name = '이름 지정';
-							if ( receiver_name != orderer_name ){
-								$("input[name='resno4']").val('P');
-							} else {
-								$("input[name='resno4']").val('P');
-							}
-						})
-					</script>
 				</td>
 			</tr>
 			<tr>
@@ -1593,149 +1547,146 @@ logger("prd");
 					<input type="text" id="r_hphone3" name="r_hphone3" maxlength="4"  value="" onfocusout="insertPhone()" class="input-join" style="width:100px;" />
 				</td>
 			</tr>
-			<tr>
-				<th>일반전화</th>
-				<td>
-					<input type="hidden" name="r_phone" value="0" />
-										<select id="r_phone1" name="r_phone1" onfocusout="insertPhone2();" class="input-join select-mode" style="width:100px;">
-						<option value="" checked >선택</option>
-						<option value="02">02</option>
-						<option value="031">031</option>
-						<option value="032">032</option>
-						<option value="041">041</option>
-						<option value="042">042</option>
-						<option value="043">043</option>
-						<option value="044">044</option>
-						<option value="051">051</option>
-						<option value="033">033</option>
-						<option value="052">052</option>
-						<option value="053">053</option>
-						<option value="054">054</option>
-						<option value="055">055</option>
-						<option value="061">061</option>
-						<option value="062">062</option>
-						<option value="063">063</option>
-						<option value="064">064</option>
-						<option value="010">010</option>
-						<option value="016">016</option>
-						<option value="017">017</option>
-						<option value="018">018</option>
-						<option value="019">019</option>
-						<option value="0130">0130</option>
-						<option value="070">070</option>
-						<option value="080">080</option>
-						<option value="0507">0507</option>
-						<option value="0506">0506</option>
-						<option value="0505">0505</option>
-						<option value="0504">0504</option>
-						<option value="0502">0502</option>
-						<option value="0503">0503</option>
-						<option value="0303">0303</option>
-					</select>
-					<span class="at">-</span>
-					<input type="text" id="r_phone2" name="r_phone2" maxlength="4" class="input-join" style="width:100px;" onfocusout="insertPhone2();" />
-					<span class="at">-</span>
-					<input type="text" id="r_phone3" name="r_phone3" maxlength="4" class="input-join" style="width:100px;" onfocusout="insertPhone2();" />
-				</td>
-			</tr>
+<script>
+function selectDeliveryBasic() {
+	$.ajax({
+		url: "/GMQDisplay-master/xhr/selectDeliveryBasic.jsp",
+		type: "POST",
+		data: { address: "basic" },
+		success: function(data) {
+			var userName = $(data).filter('#userName').text();
+			var zip = $(data).filter('#zip').text();
+			var addr1 = $(data).filter('#addr1').text();
+			var addr2 = $(data).filter('#addr2').text();
+			const phoneNumber = $(data).filter('#phone').text();
+			const slicedPhoneNumber = [
+				phoneNumber.substr(0, 3),
+				phoneNumber.substr(3, 4),
+				phoneNumber.substr(7, 4),
+			];
+
+			$("#r_name").val(userName);
+			$("#r_hphone1").val(slicedPhoneNumber[0]);
+			$("#r_hphone2").val(slicedPhoneNumber[1]);
+			$("#r_hphone3").val(slicedPhoneNumber[2]);
+			$("#zip").val(zip);
+			$("#addr1").val(addr1);
+			$("#addr2").val(addr2);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
+}
+
+if($("#deliveryType_default").prop("checked")) {
+	selectDeliveryBasic();
+}
+
+$("#deliveryType_default").on("change", function() {
+	if (this.checked) {
+		selectDeliveryBasic();
+	}
+});
+</script>
 			<tr>
 				<th>주소 <span class="mi-font-red">*</span></th>
 				<td>
-											<input type="text" id="zip" name="zip" value="" class="input-join" style="width:120px;" readonly="readonly" onclick="execDaumPostcode2();" />
-						<input type="button" value="우편번호 찾기" class="btn-join btn-join-modify fs12 mi-inline-block border_none" style="width:100px;padding:5px 8px;" onclick="execDaumPostcode2();" />
-										<span class="mi-font-red">* 도로명 주소가 기본 주소로 입력됩니다.</span>
+					<input type="text" id="zip" name="zip" value="" class="input-join" style="width:120px;" readonly="readonly" onclick="execDaumPostcode2();" />
+					<input type="button" value="우편번호 찾기" class="btn-join btn-join-modify fs12 mi-inline-block border_none" style="width:100px;padding:5px 8px;" onclick="execDaumPostcode2();" />
+					<span class="mi-font-red">* 도로명 주소가 기본 주소로 입력됩니다.</span>
 					<div id="layer_zip" style="display:none;position:fixed;z-index:10;-webkit-overflow-scrolling:touch;">
 						<img src="https://static-ux.mustit.co.kr/img/front/popup/btn_api_close.gif" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-1px;top:-29px;z-index:1" onclick="closeDaumPostcode();" alt="닫기 버튼" />
 					</div>
 					
-					<script>
-						// 우편번호 찾기 화면을 넣을 element
-						var element_layer = document.getElementById('layer_zip');
-					
-						function closeDaumPostcode() {
-							// iframe을 넣은 element를 안보이게 한다.
-							element_layer.style.display = 'none';
-						}
-					
-						function execDaumPostcode2() {
-							daum.postcode.load(function(){
-								new daum.Postcode({
-									oncomplete: function(data) {
-										// 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-										
-										// 우편번호와 주소 정보를 해당 필드에 넣는다.
-										document.getElementsByName("quickLastOrderExist")[0].value = "R";
-										document.getElementById('zip').value = data.zonecode; // 5자리 새우편번호 사용
-										document.getElementById('addr1').value = data.roadAddress;
-										document.getElementById('addr2').value = "";
-										document.getElementById("sido").value = data.sido;
-										document.getElementById("gugun").value = data.sigungu;
-										if( data.bname1 != "" ) {
-											document.getElementById("dong").value = data.bname1;
-										} else {
-											document.getElementById("dong").value = data.bname;
-										}
-										
-										// iframe을 넣은 element를 안보이게 한다.
-										// (autoClose:false 기능을 이용한다면, 아래 ��드를 제거해야 화면에서 사라지지 않는다.)
-										element_layer.style.display = 'none';
-										
-										if( $("input[type=radio][name=baesong_section]:checked").val() == "quick" ) {
-											$("#calcSurpriseDeliv").hide();
-										} //else {
-											//$("#quick_normal").click();
-										//}
-										resetQuick();
-										checkDeliveryException(data.zonecode, data.roadAddress);
-									},
-									theme : {
-										bgColor: "#FAFAFA", //바탕 배경색
-										//searchBgColor: "", //검색창 배경색
-										//contentBgColor: "", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
-										//pageBgColor: "", //페이지 배경색
-										textColor: "#555555", //기본 글자색
-										queryTextColor: "#555555", //검색창 글자색
-										postcodeTextColor: "#D01F3C", //우편번호 글자색
-										emphTextColor: "#6B97BE", //강조 글자색
-										outlineColor: "#CCCCCC" //테두리
-									},
-									width : '100%',
-									height : '100%'
-								}).embed(element_layer);
+						<script>
+							// 우편번호 찾기 화면을 넣을 element
+							var element_layer = document.getElementById('layer_zip');
 						
-								// iframe을 넣은 element를 보이게 한다.
-								element_layer.style.display = 'block';
+							function closeDaumPostcode() {
+								// iframe을 넣은 element를 안보이게 한다.
+								element_layer.style.display = 'none';
+							}
 						
-								// iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
-								initLayerPosition();
-							});
-						}
-						
-						// 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
-						// resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
-						// 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
-						function initLayerPosition() {
-							var width = 400; //우편번호서비스가 들어갈 element의 width
-							var height = 460; //우편번호서비스가 들어갈 element의 height
-							var borderWidth = 1; //샘플에서 사용하는 border의 두께
+							function execDaumPostcode2() {
+								daum.postcode.load(function(){
+									new daum.Postcode({
+										oncomplete: function(data) {
+											// 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+											
+											// 우편번호와 주소 정보를 해당 필드에 넣는다.
+											document.getElementsByName("quickLastOrderExist")[0].value = "R";
+											document.getElementById('zip').value = data.zonecode; // 5자리 새우편번호 사용
+											document.getElementById('addr1').value = data.roadAddress;
+											document.getElementById('addr2').value = "";
+											document.getElementById("sido").value = data.sido;
+											document.getElementById("gugun").value = data.sigungu;
+											if( data.bname1 != "" ) {
+												document.getElementById("dong").value = data.bname1;
+											} else {
+												document.getElementById("dong").value = data.bname;
+											}
+											
+											// iframe을 넣은 element를 안보이게 한다.
+											// (autoClose:false 기능을 이용한다면, 아래 ��드를 제거해야 화면에서 사라지지 않는다.)
+											element_layer.style.display = 'none';
+											
+											if( $("input[type=radio][name=baesong_section]:checked").val() == "quick" ) {
+												$("#calcSurpriseDeliv").hide();
+											} //else {
+												//$("#quick_normal").click();
+											//}
+											resetQuick();
+											checkDeliveryException(data.zonecode, data.roadAddress);
+										},
+										theme : {
+											bgColor: "#FAFAFA", //바탕 배경색
+											//searchBgColor: "", //검색창 배경색
+											//contentBgColor: "", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+											//pageBgColor: "", //페이지 배경색
+											textColor: "#555555", //기본 글자색
+											queryTextColor: "#555555", //검색창 글자색
+											postcodeTextColor: "#D01F3C", //우편번호 글자색
+											emphTextColor: "#6B97BE", //강조 글자색
+											outlineColor: "#CCCCCC" //테두리
+										},
+										width : '100%',
+										height : '100%'
+									}).embed(element_layer);
 							
-							// 위에서 선언한 값들을 실제 element에 넣는다.
-							element_layer.style.width = width + 'px';
-							element_layer.style.height = height + 'px';
-							element_layer.style.border = borderWidth + 'px solid';
-							// 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
-							element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
-							element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
-						}
-					</script>
+									// iframe을 넣은 element를 보이게 한다.
+									element_layer.style.display = 'block';
+							
+									// iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+									initLayerPosition();
+								});
+							}
+							
+							// 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
+							// resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
+							// 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
+							function initLayerPosition() {
+								var width = 400; //우편번호서비스가 들어갈 element의 width
+								var height = 460; //우편번호서비스가 들어갈 element의 height
+								var borderWidth = 1; //샘플에서 사용하는 border의 두께
+								
+								// 위에서 선언한 값들을 실제 element에 넣는다.
+								element_layer.style.width = width + 'px';
+								element_layer.style.height = height + 'px';
+								element_layer.style.border = borderWidth + 'px solid';
+								// 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+								element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+								element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+							}
+						</script>
 					<input type="hidden" id="sido" name="sido" value="" />
 					<input type="hidden" id="gugun" name="gugun" value="" />
 					<input type="hidden" id="dong" name="dong" value="" />
 					<ul class="mi-mt-8 after_clear">
-											<li class="fl"><input type="text" id="addr1" name="addr1" value="" class="input-join" style="width:280px;" maxlength="50" readonly="readonly" onclick="execDaumPostcode2();" /></li>
-											<li class="fl margin_l_3"><input type="text" id="addr2" name="addr2" value="" class="input-join" style="width:280px;" maxlength="50" /></li>
+						<li class="fl"><input type="text" id="addr1" name="addr1" value="" class="input-join" style="width:280px;" maxlength="50" readonly="readonly" onclick="execDaumPostcode2();" /></li>
+						<li class="fl margin_l_3"><input type="text" id="addr2" name="addr2" value="" class="input-join" style="width:280px;" maxlength="50" /></li>
 					</ul>
-											<div id="baesong_insert_area" class="margin_t_10" style="display:none;">
+						<!--<div id="baesong_insert_area" class="margin_t_10" style="display:none;">
 							<div class="baesong_insert_box box-container" id="divAddMemgerDelivery">
 								<input type="checkbox" id="baesong_insert" name="addMemberDelivery" class="new_check" value="true"/>
 								<label class="new_check" for="baesong_insert"></label> 
@@ -1746,8 +1697,8 @@ logger("prd");
 								<label class="new_check" for="default_addr"></label> 
 								<label class="new_check2" for="default_addr">기본 배송지로 설정</label>
 							</div>
-						</div>
-									</td>
+							</div>-->
+				</td>
 			</tr>
 			<!-- <tr>
 				<th>주소 <span class="mi-font-red">*</span></th>
@@ -1785,7 +1736,7 @@ logger("prd");
 						<div class="object">
 							<p class="memo_write">
 								<div class="padding_input">
-									<select id='comment_select' class="input-join select-mode mi-font-basic" onchange='chgComment("comment_select","comment","byte");' style="width:280px">
+									<select id='comment_select' name="comment_select" class="input-join select-mode mi-font-basic" onchange='chgComment("comment_select","comment","byte");' style="width:280px">
 										<option value=''>배송시 요청사항 선택</option>
 										<option value='부재시 경비실에 맡겨주세요.'>부재시 경비실에 맡겨주세요.</option>
 										<option value='부재시 휴대폰으로 연락바랍니다.'>부재시 휴대폰으로 연락바랍니다.</option>
@@ -1856,6 +1807,9 @@ String[] Mnos = request.getParameterValues("cartIds");
 String[] counts = request.getParameterValues("buyQty");
 String Mno = request.getParameter("Mno");
 DecimalFormat df = new DecimalFormat("###,###");
+
+ArrayList<String> order_info_arr = new ArrayList<String>();
+String order_info = "";
 
 int total_price = 0;
 int total_sale = 0;
@@ -1964,6 +1918,7 @@ try {
 						</td>
 					</tr>
 <%
+		order_info_arr.add(Mno + "/" + count);
 	} else {
 		for (int i = 0; i < Mnos.length; i++) {
 			String sql = "SELECT * FROM product WHERE Mno=?"; 
@@ -2066,15 +2021,19 @@ try {
 					</tr>
 <%
 			}
+		order_info_arr.add(Mno + "/" + count);
 		}
 	}
 	total += (total_price - total_sale);
+	for(String list : order_info_arr) {
+		order_info += list + " ";
+	}
 } catch (Exception e) {
 	out.print(e);
 }
 %>
 
-
+					<input type="hidden" name="info" value="<%=order_info%>"/>
 					<input type="hidden" name="chk_coupon_card" value="N" />
 					<input type="hidden" name="chk_coupon_bank" value="N" />
 					<input type="hidden" name="chk_directBuying_bank" value="N" />
@@ -4022,31 +3981,44 @@ FAX: 02-312-3591
 				
 					
 				function kakaopay() {
-				$.ajax({
-                method: "POST",
-                url: "https://kapi.kakao.com/v1/payment/ready",
-                data: {
-                    cid: "TC0ONETIME",
-                    partner_order_id: "GMQDisplay",
-                    partner_user_id: "<%=id%>",
-                    item_name: "GMQDisplay",
-                    quantity: "<%=total_count%>",
-                    total_amount: "<%=total%>",
-                    vat_amount: "200",
-                    tax_free_amount: "0",
-                    approval_url: "	http://localhost:8080/GMQDisplay-master/buy/succes.jsp",
-                    fail_url: " https://localhost:8080/kakaoPayFail?pg_token=8cf5a737f5fd9151f2ca>",
-                    cancel_url: " https://localhost:8080/kakaoPayCancel?pg_token=8cf5a737f5fd9151f2ca>"
-                },
-                headers: { Authorization: "KakaoAK b417dde18341e245cf145d50eae7f16f" }
-            })
-                .done(function (msg) {
-                    window.open(msg.next_redirect_pc_url);
-                });
-            }
+					$.ajax({
+						method: "POST",
+						url: "https://kapi.kakao.com/v1/payment/ready",
+							contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+						data: {
+							cid: "TC0ONETIME",
+							partner_order_id: "GMQDisplay",
+							partner_user_id: "<%=id%>",
+							item_name: "GMQDisplay",
+							quantity: "<%=total_count%>",
+							total_amount: "<%=total%>",
+							vat_amount: "200",
+							tax_free_amount: "0",
+							approval_url: "	http://localhost:8080/GMQDisplay-master/order/orderSuccess.jsp?info=<%=order_info%>",
+							fail_url: " http://localhost:8080/GMQDisplay-master/order/orderFail.jsp",
+							cancel_url: " http://localhost:8080/GMQDisplay-master/order/orderCancel.jsp"
+							//pg_token=f5e0398be06439ee4532
+						},
+						headers: { Authorization: "KakaoAK b417dde18341e245cf145d50eae7f16f" }
+					})
+					.done(function (msg) {
+						$("#frmOrder").submit(function(event) {
+							event.preventDefault();
+							$.ajax({
+								url: "/GMQDisplay-master/xhr/insertOrder.jsp",
+								type: "POST",
+								data: $(this).serialize()
+							})
+							.done(function (data) {
+								window.open(msg.next_redirect_pc_url, "_self");
+							});
+						});
+					});
+				}
+				
 				</script>
 				</div>
-				<button type="button" class="mi-btn mi-btn-red fs16 mi-image-full mi-bold mi-text-interval-lg mi-btn-size-xlg" onclick="kakaopay()">
+				<button type="submit" class="mi-btn mi-btn-red fs16 mi-image-full mi-bold mi-text-interval-lg mi-btn-size-xlg" onclick="kakaopay()">
 					<span  class="h0 mi-font-white mi-text-interval-basic mi-inline-block mi-roboto"><%=df.format(total)%></span>원 결제하기
 				</button>
 			</div>

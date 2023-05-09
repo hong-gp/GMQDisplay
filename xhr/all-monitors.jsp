@@ -90,7 +90,7 @@
 											%>
 											<div class="bookmarkTooltip flashTooltip bookmarkOn bookmarkOn<%=rs.getString("Mno")%>" style="display: none;">
 												<div>
-													<p><span>찜</span>이 되었습니다.</p><a href="javascript:void(0);"
+													<p><span>찜</span>이 되었습니다.</p><a href="/GMQDisplay-master/mypage/mywishlist.jsp"
 														class="btn-underline">전체보기</a>
 												</div>
 											</div>
@@ -162,14 +162,9 @@
 												<li class="message-list-item"><%=rs.getString("Mfeatures2")%></li>
 												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
 											</ul>
-											<div class="compare"> <a href="javascript:void(0);" class="link-compare-i"
-													onclick="readyCompare(this)" data-goods-id="G000291183"
-													data-mdl-code="LS27BM502EK-SP" data-disp-clsf-no="39030000"
-													data-comp-disp-clsf-en-nm="monitors"
-													data-omni="LS27BM502EK-SP|LS27BM502EK-SP">비교하기</a> <a
-													class="link-review"
-													href="/sec/monitors/package-smart-ls27bm502ek-sp-dc2/LS27BM502EK-SP/?focus=review"
-													title="상품평점"><%=format_rating%> (<%=cnt%>)</a> </div>
+											<div class="compare">
+											<a class="link-review" href="/sec/monitors/package-smart-ls27bm502ek-sp-dc2/LS27BM502EK-SP/?focus=review"
+											title="상품평점"><%=format_rating%> (<%=cnt%>)</a> </div>
 										</div>
 									</div>
 								</li>

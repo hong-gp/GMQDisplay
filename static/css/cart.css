@@ -168,8 +168,8 @@
 .box-tab-point-content.fn-order-tab .tab-point-content .tab:first-child:nth-last-child(1).on a {background:#f3f3f3;}
 .box-tab-point-content.fn-order-tab .tab-point-content .tab:first-child {border-top-left-radius: 10px;}
 .box-tab-point-content.fn-order-tab .tab-point-content .tab.on a {position: relative; z-index: 1; overflow: hidden; border-top-right-radius: 10px; border-top-left-radius: 10px; background: #fff;}
-.box-tab-point-content.fn-order-tab .tab-point-content .tab.on a:after {content:""; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: #2189FF;}
-.box-tab-point-content.fn-order-tab .tab-point-content .tab.on span {color: #2189FF;}
+.box-tab-point-content.fn-order-tab .tab-point-content .tab.on a:after {content:""; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: #e7141a;}
+.box-tab-point-content.fn-order-tab .tab-point-content .tab.on span {color: #e7141a;}
 .box-tab-point-content.fn-order-tab .tab-point-content .tab span {padding-left:0;}
 .box-tab-point-content.fn-order-tab .tab-point-content .tab ~ .tab:before {top: 0;}
 .box-tab-point-content.fn-order-tab .tab-point-content .tab.on:before,
@@ -370,7 +370,7 @@
 .user-guide .user-guide-word { margin-bottom:18px; line-height:1.5; word-break:keep-all; }
 .user-guide .user-guide-listup li { position:relative; padding-left:10px; font-size:inherit; line-height:1.5; word-break:keep-all; }
 .user-guide .user-guide-listup li:before { position:absolute; left:0; top:10px; width:3px; height:3px; background-color:#707070; border-radius:50%; content:""; }
-.user-guide .point { color:#2189FF; font-weight:normal; }
+.user-guide .point { color:#e7141a; font-weight:normal; }
 
 
 @media all and (max-width:1440px) and (min-width:1101px){
@@ -983,7 +983,7 @@
 	.user-guide .user-guide-word { margin-bottom:24px; font-size:12px; line-height:18px; word-break:keep-all; }
 	.user-guide .user-guide-listup li { position:relative; padding-left:10px; font-size:12px; line-height:18px; word-break:keep-all; }
 	.user-guide .user-guide-listup li:before { position:absolute; left:0; top:6px; width:3px; height:3px; background-color:#707070; border-radius:50%; content:""; }
-	.user-guide .point { color:#2189FF; font-size:inherit; font-weight:normal; }
+	.user-guide .point { color:#e7141a; font-size:inherit; font-weight:normal; }
 	.cart-content .user-guide { margin-top:36px; }
 
 	/* 비스포크 옵션사항 */
@@ -1091,7 +1091,7 @@
 /*22-10-07 매장픽업 */
 .pickup-store-area .pickup-store{padding: 24px 20px;background-color: #F7F7F7;}
 .pickup-store-area .pickup-store .store-info{padding-left: 100px;color: #707070;line-height: 24px;margin-top: 5px;}
-.pickup-store-area .pickup-store .store-amount .ico-b{color: #2189FF;border-color: #2189FF;font-weight: bold;}
+.pickup-store-area .pickup-store .store-amount .ico-b{color: #e7141a;border-color: #e7141a;font-weight: bold;}
 .pickup-store-area .pickup-store .store-amount .store-name{font-size: 16px;font-weight: bold;padding-left: 7px;}
 .pickup-area .cart-tit{height: 26px;margin-top: 50px;margin-bottom: 16px;font-size: 20px;font-weight: bold;line-height: 26px;}/* 22-12-06 */
 .cart-elec-area .txt-cart-info { font-size: 12px; color: #707070; position: absolute; top: 13%; left: 100px; line-height: 1.4; }/* 230220 추가 */

@@ -94,7 +94,7 @@ hr.hmf_hr_line { margin:50px 0 40px; border-color: #EAEAEA;}
 .hmf_head_tit .hmf_right.btn_wrap{ font-size:0; }
 .hmf_head_tit .hmf_right.btn_wrap button:first-of-type{ margin-left:0; }
 .hmf_head_tit .hmf_right.btn_wrap button:last-of-type{ margin-right:0; }
-.hmf_head_tit .hmf_line_h3 span{ font-size: inherit; color:#2189FF; }
+.hmf_head_tit .hmf_line_h3 span{ font-size: inherit; color:#e7141a; }
 .hmf_head_tit + .hmf_head_tit { margin-top:40px; }
 .hmf_head_tit .hmf_right .hmf_subscribe_state{ font-size:18px;font-weight:bold;color:#707070; }
 .hmf_line_h3 { padding-bottom:8px; font-size:24px; line-height:30px; }
@@ -804,7 +804,7 @@ hr.hmf_hr_line { margin:50px 0 40px; border-color: #EAEAEA;}
 .hmf_reserve_wrap .hmf_sel_list li span{ font-size:14px; line-height:18px; color:#fff; letter-spacing:0; }
 .hmf_reserve_wrap .hmf_sel_list li button{ position:absolute; top:50%; right:8px; transform:translateY(-50%); -webkit-transform:translateY(-50%); width:16px; height:16px; background:url(../images/homefitness/icon/hmf_btn_sel_del_w.svg) no-repeat; background-size:16px 16px; text-indent:-9999px; }
 .hmf_reserve_wrap .hmf_sel_list .count{ margin-top:25px; font-size:16px; line-height:21px; }
-.hmf_reserve_wrap .hmf_sel_list .count strong{ display:inline-block; font-size:16px; line-height:21px; color:#2189FF; vertical-align: baseline; }
+.hmf_reserve_wrap .hmf_sel_list .count strong{ display:inline-block; font-size:16px; line-height:21px; color:#e7141a; vertical-align: baseline; }
 
 /** 프로그램 **/
 /* 프로그램 리스트 */
@@ -852,7 +852,7 @@ hr.hmf_hr_line { margin:50px 0 40px; border-color: #EAEAEA;}
 .hmf_intro_section.tb{ padding-bottom:0;border-bottom:0;overflow:hidden; }
 .hmf_intro_section.tb .hmf_intro_conts{ margin-bottom: 0; }
 .hmf_intro_section h1,.hmf_intro_sub_title{ margin-bottom:40px;line-height:40px; }
-.hmf_intro_section h1 em,.hmf_intro_sub_title{ color:#2189FF; }
+.hmf_intro_section h1 em,.hmf_intro_sub_title{ color:#e7141a; }
 .hmf_schedule_wrap{ padding:0 0 20px; border-bottom:1px solid #eaeaea; }
 .hmf_intro_conts{ margin-bottom:40px; }
 .hmf_intro_conts dt,.hmf_intro_sub_title{ font-size:20px;font-weight:bold; }
@@ -894,9 +894,9 @@ hr.hmf_hr_line { margin:50px 0 40px; border-color: #EAEAEA;}
 .hmf_lounge_list > li + li{ margin-top:14px; }
 .hmf_lounge_list > li.admin:after{ content:''; position:absolute; top:0; left:0; bottom:0; right:0; z-index:-1; background:#2188FF; opacity:0.1; }
 .hmf_lounge_list > li.admin{ border-color:rgba(33, 136, 255, 0.1); }
-.hmf_lounge_list > li.pin{ border-color:#2189FF; }
-/* .hmf_lounge_list > li.admin .hmf_item_top .hmf_name_thum, .hmf_item_top.pt .hmf_name_thum{ background:#2189FF; }
-.hmf_lounge_list > li.admin .top_tit p, .hmf_item_top.pt .top_tit p{ color:#2189FF; } #210429 닉네임 색 구분 삭제 */
+.hmf_lounge_list > li.pin{ border-color:#e7141a; }
+/* .hmf_lounge_list > li.admin .hmf_item_top .hmf_name_thum, .hmf_item_top.pt .hmf_name_thum{ background:#e7141a; }
+.hmf_lounge_list > li.admin .top_tit p, .hmf_item_top.pt .top_tit p{ color:#e7141a; } #210429 닉네임 색 구분 삭제 */
 .hmf_lounge_list > li .hmf_item_top .top_tit strong{ overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
 .hmf_lounge_list > li .hmf_item_cont .cont_txt{ display:-webkit-box; overflow:hidden; max-height:50px; -webkit-line-clamp:2; -webkit-box-orient:vertical; white-space:normal; text-overflow:ellipsis; }
 .hmf_lounge_list > li .hmf_item_cont{ padding-left:104px; }
@@ -965,7 +965,7 @@ hr.hmf_hr_line { margin:50px 0 40px; border-color: #EAEAEA;}
 .hmf_write_item .write_img .btn{ float:right; }
 .hmf_write_item.img .write_img{ margin:0; }
 .hmf_write_item .ref_txt{ position:relative; padding-left:15px; font-size:14px; line-height:21px; color:#707070; }
-.hmf_write_item .ref_txt a{ font-size:14px; color:#2189FF; text-decoration:underline; }
+.hmf_write_item .ref_txt a{ font-size:14px; color:#e7141a; text-decoration:underline; }
 .hmf_write_item .ref_txt:before{ content:'※'; position:absolute; top:-1px; left:0; }
 .hmf_write_item + .hmf_write_list{ margin-top:60px; }
 .hmf_write_list > li{ position:relative; padding:30px 10px; border-bottom:1px solid #D9D9D9; }
@@ -1107,12 +1107,12 @@ hr.hmf_hr_line { margin:50px 0 40px; border-color: #EAEAEA;}
 .layer-hmf .inp-box-shipping .error-msg{ bottom:-49px;min-height:48px; }
 .layer-hmf .inp-box .error-msg p{ font-size:12px; }
 .layer-hmf .inp-box .error-msg p.notice_msg{ color:#707070;margin-bottom:6px; }
-.layer-hmf .inp-box .error-msg p.fc_blue { color:#2189FF; }
+.layer-hmf .inp-box .error-msg p.fc_blue { color:#e7141a; }
 .layer-hmf .inp-box-shipping{ padding: 24px 0 36px ; }
 .box-hmf-content .box-tit{ margin: 36px 0 6px;font-weight:bold; }
 .box-hmf-content .box-tit.mt0{ margin-top:0 }
 .box-hmf-content .txt-box{ line-height: 1.38;}
-.box-hmf-content .txt-required{ color:#2189FF; }
+.box-hmf-content .txt-required{ color:#e7141a; }
 .box-hmf-rsv{ background:#E8F3FF;padding:12px 12px 11px 12px;line-height:24px;margin-bottom:24px;text-align:center; }
 .box-hmf-rsv span{ display:inline-block;width:100%;font-size:20px;font-weight:bold;margin-bottom:6px; }
 .layer-hmf .chk-form{ margin-top:36px;text-align: center; }

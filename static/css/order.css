@@ -11,7 +11,7 @@
 .limit-info-box > dd span ~ span { padding-left:40px; }
 .limit-info-box > dd span em { position:relative; display:inline-block; margin-right:10px; padding-right:10px; vertical-align:baseline; letter-spacing:0; }
 .limit-info-box > dd span em:after { content:""; position:absolute; top:50%; right:0; width:1px; height:12px; transform:translateY(-50%); background:#ddd; }
-.limit-info-box > dd span strong { display:inline-block; color:#2189FF; vertical-align:baseline; letter-spacing:0; }
+.limit-info-box > dd span strong { display:inline-block; color:#e7141a; vertical-align:baseline; letter-spacing:0; }
 .limit-info .info-type-1 { padding:24px 20px; border-bottom:1px solid #ebebeb; }
 .limit-info .info-type-1 > dt { line-height:1.3em; margin-bottom:22px; font-size:14px; color:#000; font-weight:bold; letter-spacing:0; }
 .limit-info .info-type-1 > dd p { font-size:14px; line-height:1.3em; color:#707070; letter-spacing:0; word-break:keep-all; }
@@ -87,7 +87,7 @@
 .order-content .order-tbl .order-price { width:13.5%; text-align:right; }
 .coupon-droplist .droplist li {line-height:20px; padding:10px 24px;}
 .coupon-droplist .droplist li span{font-size:12px;}
-.layer-bizniIdent .li-star >li::before{color: #2189FF;}/* 2021-04-26 */
+.layer-bizniIdent .li-star >li::before{color: #e7141a;}/* 2021-04-26 */
 /* s : 221229 혜택시뮬레이터 */
 .order-content .order-tbl .order-price .price-smaller { display:block; color:#707070; font-size:12px; line-height:16px; letter-spacing:-0.4px; }
 .order-content .order-tbl .order-price .price-smaller + .price-small { margin-top:6px; }
@@ -215,7 +215,7 @@
 .order-info-box-2 .event-code-li .head,
 .order-info-box-2 .event-code-li .btn-info-sale { top:24px !important; }
 .order-info-box-2 .event-code-li.cmmall .btn-info-sale {padding-top: 3px;}/* 2023-02-21 */
-.order-info-box-2 .event-code-li.cmmall .btn-info-sale .btn-underline {font-size: 16px;font-weight: bold;color: #2189FF;border-bottom: 1px solid #2189FF;padding-top: 0;}/* 2023-02-21 */
+.order-info-box-2 .event-code-li.cmmall .btn-info-sale .btn-underline {font-size: 16px;font-weight: bold;color: #e7141a;border-bottom: 1px solid #e7141a;padding-top: 0;}/* 2023-02-21 */
 
 .order-info-inner { display:block; width:100%; margin-bottom:12px; padding:11px 0; }
 .order-info-inner:nth-last-child(1) { margin-bottom:0; }
@@ -360,8 +360,8 @@
 
 /* 할인혜택 */
 .discount-area .order-info-box-2 .head { width:113px; }
-.discount-area .order-info-box-2 .price { color:#2189FF; font-size:16px; text-align:right; }
-.discount-area .order-info-box-2 .cmmall .head {font-size: 16px;font-weight: bold;color: #2189FF;padding-top: 5px;}/* 2023-02-21 */
+.discount-area .order-info-box-2 .price { color:#e7141a; font-size:16px; text-align:right; }
+.discount-area .order-info-box-2 .cmmall .head {font-size: 16px;font-weight: bold;color: #e7141a;padding-top: 5px;}/* 2023-02-21 */
 
 /* 포인트 사용 */
 /* 221229 혜택시뮬레이터 */
@@ -466,7 +466,7 @@
 
 .pay-nav-box .pay-method-pay { width:100%; height:95px; font-size:0; background:url("../images/common/samsung-pay.svg") no-repeat center top; background-size:100%; border-radius:10px; }
 .pay-nav-box .pay-method-pay.on { background-image:url("../images/common/samsung-pay-on.svg"); }
-.pay-nav-box .pay-method-pay:focus { border:dashed 2px #2189FF; }
+.pay-nav-box .pay-method-pay:focus { border:dashed 2px #e7141a; }
 .pay-nav-box .pay-tab-nav ul:after { display:block; content:""; clear:both; }
 .pay-nav-box .pay-tab-nav ul li { float:left; width:160px; height:40px; margin-left:5px; margin-right:5px; margin-bottom:10px; }
 .pay-nav-box .pay-tab-nav ul li button { width:100%; height:100%; font-size:14px; color:#000; background:#fff; border:1px solid #b2b2b2; border-radius:20px; }
@@ -1006,7 +1006,7 @@
 
     .pay-nav-box .pay-method-pay { width:100%; height:6.5972vw; font-size:0; background:url("../images/common/samsung-pay.svg") no-repeat center top; background-size:100%; }
     .pay-nav-box .pay-method-pay.on { background-image:url("../images/common/samsung-pay-on.svg"); }
-    .pay-nav-box .pay-method-pay:focus { border:dashed 2px #2189FF; }
+    .pay-nav-box .pay-method-pay:focus { border:dashed 2px #e7141a; }
     .pay-nav-box .pay-tab-nav ul:after { clear:both; }
     .pay-nav-box .pay-tab-nav ul li { width:11.1111vw; height:2.7778vw; margin-left:0.3472vw; margin-right:0.3472vw; margin-bottom:0.6944vw; }
     .pay-nav-box .pay-tab-nav ul li button { width:100%; height:100%; font-size:0.9722vw; background:#fff; border-radius:1.3889vw; }
@@ -1500,7 +1500,7 @@
 
     .pay-nav-box .pay-method-pay { width:100%; height:6.7273vw; font-size:0; background:url("../images/common/samsung-pay.svg") no-repeat center top; background-size:100%; }
     .pay-nav-box .pay-method-pay.on { background-image:url("../images/common/samsung-pay-on.svg"); }
-    .pay-nav-box .pay-method-pay:focus { border:dashed 2px #2189FF; }
+    .pay-nav-box .pay-method-pay:focus { border:dashed 2px #e7141a; }
     .pay-nav-box .pay-tab-nav ul:after { clear:both; }
     .pay-nav-box .pay-tab-nav ul li { width:calc(20% + 20px); height:3vw; margin-left:0.4545vw; margin-right:0.4545vw; margin-bottom:0.9091vw; }
     .pay-nav-box .pay-tab-nav ul li button { width:100%; height:100%; font-size:1.2727vw; background:#fff; border-radius:1.8182vw; }
@@ -2134,7 +2134,7 @@
 .gift-box .title .change { position: absolute; top: 3px; right: 0; }
 .gift-box.receipt .title h1,
 .gift-box.delivery .title h1 { margin-bottom: 20px; }
-.gift-box .title span { font-weight: 700; color: #2189ff; vertical-align: baseline; }
+.gift-box .title span { font-weight: 700; color: #e7141a; vertical-align: baseline; }
 .gift-box .gift-card { margin-bottom: 20px; }
 .gift-card .slick-list,
 .gift-box.receipt .gift-card { min-width: 810px; min-height: 540px; background-color: #ececec; border-radius: 18px; }
@@ -2348,11 +2348,11 @@
 /* 22-06-13 My gift */
 .my-gift-box .rounded-white-box { border-radius: 0 0 20px 20px; }
 .my-gift-box .title { padding-bottom: 15px; font-size: 20px; font-weight: 700; border-bottom: solid 2px #000; }
-.my-gift-box .title span { color: #2189ff; vertical-align: baseline; }
+.my-gift-box .title span { color: #e7141a; vertical-align: baseline; }
 .conbox-myshopping-list.regular-list .my-gift-box .ordered-list-contents .wrap-order-set {border-bottom: 1px solid #bababa;} /* 221007 추가 */
 .my-gift-box .order-tbl { border-bottom: solid 2px #f5f5f5; }
 .my-gift-box .ordered-list-contents .order-tbl .order-image { padding-left: 24px; width: 168px; }
-.my-gift-box .ordered-list-contents .order-head-info .tag { margin-left: 12px; font-size: 14px; font-weight: 700; color: #2189ff; }
+.my-gift-box .ordered-list-contents .order-head-info .tag { margin-left: 12px; font-size: 14px; font-weight: 700; color: #e7141a; }
 .my-gift-box .spec-flx .o-spec,
 .my-gift-box .status { display: -ms-flexbox; display: flex; }
 .my-gift-box .spec-flx .o-spec span + span::before,
@@ -2475,7 +2475,7 @@
 .scplus-banner-box.type_02 .inner { padding: 0; border: none; }
 .scplus-banner-box.type_02 .inner .banner { margin-bottom: 0; }
 .scplus-banner-box.type_02 .none p { text-indent: -10px; text-align: left; padding-left: 10px; }
-.scplus-banner-box.type_02 .none p.bl_star { font-size: 14px; font-weight: normal; color: #2189ff; }
+.scplus-banner-box.type_02 .none p.bl_star { font-size: 14px; font-weight: normal; color: #e7141a; }
 
 .tooltip-content .scp_btn_box { margin-top: 10px; }
 .tooltip-content .scp_btn_box.btn_r { text-align: right; }
@@ -2890,7 +2890,7 @@
 /*22-10-07 매장픽업*/
 .pickup-area.order-area .pickup-store{padding: 24px 20px;background-color: #F7F7F7;}
 .pickup-area.order-area .pickup-store .store-info{padding-left: 75px;color: #707070;line-height: 24px;margin-top: 5px;}
-.pickup-area.order-area .pickup-store .store-amount .ico-b{color: #2189FF;border-color: #2189FF;font-weight: bold;}
+.pickup-area.order-area .pickup-store .store-amount .ico-b{color: #e7141a;border-color: #e7141a;font-weight: bold;}
 .pickup-area.order-area .pickup-store .store-amount .store-name{font-size: 16px;font-weight: bold;padding-left: 7px;}
 .order-tbl .pickup-btn-area .btn-pickup {border: 1px solid;line-height: 26px;font-size: 14px;min-width: 90px;height: 26px;}
 .order-tbl .pickup-btn-area{position: absolute;right: 0;z-index: 1;margin: 20px 0 0;}
@@ -2970,10 +2970,10 @@
 .order-content .benefit .order-recommend { border-top: 1px solid #eaeaea; text-align: right; padding-top: 35px; }
 /* 주문,장바구니 공통 */
 .benefit [class*=-coupon] .coupon-box { padding: 0; margin: 0; }
-.benefit [class*=-coupon] .coupon-box .btn-coupon-apply { cursor: pointer; display: flex; flex-wrap: nowrap; width: auto; height: 32px; border: 1px solid #2189FF; border-radius: 4px; box-sizing: border-box; align-items: center; margin: 0 auto 16px; }
+.benefit [class*=-coupon] .coupon-box .btn-coupon-apply { cursor: pointer; display: flex; flex-wrap: nowrap; width: auto; height: 32px; border: 1px solid #e7141a; border-radius: 4px; box-sizing: border-box; align-items: center; margin: 0 auto 16px; }
 .benefit [class*=-coupon] .coupon-box .btn-coupon-apply p { width: calc(100% - 40px); text-align: center; font-size: 12px; padding-left: 10px; font-weight: bold; text-align: left; line-height: 1.3; padding-top: 2px; }
-.benefit [class*=-coupon] .coupon-box .btn-coupon-apply p span { color: #2189FF; margin: 0 2px; display: inline-block; vertical-align: top; }
-.benefit [class*=-coupon] .coupon-box .btn-coupon-apply .txt { display: flex; align-items: center; justify-content: center; width: 40px; height: 100%; background: #2189FF; margin-left: auto; font-size: 12px; color: #fff; position: relative; }
+.benefit [class*=-coupon] .coupon-box .btn-coupon-apply p span { color: #e7141a; margin: 0 2px; display: inline-block; vertical-align: top; }
+.benefit [class*=-coupon] .coupon-box .btn-coupon-apply .txt { display: flex; align-items: center; justify-content: center; width: 40px; height: 100%; background: #e7141a; margin-left: auto; font-size: 12px; color: #fff; position: relative; }
 .benefit [class*=-coupon] .coupon-box .btn-coupon-apply .txt:after { content: ''; display: block; width: 6px; height: 6px; position: absolute; top: 50%;right: -4px; transform: translateY(-50%); border-radius: 50%; background: #fff;}
 .benefit [class*=-coupon] .coupon-box .inp-coupon-apply { width: auto; border-radius: 4px; box-sizing: border-box;margin: 0 auto 16px; height: 32px; }
 .benefit [class*=-coupon] .coupon-box .inp-coupon-apply .inp-box { display: flex; flex-wrap: nowrap; height: 100%; align-items: center; margin-left: auto; border-radius: 0 4px 4px 0; overflow: hidden; border-bottom: 1px solid #000; box-sizing: border-box; }
@@ -2987,7 +2987,7 @@
 .benefit [class*=-coupon] .coupon-box .inp-coupon-apply .coupon-info { width: calc(100% - 56px); max-width: 125px; display: flex; flex-wrap: wrap; align-items: center; }
 .benefit [class*=-coupon] .coupon-box .inp-coupon-apply .coupon-info .tit,
 .benefit [class*=-coupon] .coupon-box .inp-coupon-apply .coupon-info .price { font-size: 12px; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; line-height: 1.2; font-weight: bold; }
-.benefit [class*=-coupon] .coupon-box .inp-coupon-apply .coupon-info .price span { color: #2189FF;  font-weight: bold; }
+.benefit [class*=-coupon] .coupon-box .inp-coupon-apply .coupon-info .price span { color: #e7141a;  font-weight: bold; }
 .benefit [class*=-coupon] .coupon-box .txt-coupon-info { width: 100%; text-align: left; margin: 7px auto 0; font-size: 11px; color: #707070; line-height: 1.4; }
 @media screen and (max-width:1440px) and (min-width:1101px) {
     .order-content .benefit .order-select { padding-top: 0.4167vw; }
@@ -3054,7 +3054,7 @@
     .order-content .benefit .order-recommend { padding-top: 24px; }
     /* 비스포크 */
     .order-content .order-tbl .order-spec-group ~ .pc-bespoke { margin-top: 0; }
-    /* .benefit [class*=-coupon] .coupon-box .btn-coupon-apply { border: 2px solid #2189FF; } */
+    /* .benefit [class*=-coupon] .coupon-box .btn-coupon-apply { border: 2px solid #e7141a; } */
     .benefit [class*=-coupon] .coupon-box .btn-coupon-apply,
     .benefit [class*=-coupon] .coupon-box .inp-coupon-apply { max-width: 100%; height: 38px; }
     .benefit [class*=-coupon] .coupon-box .btn-coupon-apply p,

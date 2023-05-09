@@ -1964,15 +1964,14 @@
 	String id = (String)session.getAttribute("sid");
 	String name = "";
 
+	String db_url = "jdbc:mysql://localhost:3306/gpqd";
+	String db_id = "root";
+	String db_password = "1234";
+
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con = DriverManager.getConnection(db_url, db_id, db_password);
+
 	try {
-		String db_url = "jdbc:mysql://localhost:3306/gpqd";
-		String db_id = "root";
-		String db_password = "1234";
-
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection(db_url, db_id, db_password);
-
-		// 상품 조회
 		String sql = "SELECT * FROM user WHERE userID=?"; 
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
@@ -2077,7 +2076,28 @@
 							<div class="member ship">
 								<a href="/GMQDisplay-master/mypage/myDeliveryList.jsp" class="link-arrow lrg" data-omni="info:my delivery view more">배송지 관리</a>
 								<ul>
-									<li><span class="tit"></span><span class="cont">등록된 배송지가 없습니다.</span></li>
+									<li>
+										<%
+										try {
+											String sql2 = "SELECT * FROM deliveryList WHERE userID=? AND delivery_basic=true";
+											PreparedStatement pstmt2 = con.prepareStatement(sql2);
+											pstmt2.setString(1, id);
+
+											ResultSet rs2 = pstmt2.executeQuery();
+											if (rs2.next()) {
+										%>
+										<span class="tit">기본 배송지</span><span class="cont">[<%=rs2.getString("delivery_zip")%>] <%=rs2.getString("delivery_addr1")%> &nbsp; <%=rs2.getString("delivery_addr2")%></span>
+										<%
+											} else {
+										%>
+										<span class="tit"></span><span class="cont">등록된 배송지가 없습니다.</span>
+										<%
+											}
+										} catch (Exception e) {
+											out.print(e);
+										}
+										%>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -2100,10 +2120,43 @@
 						</div>
 
 						<div class="listBody myBoardList-style" style="border-top: 2px solid #000;">
-							<!--<div class="order-head-info empty-line">
-								<span class="no-content">주문/배송 내역이 없습니다.</span>
-							</div>-->
 							<ul>
+								<%
+								DecimalFormat df = new DecimalFormat("###,###");
+								try {
+									String date = "";
+									String sql3 = "SELECT * FROM orderItem WHERE userID=?";
+									PreparedStatement pstmt3 = con.prepareStatement(sql3);
+									pstmt3.setString(1, id);
+
+									ResultSet rs3 = pstmt3.executeQuery();
+									if (!rs3.next()) {
+								%>
+										<div class="order-head-info empty-line">
+											<span class="no-content">주문/배송 내역이 없습니다.</span>
+										</div>
+								<%
+									} else {
+										String sql5 = "SELECT * FROM orderInfo WHERE order_id=?";
+										PreparedStatement pstmt5 = con.prepareStatement(sql5);
+										pstmt5.setInt(1, rs3.getInt("order_id"));
+										ResultSet rs5 = pstmt5.executeQuery();
+										if(rs5.next()) {
+											date = rs5.getString("order_date");
+										}
+										do {
+											String Mno = rs3.getString("Mno");
+
+											String sql4 = "SELECT * FROM product WHERE Mno=?";
+											PreparedStatement pstmt4 = con.prepareStatement(sql4);
+											pstmt4.setString(1, Mno);
+											ResultSet rs4 = pstmt4.executeQuery();
+
+											if (rs4.next()) {
+												String Mname = rs4.getString("Mname");
+												int Mprice = rs4.getInt("Mprice");
+												int Msale = rs4.getInt("Msale");
+								%>
 								<li>
 									<!-- case 판매중이 아닌 경우 stopSale class 추가 -->
 									<div class=" boardlist-area" data-omni="SM-A346N|SM-A346NLGBKOO"
@@ -2127,16 +2180,15 @@
 												<input type="hidden" name="frbInfo">
 											</form>
 
-											<input type="hidden" name="link_G000292151"
-												value="/sec/smartphones/galaxy-a34-5g-a346/SM-A346NLGBKOO/">
+											<input type="hidden" name="link_G000292151" value="/sec/smartphones/galaxy-a34-5g-a346/SM-A346NLGBKOO/">
 										</div>
 										<div class="my-boardlist">
 											<div class="boardlist-image">
 												<div class="photo">
-													<a href="/sec/smartphones/galaxy-a34-5g-a346/SM-A346NLGBKOO/">
+													<a href="/GMQDisplay-master/product/<%=Mno%>.jsp">
 														<!-- KDP-21609 [FO][B2B] 모바일 웹접근성_p83 LMJ START -->
-														<img src="/GMQDisplay-master/static/images/product/EX2710S_1.png"
-															alt="BenQ 모비우스">
+														<img src="/GMQDisplay-master/static/images/product/<%=Mno%>_1.png"
+															alt="<%=Mname%>">
 														<!-- KDP-21609 [FO][B2B] 모바일 웹접근성_p83 LMJ END -->
 													</a>
 												</div>
@@ -2146,24 +2198,13 @@
 												</p>
 												<!-- 상품 명 -->
 												<p class="title">
-													<a href="/GMQDisplay-master/product/EX2710S.jsp">BenQ 모비우스</a>
+													<a href="/GMQDisplay-master/product/<%=Mno%>.jsp"><%=Mname%></a>
 												</p>
 												<!-- 모델코드 -->
-												<p class="label">EX2710S</p>
-												<p class="option">2023-04-24</p>
+												<p class="label"><%=Mno%></p>
+												<p class="option"><%=date%></p>
 											</div>
-											<div class="boardlist-delete">
-												<span>1 개</span>
-											</div>
-											<div class="boardlist-price">
-												<!-- 최종 상품 가격(현재 판매가) -->
-												<!-- KDP-21609 [FO][B2B] 모바일 웹접근성_p81 LMJ START -->
-												<span class="price-small"><span class="sr-only">정가</span>341,500원</span>
-												<span class="price-big"><span class="sr-only">할인된
-														금액</span>320,000원</span>
-												<!-- KDP-21609 [FO][B2B] 모바일 웹접근성_p81 LMJ END -->
-											</div>
-
+											
 											<div class="boardlist-cart" id="boardlist-cart" data-ctpath="/" value="12">
 												<!-- 판매중지에서는 장바구니 담기 없어짐 -->
 												<!--<button type="button" class="btn-cart" name="btn-cart"
@@ -2171,9 +2212,29 @@
 													<span>주문상세</span>
 												</button>-->
 											</div>
+											<div class="boardlist-delete">
+												<span><%=rs3.getString("item_count")%> 개</span>
+											</div>
+											<div class="boardlist-price">
+												<!-- 최종 상품 가격(현재 판매가) -->
+												<!-- KDP-21609 [FO][B2B] 모바일 웹접근성_p81 LMJ START -->
+												<span class="price-small"><span class="sr-only">정가</span><%=df.format(Mprice)%>원</span>
+												<span class="price-big"><span class="sr-only">할인된
+														금액</span><%=df.format(Msale)%>원</span>
+												<!-- KDP-21609 [FO][B2B] 모바일 웹접근성_p81 LMJ END -->
+											</div>
+
 										</div>
 									</div>
 								</li>
+								<%
+											}
+										} while(rs3.next());
+									}
+								} catch (Exception e) {
+									out.print(e);
+								}
+								%>
 							</ul>
 						</div>
 				</section>

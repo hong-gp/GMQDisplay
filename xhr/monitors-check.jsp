@@ -1183,6 +1183,8 @@
 												<li class="message-list-item"><%=rs.getString("Mfeatures1")%></li>
 												<li class="message-list-item"><%=rs.getString("Mfeatures2")%></li>
 												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
+												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
+												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
 											</ul>
 											<div class="compare">
 											<a class="link-review" href="/sec/monitors/package-smart-ls27bm502ek-sp-dc2/LS27BM502EK-SP/?focus=review"

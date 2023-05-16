@@ -88,6 +88,7 @@
 	<script src="/GMQDisplay-master/static/script/clipboard.min.js"></script>
 	<script type="text/javascript" src="/GMQDisplay-master/static/script/picturePolyfill.min.js"></script>
 	<script type="text/javascript">
+	history.back();
 		var checkActionTimeOut;
 		$(document).ready(function () {
 			/*

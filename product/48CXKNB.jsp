@@ -47,7 +47,7 @@
 
 <link rel="dns-prefetch" href="https://images.samsung.com">
 <link rel="preconnect" href="https://images.samsung.com">
-<link rel="shortcut icon" href="../../static/images/favicon.png">
+<link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
 <link rel="apple-touch-icon" href="" sizes="">
 
 <!-- PUB : style.css import resources -->
@@ -394,673 +394,528 @@ logger("prd");
 			openLayer('commonAlert');
 	});
 	
-	function getCartList(){
-		var options = {
-			url : '/xhr/order/gnbCartList' ,
-			dataType : "html" ,
-			done : function(data){
-					$(".gnb-cartList").html(data);
+	function getCartList() {
+				var options = {
+					url: '../xhr/gnbCartList.jsp',
+					dataType: "html",
+					success: function (data) {
+						$(".gnb-cartList").html(data);
+					}
 				}
+				$.ajax(options);
 			}
-		ajax.call(options);
-	}
 
-	// 뒤로가기 시 이벤트
-	$(window).bind("pageshow", function(event){
-		if(event.originalEvent.persisted || window.performance && window.performance.navigation.type == 2){
-			getCartCnt();
-			//getCartCntHidden();
-		}
-	});
+			// 뒤로가기 시 이벤트
+			$(window).bind("pageshow", function (event) {
+				if (event.originalEvent.persisted || window.performance && window.performance.navigation.type == 2) {
+					getCartCnt();
+					//getCartCntHidden();
+				}
+			});
+			function getSessionInfo() {
+				$.ajax({
+					url: "../xhr/loginCheck.jsp",
+					type: "POST",
+					success: function (result) {
+						if (result == true) {
+							$("input[name=useLogin]").val("Y");
+							$(".link-login i").addClass("ico-people-logged");
+							$(".loginBefore").remove();
+							$(".loginAfter").remove();
 
-	function getSessionInfo() {
-		$.ajax({
-			 url : "/xhr/member/getSession"
-			,type : "POST"
-			,success : function(result) {
-				result = JSON.parse(result);
-				if (result.mbrNo == "0") {
-					$("input[name=useLogin]").val("N");
-					$(".link-login i").addClass("ico-people");
-					$(".loginAfter").remove();
-					$(".loginBefore").remove();
-					
-					setLogoutGnbMenu();
-					
+							// session.mbrNm 세팅
+							//$(".sessionInfoMbrNm").text(result.mbrNm);
+
+							setLoginGnbMenu();
+
+							var htmlMo = "<a href=\"https://account.GMQDisplay.com/\" target=\"_blank\" title=\"새창열림\">안녕하세요!</a>";
+							var htmlPc = "안녕하세요!";
+							$(".loginAfter .welcomeMsg").html(htmlMo);
+							$(".loginAfter .greet-txt").html(htmlPc);
+						} else {
+							$("input[name=useLogin]").val("N");
+							$(".link-login i").addClass("ico-people");
+							$(".loginAfter").remove();
+							$(".loginBefore").remove();
+
+							setLogoutGnbMenu();
+						}
+					},
+					error: function () {
+						console.log("서버 오류가 발생했습니다.");
+					}
+				});
+			}
+
+			function appLogin(token, userId) {
+				$.ajax({
+					url: "/xhr/member/loginSucces"
+					, type: "POST"
+					, data: {
+						token: token,
+						userId: userId
+					}
+					, success: function (result) {
+						if (result.result === 'Y') {
+							getSessionInfo();
+						}
+						if (result.joinYn === 'Y') {
+							var param = {
+								galcamsMbr: result.gcsMbrYn,
+								loginSucces: result.result,
+								attrModel: {
+									user_id: userId,
+									under14: result.under14
+								}
+							};
+							window.secapp.loginSucces(JSON.stringify(param));
+							var eventParam = {
+								eventName: "App_signUp"
+								, attrModel: {
+									service_id: 'SDC'
+								}
+							};
+							window.secapp.customEvent(JSON.stringify(eventParam));
+						} else {
+							var param = {
+								galcamsMbr: result.gcsMbrYn,
+								loginSucces: result.result
+							};
+							window.secapp.loginSucces(JSON.stringify(param));
+						}
+						if (result.result === 'Y' && result.adbrixYn == 'Y') {
+							var eventParam = {
+								eventName: "App_login"
+								, attrModel: {
+									service_id: 'SDC'
+								}
+							};
+							window.secapp.customEvent(JSON.stringify(eventParam));
+						}
+					}
+				});
+			}
+
+			// 로그아웃 상태 GNB 메뉴 세팅
+			function setLogoutGnbMenu() {
+				if (device.agent.indexOf("mobi") >= 0 || device.isGnb === false) {
+					// mobile web
+					var htmlMoLoginBefore = '<ul class="mob-onlyMenu loginBefore">';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-login">';
+					htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/GMQDisplay-master/login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-join">';
+					htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/GMQDisplay-master/login_info/Sign.html\');return false;\" data-omni=\"sign up\">회원가입</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-stoConsult">';
+					htmlMoLoginBefore += '<a href="/GMQDisplay-master/faq/FAQ.html" data-omni=\'store reservation\'>고객센터</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '<li class="mob-onlyMenu-benefit">';
+					htmlMoLoginBefore += '<a href="/GMQDisplay-master/event.html" data-omni=\'event\'>회원 혜택</a></li>';
+					htmlMoLoginBefore += '';
+					htmlMoLoginBefore += '</ul>';
+
+					$("#useLogin").after(htmlMoLoginBefore);
 				} else {
-					$("input[name=useLogin]").val("Y");
-					$(".link-login i").addClass("ico-people-logged");
-					$(".loginBefore").remove();
-					$(".loginAfter").remove();
-					
-					// session.mbrNm 세팅
-					//$(".sessionInfoMbrNm").text(result.mbrNm);
-					
-					setLoginGnbMenu();
+					//pc
+					var htmlLoginBefore = '<div class="gnbSubRound loginBefore"><div>';
+					htmlLoginBefore += '<dl>';
+					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/GMQDisplay-master/login_info/login.html\');return false;\" data-omni=\'login\'>로그인</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/GMQDisplay-master/login_info/Sign.html\');return false;\" data-omni=\'sign up\'>회원가입</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '<dt><a href="/GMQDisplay-master/faq/FAQ.html" data-omni=\'store reservation\'>고객 센터</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '<dt><a href="/GMQDisplay-master/event.html" data-omni=\'event\'>회원 혜택</a></dt>';
+					htmlLoginBefore += '';
+					htmlLoginBefore += '</dl>';
+					htmlLoginBefore += '</div></div>';
 
-					var htmlMo = "<a href=\"https://account.samsung.com/\" target=\"_blank\" title=\"새창열림\">안녕하세요!</a>";
-					var htmlPc = "안녕하세요!";
-					$(".loginAfter .welcomeMsg").html(htmlMo);
-					$(".loginAfter .greet-txt").html(htmlPc);
+					$("#login-menu").html(htmlLoginBefore);
 				}
 			}
-		});
-	}
-	
-	function appLogin(token, userId) {
-		$.ajax({
-			url : "/xhr/member/loginSucces"
-			,type : "POST"
-			,data : {
-				token : token,
-				userId : userId
-			}
-			,success : function(result) {
-				if(result.result === 'Y'){
-					getSessionInfo();
-				}
-				if(result.joinYn === 'Y'){
-					var param = {
-						 galcamsMbr: result.gcsMbrYn,
-						 loginSucces: result.result,
-						 attrModel:{
-							  user_id:userId,
-							  under14:result.under14
-						   }
-						 };
-					window.secapp.loginSucces(JSON.stringify(param));
-					var eventParam = {
-							eventName : "App_signUp"
-							, attrModel : {
-								service_id: 'SDC'
-							}
-					};
-					window.secapp.customEvent(JSON.stringify(eventParam));
+
+			// 로그인 상태 GNB 메뉴 세팅
+			function setLoginGnbMenu() {
+				if (device.agent.indexOf("mobi") >= 0 || device.isGnb === false) {
+					//mobile web
+					var htmlMoLoginAfter = '<ul class="mob-onlyMenu loginAfter">';
+					htmlMoLoginAfter += '<li class="welcomeMsg">';
+					htmlMoLoginAfter += '<a href="https://account.samsung.com/" target="_blank" title="새창열림">안녕하세요!</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-myinfo">';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/mypage/myinfo.jsp" data-omni=\'my account\'>나의 정보</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-myDeviceList">';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/mypage/mywishlist.jsp" data-omni=\'my divice\'>나의 찜 목록</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-prdctRvw">';
+					//htmlMoLoginAfter += '<a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 :<span class="cmt-num writableCnt"></span>건</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-tracking">';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/mypage/myinfo.jsp" data-omni=\'orders\'>주문 조회</a></li>';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-cpnZone">';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/faq/FAQ.html" data-omni=\'FAQ\'>고객 센터</a></li>';
+					htmlMoLoginAfter += '';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-benefit">';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/event.html" data-omni=\'event\'>회원 혜택</a></li>';
+					htmlMoLoginAfter += '';
+					htmlMoLoginAfter += '<li class="mob-onlyMenu-logout">';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></li>';
+					htmlMoLoginAfter += '</ul>';
+
+					$("#useLogin").after(htmlMoLoginAfter);
 				} else {
-					var param = {
-						 galcamsMbr: result.gcsMbrYn,
-						 loginSucces: result.result
-						 };
-					window.secapp.loginSucces(JSON.stringify(param));
-				}
-				if(result.result === 'Y' && result.adbrixYn == 'Y'){
-					var eventParam = {
-							eventName : "App_login"
-							, attrModel : {
-								service_id: 'SDC'
-							}
-			    	};
-					window.secapp.customEvent(JSON.stringify(eventParam));
-				}
-			}
-		});
-	}
-	
-	// 로그아웃 상태 GNB 메뉴 세팅
-	function setLogoutGnbMenu() { 
-		if(device.agent.indexOf("mobi") >= 0 || device.isGnb === false){
-			// mobile web
-			var htmlMoLoginBefore = '<ul class="mob-onlyMenu loginBefore">';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-login">';
-			htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\'login\'>로그인</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-join">';
-			htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/signUp/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\"sign up\">회원가입</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-tracking">';
-			htmlMoLoginBefore += '<a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></li>';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-stoConsult">';
-			htmlMoLoginBefore += '<a href="/customer/myDigitalReservationSearch/" data-omni=\'store reservation\'>매장상담예약신청 조회</a></li>';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-cpnZone">';
-			htmlMoLoginBefore += '<a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/\');return false;" data-omni=\'login\'>쿠폰존</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '<li class="mob-onlyMenu-benefit">';
-			htmlMoLoginBefore += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
-			htmlMoLoginBefore += '';
-			htmlMoLoginBefore += '</ul>';
-			
-			$("#useLogin").after(htmlMoLoginBefore);
-		} else {
-			//pc
-			var htmlLoginBefore = '<div class="gnbSubRound loginBefore"><div>';
-			htmlLoginBefore += '<dl>';
-			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\'login\'>로그인</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/signUp/?returnUrl=/monitors/gaming-monitors/\');return false;\" data-omni=\'sign up\'>회원가입</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '<dt><a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송조회</a></dt>';
-			htmlLoginBefore += '<dt><a href="/customer/myDigitalReservationSearch/" data-omni=\'store reservation\'>매장상담 예약 신청 조회</a></dt>';
-			htmlLoginBefore += '<dt><a href="" onclick="NetFunnel_Action({action_id:\'b2c_gnb_login\'},\'/member/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/\');return false;" data-omni=\'login\'>쿠폰존</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '<dt><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dt>';
-			htmlLoginBefore += '';
-			htmlLoginBefore += '</dl>';
-			htmlLoginBefore += '</div></div>';
-			
-			$("#login-menu").html(htmlLoginBefore);
-		}
-	}
-	
-	// 로그인 상태 GNB 메뉴 세팅
-	function setLoginGnbMenu() {
-		if(device.agent.indexOf("mobi") >= 0 || device.isGnb === false){
-			//mobile web
-			var htmlMoLoginAfter = '<ul class="mob-onlyMenu loginAfter">';
-			htmlMoLoginAfter += '<li class="welcomeMsg">';
-			htmlMoLoginAfter += '<a href="https://account.samsung.com/" target="_blank" title="새창열림">안녕하세요!</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-myinfo">';
-			htmlMoLoginAfter += '<a href="/membership/point/" data-omni=\'my account\'>나의 정보</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-myDeviceList">';
-			htmlMoLoginAfter += '<a href="/mypage/info/indexMyDeviceList/" data-omni=\'my divice\'>나의 제품 관리</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-prdctRvw">';
-			htmlMoLoginAfter += '<a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 :<span class="cmt-num writableCnt"></span>건</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-tracking">';
-			htmlMoLoginAfter += '<a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></li>';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-cpnZone">';
-			htmlMoLoginAfter += '<a href="/mypage/coupon/indexMyCoupon/" data-omni=\'coupon zone\'>쿠폰존</a></li>';
-			htmlMoLoginAfter += '';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-benefit">';
-			htmlMoLoginAfter += '<a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></li>';
-			htmlMoLoginAfter += '';
-			htmlMoLoginAfter += '<li class="mob-onlyMenu-logout">';
-			htmlMoLoginAfter += '<a href="javascript:doLogout();" data-omni=\'logout\'>로그아웃</a></li>';
-			htmlMoLoginAfter += '</ul>';
-			
-			$("#useLogin").after(htmlMoLoginAfter);
-		} else {
-			//pc
-			var htmlLoginAfter = '<div class="gnbSubRound loginAfter"><div>';
-			htmlLoginAfter += '<dl>';
-			htmlLoginAfter += '<dt><a href="https://account.samsung.com/" target="_blank" title="새창열림"><span class="greet-txt">안녕하세요!</span></a></dt>';
-			htmlLoginAfter += '<dd><a href="/membership/point/" data-omni=\'my account\'>나의 정보</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/info/indexMyDeviceList/" data-omni=\'my divice\'>나의 제품 관리</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 : <span class="cmt-num writableCnt"></span> 건</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/order/indexDeliveryList/" data-omni=\'orders\'>주문/배송 조회</a></dd>';
-			htmlLoginAfter += '<dd><a href="/mypage/coupon/indexMyCoupon/" data-omni=\'coupon zone\'>쿠폰존</a></dd>';
-			htmlLoginAfter += '';
-			htmlLoginAfter += '<dd><a href="/eventList/benefitzone/" data-omni=\'event\'>GMQD 회원 혜택</a></dd>';
-			htmlLoginAfter += '';
-			htmlLoginAfter += '<dd><a href="javascript:doLogout();" data-omni=\'logout\'>로그아웃</a></dd>';
-			htmlLoginAfter += '</dl>';
-			htmlLoginAfter += '</div></div>';
-									
-			$("#login-menu").html(htmlLoginAfter);						
-		}
-	}
-	
+					//pc
+					var htmlLoginAfter = '<div class="gnbSubRound loginAfter"><div>';
+					htmlLoginAfter += '<dl>';
+					htmlLoginAfter += '<dt><a href="javascript:void(0)"><span class="greet-txt">안녕하세요!</span></a></dt>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/mypage/myinfo.jsp" data-omni=\'my account\'>나의 정보</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/mypage/mywishlist.jsp" data-omni=\'my divice\'>나의 찜 목록</a></dd>';
+					//htmlLoginAfter += '<dd><a href="/mypage/review/indexMyReview/" data-omni=\'my comment\'>상품평 작성 : <span class="cmt-num writableCnt"></span> 건</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/mypage/myinfo.jsp" data-omni=\'orders\'>주문 조회</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/faq/FAQ.html" data-omni=\'FAQ\'>고객 센터</a></dd>';
+					htmlLoginAfter += '';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/event.html" data-omni=\'event\'>회원 혜택</a></dd>';
+					htmlLoginAfter += '';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></dd>';
+					htmlLoginAfter += '</dl>';
+					htmlLoginAfter += '</div></div>';
 
-	function getCartCnt() {
-		$.ajax({
-			 url : "/xhr/order/gnbCartCount"
-			,type : "POST"
-			,success : function(result) {
-				if (result > 0) {
-					$('.cart-inner-count').show();
-					$('.cart-inner-count').text(result);
-				}
-				else {
-					$('.cart-inner-count').hide();
+					$("#login-menu").html(htmlLoginAfter);
 				}
 			}
-		});
-	}		
 
-	function getApiMemid(sessionInfo) {
-		var jsonResult = JSON.stringify(sessionInfo);
-		$.ajax({
-			 url : "/xhr/member/getMemberShipNo"
-			, type : "POST"
-			, data : { mbrNo : sessionInfo.mbrNo, loginId : sessionInfo.loginId}
-			, success : function(result) {
-				apiFlag = result.updateCnt;
+			function getCartCnt() {
+				$.ajax({
+					url: "/xhr/order/gnbCartCount"
+					, type: "POST"
+					, success: function (result) {
+						if (result > 0) {
+							$('.cart-inner-count').show();
+							$('.cart-inner-count').text(result);
+						}
+						else {
+							$('.cart-inner-count').hide();
+						}
+					}
+				});
 			}
-		});
-	}
-	
-	function getWritableMyComment() {
-		$.ajax({
-			url : "/xhr/review/loadWritableMyCommentListCount"
-			, type : "POST"
-			, dataType : "json"
-			, contentType : "application/json; charset=utf-8"
-			, success : function(result) {
-				$('.writableCnt').text(result.cmntCnt);
+
+			function getApiMemid(sessionInfo) {
+				var jsonResult = JSON.stringify(sessionInfo);
+				$.ajax({
+					url: "/xhr/member/getMemberShipNo"
+					, type: "POST"
+					, data: { mbrNo: sessionInfo.mbrNo, loginId: sessionInfo.loginId }
+					, success: function (result) {
+						apiFlag = result.updateCnt;
+					}
+				});
 			}
-			, error : function(request, status, error) {
-				
-				// TODO : exception message 처리
-				//alert("나의 작성 가능 상품평 수량 조회 Code : " + request.status);
-				// alert("Code : "+ request.status + "\n" + "message : " + request.responseText);
-				// 공백
-				// alert("Error : " + error);
+
+			function getWritableMyComment() {
+				$.ajax({
+					url: "../xhr/checkReview.jsp",
+					type: "POST",
+					success: function (result) {
+						$('.writableCnt').text(result);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.log(textStatus, errorThrown);
+					}
+				});
 			}
-		});
-	}
-</script>
+
+			/* function getWritableMyComment() {
+				$.ajax({
+					url : "/xhr/review/loadWritableMyCommentListCount"
+					, type : "POST"
+					, dataType : "json"
+					, contentType : "application/json; charset=utf-8"
+					, success : function(result) {
+						$('.writableCnt').text(result.cmntCnt);
+					}
+					, error : function(request, status, error) {
+						
+						// TODO : exception message 처리
+						//alert("나의 작성 가능 상품평 수량 조회 Code : " + request.status);
+						// alert("Code : "+ request.status + "\n" + "message : " + request.responseText);
+						// 공백
+						// alert("Error : " + error);
+					}
+				});
+			} */
+		</script>
 <input type="hidden" id="loginYn" value="" />
-<header id="header">
-	<div class="s-inner">
-		<a href="../index.html" class="logo">
-					<img src="../static/images/common/logo_gmqd_black.png" alt="GMQ Display">
+		<header id="header">
+			<div class="s-inner">
+				<a href="/GMQDisplay-master/index.html" class="logo">
+					<img type="image/svg+xml" src="../static/images/common/logo_gmqd_black.png" alt="GMQ Display" style="width:130px; height:20px"/>
 				</a>
-			<div class="new-gnb">
-            <button type="button" class="gnb-back" data-omni="gnb:back">이전 메뉴 보기</button>
-            <button type="button" class="gnb-close" data-omni="gnb:close">GNB 닫기</button>
-			<nav class="gnb">
-				<ul class="gnb1depth">
-					<li class="">
-								<a href="#" aria-controls="700033426-menu" aria-selected="false" data-omni="Product" >게이밍 모니터</a>
+				<div class="new-gnb">
+					<button type="button" class="gnb-back" data-omni="gnb:back">이전 메뉴 보기</button>
+					<button type="button" class="gnb-close" data-omni="gnb:close">GNB 닫기</button>
+					<nav class="gnb">
+						<ul class="gnb1depth">
+							<li class="">
+								<a href="#" aria-controls="700033426-menu" aria-selected="false" data-omni="Product">게이밍
+									모니터</a>
 								<div class="gnb2depth">
 									<div class="inner">
 										<ul class="list">
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="Product:new" >신제품<span class="flag-new">NEW</span></a>
-													<div class="gnb3depth new-prd-list">
-														<div class="prd-list-wrap">
-																<div class="main-prd">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:GMQD 게이밍 모니터">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/282e14da-b85a-4c42-b774-10baabfe7860.jpg?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/ba1119ba-5dc4-4b2f-94d5-494e3a51bf95.jpg?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">게이밍 모니터 울트라 4K <br> 최초 런칭 딜타임 </span>
-																				<span class="desc theme-blk">즉시 할인 8% + <br>카드사별 6만원 결제일할인</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-1">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:GMQD Book3 Series">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/0abb6285-7482-4831-a1d7-36ab892c9c0a.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/0d774285-1b04-46d3-af5f-6256d7804a2d.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>GMQD Book3 Series<br>런칭</span>
-																				</span>
-																				<span class="desc theme-blk">강력한 성능의 GMQD 북3<br>카드사별 최대 19만원 결제일할인!</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-2">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:Neo QLED">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/48caf28f-2aa0-4d2d-a073-f350e85db6c6.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/960c690e-f83f-484a-a1ec-28ac9a5f9c94.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>Neo QLED I OLED<br>런칭</span>
-																				</span>
-																				<span class="desc theme-blk">초고화질·초대형 TV의 기준<br>런칭 기념 특별한 혜택!</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-3">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:bespoke refrigerator">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/b32c2088-6a51-4046-bf87-94d159152d91.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/03368012-947e-4989-aabd-6407af7f6d5a.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>게이밍 모니터<br>신제품 체험단 모집</span>
-																				</span>
-																				<span class="desc theme-blk">최대 41% 할인 쿠폰 포함<br>최대 243만원 상당 혜택</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-4">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:2023 NEW bespoke-jet-2023">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/39a70a6b-2c4d-40ae-86e9-8ab994400232.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/35ee9a07-af0b-45c4-9ce5-1cea793ad2e4.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>맞춤형 AI<br>런칭 체험단</span>
-																				</span>
-																				<span class="desc theme-blk">지금 체험단 참여하면<br>최대 67만원 상당의 혜택이!</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-5">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:bespoke airsolution">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/a3a1d985-75e7-4e3e-9528-ab42be51b618.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/3bce182f-7f0d-42c2-bb54-65326fb480be.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>게이밍 모니터 <br>갤러리 런칭 체험단</span>
-																				</span>
-																				<span class="desc theme-blk">지금 체험단 참여하면<br>최대 35% 할인 혜택을!</span>
-																			</span>
-																			</a>
-																		</div>
-																	<div class="sub-prd num-6">
-																			<a href="javascript:void(0);" onclick="openCtaLink('', '');" class="rec-link" aria-selected="false" data-omni="Product:new:samsungcareplus">
-																					<span class="pic-wrap">
-																				<span class="pc-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/b1e3cc88-29df-4d81-87ca-a0622a43716c.png?$ORIGIN_JPG$"></span>
-																					<span class="mo-pic lozad" data-background-image="//images.samsung.com/kdp/display/gnb/66a8cd06-bc37-4827-aa3f-380aaad1e75e.png?$ORIGIN_JPG$"></span>
-																				</span>
-																			<span class="txt-grp">
-																				<span class="tit theme-blk">
-																					<span>GMQD 엄선케어플러스</span>
-																				</span>
-																				<span class="desc theme-blk">가전제품 전문세척 | 이전설치 + <br>가전케어 패키지 매월 6천원대</span>
-																			</span>
-																			</a>
-																		</div>
-																	</div>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
+												<a href="#" aria-selected="false" data-omni="Product:new">신제품<span
+														class="flag-new">NEW</span></a>
+												<div class="gnb3depth new-prd-list">
+													<div class="prd-list-wrap">
+														<div class="main-prd">
+															<a href="/GMQDisplay-master/product/G32C4X.jsp" class="rec-link" aria-selected="false"
+																data-omni="Product:new:GMQD 게이밍 모니터">
+																<span class="pic-wrap" style="background: url('../static/images/explain/G32C4X_1.png') no-repeat top center / cover; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="../static/images/product/G32C4X_1.png"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/ba1119ba-5dc4-4b2f-94d5-494e3a51bf95.jpg?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk" style="color: white;">MSI G32C4X 게이밍 200 HDR <br> 아이세이버 무결점 </span>
+																	<span class="desc theme-blk" style="color: #ddd;">1500R 커브드 패널 <br>프레임리스 디자인</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-1">
+															<a href="/GMQDisplay-master/product/27LGD4IPS.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:GMQD Book3 Series">
+																<span class="pic-wrap" style="background: url('../static/images/product/27LGD4IPS_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/0abb6285-7482-4831-a1d7-36ab892c9c0a.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/0d774285-1b04-46d3-af5f-6256d7804a2d.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk"">
+																		<span>크로스오버 QHD DCI-P3 4면 베젤리스 <br>무결점</span>
+																	</span>
+																	<span class="desc theme-blk">눈 보호 아이케어 기술<br>게임최적 프리싱크 어댑티브</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-2">
+															<a href="/GMQDisplay-master/product/G271.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:Neo QLED">
+																<span class="pic-wrap" style="background: url('/GMQDisplay-master/static/images/product/G271_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>MSI 옵틱스 G271 게이밍 144 아이세이버 <br>무결점</span>
+																	</span>
+																	<span class="desc theme-blk">144Hz 주사율<br>프레임리스 디자인</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-3">
+															<a href="/GMQDisplay-master/product/2460G.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:bespoke refrigerator">
+																<span class="pic-wrap" style="background: url('/GMQDisplay-master/static/images/product/2460G_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>한성컴퓨터 ULTRON PLUS <br>리얼 144 게이밍</span>
+																	</span>
+																	<span class="desc theme-blk">10.1mm 얇은 두께<br>3면이 탁 트인 제로베젤</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-4">
+															<a href="/GMQDisplay-master/product/27UP850N.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:2023 NEW bespoke-jet-2023">
+																<span class="pic-wrap" style="background: url('../static/images/product/27UP850N_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/39a70a6b-2c4d-40ae-86e9-8ab994400232.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/35ee9a07-af0b-45c4-9ce5-1cea793ad2e4.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>LG전자 <br>27UP850N</span>
+																	</span>
+																	<span class="desc theme-blk">선명한 DisplayHDR™ 400<br>캘리브레이션 기능</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-5">
+															<a href="/GMQDisplay-master/product/28MQ780.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:bespoke airsolution">
+																<span class="pic-wrap" style="background: url('../static/images/product/28MQ780_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/a3a1d985-75e7-4e3e-9528-ab42be51b618.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/3bce182f-7f0d-42c2-bb54-65326fb480be.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>LG전자 울트라와이드 듀얼업 <br>28MQ780</span>
+																	</span>
+																	<span class="desc theme-blk">2배의 화면과 2배의 조작성<br>멀티태스킹에 최적</span>
+																</span>
+															</a>
+														</div>
+														<div class="sub-prd num-6">
+															<a href="/GMQDisplay-master/product/27G2SP.jsp"
+																class="rec-link" aria-selected="false"
+																data-omni="Product:new:samsungcareplus">
+																<span class="pic-wrap" style="background: url('../static/images/product/27G2SP_1.png') no-repeat top center / contain; background-color: #f6f6f6;">
+																	<span class="pc-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/b1e3cc88-29df-4d81-87ca-a0622a43716c.png?$ORIGIN_JPG$"></span>
+																	<span class="mo-pic lozad"
+																		data-background-image="//images.samsung.com/kdp/display/gnb/66a8cd06-bc37-4827-aa3f-380aaad1e75e.png?$ORIGIN_JPG$"></span>
+																</span>
+																<span class="txt-grp">
+																	<span class="tit theme-blk">
+																		<span>알파스캔 AOC  게이밍 165 프리싱크 무결점 </span>
+																	</span>
+																	<span class="desc theme-blk">Adaptive Sync<br>초슬림 베젤 화면</span>
+																</span>
+															</a>
+														</div>
 													</div>
-												</li>
+													<!-- 2dep banner -->
+													<!-- //2dep banner -->
+												</div>
+											</li>
 											<li class="">
-													<a href="#" aria-selected="false" data-omni="Product:mobile" >게임용 모니터</a>
-													<div class="gnb3depth ">
-														<ul>
+												<a href="#" aria-selected="false" data-omni="Product:mobile">게임용 모니터</a>
+												<div class="gnb3depth ">
+													<ul>
+														<li class="">
+															<a href="#" aria-selected="false"
+																data-omni="Product:mobile:smartphones">FPS/RTS</a>
+															<div class="gnb4depth">
+																<ul>
 																	<li class="">
-																			<a href="#" aria-selected="false" data-omni="Product:mobile:smartphones">FPS/RTS</a>
-																			<div class="gnb4depth">
-																					<ul>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:smartphones:smartphones recommendation" >인기 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:smartphones:all-smartphones" >전체 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:smartphones:mobile accessories" >추천 상품</a>
-																							</li>
-																						</ul>
-																				</div>
-																			</li>
+																		<a href="/GMQDisplay-master/monitors.html?sort=popularity&genre=fps/rts"
+																			target="_blank">인기 상품</a>
+																	</li>
 																	<li class="">
-																			<a href="#" aria-selected="false" data-omni="Product:mobile:GMQD Book">RPG/Sports/fights</a>
-																			<div class="gnb4depth">
-																					<ul>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:GMQD Book:Recommended GMQD Book" >인기 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:GMQD Book:All GMQD Book" >전체 상품</a>
-																							</li>
-																						<li class="">
-																								<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:GMQD Book:galaxybook-ultra" >추천 상품</a>
-																							</li>
-																				</div>
-																			</li>
+																		<a href="/GMQDisplay-master/monitors.html?genre=fps/rts"
+																			target="_blank" aria-selected="false">전체
+																			상품</a>
+																	</li>
 																	<li class="">
-																			<a href="#" aria-selected="false" data-omni="Product:mobile:buds" >
-																					</a>
-																			</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product::learn more">
-																<div class="img">
-																	<img src="/static/images/menu/menu01.jpg" alt="2023 Neo QLED I OLED 사전판매 체험단" class="lozad">
-																	</div>
-																<p class="txt">2023 Neo QLED I OLED 런칭</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product:Apply:learn more" class="link">
-																		<span>구매 혜택 보기</span>
-																		</a>
-																	</div>
-															</div>
-														<!-- //2dep banner -->
-													</div>
-												</li>
-
-												<li class="">
-													<a href="#" aria-selected="false" data-omni="Product:mobile" >전문가용 모니터</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:Everything about the GMQD" >그래픽 작업용 게이밍 모니터</a>
-																</li>
-																<li class="">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:Everything about the GMQD" >사운드 작업용 게이밍 모니터</a>
-																</li>
-																<li class="">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="Product:mobile:Everything about the GMQD" >비디오/콘솔용 게이밍 모니터</a>
-																</li>
-															</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product::learn more">
-																<div class="img">
-																	<img src="/static/images/menu/menu01.jpg" alt="2023 Neo QLED I OLED 사전판매 체험단" class="lozad">
-																	</div>
-																<p class="txt">전문가용 모니터의 모든것</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product:Apply:learn more" class="link">
-																		<span>더 많은 상품들 보러가기</span>
-																		</a>
-																	</div>
-															</div>
-														<!-- //2dep banner -->
-													</div>
-												</li>
-											<li class="">
-												<a href="#" aria-selected="false" data-omni="Product:new" >맞춤형 주변기기</a>
-													<div class="gnb3depth ">
-
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product::learn more">
-																<div class="img">
-																	<img src="/static/images/menu/menu01.jpg" alt="GMQD Book3 Series 런칭" class="lozad">
-																	</div>
-																<p class="txt">GMQD Book3 Series 런칭</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:Product:Buying benefit:learn more" class="link">
-																		<span>구매 혜택 보기</span>
-																		</a>
-																	</div>
-															</div>
-														<!-- //2dep banner -->
-													</div>
-												</li>
-											</ul>
-									</div>
-								</div>
-							</li>
-						<li class="">
-								<a href="../recommend/index_game.html" aria-selected="false">추천·맞춤케어</a>
-										<div class="gnb2depth">
-									<div class="inner">
-										<ul class="list">
-											</ul>
-									</div>
-								</div>
-							</li>
-						<li class="">
-								<a href="#" aria-controls="700027213-menu" aria-selected="false" >이벤트</a>
-								<div class="gnb2depth">
-									<div class="inner">
-										<ul class="list">
-											<li class=" direct">
-													<a href="javascript:void(0);" onclick="openCtaLink('https://www.samsung.com/bespokeshop/', '');" aria-selected="false" data-omni="e-Food-Mall:e-food hall HOME" >
-																	이벤트 HOME</a>
-															<div class="gnb3depth ">
-														<ul>
+																		<a href="/GMQDisplay-master/monitors.html?recom=recom&genre=fps/rts"
+																			target="_blank" aria-selected="false">추천
+																			상품</a>
+																	</li>
 																</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink();" data-omni="feature image:e-Food-Mall::learn more">
-																<div class="img">
-																	<img data-src="https://images.samsung.com/kdp/display/gnb/29d6faf0-26aa-4bf6-8605-cc4ace3dbade.jpg?$ORIGIN_JPG$" alt="셀럽 푸드 티켓팅 X 게이밍 모니터 큐커_자세히 보기" class="lozad">
-																	</div>
-																<p class="txt">셰프 푸드 티켓팅 X 게이밍 모니터 큐커</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink();" data-omni="feature image:e-Food-Mall:Learn more:learn more" class="link">
-																		<span>자세히 보기</span>
-																		</a>
-																	</div>
 															</div>
-														<!-- //2dep banner -->
-													</div>
-												</li>
-											<li class=" direct">
-													<a href="javascript:void(0);" onclick="openCtaLink('', '');" aria-selected="false" data-omni="e-Food-Mall:subscription" >
-																	GMQD 멤버십 플랜</a>
-															<div class="gnb3depth ">
-														<ul>
-																</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:e-Food-Mall:Start My Plan Membership:learn more">
-																<div class="img">
-																	<img data-src="https://images.samsung.com/kdp/display/gnb/a75403ff-7df6-4af3-82f4-298f99472c68.jpg?$ORIGIN_JPG$" alt="산성전자 멤버십 PLAN 최대 72만 미식혜택 (2만원 X 36개월) 이벤트 영수증 구매 금액 65,000원 결제수단 제휴사신용카드 월 혜택 금액 20,000원(청구할인,캐시백 등 카드사별 상이)" class="lozad">
-																	</div>
-																<p class="txt">GMQD 제품 오너들의 <br> 평소처럼 쓰면서 카드값 아끼는 방법!</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('', '');" data-omni="feature image:e-Food-Mall:Learn more:learn more" class="link">
-																		<span>GMQD 멤버십 플랜 시작하기</span>
-																		</a>
-																	</div>
+														</li>
+														<li class="">
+															<a href="#" aria-selected="false"
+																data-omni="Product:mobile:GMQD Book">RPG/Sports/fights</a>
+															<div class="gnb4depth">
+																<ul>
+																	<li class="">
+																		<a href="/GMQDisplay-master/monitors.html?sort=popularity&genre=rpg/sports/fighting"
+																			aria-selected="false">인기 상품</a>
+																	</li>
+																	<li class="">
+																		<a href="/GMQDisplay-master/monitors.html?genre=rpg/sports/fighting"
+																			target="_blank" aria-selected="false">전체
+																			상품</a>
+																	</li>
+																	<li class="">
+																		<a href="/GMQDisplay-master/monitors.html?recom=recom&genre=rpg/sports/fighting"
+																			aria-selected="false">추천 상품</a>
+																	</li>
 															</div>
-														<!-- //2dep banner -->
+														</li>
+														<li class="">
+															<a href="#" aria-selected="false"
+																data-omni="Product:mobile:buds">
+															</a>
+														</li>
+													</ul>
+													<div class="gnbBanner type2">
+														<a href="/GMQDisplay-master/gaming-monitor.html">
+															<div class="img" style="position: relative;">
+																<img src="../static/images/explain/IP2742_1.png" style="position: absolute; bottom: -50px;" alt="쓰리윈즈 인터픽셀 게이밍 IPS 165 피벗 무결점" class="lozad">
+															</div>
+															<p class="txt">게임용 모니터의 모든 것</p>
+														</a>
+														<div class="link-box flex--center">
+															<a href="/GMQDisplay-master/gaming-monitor.html" 
+																data-omni="feature image:Product:Apply:learn more"
+																class="link">
+																<span>더 많은 상품들 보러가기</span>
+															</a>
+														</div>
 													</div>
-												</li>
+												</div>
+											</li>
+
+											<li class="">
+												<a href="#" aria-selected="false" data-omni="Product:mobile">전문가용
+													모니터</a>
+												<div class="gnb3depth ">
+													<ul>
+														<li class="">
+															<a href="/GMQDisplay-master/monitors.html?genre=graphic" target="_blank"
+																aria-selected="false"
+																data-omni="Product:mobile:Everything about the GMQD">그래픽
+																작업용 게이밍 모니터</a>
+														</li>
+														<li class="">
+															<a href="/GMQDisplay-master/monitors.html?genre=work" target="_blank"
+																aria-selected="false"
+																data-omni="Product:mobile:Everything about the GMQD">사운드
+																작업용 게이밍 모니터</a>
+														</li>
+														<li class="">
+															<a href="/GMQDisplay-master/monitors.html?genre=videogame" target="_blank"
+																aria-selected="false"
+																data-omni="Product:mobile:Everything about the GMQD">비디오/콘솔용
+																게이밍 모니터</a>
+														</li>
+													</ul>
+													<div class="gnbBanner type2">
+														<a href="/GMQDisplay-master/expert-monitor.html">
+															<div class="img">
+																<img src="https://images.samsung.com/kdp/cms_contents/131599/d0f0bd10-1dab-40a0-ad9a-b4475dfc7827.jpg?$ORIGIN_JPG$"
+																	alt="전문가용 모니터의 모든 것" class="lozad">
+															</div>
+															<p class="txt">전문가용 모니터의 모든 것</p>
+														</a>
+														<div class="link-box flex--center">
+															<a href="/GMQDisplay-master/expert-monitor.html" class="link">
+																<span>더 많은 상품들 보러가기</span>
+															</a>
+														</div>
+													</div>
+												</div>
+											</li>
+										</ul>
 									</div>
 								</div>
 							</li>
-						<li class="">
-								<a href="#" onclick="openCtaLink('', '');" aria-controls="700000115-menu" aria-selected="false" data-omni="support" >고객서비스</a>
-								<div class="gnb2depth">
+							<li class="">
+								<a href="/GMQDisplay-master/recommend/index_game.html" aria-selected="false">게임용 추천케어</a>
+							<div class="gnb2depth">
 									<div class="inner">
 										<ul class="list">
-											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:support" >무엇을 도와드릴까요?</a>
-													<div class="gnb3depth">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" aria-selected="false" data-omni="support:support:support-learn-more" >
-																							무엇을 도와드릴까요?</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/solution', '_blank');" aria-selected="false" data-omni="support:support:self-solve">
-																							스스로 해결</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<div class="gnbBanner type2">
-																<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" data-omni="feature image:support:How can I help you?:learn more">
-																<div class="img">
-																	<img data-src="https://images.samsung.com/kdp/display/gnb/3823f581-fdc7-4936-8d3c-00cb35ada470.jpg?$ORIGIN_JPG$" alt="무엇을 도와드릴까요? 더 알아보기" class="lozad">
-																	</div>
-																<p class="txt">무엇을 도와드릴까요?</p>
-																</a>
-																<div class="link-box flex--center">
-																	<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" data-omni="feature image:support:Learn more:learn more" class="link">
-																		<span>더 알아보기</span>
-																		</a>
-																	</div>
-															</div>
-														<!-- //2dep banner -->
-													</div>
-												</li>
-											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:selfserve" >
-															제품 지원</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/', '');" aria-selected="false" data-omni="support:selfserve:Manual-download" >
-																							매뉴얼 & 다운로드</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/video', '_blank');" aria-selected="false" data-omni="support:selfserve:video guide">
-																							동영상 가이드</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/consult/remote', '_blank');" aria-selected="false" data-omni="support:selfserve:remote_service">
-																							원격 상담</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://www.samsungsvc.co.kr/consult/call', '_blank');" aria-selected="false" data-omni="support:selfserve:rescounselview">
-																							전화 상담 예약</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('http://www.g-sis.co.kr/', '_blank');" aria-selected="false" data-omni="support:selfserve:computeronline">
-																							컴퓨터 온라인 상담</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
-													</div>
-												</li>
-											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:information" >
-															추천 부가정보</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/newsalert/', '');" aria-selected="false" data-omni="support:information:newsalert" >
-																							고객서비스 알림</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/warranty/', '');" aria-selected="false" data-omni="support:information:warranty" >
-																							워런티</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/faq/', '');" aria-selected="false" data-omni="support:information:GMQDisplay-faq" >
-																							GamingMonitorDisplay FAQ</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('https://r1.community.samsung.com/t5/Korea/ct-p/kr', '_blank');" aria-selected="false" data-omni="support:information:community">
-																							GMQD 엄선멤버스 커뮤니티</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/support/galaxy-battery/', '');" aria-selected="false" data-omni="support:information:galaxy-battery" >
-																							GMQD 배터리</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('https://www.samsung.com/maintenance-mode', '');" aria-selected="false" data-omni="support:information:maintenance-mode" >
-																							GMQD 수리모드</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
-													</div>
-												</li>
-											<li class="">
-													<a href="#" aria-selected="false" data-omni="support:Service center" >
-															서비스 센터</a>
-													<div class="gnb3depth ">
-														<ul>
-																<li class="">
-																			<a href="javascript:void(0);" onclick="openCtaLink('/digitalplaza/centerMain/', '');" aria-selected="false" data-omni="support:Service center:Service-center_plaza" >
-																							서비스센터 찾기</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('', '_blank');" aria-selected="false" data-omni="support:Service center:U service reservation">
-																							출장 서비스 예약</a>
-																					</li>
-																	<li class="">
-																			<a href="javascript:void(0);" class="outlink " title="새창으로 열림" onclick="openCtaLink('', '_blank');" aria-selected="false" data-omni="support:Service center:Product Inquiry">
-																							제품 문의</a>
-																					</li>
-																	</ul>
-														<!-- 2dep banner -->
-														<!-- //2dep banner -->
-													</div>
-												</li>
+										</ul>
 									</div>
 								</div>
 							</li>
-						<li class="blank">
-								<a aria-selected="false"></a>
+							<li class="">
+								<a href="/GMQDisplay-master/recommend/index_game1.html" aria-selected="false">전문가용 추천케어</a>
 								<div class="gnb2depth">
 									<div class="inner">
 										<ul class="list">
@@ -1068,61 +923,66 @@ logger("prd");
 									</div>
 								</div>
 							</li>
-				<!-- s: markup 추가 0713  모바일용 메뉴 추가 -->
-				<input type="hidden" name="useLogin" id="useLogin" value="" />
-				<!-- e: markup 추가 0713  모바일용 메뉴 추가 -->
-			</nav>
-		</div>
+							<li class="">
+								<a href="/GMQDisplay-master/event.html" aria-controls="700027213-menu" aria-selected="false">이벤트</a>
+							</li>
+							<li class="">
+								<a href="/GMQDisplay-master/faq/FAQ.html" aria-controls="700000115-menu"
+									aria-selected="false" data-omni="support">고객서비스</a>
+							</li>
+							<!--   모바일용 메뉴 추가 -->
+							<input type="hidden" name="useLogin" id="useLogin" value="" />
+							<!-- 모바일용 메뉴 추가 -->
+					</nav>
+				</div>
 
-		<div class="header-right gnbMenu">
-			<ul>
-				<li>
-					<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search" role="button">
-						<i class="icon ico-large ico-zoom">검색</i>
-					</a>
-				</li>
+				<div class="header-right gnbMenu">
+					<ul>
+						<li>
+							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
+								role="button">
+								<i class="icon ico-large ico-zoom">검색</i>
+							</a>
+						</li>
 
-				<li>
-					<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu" aria-selected="false" class="link-cart" data-omni="cart" role="button">
-						<i class="icon ico-large ico-cart">장바구니</i>
-						<span class="cart-inner-count"></span>
-					</a>
-					<div class="s-gnbSubWrap textSubWrap cartMenu" id="cart-menu">
-						<div class="gnbSubRound">
-							<div>
-								<ul class="gnb-cartList">
-								</ul>
-								<div class="btn-box">
-									<button type="button" class="btn btn-d btn-type2" onclick="NetFunnel_Action({action_id :'b2c_cart_view'},function(ev, ret){location.href='/cart/';});" data-omni="cart">장바구니 보기</button>
+						<li>
+							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
+								aria-selected="false" class="link-cart" data-omni="cart" role="button">
+								<i class="icon ico-large ico-cart">장바구니</i>
+								<span class="cart-inner-count"></span>
+							</a>
+							<div class="s-gnbSubWrap textSubWrap cartMenu" id="cart-menu">
+								<div class="gnbSubRound">
+									<div>
+										<ul class="gnb-cartList">
+										</ul>
+										<div class="btn-box">
+											<button type="button" class="btn btn-d btn-type2"
+												onclick="window.location.href = '/GMQDisplay-master/mypage/cart.jsp';"
+												data-omni="cart">장바구니 보기</button>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<input type="hidden" name="useLogin" id="useLogin" value="로그인" />
-					<a href="javascript:void(0);" aria-controls="login-menu" aria-selected="false" class="link-login" data-omni="login">
-						<i class="icon ico-large ico-people">로그인</i>
-					</a>
-					<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu" style="display: none;">
-					<div class="gnbSubRound loginBefore"><div>
-						<dl><dt>
-							<a href="#" onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/indexLogin/?returnUrl=/monitors/gaming-monitors/');return false;" data-omni="login" aria-selected="false">로그인</a></dt><dt><a href="" onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/signUp/?returnUrl=/monitors/gaming-monitors/');return false;" data-omni="sign up" aria-selected="false">회원가입</a></dt><dt><a href="/mypage/order/indexDeliveryList/" data-omni="orders" aria-selected="false">주문/배송조회</a></dt><dt><a href="/customer/myDigitalReservationSearch/" data-omni="store reservation" aria-selected="false">매장상담 예약 신청 조회</a></dt><dt><a href="" onclick="NetFunnel_Action({action_id:'b2c_gnb_login'},'/member/indexLogin/?returnUrl=/mypage/coupon/indexMyCoupon/');return false;" data-omni="login" aria-selected="false">쿠폰존</a></dt>
-							<dt>
-								<a href="#" data-omni="event" aria-selected="false">GMQD 회원 혜택</a></dt>
-						</dl>
-					</div>
+						</li>
+						<li>
+							<input type="hidden" name="useLogin" id="useLogin" value="" />
+							<a href="javascript:;" aria-controls="login-menu" aria-selected="false" class="link-login"
+								data-omni="login">
+								<i class="icon ico-large ico-people">로그인</i>
+							</a>
+							<!-- 로그인 메뉴 -->
+							<div class="s-gnbSubWrap textSubWrap loginMenu" id="login-menu"></div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="link-m-nav" data-omni="gnb:open" role="button">
+								<i class="icon ico-large ico-nav">전체메뉴</i>
+							</a>
+						</li>
+					</ul>
 				</div>
-				</li>
-				<li>
-					<a href="javascript:void(0);" class="link-m-nav" data-omni="gnb:open" role="button">
-						<i class="icon ico-large ico-nav">전체메뉴</i>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</header>
+			</div>
+		</header>
 <!-- s : 221118 앱 설치 유도 팝업 -->
 <div class="toast-pop induce-ss-app toast-parent" data-toast-name="toastInduce" data-focus="toastInduce" data-toast-index="0">
 	<div class="inner">
@@ -2681,7 +2541,7 @@ function checkPdDropOption(e) {
 			<div class="pg-location-inner">
 				<a href="./../index.html">HOME</a>
 				<a href="./../monitors.html">게이밍 모니터</a>
-				<a href="#">전문가용 모니터</a>
+				<a href="/GMQDisplay-master/expert-monitor.html">전문가용 모니터</a>
 				<a href="./../monitors.html?genre=videogame">비디오/콘솔용</a>
 				<span>LG전자 올레드 OLED48CXKNB (스탠드)</span>
 			</div>
@@ -2722,14 +2582,7 @@ function checkPdDropOption(e) {
 						
 						</ol>
 			</div>
-			<div class="opt-btn">
-				<!-- 이미지 삭제 및 em 태그 추가 -->
-				<!-- 360도 보기 상태에서 확대보기를 클릭하면 btn360 에 act removeClass 해줘야 함. -->
-				<span class="btn-bigView">
-					<button type="button" class="btnBig" data-focus="dataFocus06"><!-- <img src="/sec/static/_images/common/icon_big-view.svg" alt="확대 이미지 보기"> --><em class="blind">확대 이미지 보기</em>
-					</button>
-				</span>
-           	</div>
+			
            </div>
 	</div>
 <script>
@@ -4231,10 +4084,60 @@ function Urlsend(sns) {
 						</ul>	            
 					</ol>
 				</div>
-						<button type="button" class="btn-good " title="">
-							<i class="icon ico-large ico-goods">좋아요 미선택</i>
-						</button>
+						<%
+						try {
+							String db_url = "jdbc:mysql://localhost:3306/gpqd";
+							String db_id = "root";
+							String db_password = "1234";
 
+							Class.forName("com.mysql.jdbc.Driver");
+							Connection con = DriverManager.getConnection(db_url, db_id, db_password);
+
+							if (id != null) { 
+								String sql_wish = "SELECT * FROM wishlist WHERE userID=? AND Mno=?"; 
+								PreparedStatement pstmt_wish = con.prepareStatement(sql_wish);
+								pstmt_wish.setString(1, id);
+								pstmt_wish.setString(2, "48CXKNB");
+
+								ResultSet rs_wish = pstmt_wish.executeQuery();
+								if (rs_wish.next()) {
+						%>
+							<button type="button" class="btn-good on" title="" form="48CXKNB">
+								<i class="icon ico-large ico-goods">좋아요 미선택</i>
+							</button>
+						<%
+								} else {
+						%>
+							<button type="button" class="btn-good " title="" form="48CXKNB">
+								<i class="icon ico-large ico-goods">좋아요 미선택</i>
+							</button>
+						<%
+								}
+							} else {
+						%>
+							<button type="button" class="btn-good " title="" onclick="location.href='/GMQDisplay-master/login_info/login.html';">
+								<i class="icon ico-large ico-goods">좋아요 미선택</i>
+							</button>	
+						<%
+							}
+						} catch (Exception e) {
+							out.print(e);
+						}
+						%>
+<script>
+	$('.btn-good').click(function() {
+		$.ajax({
+			url: "/GMQDisplay-master/xhr/wishlist_insert.jsp",
+			type: "POST",
+			data: {Mno: "48CXKNB"},
+			success: function(data) {
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(errorThrown);
+			}
+		});
+	});
+</script>
 						<div class="bookmarkTooltip flashTooltip bookmarkOn">
 							<div>
 								<p><span>찜</span>이 되었습니다.</p>
@@ -4250,35 +4153,157 @@ function Urlsend(sns) {
 								<h1 class="itm-info-title" id="goodsDetailNm">LG전자 올레드 OLED48CXKNB (스탠드)</h1>
 								<div class="itm-sku b2c-itm-sku compare-box-align">48CXKNB</div>
 										<!-- B2C, 패넷, 패넷 디플 PD페이지 비교하기 버튼 추가 s --> 
-										<div class="compare">
+										<!--<div class="compare">
 												<a href="javascript:void(0);" class="link-compare-i" onclick="readyCompare(this)" data-goods-id="48CXKNB" data-mdl-code="48CXKNB " data-comp-disp-clsf-en-nm="monitors">
 												비교하기
 												</a>
-											</div>
+											</div>-->
 										<!-- B2C, 패넷, 패넷 디플 PD페이지 비교하기 버튼 추가 e --> 
 										<div class="itm-rating-con">
 											<div class="itm-rating b2c-itm-rating">
-												<div class="itm-sart-rating" role="img" aria-label="별점 0.0점">
+													<%
+													try {
+														int total = 0;
+														int cnt = 0;
+														double rating = 0;
+
+														String db_url = "jdbc:mysql://localhost:3306/gpqd";
+														String db_id = "root";
+														String db_password = "1234";
+
+														Class.forName("com.mysql.jdbc.Driver");
+														Connection con = DriverManager.getConnection(db_url, db_id, db_password);
+
+														// 리뷰 조회
+														String sql = "SELECT * FROM review WHERE Mno=?"; 
+														PreparedStatement pstmt = con.prepareStatement(sql);
+														pstmt.setString(1, "48CXKNB");
+
+														ResultSet rs = pstmt.executeQuery();
+														while(rs.next()) {
+															total += rs.getInt("review_rating");
+															cnt++;
+														}
+														if (cnt == 0)
+															rating = 0;
+														else
+															rating = (double)total / cnt;
+
+														DecimalFormat df = new DecimalFormat("#.#");
+														String format_rating = df.format(rating);
+													%>
+												<div class="itm-sart-rating" role="img" aria-label="별점 <%=format_rating%>점">
 													<!-- 
 														별점 1점일때 클래스 star-yellow 적용
 														별점 0.5점일때 클래스 star-half-yellow 적용
 														별점 0점일때 클래스 star-gray 적용
 													-->
+													<%
+														if (rating < 0.5) {
+													%>
 													<i class="star-gray"></i><!-- 별점 0점 -->
-																	<i class="star-gray"></i><!-- 별점 0점 -->
-																	<i class="star-gray"></i><!-- 별점 0점 -->
-																	<i class="star-gray"></i><!-- 별점 0점 -->
-																	<i class="star-gray"></i><!-- 별점 0점 -->
-																	<span>0.0</span>
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 0.5 && rating < 1) {
+													%>
+													<i class="star-half-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 1 && rating < 1.5) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 1점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 1.5& rating < 2) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 1점 -->
+													<i class="star-half-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 2 && rating < 2.5) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 2.5 && rating < 3) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-half-yellow"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 3 && rating < 3.5) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 3.5 && rating < 4) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-half-yellow"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 4 && rating < 4.5) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-gray"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 4.5 && rating < 5) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-half-yellow"></i><!-- 별점 0점 -->
+													<%
+														} else if (rating >= 5) {
+													%>
+													<i class="star-yellow"></i><!-- 별점 0.5점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<i class="star-yellow"></i><!-- 별점 0점 -->
+													<%
+														}
+													%>
+													<span><%=format_rating%></span>
 												</div>
 												<!-- <div class="itm-sart-rating">
 													<i class="icon ico-default ico-star">별점</i> 
 													<span>4.0</span>
 												</div> -->
-												<a href="javascript:;" class="itm-review-count" title="상품평 보러가기">(0건)</a>
+												<a href="javascript:;" class="itm-review-count" title="상품평 보러가기">(<%=cnt%>건)</a>
 											</div>
+												<%
+													} catch (Exception e) {
+														out.print(e);
+													}
+												%>
 											<div class="itm-rating itm-review">
-												<span class="itm-review-write"><a href="javascript:void(0);" class="btn-underline" title="상품평 쓰기 바로가기">상품평 쓰기</a></span>
+												<span class="itm-review-write"><a href="javascript:void(0);" class="btn-underline" title="상품평 쓰기 바로가기" onclick="fnWrite()">상품평 쓰기</a></span>
 											</div>
 											
 										</div>
@@ -7712,11 +7737,7 @@ function Urlsend(sns) {
 	                <nav id="anchor-navbar" class="anchor-navbar">
 	                    <ul class="anchor-nav">
  	                    	<!--3rd 파티 상품은 특장점/상품평/유의사항만 노출 -->
-	        				<li id="compGoodsPurBenefitLi" >
-			                            <a data-scroll="compGoodsPurBenefit" href="javascript:void(0);" class="dot topNav active" id="itm-benefit-component">
-			                                <span data-omni="purchase benefits">구매혜택</span>
-			                            </a>
-			                        </li>
+	        				
 		                        <li>
 	                        	<a id="acompGoodsFeatures" data-scroll="compGoodsFeatures" href="javascript:void(0);" class="dot">
 		                                <span data-omni="benefits">특장점</span>
@@ -7745,7 +7766,7 @@ function Urlsend(sns) {
 		                            </a>
 		                        </li>
 		                    <li id="compGoodsNoticeInfoLi" >
-	                            <a data-scroll="compGoodsNoticeInfo" href="javascript:void(0);" class="dot" id="compGoodsNoticeInfo">
+	                            <a data-scroll="compGoodsNoticeInfo" href="#compGoodsNoticeInfo1" class="dot" id="compGoodsNoticeInfo">
 	                                <span data-omni="compGoodsNoticeInfo">유의사항</span>
 	                            </a>                        	
                         	</li>            	
@@ -11185,7 +11206,7 @@ function buy() {
 						</div>
                 </div>
 </article>
-		        <article class="component-con component09" id="compGoodsNoticeInfo" >
+		        <article class="component-con component09" id="compGoodsNoticeInfo1" >
 	            	<!-- 구매시 유의사항-->
             		<div class="fixWidth">
 		<h3 class="component-title">구매시 유의사항</h3>
@@ -11527,7 +11548,7 @@ function buy() {
 <!-- e : 220615 수정 -->
     
 	<div id="floatingSticky" class="floating-sticky">
-		<div class="menu-list">
+		<!--<div class="menu-list">
 			<div class="inner">
 				<a href="#" class="btn-floating" onclick="floating_open();"><span>메뉴 보기</span></a>
 				<ul>
@@ -11537,7 +11558,7 @@ function buy() {
 					<li class="menuGift"><a href="javascript:gift_open();" data-omni="float chat:event gift">선물하기</a></li>
 				</ul>
 			</div>
-		</div>
+		</div>-->
 		<button type="button" class="btn-gotop">
 			<span>위로</span>
 		</button>
@@ -11636,246 +11657,263 @@ wcs_do();
 </script>
 <!-- s : 220929 class명 바뀜 -->
 <footer id="footer" class="footer_b2c">
-<input type="hidden" id="goodsAdvCmntStYn" value="Y" />
-<!-- e : 220929  -->
-	<div class="footer-content">
-		<nav class="footer-inner sitemap-links">
-			<h2 class="hide">페이지 링크</h2>
-			<ul>
-<!-- s : 221025  -->
-				<li class="productLine1">
-					<h3>
-						<a href="javascript:void(0);">게이밍 모니터</a>
-					</h3>
-					<ul>
-						<li><a href="#" data-omni="product_smartphones">FPS</a></li>
-						<li><a href="#" data-omni="product_smartphones">RTS</a></li>
-						<li><a href="#" data-omni="product_tablets">RPG</a></li>
-						<li><a href="#" data-omni="product_watches">Sports</a></li>
-						<li><a href="#" data-omni="product_buds">fights</a></li>
-					</ul>					
-				</li>
-				<li class="productLine2">
-					<h3>이벤트</h3>
-					<ul>
-						<li><a href="./electric-range/bespoke-induction/index.html" data-omni="product_smartphones">기획전 모두보기</a></li>
-						<li><a href="./cooking-appliances/bespoke-oven/index.html" data-omni="product_cooking appliances">GMQD 단독</a></li>
-						<li><a href="./qooker/bespoke-qooker/index.html" data-omni="product_qooker">GMQD Live</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>
-						<a href="javascript:void(0);">고객서비스</a>
-					</h3>
-					<ul>
-						<li><a href="#" data-omni="faq_support">매뉴얼 & 다운로드</a></li>
-						<li><a href="#" data-omni="faq_faq">GMQD FAQ</a></li>
-						<li><a href="#" data-omni="faq_shop locator">매장 찾기</a></li>
-						<li><a href="#" data-omni="faq_service-locator">서비스센터 찾기</a></li>
-						<li><a href="./GMQDisplay-Care-Plus/CE/index.html" data-omni="faq_samsung care plus CE">GMQDisplay Care+</a></li>
-					</ul>
-				</li>
-				<li>
-					<h3>
-						<a href="javascript:void(0);">윤리&준법경영</a>
-					</h3>
-					<ul>
-						<li><a href="https://sec-audit.com/common/businessPrinciple/viewBusinessPrincMain.do?_menuId=AVyA0fTVACzV4mS0&amp;_menuF=true&amp;s_gbn=PA100001" data-omni="ethics and law_principle" class="link-outlink" title="새창으로 열림" target="_blank">경영원칙</a></li>
-						<li><a href="https://sec-audit.com/common/wrongReport/init.do?_menuId=AVyAoCSlAADV4mQ3&amp;_menuF=true&amp;s_gbn=PA100002" data-omni="ethics and law_wrong report" class="link-outlink" title="새창으로 열림" target="_blank">부정제보</a></li>
-						<li><a href="https://sec-compliance.net/gcc/gcc.do?method=gccReport&amp;langCd=ko_KR" data-omni="ethics and law_GCC" class="link-outlink" title="새창으로 열림" target="_blank">법위반제보</a></li>
-					</ul>
-				</li>
-				<!-- e : 221025 -->
-				<!-- s : 220929 -->
-				<li class="row2">
-					<ul>
-						<li>
-							<h3><a href="javascript:void(0);">사이트소개</a></h3>
-							<ul>
-								<li><a href="./about-us/company-info/index.html" data-omni="about-us_company-info">사이트 정보</a></li>
-								<li><a href="./about-us/business-area/index.html" data-omni="about-us_business-area">사이트 개요</a></li>
-								<li><a href="./about-us/brand-identity/index.html" data-omni="about-us_brand-identity">아이덴티티</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				<li class="row2">
-				<!-- e : 220929 -->
-					<ul>
-						<li>
-							<h3><a href="javascript:void(0);">회사소개</a></h3>
-							<ul>
-								<li><a href="./about-us/company-info/index.html" data-omni="about-us_company-info">기업정보</a></li>
-								<li><a href="./about-us/business-area/index.html" data-omni="about-us_business-area">사업정보</a></li>
-								<li><a href="./about-us/brand-identity/index.html" data-omni="about-us_brand-identity">브랜드 아이덴티티</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<div class="footer-content">
-		<div class="footer-inner">
-			<div class="info-detail">
-				<p>
-					<span>GMQDisplay 주식회사 대표이사 : GMQDisplay </span>
-					<span class="mo-inline">사업자등록번호 : 000-00-00000</span>
-					<span class="comp-wrap"><a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1248100998&amp;apv_perm_no=" class="comp" title="새창 열림" target="_blank">사업자 정보확인</a></span>
-					<span>통신판매업 신고 : 0000-천안점-0000</span>
-				</p>
-				<p class="gap">
-					<span>사업장주소 : 31020 충청남도 천안시 서북구 성환읍 대학로 91번지</span>
-					<span>호스팅서비스사업자 : GMQDisplay(주)</span>
-					<span>대표번호 : 00-0000-0000</span>
-					<span>제품/서비스/멤버십: 0000-0000(통화요금 : 발신자부담)</span>
-					<span>구매문의 : 0000-0000</span>
-					<span>모니터 문의 : 0000-0000</span>
-				</p>
-				<p>본 사이트에서 판매되는 상품 중에는 등록된 개별 판매자가 판매하는 상품이 포함되어 있습니다. </p>
-					<!-- s : 22-12-21 소비자분쟁해결기준 CTA -->
-					<div class="dis-resol">
-						<p>개별 판매자 판매 상품의 경우 GMQDisplay(주)는 통신판매중개업자로서 통신판매의 당사자가 아니므로, 개별 판매자가 등록한 상품, 거래정보 및 거래 등에 대해 책임을 지지 않습니다.</p>
-						<a href="./dispute-resolution/index.html" class="comp" title="새창 열림" target="_blank">소비자분쟁해결기준</a>
-					</div>
-					<!-- e : 22-12-21 소비자분쟁해결기준 CTA -->
-				<p>본 사이트의 컨텐츠는 저작권법의 보호를 받는 바  무단 전재, 복사, 배포 등을 금합니다.</p>
-			</div>
-		</div>
-	</div>
-	<div class="footer-content">
-		<div class="footer-inner copyrightGroup">
-			<div class="copyrightBox">
-				<p class="copyright">Copyright &copy; 2023 GMQDisplay. All Rights Reserved.</p>
-				<div class="mark-box">
-					<a href="javascript/index.html" title="웹접근성 우수사이트 인증서 : 새창으로 열기" class="btn-mark btn-wa" data-popup-target="popupWA" data-omni="local logo_wa" >
-						<img class="pc-ver" src="./static/images/common/icon-footer-wa.svg" alt="웹접근성 우수사이트">
-						<img class="mo-ver" src="./static/images/common/icon-footer-wa-mo.jpg" alt="웹접근성 우수사이트">
-							웹접근성 우수사이트
-					</a>
-					<a href="javascript:openPrivacy();" 
-						title="개인정보 보호 우수사이트 인증서 : 새창으로 열기" class="btn-mark btn-eprivacy" data-omni="local logo_eprivacy">
-						<img src="./static/images/common/icon-footer-eprivacy.svg" alt="개인정보보호 우수사이트">개인정보보호 우수사이트
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="footer-content">
-		<div class="footer-inner btnBottomGroup">
-			<div class="cs-btn">
-				<ul class="korean">
-					<li><a href="./function/ipredirection/ipredirectionLocalList/index.html">한국/한국어 </a></li><!-- 200918 추가 -->
-				</ul>
-				<ul>
-					<li><a href="javascript:void(0);" title="이메일 무단 수집거부" data-popup-target="popupGatherRefuse" data-omni="footer:bottom_email_security">이메일 무단 수집거부</a></li>
-					<li><a href="javascript:void(0);" title="아이디어 정책" data-popup-target="popupIdeaPolicy" data-omni="footer:bottom_idea security">아이디어 정책</a></li>
-					<li><a href="./info/sitemap/index.html" data-omni="footer:bottom_sitemap">사이트맵</a></li>
-				</ul>
-			</div>
-			<div class="clause-links">
-				<!-- s : Accessible Dropdown -->
-				<div id="dropClauseList01" class="wrap-droplist rounded clause-use">
-					<button class="droplist-button" aria-haspopup="listbox" aria-labelledby="dropServiceClauseTitle dropServiceClauseBtn" id="dropServiceClauseBtn" title="서비스별 이용약관">이용약관<span class="blind">하위 메뉴 있음</span></button>
-					<ul class="droplist" tabindex="-1" aria-labelledby="dropServiceClauseTitle" aria-activedescendant="optServiceClause01">
-						<!--aria-activedescendant에 선택된 li의 id 삽입 -->
-						<li id="optServiceClause02" class="droplist-item" data-omni="footer:terms_legal"><a href="https://account.samsung.com/membership/etc/specialTC.do?fileName=samsungkorea.html" target="_blank" title="새 창으로 열림">GMQDisplay 대표사이트 이용약관</a></li>
-						<li id="optServiceClause03" class="droplist-item" data-omni="footer:terms_conditions"><a href="./membership/terms/index.html">GMQDisplay멤버십 이용약관</a></li>
-						<li id="optServiceClause04" class="droplist-item" data-omni="footer:terms_contents"><a href="https://account.samsung.com/membership/policy/terms" target="_blank" title="새 창으로 열림">GMQDisplay 서비스 이용약관</a></li>
-					</ul>
-				</div>
-				<!-- s : Accessible Dropdown -->
-				<div id="dropClauseList02" class="wrap-droplist rounded  clause-private">
-					<button class="droplist-button" title="서비스별 개인정보처리방침">개인정보처리방침<span class="blind">하위 메뉴 있음</span></button>
-					<ul class="droplist" tabindex="-1" aria-labelledby="dropServicePrivateTitle" aria-activedescendant="optServicePrivate01">
-						<!--aria-activedescendant에 선택된 li의 id 삽입-->
-						<li id="optServicePrivate02" class="droplist-item"><a href="./../person.html">GMQD 개인정보처리방침</a></li>
-						<li id="optServicePrivate03" class="droplist-item"><a href="./info/privacy/02/index.html">GMQD 이벤트 개인정보처리방침</a></li>
-						<li id="optServicePrivate04" class="droplist-item"><a href="./info/privacy/03/index.html">GMQDisplay멤버십 개인정보처리방침</a></li>
-						<li id="optServicePrivate05" class="droplist-item"><a href="./info/privacy/04/index.html">멤버십블루 개인정보처리방침</a></li>
-						<li id="optServicePrivate06" class="droplist-item"><a href="./info/privacy/05/index.html">경력채용 개인정보처리방침</a></li>
-					</ul>
-				</div>
-				<!-- e : Accessible Dropdown -->
-			</div>
-			<div class="link-box">
-				<div class="sns-btn">
-					<div class="wrap-sns">
-						<span class="tit">GMQDisplay의 다양한 소식을 만나보세요!</span>
-						<ul>
-							<li><a href="#" class="btn-fb" title="새창 열림" target="_blank">
-								<span class="blind">facebook</span></a></li>
-							<li><a href="#" class="btn-yt" title="새창 열림" target="_blank">
-								<span class="blind">youtube</span></a></li>
-							<li><a href="#" class="btn-ig" title="새창 열림" target="_blank">
-								<span class="blind">instagram</span></a></li>
-							<li><a href="#" class="btn-pf" title="새창 열림" target="_blank">
-								<span class="blind">카카오톡 플러스친구</span></a></li>
-							<li><a href="#" class="btn-tw" title="새창 열림" target="_blank">
-								<span class="blind">트위터</span></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
-	
-<!-- s : 에너지 계산기 -->	
-<button id="energyBtn" style="display:none" type="button" data-popup-target="popupEnergy">팝업보기</button>   
-<div class="layer-pop layer-normal layer-energy-calculator" id="popupEnergy" tabindex=" 0"  data-popup-layer="popupEnergy" data-focus="popupEnergy">
-</div>
-<!-- e : 에너지 계산기 -->	
-<!-- s : 이메일 무단 수집거부 -->
-<div class="layer-pop layer-normal" id="popupGatherRefuse" tabindex="0" data-popup-layer="popupGatherRefuse" data-focus="popupGatherRefuse">
-	<div class="layer-header">
-		<h2>이메일 무단 수집거부</h2>
-	</div>
-	<div class="layer-content">
-		<div class="etc-divWrap">
-			<p>본 웹사이트는 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단 수집되는 것을 거부합니다.<br> 
-			이를 위반 시 『정보통신망 이용 촉진 및 정보보호 등에 관한 법률』등에 의해 처벌받을 수 있습니다.</p>
-		</div>
-	</div>
-	<button type="button" class="pop-close" data-focus-next="popupGatherRefuse">팝업닫기</button>
-</div>
-<!-- e : 이메일 무단 수집거부 -->
+									<input type="hidden" id="goodsAdvCmntStYn" value="Y" />
+									<div class="footer-content">
+										<nav class="footer-inner sitemap-links">
+											<h2 class="hide">페이지 링크</h2>
+											<ul>
+												<li class="productLine1">
+													<h3><a href="javascript:void(0);">게임용 모니터</a></h3>
+													<ul>
+														<li><a href="/GMQDisplay-master/monitors.html?genre=fps/rts" data-omni="product_fps/rts">FPS/RTS</a></li>
+														<li><a href="/GMQDisplay-master/monitors.html?genre=rpg/sports/fighting" data-omni="product_RPG/Sports/fights">RPG/Sports/fights</a></li>
+														
+													</ul>
+												</li>
+												<li class="productLine2">
+													<h3>전문가용 모니터</h3>
+													<ul>
+														<li><a href="/GMQDisplay-master/monitors.html?genre=graphic" data-omni="product_graphic">그래픽 작업용</a></li>
+														<li><a href="/GMQDisplay-master/monitors.html?genre=work" data-omni="product_sound">사운드 작업용</a></li>
+														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
+													</ul>
+												</li>
+												<li class="productLine2">
+													<h3>추천 케어</h3>
+													<ul>
+														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
+																data-omni="product_smartphones">게임용 추천케어</a></li>
+														<li><a href="/GMQDisplay-master/recommend/index_game1.html;"
+																data-omni="product_cooking appliances">전문가용 추천케어</a></li>
+													</ul>
+												</li>
+												
+												<li>
+													<h3>
+														<a href="javascript:void(0);">이벤트</a>
+													</h3>
+													<ul>
+														<li><a href="/GMQDisplay-master/event.html"
+																data-omni="ethics and law_principle"
+																class="link-outlink" title="새창으로 열림"
+																target="_blank">이벤트 HOME</a>
+														</li>
+													</ul>
+												</li>
+												<li>
+													<h3>
+														<a href="javascript:void(0);">고객 서비스</a>
+													</h3>
+													<ul>
+														<li><a href="/GMQDisplay-master/faq/FAQ.html"
+																data-omni="ethics and law_principle"
+																class="link-outlink" title="새창으로 열림"
+																target="_blank">고객센터</a>'
+														</li>
+														<li><a href="/GMQDisplay-master/person.html"
+																data-omni="ethics and law_principle"
+																class="link-outlink" title="새창으로 열림"
+																target="_blank">개인정보처리방침</a>'
+														</li>
+													</ul>
+												</li>
+												
+												<li class="row2">
+													<ul>
+														<li>
+															<h3><a href="javascript:void(0);">회사 소개</a></h3>
+															<ul>
+																<li><a href="/GMQDisplay-master/introduceCompany.html"
+																		data-omni="about-us_company-info">GMQ Display 소개</a>
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</nav>
+									</div>
+									<div class="footer-content">
+										<div class="footer-inner">
+											<div class="info-detail">
+												<p>
+													<span>GMQDisplay 주식회사 대표이사 : GMQDisplay </span>
+													<span class="mo-inline">사업자등록번호 : 000-00-00000</span>
+													<span>통신판매업 신고 : 0000-천안점-0000</span>
+												</p>
+												<p class="gap">
+													<span>사업장주소 : 31020 충청남도 천안시 서북구 성환읍 대학로 91번지</span>
+													<span>호스팅서비스사업자 : GMQDisplay(주)</span>
+													<span>대표번호 : 00-0000-0000</span>
+													<span>제품/서비스/멤버십: 0000-0000(통화요금 : 발신자부담)</span>
+													<span>구매문의 : 0000-0000</span>
+													<span>모니터 문의 : 0000-0000</span>
+												</p>
+												<p>본 사이트에서 판매되는 상품 중에는 등록된 개별 판매자가 판매하는 상품이 포함되어 있습니다. </p>
+												<!-- s : 22-12-21 소비자분쟁해결기준 CTA -->
+												<div class="dis-resol">
+													<p>개별 판매자 판매 상품의 경우 GMQDisplay(주)는 통신판매중개업자로서 통신판매의 당사자가 아니므로, 개별
+														판매자가 등록한 상품, 거래정보 및 거래 등에 대해 책임을 지지 않습니다.</p>
+												</div>
+												<!-- e : 22-12-21 소비자분쟁해결기준 CTA -->
+												<p>본 사이트의 컨텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</p>
+											</div>
+										</div>
+									</div>
+									<div class="footer-content">
+										<div class="footer-inner copyrightGroup">
+											<div class="copyrightBox">
+												<p class="copyright">Copyright &copy; 2023 GMQDisplay. All Rights
+													Reserved.</p>
+												<div class="mark-box">
+												<div class="cs-btn">
+												<ul>
+													<li><a href="javascript:void(0);" title="이메일 무단 수집거부"
+															data-popup-target="popupGatherRefuse"
+															data-omni="footer:bottom_email_security">이메일 무단 수집거부</a>
+													</li>
+													<!--<li><a href="javascript:void(0);" title="아이디어 정책"
+															data-popup-target="popupIdeaPolicy"
+															data-omni="footer:bottom_idea security">아이디어 정책</a></li>
+													<li><a href="./info/sitemap/index.html"
+															data-omni="footer:bottom_sitemap">사이트맵</a></li>-->
+												</ul>
+											</div>
+													<!-- s : Accessible Dropdown -->
+												<!--aria-activedescendant에 선택된 li의 id 삽입 -->
+												<!--<div id="dropClauseList01" class="wrap-droplist rounded clause-use">
+													<button class="droplist-button" aria-haspopup="listbox"
+														aria-labelledby="dropServiceClauseTitle dropServiceClauseBtn"
+														id="dropServiceClauseBtn" title="서비스별 이용약관">이용약관<span
+															class="blind">하위 메뉴 있음</span>
+													</button>
+													<ul class="droplist" tabindex="-1"
+														aria-labelledby="dropServiceClauseTitle"
+														aria-activedescendant="optServiceClause01">
+														
+														<li id="optServiceClause02" class="droplist-item"
+															data-omni="footer:terms_legal"><a
+																href="https://account.samsung.com/membership/etc/specialTC.do?fileName=samsungkorea.html"
+																target="_blank" title="새 창으로 열림">GMQDisplay 대표사이트
+																이용약관</a></li>
+														<li id="optServiceClause03" class="droplist-item"
+															data-omni="footer:terms_conditions"><a
+																href="./membership/terms/index.html">GMQDisplay멤버십
+																이용약관</a></li>
+														<li id="optServiceClause04" class="droplist-item"
+															data-omni="footer:terms_contents"><a
+																href="https://account.samsung.com/membership/policy/terms"
+																target="_blank" title="새 창으로 열림">GMQDisplay 서비스 이용약관</a>
+														</li>
+													</ul>
+												</div> -->
+												
+												<!-- s : Accessible Dropdown -->
+												<div class="clause-links">
+												<div id="dropClauseList02"
+													class="wrap-droplist rounded  clause-private">
+													<button class="droplist-button" title="서비스별 개인정보처리방침">GMQ Display<span
+															class="blind">하위 메뉴 있음</span></button>
+													<ul class="droplist" tabindex="-1"
+														aria-labelledby="dropServicePrivateTitle"
+														aria-activedescendant="optServicePrivate01">
+														<!--aria-activedescendant에 선택된 li의 id 삽입-->
+														<li id="optServicePrivate02" class="droplist-item">
+														<a href="/GMQDisplay-master/person.html">GMQ Display 개인정보처리방침</a>
+														</li>
+														<li id="optServicePrivate03" class="droplist-item">
+															<a href="/GMQDisplay-master/event.html">GMQ Display 이벤트/멤버쉽</a>
+														</li>
+														<li id="optServicePrivate04" class="droplist-item">
+															<a href="/GMQDisplay-master/faq/FAQ.html">GMQ Display 고객센터</a>
+														</li>
+														<li id="optServicePrivate05" class="droplist-item">
+															<a href="/GMQDisplay-master/faq/notice.html">GMQ Display 공지사항</a>
+														</li>
+														<li id="optServicePrivate06" class="droplist-item">
+															<a href="/GMQDisplay-master/introduceCompany.html">GMQ Display 회사소개</a>
+														</li>
+													</ul>
+												</div>
+												<!-- e : Accessible Dropdown -->
+											</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								
+								</footer>
 
-<!-- s : 아이디어 정책 -->
-<div class="layer-pop layer-normal" id="popupIdeaPolicy" tabindex="0" data-popup-layer="popupIdeaPolicy" data-focus="popupIdeaPolicy">
-	<div class="layer-header">
-		<h2>아이디어 제안에 대한 정책</h2>
-	</div>
-	<div class="layer-content">
-		<div class="etc-divWrap">
-			<p>GMQDisplay 및 GMQDisplay 임직원은 당사가 공식적으로 요청하지 않았음에도 불구하고 여러분께서 일방적으로 당사에 제출하는 아이디어나 제안 등을 수령하거나 검토하지 않습니다.</p>
-			<p>이는 제출하신 내용이 당사 내부적으로 개발한 제품, 기술, 서비스와 유사할 경우 발생할 수 있는 오해와 분쟁을 방지하고 나아가 여러분의 창의적인 아이디어를 적극 보호하기 위함입니다.</p>
-			<p>이러한 취지를 이해하여 주시고 구체화되지 않은 아이디어나 콘셉트(Concept) 단계의 제안이 당사에 제출되지 않도록 하여 주시기 바랍니다.</p>
-		</div>
-	</div>
-	<button type="button" class="pop-close" data-focus-next="popupIdeaPolicy">팝업닫기</button>
-</div>
-<!-- e : 아이디어 정책 -->
+								<!-- s : 에너지 계산기 -->
+								<button id="energyBtn" style="display:none" type="button"
+									data-popup-target="popupEnergy">팝업보기</button>
+								<div class="layer-pop layer-normal layer-energy-calculator" id="popupEnergy"
+									tabindex=" 0" data-popup-layer="popupEnergy" data-focus="popupEnergy">
+								</div>
+								<!-- e : 에너지 계산기 -->
+								<!-- s : 이메일 무단 수집거부 -->
+								<div class="layer-pop layer-normal" id="popupGatherRefuse" tabindex="0"
+									data-popup-layer="popupGatherRefuse" data-focus="popupGatherRefuse">
+									<div class="layer-header">
+										<h2>이메일 무단 수집거부</h2>
+									</div>
+									<div class="layer-content">
+										<div class="etc-divWrap">
+											<p>본 웹사이트는 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단 수집되는 것을
+												거부합니다.<br>
+												이를 위반 시 『정보통신망 이용 촉진 및 정보보호 등에 관한 법률』등에 의해 처벌받을 수 있습니다.</p>
+										</div>
+									</div>
+									<button type="button" class="pop-close"
+										data-focus-next="popupGatherRefuse">팝업닫기</button>
+								</div>
+								<!-- e : 이메일 무단 수집거부 -->
 
-<!-- s : 웹접근성 우수사이트 인증서  -->
-<div class="layer-pop layer-default" id="popupWA" tabindex="0" data-popup-layer="popupWA" data-focus="popupWA">
-	<div class="layer-content">
-		<img class="pc-ver" src="./static/images/common/WA-2022.jpg" alt="웹접근성 우수사이트 인증서">
-        <img class="mo-ver" src="./static/images/common/WA-2022-mo.jpg" alt="웹접근성 우수사이트 인증서">
-	</div>
-	<button type="button" class="pop-close" data-focus-next="popupWA">팝업닫기</button>
-</div>
-<!-- e : 웹접근성 우수사이트 인증서  -->
-<!— e : 바닥글 영역 - b2c —>
-	</div>
+								<!-- s : 아이디어 정책 -->
+								<div class="layer-pop layer-normal" id="popupIdeaPolicy" tabindex="0"
+									data-popup-layer="popupIdeaPolicy" data-focus="popupIdeaPolicy">
+									<div class="layer-header">
+										<h2>아이디어 제안에 대한 정책</h2>
+									</div>
+									<div class="layer-content">
+										<div class="etc-divWrap">
+											<p>GMQDisplay 및 GMQDisplay 임직원은 당사가 공식적으로 요청하지 않았음에도 불구하고 여러분께서 일방적으로 당사에
+												제출하는 아이디어나 제안 등을 수령하거나 검토하지 않습니다.</p>
+											<p>이는 제출하신 내용이 당사 내부적으로 개발한 제품, 기술, 서비스와 유사할 경우 발생할 수 있는 오해와 분쟁을 방지하고 나아가
+												여러분의 창의적인 아이디어를 적극 보호하기 위함입니다.</p>
+											<p>이러한 취지를 이해하여 주시고 구체화되지 않은 아이디어나 콘셉트(Concept) 단계의 제안이 당사에 제출되지 않도록 하여 주시기
+												바랍니다.</p>
+										</div>
+									</div>
+									<button type="button" class="pop-close"
+										data-focus-next="popupIdeaPolicy">팝업닫기</button>
+								</div>
+								<!-- e : 아이디어 정책 -->
 
-	<input type="hidden" id="viewStContextPath" value="/"/>
+								<!-- s : 웹접근성 우수사이트 인증서  -->
+								<div class="layer-pop layer-default" id="popupWA" tabindex="0"
+									data-popup-layer="popupWA" data-focus="popupWA">
+									<div class="layer-content">
+										<img class="pc-ver" src="./static/images/common/WA-2022.jpg"
+											alt="웹접근성 우수사이트 인증서">
+										<img class="mo-ver" src="./static/images/common/WA-2022-mo.jpg"
+											alt="웹접근성 우수사이트 인증서">
+									</div>
+									<button type="button" class="pop-close" data-focus-next="popupWA">팝업닫기</button>
+								</div>
+								<!-- e : 웹접근성 우수사이트 인증서  -->
+								<!-- e : 바닥글 영역 - b2c -->
+							</div>
 
-	<script src="./static/script/masonry.min.js" async></script>
-	
-	<!— masonry js —>
-	<script src="./static/script/buynow.js" async></script>
-	<script type="text/javascript" src="https://resources.digital-cloud-west.medallia.com/wdcwest/145272/onsite/embed.js" async></script>
+							<input type="hidden" id="viewStContextPath" value="/" />
+
+							<script src="./static/script/masonry.min.js" async></script>
+
+							<!-- masonry js -->
+							<script src="./static/script/buynow.js" async></script>
+							<script type="text/javascript"
+								src="https://resources.digital-cloud-west.medallia.com/wdcwest/145272/onsite/embed.js"
+								async></script>
 </body>
 
-	</html>
+</html>

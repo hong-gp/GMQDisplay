@@ -288,7 +288,7 @@
 
                         
                         
-                                <a href="./Help/ForgotPassWord%EF%B9%96system_id=G5&amp;function=Login&amp;lang=ko-kr&amp;return_url=https%EF%B9%95%EA%A4%B7%EA%A4%B7www.GMQDisplay.com%EA%A4%B7ko-kr%EA%A4%B7index.login.html" class="text_btn">비밀번호를 잊으셨나요?</a>
+                                <!--<a href="./Help/ForgotPassWord%EF%B9%96system_id=G5&amp;function=Login&amp;lang=ko-kr&amp;return_url=https%EF%B9%95%EA%A4%B7%EA%A4%B7www.GMQDisplay.com%EA%A4%B7ko-kr%EA%A4%B7index.login.html" class="text_btn">비밀번호를 잊으셨나요?</a>-->
                         <span id="msg" style="display: none; color: #F00; font-size: 12px;"></span>
                         <input type="hidden" id="systemid" name="systemid" value="G5" />
                         <input type="hidden" id="returnurl" name="returnurl" value="https://www.GMQDisplay.com/ko-kr/index.login.html" />
@@ -326,17 +326,19 @@
                     
 
                     <div class="form_item" style="margin-top: 30px;">
-                        <div class="sub_line">또는 로그인</div>
+                        <div class="sub_line">아이디 · 비밀번호 찾기</div>
                     </div>
-                    
+                    <div class="form_item" style="text-align: center;">
+                        <button class="btn_small" style="margin-right:20px;" onclick="location.href='/GMQDisplay-master/login_info/SearchId.jsp'">아이디 찾기</button>
+						<button class="btn_small" style="margin-left:20px;" onclick="location.href='/GMQDisplay-master/login_info/SearchPassword.jsp'">비밀번호 찾기</button>
+                    </div>
 
-
-                    <div class="form_item" id="google" style="text-align: center;">
+                    <!--<div class="form_item" id="google" style="text-align: center;">
                         <button class="btn_login google">Login with Google</button>
                     </div>
                     <div class="form_item" id="fblogin" style="text-align: center;">
                         <button class="btn_login Kakao">Login with kakao</button>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="col-sm-5 col-xs-12 log_right">
@@ -349,7 +351,7 @@
                     </div>
                     <a href="./Sign.html" class="btn_small">회원가입</a>
                 </div>
-                <div class="bottom_area">
+                <!--<div class="bottom_area">
                     <ul>
                         <li class="icon"><span class="icon-Faster"></span></li>
                         <li>
@@ -371,11 +373,7 @@
 
                         </li>
                     </ul>
-
-
-
-                    
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -1632,29 +1630,5 @@
 
 </script>
 
-    <!-- footer-->
-    <footer class="component component-footer simple_footer">
-        <!-- 四欄sitemap-->
-        <aside class="component-container-footer">
-            <aside class="row">
-                <section class="copy-and-policy">
-                    <span class="copy tiny-sm">Copyright © GMQDisplay Corporation. All Rights Reserved.</span>
-                    <aside class="policy">
-                        <ul>
-                            <li class="small-sm"><a href="https://www.GMQDisplay.com/ko-kr/policy/privacy-policy.html">개인정보 보호 정책</a></li>
-                            	<li class="small-sm"><a href="https://www.GMQDisplay.com/ko-kr/policy/user-terms.html">이용약관 고지</a></li>
-                            <li class="small-sm"><a href="https://www.GMQDisplay.com/ko-kr/support/contact-us.html">문의하기</a></li>
-                        </ul>
-                    </aside>
-                </section>
-            </aside>
-            <!-- ./四欄sitemap-->
-        </aside>
-    </footer>
-
-    <!-- ./footer-->
-    <!--[if lt IE 10]>
-          <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
 </body>
 </html>

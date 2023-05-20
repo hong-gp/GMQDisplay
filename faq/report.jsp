@@ -11,7 +11,8 @@ if (id == null) {
 %>
 <head>
 
-<title>GMQ Display Service </title><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>고객센터 | GMQDisplay</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="keywords" content="고객센터, GMQ Display 고객센터, GMQ Display 1:1문의, GMQ Display 문의방법, 고객문의, 도움말  ">
 <meta http-equiv="pragma" content="no-cache">
@@ -19,7 +20,7 @@ if (id == null) {
 <meta name="Title" content="GPG Display Service">
 <meta name="Description" content="GMQ Display 서비스 이용에 궁금한 점이 있으시다면 서비스 도움말 메뉴를 이용해보세요.">
 <meta content="width=1200" name="viewport">
-<!--<link rel="shortcut icon" href="//img.danawa.com/new/danawa_main/v1/img/danawa_favicon.ico">-->
+<link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/css/common.css?v=2107270920">
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/css/navigation.css?v=2107270920">
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/wish_pop.css" />
@@ -81,20 +82,7 @@ if (id == null) {
 				</div>
 
 				<!-- 검색 -->
-				<div class="search_middle_area">
-					<div class="top_search_area">
-						<form id="srchFRM_HELPTOP" name="srchFRM_HELPTOP" method="GET" action="#">
-							<fieldset style="border-color:#666666;">
-								<legend>검색</legend>
-								<div class="search_area_content">
-									<input type="text" class="search_words_insert" name="search" id="AKCSearch" autocomplete="off" title="검색어 입력" placeholder="도움말을 검색하세요.">
-									<input id="module" name="module" value="goods" type="hidden">
-									<input id="act" name="act" value="dispMain" type="hidden">
-									<button class="btn_search_submit" onclick="btnSearch()"><span>검색</span></button>
-								</div>
-							</fieldset>
-						</form>
-					</div>
+				
 				</div>
 			</div>
 		</div>
@@ -232,7 +220,7 @@ if (id == null) {
 						내용<span class="ccs_notice">(필수)</span>
 					</legend>
 
-	                <textarea name="userContent" cols="50" rows="8" title="내용 입력" placeholder="내용을 작성해 주세요 &#13;&#10;※ 개인 정보 입력은 지양해 주세요" style="background-color:#cccccc"></textarea>
+	                <textarea name="userContent" cols="70" rows="10" title="내용 입력" placeholder="내용을 작성해 주세요 &#13;&#10;※ 개인 정보 입력은 지양해 주세요" style="background-color:#cccccc"></textarea>
                     <div class="remaining" align="right"><span id="textCount">0</span> / 1,000 자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                     
 	            </fieldset>
@@ -240,11 +228,11 @@ if (id == null) {
 	            
 				<center>
 					<button id="insert_report_btn" type = "button" 
-					style="background-color:#e7141a;width:80px;height:30px;padding: 0 1vw; color: white; border-radius: 1.3889vw;">
+					style="background-color:#e7141a;width:90px;height:30px;padding: 0 1vw; color: white; border-radius: 1.3889vw;">
 						입 력
 					</button>
 					<button type = "reset"
-					style="background-color:#ccc;width:80px;height:30px;padding: 0 1vw; color: white; border-radius: 1.3889vw;">
+					style="background-color:#ccc;width:90px;height:30px;padding: 0 1vw; color: white; border-radius: 1.3889vw;">
 						취 소
 					</button>
 		        </center> 
@@ -347,7 +335,7 @@ $(document).ready(function () {
 					<strong class="title">GMQ Display 고객센터</strong>
 					<div class="service">
 						<a href="FAQ.html" target="_blank" class="link link--home">고객센터 홈</a>
-						<a href="#" target="_blank" onclick="window.open('/GMQDisplay-master/faq/report.jsp','_blank', 'width=1080, height=800, toolbar=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no'); return false;" class="link link--inquiry">문의/제안</a>
+						<a href="/GMQDisplay-master/faq/report.jsp" target="_blank" class="link link--inquiry">문의/제안</a>
 						<a href="service.html" target="_blank" class="link link--help">도움말</a>
 					</div>
 					<ul class="info">

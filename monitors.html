@@ -945,13 +945,6 @@
 				<div class="header-right gnbMenu">
 					<ul>
 						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
-
-						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
 								aria-selected="false" class="link-cart" data-omni="cart" role="button">
 								<i class="icon ico-large ico-cart">장바구니</i>
@@ -1963,6 +1956,7 @@
 					var types = [];
 
 					$("input[name='recom'], input[name='genre'], input[name='size'], input[name='resolution'], input[name='ratio'], input[name='hz'], input[name='type'], .droplist-item").click(function () {
+
 						if ($(this).is(".droplist-item")) {
 							sort = this.firstChild.textContent.trim();
 							if (sort == "최신순") {
@@ -2009,9 +2003,21 @@
 							}
 						}
 
+						/*$('input[name="size"],input[name="resolution"],input[name="ratio"],input[name="hz"],input[name="type"]').on('change', function() {
+							var checkboxName = $(this).attr('name');
+							var checkboxGroup = $('input[name="' + checkboxName + '"]');
+
+							if ($(this).is(':checked')) {
+								checkboxGroup.not(this).prop('disabled', true);
+							} else {
+								checkboxGroup.prop('disabled', false);
+							}
+						});*/
+
 						$.ajax({
 							url: "./xhr/monitors-check.jsp",
 							type: "GET",
+							async : false,
 							data: {
 								recom: recoms.join("/"),
 								genre: genres.join("/"),
@@ -2024,11 +2030,100 @@
 							},
 							success: function (data) {
 								var bodyHtml = $(data);
+
+								var data_genre = $(data).filter('.genre').map(function() {
+									return $(this).text();
+								}).get();
+
+								var data_size = $(data).filter('.size').map(function() {
+									return $(this).text();
+								}).get();
+
+								var data_resolution = $(data).filter('.resolution').map(function() {
+									return $(this).text();
+								}).get();
+
+								var data_ratio = $(data).filter('.ratio').map(function() {
+									return $(this).text();
+								}).get();
+
+								var data_hz = $(data).filter('.hz').map(function() {
+									return $(this).text();
+								}).get();
+
+								var data_type = $(data).filter('.type').map(function() {
+									return $(this).text();
+								}).get();
+
+								/*if ($('input[name="size"]').is(':checked') || $('input[name="resolution"]').is(':checked') || $('input[name="ratio"]').is(':checked') || $('input[name="hz"]').is(':checked') || $('input[name="type"]').is(':checked')) {
+									$('input[name="genre"]').each(function() {
+										var genreValue = $(this).val();
+										if (!data_genre.includes(genreValue)) {
+											$('input[name="genre"][value="' + genreValue + '"]').prop('disabled', true);
+											if ($('input[name="genre"][value="' + genreValue + '"]').is(':checked')) {
+												$('input[name="genre"][value="' + genreValue + '"]').prop('disabled', false);
+											}
+										} else {
+											$('input[name="genre"][value="' + genreValue + '"]').prop('disabled', false);
+										}
+									});
+								} else {
+									$('input[name="genre"]').prop('disabled', false);
+								}*/
+
+								$('input[name="size"]').each(function() {
+									var value = $(this).val();
+									var str = value + "인치";
+									if (!data_size.includes(str)) {
+										$('input[name="size"][value="' + value + '"]').prop('disabled', true);
+									} else {
+										$('input[name="size"][value="' + value + '"]').prop('disabled', false);
+									}
+								});
+
+								$('input[name="resolution"]').each(function() {
+									var value = $(this).val();
+									if (!data_resolution.includes(value)) {
+										$('input[name="resolution"][value="' + value + '"]').prop('disabled', true);
+									} else {
+										$('input[name="resolution"][value="' + value + '"]').prop('disabled', false);
+									}
+								});
+
+								$('input[name="ratio"]').each(function() {
+									var value = $(this).val();
+									if (!data_ratio.includes(value)) {
+										$('input[name="ratio"][value="' + value + '"]').prop('disabled', true);
+									} else {
+										$('input[name="ratio"][value="' + value + '"]').prop('disabled', false);
+									}
+								});
+
+								$('input[name="hz"]').each(function() {
+									var value = $(this).val();
+									if (!data_hz.includes(value)) {
+										$('input[name="hz"][value="' + value + '"]').prop('disabled', true);
+									} else {
+										$('input[name="hz"][value="' + value + '"]').prop('disabled', false);
+									}
+								});
+
+								$('input[name="type"]').each(function() {
+									var value = $(this).val();
+									if (!data_type.includes(value)) {
+										$('input[name="type"][value="' + value + '"]').prop('disabled', true);
+									} else {
+										$('input[name="type"][value="' + value + '"]').prop('disabled', false);
+									}
+								});
+
 								if ($(".list-type").length > 0) {
 									$(".list-type").html(bodyHtml);
 								} else {
 									$(".list-type").html(bodyHtml);
 								}
+
+								//$("#pd-container").load(location.href = " #pd-container");
 							}
 						});
 					});
@@ -8318,8 +8413,8 @@
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<h3><a href="javascript:void(0);">추천 케어</a></h3>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

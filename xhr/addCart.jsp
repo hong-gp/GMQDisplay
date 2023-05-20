@@ -44,13 +44,18 @@
 			pstmt2.executeUpdate();
 			out.print("add");
 		} else {
-			String sql2 = "UPDATE cart SET cart_count=? WHERE userID=? AND Mno=?";
-			PreparedStatement pstmt2 = con.prepareStatement(sql2);
-			pstmt2.setInt(1, (rs.getInt("cart_count") + cart_count));
-			pstmt2.setString(2, id);
-			pstmt2.setString(3, Mno);
-			pstmt2.executeUpdate();
-			out.print(rs.getInt("cart_count") + cart_count);
+			if ((rs.getInt("cart_count") + cart_count) > 0) {
+				String sql2 = "UPDATE cart SET cart_count=? WHERE userID=? AND Mno=?";
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);
+				pstmt2.setInt(1, (rs.getInt("cart_count") + cart_count));
+				pstmt2.setString(2, id);
+				pstmt2.setString(3, Mno);
+				pstmt2.executeUpdate();
+
+				out.print(rs.getInt("cart_count") + cart_count);
+			} else {
+				out.print(rs.getInt("cart_count"));
+			}
 		}
 	} catch (Exception e) {
 		out.print(e);

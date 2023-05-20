@@ -1360,13 +1360,6 @@
 				<div class="header-right gnbMenu">
 					<ul>
 						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
-
-						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
 								aria-selected="false" class="link-cart" data-omni="cart" role="button">
 								<i class="icon ico-large ico-cart">장바구니</i>
@@ -2675,7 +2668,7 @@ $(document).ready(function() {
 			data: { Mno: Mno }
 		})
 		.done(function( msg ) {
-			location.replace(location.href);
+			location.href = 'cart.jsp';
 			$("#mask").remove();
 			$('.alert#deleteCartMsg').hide();
 		});
@@ -2944,20 +2937,6 @@ $(document).ready(function() {
 		<!-- e : 220615 수정 -->
 
 		<div id="floatingSticky" class="floating-sticky">
-			<div class="menu-list">
-				<div class="inner">
-					<a href="#" class="btn-floating" onclick="floating_open();"><span>메뉴 보기</span></a>
-					<ul>
-						<li class="menu01" aria-hidden=""><a href="javascript:chat_open();">챗봇 채팅하기</a></li>
-						<li class="menu02" aria-hidden=""><a href="javascript:chat_open2();">구매 상담사 채팅하기</a></li>
-						<li class="menu03" aria-hidden="true" style="display:none;"><a
-								href="/sec/customer/reservationstore/?ref=floating/ " onclick="chat_open3();">매장 방문
-								예약하기</a></li>
-						<li class="menuGift"><a href="javascript:gift_open();"
-								data-omni="float chat:event gift">선물하기</a></li>
-					</ul>
-				</div>
-			</div>
 			<button type="button" class="btn-gotop">
 				<span>위로</span>
 			</button>
@@ -3077,8 +3056,8 @@ $(document).ready(function() {
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<h3><a href="javascript:void(0);">추천 케어</a></h3>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

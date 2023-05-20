@@ -939,13 +939,6 @@ logger("prd");
 				<div class="header-right gnbMenu">
 					<ul>
 						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
-
-						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
 								aria-selected="false" class="link-cart" data-omni="cart" role="button">
 								<i class="icon ico-large ico-cart">장바구니</i>
@@ -4143,7 +4136,7 @@ function Urlsend(sns) {
 						<div class="bookmarkTooltip flashTooltip bookmarkOn">
 							<div>
 								<p><span>찜</span>이 되었습니다.</p>
-									<a href="javascript:void(0);" class="btn-underline">전체보기</a>
+									<a href="/GMQDisplay-master/mypage/mywishlist.jsp" class="btn-underline">전체보기</a>
 							</div>
 						</div>
 							 <div class="bookmarkTooltip flashTooltip bookmarkOff">
@@ -4437,31 +4430,27 @@ function Urlsend(sns) {
 											<div class="dropDown-content itm-eventInfo">
 												<div id="membership-info">
 													<a href="javascript:MemDisplay();" class="dropButton" id="membershipDropBtn">
-														<span>GMQDisplay 멤버십 <strong id="membership-ptn-top">2490 포인트</strong> 적립</span>
+														<span>GMQDisplay 멤버십 <strong id="membership-ptn-top">2490 포인트</strong> 지원</span>
 														<span class="blind">닫힘</span>
 													</a>
 														<div class="dropcontent" id="TabMembership">
 															<div class="casewrap point-nomember" style="display: block;" >
 																<p class="emphasis-txt border-line">GMQ Display
-																	<em class="case-blue membership-ptn"> 포인트 2490 (기본 0.1%)</em> 적립 예정
+																	<em class="case-blue membership-ptn"> 포인트 2490 (기본 0.1%)</em> 지원 예정
 																</p>
 																	<p class="assi-txt">GMQ Display 포인트는 GMQ Display계정의<br> 
 																	'국가 또는 지역' 정보가 <br>
-																	대한민국인 고객님만 적립 및 사용 가능합니다.</p>
+																	대한민국인 고객님만 지원 및 사용 가능합니다.</p>
 																											
 																		<div class="center-link">
-																			<a href="#" target="_blank" class="btn-underline">내 계정정보 확인하기</a>
+																			<a href="/GMQDisplay-master/mypage/myinfo.jsp" target="_blank" class="btn-underline">내 계정정보 확인하기</a>
 																		</div>
-																				<p class="assi-txt">적립 예정 포인트는 멤버십 회원 상태와 등급별 최대 적립 <br>한도에 따라 실제 적립 포인트와 상이할 수 있습니다.</p>
+																				<p class="assi-txt">지원 예정 포인트는 멤버십 회원 상태와 등급별 최대 지원 <br>한도에 따라 실제 지원 포인트와 상이할 수 있습니다.</p>
 																					<div>
 																							<ul class="detail-view">
 																								<li>
-																									<span>GMQ Display 멤버십 등급혜택</span>
-																										<a href="#" target="_blank" class="btn-underline">자세히 보기</a>
-																								</li>
-																								<li>
-																									<span>GMQ Display 포인트 적립혜택</span>
-																										<a href="#" target="_blank" class="btn-underline">자세히 보기</a>
+																									<span>GMQ Display 포인트 지원혜택</span>
+																										<a href="/GMQDisplay-master/event.html" target="_blank" class="btn-underline">자세히 보기</a>
 																								</li>
 																							</ul>
 																					</div>
@@ -5253,7 +5242,7 @@ function Urlsend(sns) {
 									{{if ~fn_equals(pfGoods.stId, 1)}}
 										{{if (pfGoods.mShipPtShowYn) }}
 											<div class="point-detail">
-												<span class="expect">적립 예정 포인트</span>
+												<span class="expect">지원 예정 포인트</span>
 												<span class="point">{{:~fn_comma( pfGoods.membershipPoint ) }} 원</span>
 											</div>		
 										{{/if}}
@@ -5262,7 +5251,7 @@ function Urlsend(sns) {
 									{{if ~fn_equals(pfGoods.stId, 2) || ~fn_equals(pfGoods.stId, 3)}}
 										{{if (pfGoods.mShipPtShowYn) }}
 											<div class="point-detail">
-												<span class="expect">적립 예정 포인트</span>
+												<span class="expect">지원 예정 포인트</span>
 												<span class="point">{{:~fn_comma( pfGoods.membershipPoint ) }} 원</span>
 											</div>
 										{{/if}}
@@ -6557,7 +6546,7 @@ function Urlsend(sns) {
 									compareData[v]["pfGoods"]["stGrp"] = "b2c";
 									compareData[v]["pfGoods"]["goodsAdvCmntStYn"] = goodsAdvCmntStYn;
 									
-									//적립포인트 - s 
+									//지원포인트 - s 
 									var mShipPtShowYn = false;
 									if(!mShipPtShowYn){
 										var stId = compareData[v]["pfGoods"]["stId"];
@@ -6589,7 +6578,7 @@ function Urlsend(sns) {
 										totalMShipPtShowYn = true;
 									}
 									compareData[v]["pfGoods"]["mShipPtShowYn"] = mShipPtShowYn;
-									//적립포인트 - e
+									//지원포인트 - e
 									
 									$('.part1').append($('#compareItemTempl').render(compareData[v]));	
 									
@@ -6687,7 +6676,7 @@ function Urlsend(sns) {
 								compareData[v]["pfGoods"]["stGrp"] = "b2c";
 								compareData[v]["pfGoods"]["goodsAdvCmntStYn"] = goodsAdvCmntStYn;
 								
-								//적립포인트 - s 
+								//지원포인트 - s 
 								var mShipPtShowYn = false;
 								if(!mShipPtShowYn){
 									var stId = compareData[v]["pfGoods"]["stId"];
@@ -6719,7 +6708,7 @@ function Urlsend(sns) {
 									totalMShipPtShowYn = true;
 								}
 								compareData[v]["pfGoods"]["mShipPtShowYn"] = mShipPtShowYn;
-								//적립포인트 - e
+								//지원포인트 - e
 								
 								$('.part1').append($('#compareItemTempl').render(compareData[v]));	
 								
@@ -7221,14 +7210,14 @@ function Urlsend(sns) {
 						$(".layer-content-compare").animate({ scrollTop: position }, 600, "swing");
 					}
 					/* ===================================================================== */
-					/* 멤버십 적립포인트 보이기 여부(B2C)(필요) */
+					/* 멤버십 지원포인트 보이기 여부(B2C)(필요) */
 					function mShipPtShowYnB2C(stId, mdlCode
 																, envmtGbCd, environmentGbLocal, environmentGbDev, environmentGbStg
 																, stGbCd, membershipUseExcptYn, carePlusType
 																, thirdPartyYn
-																, isLogin, membershipYn){console.log("멤버십 적립포인트 보이기 여부(B2C)(필요)");
+																, isLogin, membershipYn){console.log("멤버십 지원포인트 보이기 여부(B2C)(필요)");
 						
-						//적립 예정 포인트 or GMQDisplay 멤버십 가입하기
+						//지원 예정 포인트 or GMQDisplay 멤버십 가입하기
 						//(한달살기) 특정 SKU 멤버십 포인트 미노출 처리
 						if(!(
 								mdlCode === 'NT950QDB-KC58T' || mdlCode === 'NT950QDB-KC58F' || mdlCode === 'NT950XDB-KC58O' || mdlCode === 'NT950XDB-KC58F' || 
@@ -7254,8 +7243,8 @@ function Urlsend(sns) {
 						}
 					}
 					
-					/* 멤버십 적립포인트 보이기 여부(패넷)(필요) */
-					function mShipPtShowYnFNET(stId, stGbCd, stCd, isLogin, membershipYn){console.log("멤버십 적립포인트 보이기 여부(패넷)(필요)");
+					/* 멤버십 지원포인트 보이기 여부(패넷)(필요) */
+					function mShipPtShowYnFNET(stId, stGbCd, stCd, isLogin, membershipYn){console.log("멤버십 지원포인트 보이기 여부(패넷)(필요)");
 						
 						if((stGbCd !== '80')){
 							if((stCd !== 'epp')){
@@ -10495,41 +10484,7 @@ function buy() {
 													</ul>
 												</div>
 											</div> -->
-											<div class="dropdownMenu type2">
-												<button title="리스트 정렬 순서" type="button" id="review-sort-btn"
-													class="choose-account" aria-haspopup="true" value="">베스트순<span
-														class="blind">하위메뉴 있음</span></button>
-												<ul class="account-types" role="menu">
-													<li id="bestCmnt" role="presentation" aria-selected="true">
-														<input type="radio" id="review-sort-bestCmnt"
-															name="review-list-sort" value="bestCmnt" role=""
-															aria-checked="" data-omni="">
-														<label for="review-sort-bestCmnt"><span
-																class="reviewSortDetail">베스트순</span></label>
-													</li>
-													<li id="sysRegDtm" role="presentation" aria-selected="false">
-														<input type="radio" id="review-sort-sysRegDtm"
-															name="review-list-sort" value="sysRegDtm" role=""
-															aria-checked="" data-omni="most recent">
-														<label for="review-sort-sysRegDtm"><span
-																class="reviewSortDetail">최신순</span></label>
-													</li>
-													<li id="estmScoreHigh" role="presentation" aria-selected="false">
-														<input type="radio" id="review-sort-estmScoreHigh"
-															name="review-list-sort" value="estmScoreHigh"
-															data-omni="highest to lowest rating">
-														<label for="review-sort-estmScoreHigh"><span
-																class="reviewSortDetail">평점높은순</span></label>
-													</li>
-													<li id="estmScoreLow" role="presentation" aria-selected="false">
-														<input type="radio" id="review-sort-estmScoreLow"
-															name="review-list-sort" value="estmScoreLow"
-															data-omni="lowest to highest rating">
-														<label for="review-sort-estmScoreLow"><span
-																class="reviewSortDetail">평점낮은순</span></label>
-													</li>
-												</ul>
-											</div>
+											
 										</div>
 										<div id="commentList">
 											<ul class="review-list" id="review-list">
@@ -10718,7 +10673,7 @@ function buy() {
 														}
 														%>
 														</div>
-														<div class="help-goods">
+														<!--<div class="help-goods">
 															<input type="hidden" name="goodsEstmNo" value="183963">
 															<button type="button" class="btn-goods" name="opnnCheck" data-yescls="login-view-like">도움이 돼요<span>0</span></button>
 																</div>
@@ -10727,7 +10682,7 @@ function buy() {
 																
 																<a href="javascript:;" class="report_183963" onclick="commentReport('183963');" tabindex="-1"></a>
 																<a href="javascript:;" class="btn-underline" title="상품평 신고하기" id="reportBtn" onclick="layerMsgPop(this);" data-content="상품평을 신고하시겠습니까?" data-yes="확인" data-yescls="comment-report report_183963" data-no="취소" data-close="툴팁 닫기">신고</a>
-															</p>
+															</p>-->
 													</div>
 													<!-- e : 221221 상품리스트 -->
 
@@ -11032,7 +10987,7 @@ function fnCancelWrite() {
 											<ul>
 												<li>
 													고객후기를 위한 공간입니다. 제품 및 기타 문의사항은 <a
-														href="https://www.samsung.com/sec/info/contactus/">고객서비스</a>를
+														href="/GMQDisplay-master/faq/FAQ.html">고객서비스</a>를
 													이용해주세요.<br>
 													[타인에게 불쾌감을 유발할 수 있는 욕설과 저속한 비속어를 사용하거나 타인을 근거 없이 비방하는 리뷰는 제한될 수
 													있습니다.]
@@ -11693,8 +11648,8 @@ wcs_do();
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<h3><a href="javascript:void(0);">추천 케어</a></h3>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

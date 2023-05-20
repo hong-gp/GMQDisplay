@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.*" %>
+<%
+String id = (String)session.getAttribute("sid");
+if (id == null) {
+	response.sendRedirect("/GMQDisplay-master/login_info/login.html");
+	return;
+}
+%>
 <!DOCTYPE HTML>
 <html lang="ko">
 
 <head>
 
-    <title>Gaming Monitor Display</title>
+    <title>마이페이지 | GMQDisplay</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +52,7 @@
 
     <link rel="dns-prefetch" href="https://images.GMQDisplay.com">
     <link rel="preconnect" href="https://images.GMQDisplay.com">
-    <link rel="shortcut icon" href="./static/images/favicon.png">
+    <link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
     <link rel="apple-touch-icon" href="" sizes="">
 
     <!-- PUB : style.css import resources -->
@@ -947,12 +954,7 @@
 
 				<div class="header-right gnbMenu">
 					<ul>
-						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
+						
 
 						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
@@ -1699,7 +1701,6 @@
 
             <div class="content board-content">
 <%
-	String id = (String)session.getAttribute("sid");
 	String name = "";
 	DecimalFormat df = new DecimalFormat("###,###");
 
@@ -2059,7 +2060,17 @@
 									pstmt.setString(1, id);
 
 									ResultSet rs = pstmt.executeQuery();
-									while (rs.next()) {
+									if (!rs.next()) {
+								%>
+									<div class="conbox-shipment">
+									<div class="my-shipment-none">
+										<p class="txt">찜한 상품이 없습니다.</p>							
+									</div>
+									</div>
+								<%
+
+									} else {
+										do {
 										String sql2 = "SELECT * FROM product WHERE Mno=?"; 
 										PreparedStatement pstmt2 = con.prepareStatement(sql2);
 										pstmt2.setString(1, rs.getString("Mno"));
@@ -2100,7 +2111,7 @@
                                         <div class="my-boardlist">
                                             <div class="boardlist-image">
                                                 <div class="photo">
-                                                    <a href="/sec/smartphones/galaxy-a34-5g-a346/SM-A346NLGBKOO/">
+                                                    <a href="/GMQDisplay-master/product/<%=Mno%>.jsp">
                                                         <!-- KDP-21609 [FO][B2B] 모바일 웹접근성_p83 LMJ START -->
                                                         <img src="../static/images/product/<%=Mno%>_1.png"
                                                             alt="<%=Mname%>">
@@ -2113,7 +2124,7 @@
                                                 </p>
                                                 <!-- 상품 명 -->
                                                 <p class="title"><a
-                                                        href="/sec/smartphones/galaxy-a34-5g-a346/SM-A346NLGBKOO/"><%=Mname%></a></p>
+                                                        href="/GMQDisplay-master/product/<%=Mno%>.jsp"><%=Mname%></a></p>
                                                 <!-- 모델코드 -->
                                                 <p class="label"><%=Mno%></p>
                                                 <p class="option"><%=rs.getString("wishlist_date")%></p>
@@ -2144,7 +2155,8 @@
                                 </li>
 							<%
 										}
-									} 
+										} while(rs.next());
+									}
 								} catch (Exception e) {
 									out.print(e);
 								}
@@ -2182,19 +2194,7 @@
 	});
 </script>
                         </div>
-                        <div class="pageingWrap">
-                            <div class="paging" id="interestPage"><span class="btn_first"><a class="btn_paging first"
-                                        href="javascript:;" style="cursor: default;">맨 처음 페이지로 가기</a></span><span
-                                    class="btn_prev"><a href="javascript:;" style="cursor: default;">이전 페이지로
-                                        가기</a></span>
-                                <ul>
-                                    <li class="active"><a href="javascript:;" class="pageClass currentPage"
-                                            style="cursor: default;">1</a></li>
-                                </ul><span class="btn_next"><a href="javascript:;" style="cursor: default;">다음 페이지로
-                                        가기</a></span><span class="btn_last"><a href="javascript:;"
-                                        style="cursor: default;">맨 마지막 페이지로 가기</a></span>
-                            </div>
-                        </div><!-- 모바일에서 paging 대신 버튼 사용. 더보기(...) 클릭시 10개씩 노출 -->
+                        
                     </div>
                     <!-- e : 게시판 -->
                 </div>
@@ -2337,8 +2337,8 @@
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<a href="javascript:void(0);"><h3>추천 케어</h3></a>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

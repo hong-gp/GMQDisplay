@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.*" %>
+<%
+String id = (String)session.getAttribute("sid");
+if (id == null) {
+	response.sendRedirect("/GMQDisplay-master/login_info/login.html");
+	return;
+}
+%>
 <!DOCTYPE HTML>
 <html lang="ko">
 
 <head>
 
-	<title>Gaming Monitor Display</title>
+	<title>마이페이지 | GMQDisplay</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +52,7 @@
 
 	<link rel="dns-prefetch" href="https://images.GMQDisplay.com">
 	<link rel="preconnect" href="https://images.GMQDisplay.com">
-	<link rel="shortcut icon" href="./static/images/favicon.png">
+	<link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
 	<link rel="apple-touch-icon" href="" sizes="">
 
 	<!-- PUB : style.css import resources -->
@@ -947,12 +954,7 @@
 
 				<div class="header-right gnbMenu">
 					<ul>
-						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
+						
 
 						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
@@ -1699,7 +1701,6 @@
 
 			<div class="content board-content">
 <%
-	String id = (String)session.getAttribute("sid");
 	String name = "";
 
 	String db_url = "jdbc:mysql://localhost:3306/gpqd";
@@ -1803,7 +1804,7 @@
 						<!-- e : 멤버십 가입 후 -->
 						<div class="my-info-manage">
 							<div class="member info">
-								<a href="" target="" class="link-arrow lrg" data-omni="info:profile view more">회원 정보</a>
+								<a href="javascript:void(0);" target="" class="link-arrow lrg" data-omni="info:profile view more">회원 정보</a>
 								<ul>
 									<li>
 										<span class="tit">Email ID</span>
@@ -2051,8 +2052,8 @@
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<a href="javascript:void(0);"><h3>추천 케어</h3></a>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

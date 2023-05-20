@@ -3,29 +3,46 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.*" %>
 <html lang="ko">
-<head>
-	<link rel="stylesheet" href="../static/css/reset.css">
-	<link rel="stylesheet" href="../static/css/pf.css">
-</head>
 <body>
 <%
 	request.setCharacterEncoding("utf-8");
 	String id = (String)session.getAttribute("sid");
 
 	String[] recom = request.getParameterValues("recom");
-	String str_recom = recom[0];
+	String str_recom = "";
+	if (recom != null)
+		str_recom = recom[0];
+
 	String[] valueArray = request.getParameterValues("genre");
+	if (valueArray != null)
+		str_recom = recom[0];
 	String value = "";
+
 	String[] sizeArray = request.getParameterValues("size");
+	if (recom != null)
+		str_recom = recom[0];
 	String size = "";
+
 	String[] resolutionArray = request.getParameterValues("resolution");
+	if (recom != null)
+		str_recom = recom[0];
 	String resolution = "";
+
 	String[] ratioArray = request.getParameterValues("ratio");
+	if (recom != null)
+		str_recom = recom[0];
 	String ratio = "";
+
 	String[] hzArray = request.getParameterValues("hz");
+	if (recom != null)
+		str_recom = recom[0];
 	String hz = "";
+
 	String[] typeArray = request.getParameterValues("type");
+	if (recom != null)
+		str_recom = recom[0];
 	String type = "";
+
 	String sort = request.getParameter("sort");
 	
   Connection con = null;
@@ -612,16 +629,16 @@
 
 	if (str_recom.equals("recom")) {
 		if(pathArr.length > 0 || sizeArr.length > 0 || resolutionArr.length > 0 || ratioArr.length > 0 || hzArr.length > 0 || typeArr.length > 0) {
-			query += " AND ( Mno = 'EX2710S' OR Mno = '32UN650' OR Mno = 'S27AG300' )";
+			query += " AND ( Mno = 'EX2710S' OR Mno = '32UN650' OR Mno = 'S27AG300' OR Mno = 'G32C4X' OR Mno = 'G241VE2' OR Mno = 'XL2411K' OR Mno = 'TFG27Q14P' OR Mno = 'U3419W')";
 		} else {
-			query += " WHERE ( Mno = 'EX2710S' OR Mno = '32UN650' OR Mno = 'S27AG300' )";
+			query += " WHERE ( Mno = 'EX2710S' OR Mno = '32UN650' OR Mno = 'S27AG300' OR Mno = 'G32C4X' OR Mno = 'G241VE2' OR Mno = 'XL2411K' OR Mno = 'TFG27Q14P' OR Mno = 'U3419W')";
 		}
 	}
 
 	if (sort.equals("launch")) {
 		query += " ORDER BY Mlaunch DESC";
 	} else if (sort.equals("popularity")) {
-		query += " ORDER BY Mlaunch DESC";
+		query += " ORDER BY Morder DESC";
 	} else if (sort.equals("expensive")) {
 		query += " ORDER BY Mprice DESC";
 	} else if (sort.equals("cheap")) {
@@ -1045,8 +1062,16 @@
     rs = stmt.executeQuery();
 	int num = 0;
 	DecimalFormat df = new DecimalFormat("###,###");
-
-		while(rs.next()) {
+		if (!rs.next()) {
+%>
+			<li class="empty-box" style="width:100%">
+				<div class="empty-line">
+					<span class="no-content">판매 가능한 상품이 없습니다.</span>
+				</div>
+			</li>
+<%
+		} else {
+			do {
 			try {
 			// 리뷰 평점, 개수
 			String sql_review = "SELECT * FROM review WHERE Mno=?";
@@ -1071,7 +1096,85 @@
 			DecimalFormat df_rating = new DecimalFormat("#.#");
 			String format_rating = df_rating.format(rating);
 			num++;
+
+			String genreStr = "";
+
+			if (rs.getString("Mgenre").equals("fps") || rs.getString("Mgenre").equals("rts"))
+				genreStr = "fps/rts";
+			else if (rs.getString("Mgenre").equals("rpg") || rs.getString("Mgenre").equals("sports") || rs.getString("Mgenre").equals("fighting"))
+				genreStr = "rpg/sports/fighting";
+			else if (rs.getString("Mgenre").equals("graphic"))
+				genreStr = "graphic";
+			else if (rs.getString("Mgenre").equals("work"))
+				genreStr = "work";
+			else if (rs.getString("Mgenre").equals("videogame"))
+				genreStr = "videogame";
+
+			String resolutionStr = "";
+
+			if (rs.getString("Mresolution").equals("1920 x 1080(FHD)"))
+				resolutionStr = "FHD";
+			else if (rs.getString("Mresolution").equals("2560 x 1440(QHD)"))
+				resolutionStr = "(QHD)";
+			else if (rs.getString("Mresolution").equals("3840 x 2160(4K UHD)"))
+				resolutionStr = "UHD";
+			else if (rs.getString("Mresolution").equals("3440 x 1440(Ultra WQHD)"))
+				resolutionStr = "WQHD";
+			else if (rs.getString("Mresolution").equals("2560 x 2880(SDQHD)"))
+				resolutionStr = "SDQHD";
+
+			String ratioValue = "";
+
+			if (rs.getString("Mratio").equals("와이드(16:9)"))
+				ratioValue = "16:9";
+			else if (rs.getString("Mratio").equals("울트라와이드(21:9)"))
+				ratioValue = "21:9";
+			else if (rs.getString("Mratio").equals("와이드(16:18)"))
+				ratioValue = "16:18";
+
+			String hzValue = "";
+
+			if (rs.getString("Minjection").equals("60Hz") || rs.getString("Minjection").equals("75Hz"))
+				hzValue = "60/75";
+			else if (rs.getString("Minjection").equals("144Hz") || rs.getString("Minjection").equals("120Hz") || rs.getString("Minjection").equals("100Hz") )
+				hzValue = "80/100/120/144";
+			else if (rs.getString("Minjection").equals("165Hz") || rs.getString("Minjection").equals("170Hz"))
+				hzValue = "165/170";
+			else if (rs.getString("Minjection").equals("180Hz") || rs.getString("Minjection").equals("200Hz") || rs.getString("Minjection").equals("240Hz") || rs.getString("Minjection").equals("280Hz"))
+				hzValue = "180/200/240/280";
+
+			String typeValue = "";
+
+			if (rs.getString("Mform").equals("평면"))
+				typeValue = "flat";
+			else if (rs.getString("Mform").equals("커브드"))
+				typeValue = "curve";
+
+			String genre_span = "";
+			if (rs.getString("Mgenre").equals("fps"))
+				genre_span = "FPS";
+			else if (rs.getString("Mgenre").equals("rts"))
+				genre_span = "RTS";
+			else if (rs.getString("Mgenre").equals("rpg"))
+				genre_span = "RPG";
+			else if (rs.getString("Mgenre").equals("sports"))
+				genre_span = "Sports";
+			else if (rs.getString("Mgenre").equals("fighting"))
+				genre_span = "Fights";
+			else if (rs.getString("Mgenre").equals("graphic"))
+				genre_span = "그래픽 작업용";
+			else if (rs.getString("Mgenre").equals("work"))
+				genre_span = "사운드 작업용";
+			else if (rs.getString("Mgenre").equals("videogame"))
+				genre_span = "비디오 게임용";
 %>
+<div class="genre" style="display: none;"><%=genreStr%></div>
+<div class="size" style="display: none;"><%=rs.getString("Msize")%></div>
+<div class="resolution" style="display: none;"><%=resolutionStr%></div>
+<div class="ratio" style="display: none;"><%=ratioValue%></div>
+<div class="hz" style="display: none;"><%=hzValue%></div>
+<div class="type" style="display: none;"><%=typeValue%></div>
+
 								<li class="item" id="li-prd-<%=rs.getString("Mno")%>">
 									<form name="form<%=rs.getString("Mno")%>" id="form<%=rs.getString("Mno")%>" method="post">
 										<input type="hidden" name="Mno" value="<%=rs.getString("Mno")%>" />
@@ -1079,8 +1182,8 @@
 									<div class="item-inner" data-omni="<%=rs.getString("Mno")%>|<%=rs.getString("Mno")%>">
 										<div class="ins-badge-area-c1228"><span style="float:right"></span></div>
 										<div class="ins-badge-area-c1236"><span style="float:right"></span></div>
-										<div class="card-flag" style="height: 23px;">
-											<span><%=rs.getString("Mgenre")%></span>
+										<div class="card-flag">
+											<span><%=genre_span%></span>
 											<%
 											if (id != null) {
 												String sql_wish = "SELECT * FROM wishlist WHERE userID=? AND Mno=?"; 
@@ -1123,13 +1226,11 @@
 											</div>
 										</div> <!-- 마우스 오버시 이미지 순차교체  --><a
 											href="./product/<%=rs.getString("Mno")%>.jsp"
-											onclick="netFunnel_Action_PF('./static/images/product/<%=rs.getString("Mno")%>_1.png');return false;"
 											class="card-img"
-											data-image-src="['//images.samsung.com/kdp/goods/2023/02/03/e2186039-ca36-4b0a-be72-97709b57a64a.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/4b7e8b36-5ddb-4328-9693-9387d4fe6aa1.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/420e46ce-c182-4e7f-9f29-0b3045c3ab5b.png?$PF_PRD_PNG$']"
-											style="height: 224px;"> <img
-												src="./static/images/product/<%=rs.getString("Mno")%>_1.png"
+											data-image-src="['//images.samsung.com/kdp/goods/2023/02/03/e2186039-ca36-4b0a-be72-97709b57a64a.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/4b7e8b36-5ddb-4328-9693-9387d4fe6aa1.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/420e46ce-c182-4e7f-9f29-0b3045c3ab5b.png?$PF_PRD_PNG$']">
+											<img src="./static/images/product/<%=rs.getString("Mno")%>_1.png"
 												alt="<%=rs.getString("Mname")%>"></a>
-										<div class="card-opt" style="height: 13px;">
+										<div class="card-opt">
 											<div class="pf-color-sel">
 												<div class="option-slick">
 													<ol class="itm-color-list swiper-wrapper">
@@ -1149,10 +1250,10 @@
 												</div>
 											</div>
 										</div>
-										<div class="card-option" style="height: 10px;"></div>
-										<div class="card-detail" style="height: 68px;"> <span class="prd-name"
-												title="The Freestyle + 스마트 모니터 68.6 cm 패키지"><%=rs.getString("Mname")%></span> <span class="prd-num"><%=rs.getString("Mno")%></span> </div>
-										<div class="card-price" style="height: 61px;">
+										<div class="card-option"></div>
+										<div class="card-detail"> <span class="prd-name"
+												title="<%=rs.getString("Mname")%>"><%=rs.getString("Mname")%></span> <span class="prd-num"><%=rs.getString("Mno")%></span> </div>
+										<div class="card-price">
 											<div class="list-price"> <span>기준가</span> <em><%=df.format(Integer.parseInt(rs.getString("Mprice")))%> 원</em> </div>
 											<div class="price-detail"> <span class="coupon">혜택가</span>
 												<div class="pic"> <em><%=df.format(Integer.parseInt(rs.getString("Msale")))%></em><span class="unit">원</span> <button
@@ -1171,23 +1272,21 @@
 													</div> <!-- e : 툴팁 -->
 												</div>
 											</div>
-											<div class="point-detail"> <span class="expect">적립 예정 포인트</span> <span
+											<div class="point-detail"> <span class="expect">지원 예정 포인트</span> <span
 													class="point"><%=(Integer.parseInt(rs.getString("Msale")))/100%>P</span> </div>
 										</div>
-										<div class="card-btn" style="height: 44px;"> <!-- 200723 href 속성 삭제 --><a href="./product/<%=rs.getString("Mno")%>.jsp"><button
+										<div class="card-btn"> <!-- 200723 href 속성 삭제 --><a href="./product/<%=rs.getString("Mno")%>.jsp"><button
 												type="button" class="btn btn-d btn-type2"
 												onclick="netFunnel_Action_PF('./product/<%=rs.getString("Mno")%>.jsp');return false;"
 												data-omni="">구매하기</button></a> </div>
-										<div class="card-purchase" style="height: 110px;">
+										<div class="card-purchase">
 											<ul class="message-list">
-												<li class="message-list-item"><%=rs.getString("Mfeatures1")%></li>
-												<li class="message-list-item"><%=rs.getString("Mfeatures2")%></li>
-												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
-												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
-												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
+												<li class="message-list-item"><%=rs.getString("Msize")%></li>
+												<li class="message-list-item"><%=rs.getString("Mresolution")%></li>
+												<li class="message-list-item"><%=rs.getString("Minjection")%>의 주사율</li>
 											</ul>
 											<div class="compare">
-											<a class="link-review" href="/sec/monitors/package-smart-ls27bm502ek-sp-dc2/LS27BM502EK-SP/?focus=review"
+											<a class="link-review" href="javascript:void(0);"
 											title="상품평점"><%=format_rating%> (<%=cnt%>)</a> </div>
 										</div>
 									</div>
@@ -1233,7 +1332,8 @@
 			} catch (Exception e) {
 				out.print(e);
 			}
-		}
+		} while (rs.next());
+}
   } catch (Exception e) {
     e.printStackTrace();
   }

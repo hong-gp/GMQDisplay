@@ -49,6 +49,24 @@
 			DecimalFormat df_rating = new DecimalFormat("#.#");
 			String format_rating = df_rating.format(rating);
 			num++;
+
+			String genre_span = "";
+			if (rs.getString("Mgenre").equals("fps"))
+				genre_span = "FPS";
+			else if (rs.getString("Mgenre").equals("rts"))
+				genre_span = "RTS";
+			else if (rs.getString("Mgenre").equals("rpg"))
+				genre_span = "RPG";
+			else if (rs.getString("Mgenre").equals("sports"))
+				genre_span = "Sports";
+			else if (rs.getString("Mgenre").equals("fighting"))
+				genre_span = "Fights";
+			else if (rs.getString("Mgenre").equals("graphic"))
+				genre_span = "그래픽 작업용";
+			else if (rs.getString("Mgenre").equals("work"))
+				genre_span = "사운드 작업용";
+			else if (rs.getString("Mgenre").equals("videogame"))
+				genre_span = "비디오 게임용";
 %>
 								<li class="item" id="li-prd-<%=rs.getString("Mno")%>">
 									<form name="form<%=rs.getString("Mno")%>" id="form<%=rs.getString("Mno")%>" method="post">
@@ -57,8 +75,8 @@
 									<div class="item-inner" data-omni="<%=rs.getString("Mno")%>|<%=rs.getString("Mno")%>">
 										<div class="ins-badge-area-c1228"><span style="float:right"></span></div>
 										<div class="ins-badge-area-c1236"><span style="float:right"></span></div>
-										<div class="card-flag" style="height: 23px;">
-											<span><%=rs.getString("Mgenre")%></span>
+										<div class="card-flag">
+											<span><%=genre_span%></span>
 											<%
 											if (id != null) {
 												String sql_wish = "SELECT * FROM wishlist WHERE userID=? AND Mno=?"; 
@@ -101,36 +119,13 @@
 											</div>
 										</div> <!-- 마우스 오버시 이미지 순차교체  --><a
 											href="./product/<%=rs.getString("Mno")%>.jsp"
-											onclick="netFunnel_Action_PF('./static/images/product/<%=rs.getString("Mno")%>_1.png');return false;"
 											class="card-img"
-											data-image-src="['//images.samsung.com/kdp/goods/2023/02/03/e2186039-ca36-4b0a-be72-97709b57a64a.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/4b7e8b36-5ddb-4328-9693-9387d4fe6aa1.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/420e46ce-c182-4e7f-9f29-0b3045c3ab5b.png?$PF_PRD_PNG$']"
-											style="height: 224px;"> <img
-												src="./static/images/product/<%=rs.getString("Mno")%>_1.png"
+											data-image-src="['//images.samsung.com/kdp/goods/2023/02/03/e2186039-ca36-4b0a-be72-97709b57a64a.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/4b7e8b36-5ddb-4328-9693-9387d4fe6aa1.png?$PF_PRD_PNG$', '//images.samsung.com/kdp/goods/2023/02/03/420e46ce-c182-4e7f-9f29-0b3045c3ab5b.png?$PF_PRD_PNG$']">
+											<img src="./static/images/product/<%=rs.getString("Mno")%>_1.png"
 												alt="<%=rs.getString("Mname")%>"></a>
-										<div class="card-opt" style="height: 13px;">
-											<div class="pf-color-sel">
-												<div class="option-slick">
-													<ol class="itm-color-list swiper-wrapper">
-														<li class="swiper-slide"> <input type="radio"
-																id="itm-color-1001-G000291183"
-																name="itm-color-LS27BM502EK-SP" checked="checked"
-																onclick="fnGetPfPrd('G000291183', 'li-prd-G000291183', 'itm-color-1001-G000291183')">
-															<!-- <label for="itm-color-1001-G000291183"><span
-																	class="itm-color-object opt-checked"
-																	style="background-color:#000000;"
-																	data-omni="color_BLACK|LS27BM502EK-SP|LS27BM502EK-SP">블랙</span></label> -->
-														</li>
-													</ol>
-													<div class="slide-nav"> <button type="button"
-															class="btn-prev">이전</button> <button type="button"
-															class="btn-next">다음</button> </div>
-												</div>
-											</div>
-										</div>
-										<div class="card-option" style="height: 10px;"></div>
-										<div class="card-detail" style="height: 68px;"> <span class="prd-name"
-												title="The Freestyle + 스마트 모니터 68.6 cm 패키지"><%=rs.getString("Mname")%></span> <span class="prd-num"><%=rs.getString("Mno")%></span> </div>
-										<div class="card-price" style="height: 61px;">
+										<div class="card-detail"> <span class="prd-name"
+												title="<%=rs.getString("Mname")%>"><%=rs.getString("Mname")%></span> <span class="prd-num"><%=rs.getString("Mno")%></span> </div>
+										<div class="card-price">
 											<div class="list-price"> <span>기준가</span> <em><%=df.format(Integer.parseInt(rs.getString("Mprice")))%> 원</em> </div>
 											<div class="price-detail"> <span class="coupon">혜택가</span>
 												<div class="pic"> <em><%=df.format(Integer.parseInt(rs.getString("Msale")))%></em><span class="unit">원</span> <button
@@ -149,21 +144,21 @@
 													</div> <!-- e : 툴팁 -->
 												</div>
 											</div>
-											<div class="point-detail"> <span class="expect">적립 예정 포인트</span> <span
+											<div class="point-detail"> <span class="expect">지원 예정 포인트</span> <span
 													class="point"><%=(Integer.parseInt(rs.getString("Msale")))/100%>P</span> </div>
 										</div>
-										<div class="card-btn" style="height: 44px;"> <!-- 200723 href 속성 삭제 --><a href="./product/<%=rs.getString("Mno")%>.jsp"><button
+										<div class="card-btn"> <!-- 200723 href 속성 삭제 --><a href="./product/<%=rs.getString("Mno")%>.jsp"><button
 												type="button" class="btn btn-d btn-type2"
 												onclick="netFunnel_Action_PF('./product/<%=rs.getString("Mno")%>.jsp');return false;"
 												data-omni="">구매하기</button></a> </div>
-										<div class="card-purchase" style="height: 110px;">
+										<div class="card-purchase">
 											<ul class="message-list">
-												<li class="message-list-item"><%=rs.getString("Mfeatures1")%></li>
-												<li class="message-list-item"><%=rs.getString("Mfeatures2")%></li>
-												<li class="message-list-item"><%=rs.getString("Mfeatures3")%></li>
+												<li class="message-list-item"><%=rs.getString("Msize")%></li>
+												<li class="message-list-item"><%=rs.getString("Mresolution")%></li>
+												<li class="message-list-item"><%=rs.getString("Minjection")%>의 주사율</li>
 											</ul>
 											<div class="compare">
-											<a class="link-review" href="/sec/monitors/package-smart-ls27bm502ek-sp-dc2/LS27BM502EK-SP/?focus=review"
+											<a class="link-review" href="javascript:void(0);"
 											title="상품평점"><%=format_rating%> (<%=cnt%>)</a> </div>
 										</div>
 									</div>

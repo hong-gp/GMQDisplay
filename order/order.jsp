@@ -13,50 +13,7 @@
 <html lang="ko">
 <head>
 
-<title>Gaming Monitor Display</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
-	<meta http-equiv="Content-Style-Type" content="text/css">
-	<meta name="viewport" content="width=1082">
-	<meta name="google-site-verification" content="kfz-w2PvI30cjijNzYanVGxHa3BA7uKnLfGLj4UILU0" />
-	
-
-	<link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
-	<link href="https://static-ux.mustit.co.kr/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/lib/bootstrap/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/common/reset.css?v=1680035330"> <!-- reset.css -->
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/header.css?v=1680035330"> <!-- 리뉴얼 헤더 -->
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/common.css?v=1680035330"> <!-- common.css -->
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/button.css?v=1680035330"> <!-- button.css -->
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/font.css?v=1680035330"> <!-- font.css -->
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/layer.css?v=1680035330"><!-- 레이어팝업 -->
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/common/slide.css">
-	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/dist/service_desktop.css?v=1682322910">
-			<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/order.css?v=1680035330">
-		<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/common/join_styles.css?v=1680035330">
-	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/new_main.css?v=1680035330"> <!-- main.css -->
-	<link rel="canonical" href="https://mustit.co.kr/order/step1" />
-	<script type="text/javascript" src="https://static-ux.mustit.co.kr/lib/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="https://static-ux.mustit.co.kr/lib/jquery.min.1.7.1.js"></script>
-	<script type="text/javascript" src="//mustit.co.kr/lib/js/filesize_check.js"></script>
-	<script type="text/javascript" src="https://static-ux.mustit.co.kr/lib/jquery.scrollablecombo.js"></script> <!-- 메인배너스크롤 js -->
-	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/jquery.serialize-object.min.js"></script>
-	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/slide.js"></script>
-	<script type="text/javascript" src="//mustit.co.kr/lib/js/common.js?v=1680035330"></script>
-	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/order.js?v=1680035330"></script>
-	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/header.js?v=1680035330"></script>
-	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/header_new.js?v=1680035330"></script>
-	<script type="text/javascript" src="/lib/include/jquery.dotdotdot.js"></script> <!-- 여러줄 말줄임 -->
-	<!-- uri에 따라 js를 로드 시키는데 product.js 파일은 etc/selling_event_view/ uri를 가졌을때는 로드시키질 못함. 그래서 아래쪽 추가하는 코드 -->
-		<link rel="stylesheet" href="https://static-ux.mustit.co.kr/lib/jquery-ui/jquery-ui.css">
-	<script src="https://static-ux.mustit.co.kr/lib/jquery-ui/jquery-ui.js"></script>
-
-	<!--ux component-->
-	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/version/0.9.0/service/desktop/mustit-ui-desktop.css">
-	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/ux/service/common/mustit-webfonts.css">
-	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/ux/service/common/pretendard.css"><!--신규폰트 추가-->
-	<script type="text/javascript" src="https://static-ux.mustit.co.kr/version/0.9.0/service/desktop/mustit-ui-desktop.js"></script>
+<title>주문서 작성 | GMQDisplay</title>
 	<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,6 +46,44 @@
 <meta itemprop="description" content="GMQDisplay 게이밍 모니터에 대한 모든 궁금증을 해결하세요. 디자인과 기능, 사용 방법 등을 한눈에 비교하고 확인할 수 있어 제품 선택이 한결 쉬워집니다.">
 <meta itemprop="keywords" content="GMQDisplay 게이밍 모니터, 게이밍 모니터, 오디세이 모니터">
 
+	
+
+	<link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
+	<link href="https://static-ux.mustit.co.kr/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/lib/bootstrap/bootstrap.css"> -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/common/reset.css"> <!-- reset.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/header.css"> <!-- 리뉴얼 헤더 -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/common.css"> <!-- common.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/button.css"> <!-- button.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/font.css"> <!-- font.css -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/front/layer.css"><!-- 레이어팝업 -->
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/common/slide.css">
+	<link rel="stylesheet" type="text/css" href="https://mustit.co.kr/lib/css/dist/service_desktop.css">
+			<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/order.css">
+		<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/common/join_styles.css">
+	<link rel="stylesheet" type="text/css" href="//mustit.co.kr/lib/css/front/new_main.css"> <!-- main.css -->
+	<link rel="canonical" href="https://mustit.co.kr/order/step1" />
+	<script type="text/javascript" src="https://static-ux.mustit.co.kr/lib/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="https://static-ux.mustit.co.kr/lib/jquery.min.1.7.1.js"></script>
+	<script type="text/javascript" src="//mustit.co.kr/lib/js/filesize_check.js"></script>
+	<script type="text/javascript" src="https://static-ux.mustit.co.kr/lib/jquery.scrollablecombo.js"></script> <!-- 메인배너스크롤 js -->
+	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/jquery.serialize-object.min.js"></script>
+	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/slide.js"></script>
+	<script type="text/javascript" src="//mustit.co.kr/lib/js/common.js?v=1680035330"></script>
+	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/order.js?v=1680035330"></script>
+	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/header.js?v=1680035330"></script>
+	<script type="text/javascript" src="//mustit.co.kr/lib/js/front/header_new.js?v=1680035330"></script>
+	<script type="text/javascript" src="/lib/include/jquery.dotdotdot.js"></script> <!-- 여러줄 말줄임 -->
+	<!-- uri에 따라 js를 로드 시키는데 product.js 파일은 etc/selling_event_view/ uri를 가졌을때는 로드시키질 못함. 그래서 아래쪽 추가하는 코드 -->
+		<link rel="stylesheet" href="https://static-ux.mustit.co.kr/lib/jquery-ui/jquery-ui.css">
+	<script src="https://static-ux.mustit.co.kr/lib/jquery-ui/jquery-ui.js"></script>
+
+	<!--ux component-->
+	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/version/0.9.0/service/desktop/mustit-ui-desktop.css">
+	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/ux/service/common/mustit-webfonts.css">
+	<link rel="stylesheet" type="text/css" href="https://static-ux.mustit.co.kr/ux/service/common/pretendard.css"><!--신규폰트 추가-->
+	<script type="text/javascript" src="https://static-ux.mustit.co.kr/version/0.9.0/service/desktop/mustit-ui-desktop.js"></script>
+	
 <link rel="dns-prefetch" href="https://images.GMQDisplay.com">
 <link rel="preconnect" href="https://images.GMQDisplay.com">
 <link rel="shortcut icon" href="./static/images/favicon.png">
@@ -1057,13 +1052,6 @@ logger("prd");
 				<div class="header-right gnbMenu">
 					<ul>
 						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
-
-						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
 								aria-selected="false" class="link-cart" data-omni="cart" role="button">
 								<i class="icon ico-large ico-cart">장바구니</i>
@@ -1143,18 +1131,8 @@ logger("prd");
 <!-- START :: RTB House -->
 <!-- END :: RTB House -->
 
-<div class="content new_order" id="ordern">
+<div class="content new_order" id="ordern" style="width: 90%;">
 	<div class="order_title mi-after-clear">
-		<div class="step_img" style="line-height:27px;margin:9px 0;">
-			<img src="https://static-ux.mustit.co.kr/img/front/order/icon_sbasket.png" alt="장바구니" style="width:20px;"/>
-			<span class="step_name" style="margin-right:25px;">장바구니</span>
-			<img src="https://static-ux.mustit.co.kr/img/front/mypage/icon_course_arrow_new.png" alt="화살표" class="arrow" style="width:8px;height:16px;margin-top:-6px;margin-right:25px;"/>
-			<img src="https://static-ux.mustit.co.kr/img/front/order/icon-order-form-on.png" alt="주문서작성" style="width:20px;"/>
-			<span class="step_name on" style="margin-right:25px;">주문서작성</span>
-			<img src="https://static-ux.mustit.co.kr/img/front/mypage/icon_course_arrow_new.png" alt="화살표" class="arrow" style="width:8px;height:16px;margin-top:-6px;margin-right:25px;"/>
-			<img src="https://static-ux.mustit.co.kr/img/front/order/icon_order_completed.png" alt="주문완료" style="width:20px;"/>
-			<span class="step_name">주문완료</span>
-		</div>
 		<h2 class="mi-fw-bold fs30 mi-font-black">주문서 작성</h2>
 	</div>
 	
@@ -1549,6 +1527,12 @@ String[] counts = request.getParameterValues("buyQty");
 String Mno = request.getParameter("Mno");
 DecimalFormat df = new DecimalFormat("###,###");
 
+if (Mnos == null && Mno == null) {
+%>
+	<script>alert("장바구니에 담겨있는 상품이 없습니다."); history.back();</script>
+<%
+}
+
 ArrayList<String> order_info_arr = new ArrayList<String>();
 String order_info = "";
 
@@ -1802,17 +1786,16 @@ try {
 					<th>&nbsp;</th>
 					<th>할인가능금액</th>
 					<th>&nbsp;</th>
-					<th>포인트 사용
+					<th>포인트 지원
 						<div class="detail_desc">
 							<img src="https://static-ux.mustit.co.kr/img/front/product/icon_point.gif" alt=""
-								class="mark cursor" onclick="detail(this);" />
+								class="mark cursor" onclick="detail(this);" style="vertical-align: middle;"/>
 							<div class="detail">
 								<img src="https://static-ux.mustit.co.kr/img/front/order/img_detailPoint.gif"
 									class="mark_point" />
-								<p>상품 구매 후,</p>
-								<p>맴버쉽 포인트(1%) 지급됩니다.</p>
+								<p>맴버쉽 포인트(1%) 지원됩니다.</p>
 								<p>
-									<a href="/mypage/my_point?search_date=12m" target="_blank">
+									<a href="/GMQDisplay-master/event.html" target="_blank">
 										<span class="detail_btn">자세히 보기 ></span>
 									</a>
 								</p>
@@ -1821,15 +1804,15 @@ try {
 					</th>
 
 					<th>&nbsp;</th>
-					<th class="mi-relative">총 배송비<img id="totalDelivCursor"
-							src="https://static-ux.mustit.co.kr/img/front/mypage/icon_buying_seller.gif" class="arr_img cursor"
-							onclick="show_total_deliv();" />
+					<th class="mi-relative">총 배송비
+						<img id="totalDelivCursor" src="https://static-ux.mustit.co.kr/img/front/mypage/icon_buying_seller.gif" class="arr_img cursor"
+							onclick="show_total_deliv();" style="vertical-align: middle;"/>
 						<div class="total_deliv_detail">
 							<div class="detail_row">
-								<span class="detail_cell box_gray_f8">일반</span>
-								<span class="detail_cell"><span id="deliveryPrePayPrice">3,000원</span></span><br>
-								<span class="detail_cell box_gray_f8">제주/도서산간 지역</span>
-								<span class="detail_cell"><span id="deliveryPrePayPrice">5,000원</span></span>
+								<!--<span class="detail_cell box_gray_f8">회원 혜택</span>
+								<span class="detail_cell"><span id="deliveryPrePayPrice">0원</span></span><br>-->
+								<span class="detail_cell box_gray_f8">회원 혜택</span>
+								<span class="detail_cell"><span id="deliveryPrePayPrice">0원</span></span>
 							</div>
 
 							<div class="detail_row" style="display:none;">
@@ -1866,13 +1849,13 @@ try {
 					<td class="padding_0 border_r_none">
 						<img src="https://static-ux.mustit.co.kr/img/front/icon/icon-minus.png" alt="MINUS" style="width:20px">
 					</td>
-				<!--적립금-->
-				<td class="border_r_none">
+					<!--적립금-->
+					<td class="border_r_none">
 					<p>
-						<span id="uuse_mileage" class="fs20 c_black bold mi-helvetica"></span><span class="fs13 c_black bold">원</span>
+						<span class="fs20 c_black bold mi-helvetica"><%=df.format(total/100)%>원</span>
 					</p>
 						<p>
-					<input type="button" value="사용하기" class="btn-join mi-inline-block btn-join-gray-outline c_gray8 mi-font-basic" style="padding:3px 0 1px;width:90px;"/>
+					<!--<input type="button" value="사용하기" class="btn-join mi-inline-block btn-join-gray-outline c_gray8 mi-font-basic" style="padding:3px 0 1px;width:90px;"/>-->
 					</p>
 					<input name="use_mileage" type="hidden" readonly="readonly" size="8" maxlength="9" onkeyup="ck_digit(this);" onclick="canclePoint();" class="form-control"> 
 					<input type="hidden" name="itcoupon_discount" value="0"/>
@@ -1896,17 +1879,18 @@ try {
 					<img src="https://static-ux.mustit.co.kr/img/front/icon/icon-plus.png" alt="PLUS" style="width:20px">
 				</td>
 				<td class="border_r_none">
-					<span class="fs20 c_black bold mi-helvetica" id="baesongbi">3,000원</span>
+					<span class="fs20 c_black bold mi-helvetica">0원</span>
 				</td>
 				<td class="padding_0 border_r_none">
 					<img src="https://static-ux.mustit.co.kr/img/front/icon/icon-equals.png" alt="EQUALS" style="width:20px">
 				</td>
 				<!-- 최종 결정금액 -->
 				<td class="border_r_none">
-					<span class="mi-font-red bold h0 mi-helvetica gtag_price" id="total_price"><%=df.format(total)%> 원</span>
+					<span class="mi-font-red bold h0 mi-helvetica gtag_price"><%=df.format(total-(total/100))%> 원</span>
 				</td>
 			</tr>
 		</table>
+		<%total = total-(total/100);%>
 		<style>
 			#paymentTab .mi-accordion-title:after {right:34px!important;}
 			.mi-tab-primary .mi-hidden:checked + .mi-tab-link.border-red {border-color:#d01f3c;}
@@ -1935,7 +1919,7 @@ try {
 </script>
 		<!-- ?php echo "<xmp>"; print_r($order_payment_data); echo "</xmp>";? -->
 		<div id="wrapId" class="mi-after-clear mi-group-t20">
-			<div class="mi-float-left mi-border-whitegray mi-list-group mi-accordion" style="width:660px;border-bottom:0" id="wrap-mi-accordion">
+			<div class="mi-float-left mi-border-whitegray mi-list-group mi-accordion" style="width:710px;border-bottom:0" id="wrap-mi-accordion">
 			 	<div id="paymentTab">
 				<div class="mi-box-p20 mi-border-whitegray mi-border-del-lr mi-accordion-title">
 					<span class="mi-large mi-bold mi-font-mblack mi-inline-block mi-group-t5 mi-group-b5 mi-text-interval-lg" id="payment_name">결제수단 선택</span>
@@ -1947,70 +1931,11 @@ try {
 				<div class="mi-relative mi-border-whitegray mi-border-del-lr mi-accordion-contents" style="background-color:#fafafa;border-top:0;padding:15px;" id="payment_list">
 										
 					<!-- 결제수단관리 배너 PC 이미지 -->
-		
-					
-				
-
 					<input type="hidden" name="isBannerImg" id="isBannerImg" value="OK">
 					<!--<img src="https://mustit-upload.s3.ap-northeast-2.amazonaws.com/pc/banner/banner-dummy-test.png" style="position:absolute;top:-20px;left:20px;z-index:1;height:44px;">-->
 					<ul id="method_payment" class="mi-tab mi-tab-primary plus-h white-default mi-group-b15" data-tab-cnt="4">
+						
 						<span class="mi-inline-block mi-box-ap5 mi-col-3">
-							<li class="mi-tab-item" style="width:100%;">
-								<label id="pay_s1">
-									<input type="radio" name="pay_choice" id="tossPayment" value="onlytoss" onclick="loadRule(tossPayment);" class="mi-hidden"  data-gopaymethod="onlytoss"
-									data-payment-name="토스페이"
-									data-paymethod="simple"
-									data-check-start-date="2020-08-12 16:00:00"
-									data-check-end-date="2020-08-18 12:01:59"
-									data-payment-manage-no="5"
-									/>
-									                                
-                                    <span class="mi-tab-link border-red">
-										<img src="https://image.mustit.co.kr/lib/upload/payment/b2bd02a3722225c9acd7635d8c239ac4.png" class="mi-image-full checkBrowser" data-pay-choice="tossPayment"/>
-									</span>
-                                       
-																		
-								</label>
-																
-							</li>
-						</span>
-							<span class="mi-inline-block mi-box-ap5 mi-col-3">
-							<li class="mi-tab-item" style="width:100%;">
-								<label id="pay_s2">
-									<input type="radio" name="pay_choice" id="card" value="card" onclick="loadRule(card);" class="mi-hidden"  		data-gopaymethod="card"
-									data-payment-name="카드결제"
-									data-paymethod="general"
-									data-check-start-date=""
-									data-check-end-date=""
-									data-payment-manage-no="1"
-									/>
-								<span class="mi-tab-link border-red" style="padding:15px 0;font-size:14px;line-height:20px;" id="card_choice">
-										<span>카드결제</span>	
-									</span>
-																		
-								</label>
-																
-							</li>
-						</span>
-							<span class="mi-inline-block mi-box-ap5 mi-col-3">
-							<li class="mi-tab-item" style="width:100%;">
-								<label id="pay_s3">
-									<input type="radio" name="pay_choice" id="VBank" value="VBank" onclick="loadRule(VBank);" class="mi-hidden"  					data-gopaymethod="VBank"
-									data-payment-name="무통장입금"
-									data-paymethod="general"
-									data-check-start-date=""
-									data-check-end-date=""
-									data-payment-manage-no="2"
-									/>
-									<span class="mi-tab-link border-red" style="padding:15px 0;font-size:14px;line-height:20px;">
-										<span>무통장입금</span>	
-									</span>
-																		
-								</label>
-																
-							</li>
-						</span>
-							<span class="mi-inline-block mi-box-ap5 mi-col-3">
 							<li class="mi-tab-item" style="width:100%;">
 								<label id="pay_s4">
 									<input type="radio" name="pay_choice" id="kakaoPay" value="onlykakaopay" onclick="loadRule(kakaoPay);" class="mi-hidden" data-gopaymethod="onlykakaopay"
@@ -2030,66 +1955,7 @@ try {
 																
 							</li>
 						</span>
-							<span class="mi-inline-block mi-box-ap5 mi-col-3">
-							<li class="mi-tab-item" style="width:100%;">
-								<label id="pay_s5">
-									<input type="radio" name="pay_choice" id="nPay" value="nPay" onclick="loadRule(nPay);" class="mi-hidden"  						data-gopaymethod="nPay"
-									data-payment-name="네이버페이"
-									data-paymethod="simple"
-									data-check-start-date="2022-06-18 00:05:00"
-									data-check-end-date="2022-06-18 00:59:59"
-									data-payment-manage-no="4"
-									/>
-									                                
-                                    <span class="mi-tab-link border-red">
-										<img src="https://image.mustit.co.kr/lib/upload/payment/78439737807607bee3125e5a2b335676.jpeg" class="mi-image-full checkBrowser" data-pay-choice="nPay"/>
-									</span>
-                                       
-																		
-								</label>
-																
-							</li>
-						</span>
-												<span class="mi-inline-block mi-box-ap5 mi-col-3">
-							<li class="mi-tab-item" style="width:100%;">
-								<label id="pay_s6">
-									<input type="radio" name="pay_choice" id="payCo" value="onlypayco" onclick="loadRule(payCo);" class="mi-hidden" checked="checked" 									data-gopaymethod="onlypayco"
-									data-payment-name="PAYCO"
-									data-paymethod="simple"
-									data-check-start-date="2020-08-13 10:00:00"
-									data-check-end-date="2020-08-14 23:59:59"
-									data-payment-manage-no="6"
-									/>
-									                                
-                                    <span class="mi-tab-link border-red">
-										<img src="https://image.mustit.co.kr/lib/upload/payment/d244be0e3b829ed4012d88f8c431457f.png" class="mi-image-full checkBrowser" data-pay-choice="payCo"/>
-									</span>
-                                       
-																		
-								</label>
-																
-							</li>
-						</span>
-												<span class="mi-inline-block mi-box-ap5 mi-col-3">
-							<li class="mi-tab-item" style="width:100%;">
-								<label id="pay_s7">
-									<input type="radio" name="pay_choice" id="samsungPay" value="onlyssp" onclick="loadRule(samsungPay);" class="mi-hidden"  data-gopaymethod="onlyssp"
-									data-payment-name="삼성페이"
-									data-paymethod="simple"
-									data-check-start-date=""
-									data-check-end-date=""
-									data-payment-manage-no="7"
-									/>
-									                                
-                                    <span class="mi-tab-link border-red">
-										<img src="https://image.mustit.co.kr/lib/upload/payment/733f9d8b09855daf8098be1c5719208d.png" class="mi-image-full checkBrowser" data-pay-choice="samsungPay"/>
-									</span>
-                                       
-																		
-								</label>
-																
-							</li>
-						</span>
+							
 											</ul>
 					
 					<div class="mi-group-b5 mi-group-l5 mi-group-r5" >
@@ -2891,7 +2757,7 @@ try {
 					<div class="c_gray9">- 관리자만 보이는 무통장입금(모듈미설치) 입니다.</div>
 				</div>
 			</div>
-			<div id="ordererConsent" class="mi-float-right" style="width:400px">
+			<div id="ordererConsent" class="mi-float-right" style="width:450px">
 				
 
 				<div class="mi-box-ap20 mi-border-whitegray mi-list-group">
@@ -4488,8 +4354,8 @@ var  promotionSliderStart = false;
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<a href="javascript:void(0);"><h3>추천 케어</h3></a>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

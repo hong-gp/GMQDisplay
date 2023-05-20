@@ -1087,13 +1087,6 @@ $.views.tags('script',{   // 스크립트
 				<div class="header-right gnbMenu">
 					<ul>
 						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
-
-						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
 								aria-selected="false" class="link-cart" data-omni="cart" role="button">
 								<i class="icon ico-large ico-cart">장바구니</i>
@@ -2037,9 +2030,9 @@ int count = 0;
 	String color = request.getParameter("color");
 	String colorStr = "";
 	if (color.equals("")) {
-		colorStr = "색역 미지원";
+		colorStr = "색 표현 100% 이하";
 	} else {
-		colorStr = "색역 지원";
+		colorStr = "색 표현 100% 이상";
 	}
 
 	int max = 0;
@@ -2136,16 +2129,6 @@ try {
 						<dd><strong>#</strong><%=speakerStr%></dd>
 						<dd><strong>#</strong><%=colorStr%></dd>
 					</dl>
-					<!-- 정렬 옵션 -->
-					<div id="rcmndCycle" class="wrap-droplist">
-						<button class="droplist-button" aria-haspopup="listbox" aria-labelledby="rcmndCycleTitle rcmndCycleBtn" id="rcmndCycleBtn">추천순</button>
-						<ul class="droplist" tabindex="-1"  role="listbox" aria-labelledby="rcmndCycleTitle" aria-activedescendant="optRcmndCycle10"><!--aria-activedescendant에 선택된 li의 id 삽입-->
-							<li id="optRcmndCycle10"  role="option" class="droplist-item focused" aria-selected="true" data-sort-type="10" data-omni="recommendedorder" tabindex="-1">추천순</li>
-							<li id="optRcmndCycle20"  role="option" class="droplist-item" data-sort-type="20" data-omni="highprice" tabindex="-1">높은 가격순</li>
-							<li id="optRcmndCycle30"  role="option" class="droplist-item" data-sort-type="30" data-omni="lowprice"tabindex="-1">낮은 가격순</li>
-							<li id="optRcmndCycle40"  role="option" class="droplist-item" data-sort-type="40" data-omni="producthigh" tabindex="-1">상품평 높은순</li>
-								</ul>
-					</div>
 				</section>
 				<section class="rcmd-prdt-list ">
 					<ul>
@@ -2240,9 +2223,18 @@ try {
 												<span class="price"><%=df.format(Integer.parseInt(rs2.getString("Mprice")))%>원</span>
 												<div class="sale">
 													<em><%=df.format(Integer.parseInt(rs2.getString("Msale")))%></em><span>원</span> <!-- 상품가격 -->
-													<button class="btn-downtool" aria-hidden="true"><span class="blind">툴팁보기(레이어열림)</span></button>
+
+													<script>
+														$(function (){
+															$("#toggle<%=rs2.getString("Mno")%>").click(function (){
+															$("#divToggle<%=rs2.getString("Mno")%>").toggle();
+															});
+														});
+													</script>
+
+													<button class="btn-downtool" aria-hidden="true" id="toggle<%=rs2.getString("Mno")%>"><span class="blind">툴팁보기(레이어열림)</span></button>
 													<!-- s : 툴팁 -->
-													<div class="box-tip" aria-hidden="true" style="display: none;">
+													<div class="box-tip" aria-hidden="true" style="display: none;" id="divToggle<%=rs2.getString("Mno")%>">
 														<ul>
 															<li>
 																<span class="tit">기준가</span><del class="price"><%=df.format(Integer.parseInt(rs2.getString("Mprice")))%>원</del>
@@ -2259,7 +2251,7 @@ try {
 												</div>
 											</div>
 											<div class="point-detail">
-												<span class="expect">적립 예정 포인트</span><strong class="point"><%=Integer.parseInt(rs2.getString("Msale"))/100%>P</strong>
+												<span class="expect">지원 예정 포인트</span><strong class="point"><%=Integer.parseInt(rs2.getString("Msale"))/100%>P</strong>
 											</div>
 											<div class="cta"><!-- 200723 href 속성 삭제 -->
 												<button class="btn btn-type1 btn-rcmd-prdt" onclick="location.href = '/GMQDisplay-master/product/<%=rs2.getString("Mno")%>.jsp'">자세히 보기</button>
@@ -2281,11 +2273,9 @@ try {
 									<div class="epilogue">
 										<div class="titl">
 											<strong>후기 보기</strong>
-											<a href="/sec/tvs/neo-qled-8k-qnb800fxkr-d2c/KQ75QNB800FXKR/?focus=review" title="상품평점" data-omni="productcomment">
 												<div class="num">
 													<p class="blind">툴팁보기(레이어열림)</p><%=format_rating%><span> <!-- (<%=cnt%>) --></span>
 												</div>
-											</a>
 										</div>
 										<ul class="list-box slick-initialized slick-slider">
 											<div class="slick-list draggable">
@@ -2470,8 +2460,8 @@ try {
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<h3><a href="javascript:void(0);">추천 케어</a></h3>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

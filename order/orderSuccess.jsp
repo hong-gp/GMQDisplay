@@ -1850,13 +1850,6 @@ logger("prd");
 				<div class="header-right gnbMenu">
 					<ul>
 						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
-
-						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
 								aria-selected="false" class="link-cart" data-omni="cart" role="button">
 								<i class="icon ico-large ico-cart">장바구니</i>
@@ -2834,6 +2827,20 @@ try {
 				pstmt4.setString(2, rs3.getString("Mno"));
 				pstmt4.executeUpdate();
 			}
+
+			String sql7 = "SELECT * FROM product WHERE Mno=?";
+			PreparedStatement pstmt7 = con.prepareStatement(sql7);
+			pstmt7.setString(1, rs2.getString("Mno"));
+			ResultSet rs7 = pstmt7.executeQuery();
+
+			if(rs7.next()) {
+				String sql8 = "UPDATE product SET Morder=? WHERE Mno=?";
+				PreparedStatement pstmt8 = con.prepareStatement(sql8);
+				pstmt8.setInt(1, rs7.getInt("Morder")+rs2.getInt("item_count"));
+				pstmt8.setString(2, rs2.getString("Mno"));
+				pstmt8.executeUpdate();
+			}
+
 		}
 	}
 %>
@@ -2842,7 +2849,7 @@ try {
         <div id="__next" data-reactroot="">
           <style>
             #container {
-              background-color: #F0F0F0;
+              /*background-color: #F0F0F0;*/
             }
           </style>
           <div class="sc-ztsili-0 hnTLwu">
@@ -2882,17 +2889,17 @@ try {
 									int Msale = rs6.getInt("Msale");
 									int total_Msale = Msale * count;
 									total += total_Msale;
-							%>
-                              <a class="sc-18pc8pe-1 eQfPNh float-left" href="(이미지경로.jpg)" target="_blank">
+							%><hr style="display: block;"><br>
+                              <a class="sc-18pc8pe-1 eQfPNh float-left" href="/GMQDisplay-master/product/<%=Mno%>.jsp" target="_blank">
                                   <img class="sc-18pc8pe-2 daJtqk" loading="lazy" src="/GMQDisplay-master/static/images/product/<%=Mno%>_1.png" alt="product image" style="width: 100px; display: inline-block">
                               </a>
                               <div style="display: inline-block">
-                                  <a href="(이미지경로.jpg)" target="_blank" class="sc-18pc8pe-3 gGAwML"><%=Mno%></a>
+                                  <a href="(이미지경로.jpg)" target="_blank" class="sc-18pc8pe-3 gGAwML"><%=rs6.getString("Mname")%></a>
                                   <div class="sc-18pc8pe-5 pLEoM">
                                       <span class="sc-18pc8pe-9 fFYOeI"><%=df.format(Msale)%></span> 원
                                   </div>
-                                  <div class="sc-18pc8pe-8 dCzZgT">수량: <%=count%> 개</div>
-                              </div><br><br>
+                                  <div class="sc-18pc8pe-8 dCzZgT" style="position: relative; top: -20px;left: 500px;">수량: <%=count%> 개</div>
+                              </div>
 							<%
 								}
 							}
@@ -2925,8 +2932,6 @@ try {
                             <td>받는주소</td>
                             <td>
                               <%=order_delivery_address%>
-                            </td>
-                            <td>
                             </td>
                             <td>
                             </td>

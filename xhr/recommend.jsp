@@ -2061,7 +2061,7 @@ int count = 0;
 
 	if (panel.equals("flat"))
 		panel = "평면";
-	else 
+	else if (panel.equals("curve"))
 		panel = "커브드";
 
 try {
@@ -2105,16 +2105,6 @@ try {
 						<dd><strong>#</strong><%=inchValue%></dd>
 						<dd><strong>#</strong><%=gamemodeStr%></dd>
 					</dl>
-					<!-- 정렬 옵션 -->
-					<div id="rcmndCycle" class="wrap-droplist">
-						<button class="droplist-button" aria-haspopup="listbox" aria-labelledby="rcmndCycleTitle rcmndCycleBtn" id="rcmndCycleBtn">추천순</button>
-						<ul class="droplist" tabindex="-1"  role="listbox" aria-labelledby="rcmndCycleTitle" aria-activedescendant="optRcmndCycle10"><!--aria-activedescendant에 선택된 li의 id 삽입-->
-							<li id="optRcmndCycle10"  role="option" class="droplist-item focused" aria-selected="true" data-sort-type="10" data-omni="recommendedorder" tabindex="-1">추천순</li>
-							<li id="optRcmndCycle20"  role="option" class="droplist-item" data-sort-type="20" data-omni="highprice" tabindex="-1">높은 가격순</li>
-							<li id="optRcmndCycle30"  role="option" class="droplist-item" data-sort-type="30" data-omni="lowprice"tabindex="-1">낮은 가격순</li>
-							<li id="optRcmndCycle40"  role="option" class="droplist-item" data-sort-type="40" data-omni="producthigh" tabindex="-1">상품평 높은순</li>
-								</ul>
-					</div>
 				</section>
 				<section class="rcmd-prdt-list ">
 					<ul>
@@ -2209,9 +2199,20 @@ try {
 												<span class="price"><%=df.format(Integer.parseInt(rs2.getString("Mprice")))%>원</span>
 												<div class="sale">
 													<em><%=df.format(Integer.parseInt(rs2.getString("Msale")))%></em><span>원</span> <!-- 상품가격 -->
-													<button class="btn-downtool" aria-hidden="true"><span class="blind">툴팁보기(레이어열림)</span></button>
+
+
+													<script>
+														$(function (){
+															$("#toggle1").click(function (){
+															$("#divToggle1").toggle();
+															});
+														});
+													</script>
+
+													<button class="btn-downtool" aria-hidden="true" id="toggle1">
+													<span class="blind" >툴팁보기(레이어열림)</span></button>
 													<!-- s : 툴팁 -->
-													<div class="box-tip" aria-hidden="true" style="display: none;">
+													<div class="box-tip" aria-hidden="true" style="display: none;" id="divToggle1">
 														<ul>
 															<li>
 																<span class="tit">기준가</span><del class="price"><%=df.format(Integer.parseInt(rs2.getString("Mprice")))%>원</del>

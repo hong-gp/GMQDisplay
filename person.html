@@ -558,7 +558,7 @@ var checkActionTimeOut;
 					//mobile web
 					var htmlMoLoginAfter = '<ul class="mob-onlyMenu loginAfter">';
 					htmlMoLoginAfter += '<li class="welcomeMsg">';
-					htmlMoLoginAfter += '<a href="https://account.samsung.com/" target="_blank" title="새창열림">안녕하세요!</a></li>';
+					htmlMoLoginAfter += '<a href="javascript:void(0)" target="_blank" title="새창열림">안녕하세요!</a></li>';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-myinfo">';
 					htmlMoLoginAfter += '<a href="/GMQDisplay-master/mypage/myinfo.jsp" data-omni=\'my account\'>나의 정보</a></li>';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-myDeviceList">';
@@ -954,13 +954,6 @@ var checkActionTimeOut;
 
 				<div class="header-right gnbMenu">
 					<ul>
-						<li>
-							<a href="javascript:void(0);" id="link-search" class="link-search" data-omni="search"
-								role="button">
-								<i class="icon ico-large ico-zoom">검색</i>
-							</a>
-						</li>
-
 						<li>
 							<a href="javascript:void(0);" onclick="getCartList()" aria-controls="cart-menu"
 								aria-selected="false" class="link-cart" data-omni="cart" role="button">
@@ -2724,45 +2717,6 @@ var checkActionTimeOut;
     <!-- 14. 고지의 의무 끝-->
     <!-- 부칙 -->
     <!-- 부칙 -->
-    <div class="contents_txt">
-    <p style="margin-top:30px;">
-        <select onchange="location.href='/info/' + this.options[this.selectedIndex].value;" title="날짜별 개인정보처리방침 보기"> <!-- 2016-05-16 title 추가해주세요 -->
-            <option selected="selected">현재/이전 개인정보처리방침 보기</option>
-            <option value="../person.html">현재방침 (시행일:2023.03.02)</option>
-			<!--
-            <option value="helprule_private_202302.html">이전방침 (시행일:2023.02.09.)</option>
-            <option value="helprule_private_202301.html">이전방침 (시행일:2023.01.16.)</option>
-            <option value="helprule_private_202212.html">이전방침 (시행일:2022.12.01.)</option>
-            <option value="helprule_private_202210.html">이전방침 (시행일:2022.10.27.)</option>
-            <option value="helprule_private_202206.html">이전방침 (시행일:2022.06.20.)</option>
-            <option value="helprule_private_202204.html">이전방침 (시행일:2022.04.21.)</option>
-            <option value="helprule_private_202111.html">이전방침 (시행일:2021.11.24.)</option>
-            <option value="helprule_private_202107.html">이전방침 (시행일:2021.07.07.)</option>
-            <option value="helprule_private_202106.html">이전방침 (시행일:2021.03.11.)</option>
-            <option value="helprule_private_202012.html">이전방침 (시행일:2021.01.18.)</option>
-            <option value="helprule_private_202009_2.html">이전방침 (시행일:2020.09.16.)</option>
-            <option value="helprule_private_202009.html">이전방침 (시행일:2020.09.03.)</option>
-            <option value="helprule_private_202004.html">이전방침 (시행일:2020.04.10.)</option>
-            <option value="helprule_private_201904.html">이전방침 (시행일:2019.05.02.)</option>
-            <option value="helprule_private_201809.html">이전방침 (시행일:2018.09.17.)</option>
-            <option value="helprule_private_201803.html">이전방침 (시행일:2018.03.12.)</option>
-            <option value="helprule_private_201802.html">이전방침 (시행일:2018.02.27.)</option>
-            <option value="helprule_private_201712.html">이전방침 (시행일:2017.12.29.)</option>
-            <option value="helprule_private_201709.html">이전방침 (시행일:2017.09.18.)</option>
-            <option value="helprule_private_201703.html">이전방침 (시행일:2017.03.31.)</option>
-            <option value="helprule_private_201612.html">이전방침 (시행일:2016.12.08.)</option>
-            <option value="helprule_private_201605.html">이전방침 (시행일:2016.05.17.)</option>
-            <option value="helprule_private_2016.html">이전방침 (시행일:2015.12.14.)</option>
-            <option value="helprule_private_2015_2.html">이전방침 (시행일:2015.07.20.)</option>
-            <option value="helprule_private_2015_1.html">이전방침 (시행일:2015.05.18.)</option>
-            <option value="helprule_private_2015.html">이전방침 (시행일:2014.12.05.)</option>
-            <option value="helprule_private_2014.html">이전방침 (시행일:2014.06.09.)</option>
-            <option value="helprule_private_2013.html">이전방침 (시행일:2013.02.17.)</option>
-            <option value="helprule_private_2007.html">이전방침 (시행일:2007.02.13.)</option>
-			-->
-        </select>
-    </p>
-</div>    <!-- 부칙 끝 -->
 </div>
 <!-- footer -->
 </div>
@@ -2789,8 +2743,8 @@ var checkActionTimeOut;
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<a href="javascript:void(0);"><h3>추천 케어</h3></a>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

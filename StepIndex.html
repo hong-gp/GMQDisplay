@@ -14,10 +14,10 @@
 	<meta name="date" content="">
 	<meta name="sitecode" content="sec">
 
-	<meta name="twitter:card" content="Summary">
-	<meta name="twitter:site" content="@samsungkorea">
-	<meta name="twitter:creator" content="@samsungkorea">
-	<meta name="twitter:url" content="https://www.samsung.com/monitors/gaming-monitors/">
+	<meta name="twitter:card" content="">
+	<meta name="twitter:site" content="">
+	<meta name="twitter:creator" content="">
+	<meta name="twitter:url" content="">
 	<meta name="twitter:title" content="게이밍 모니터 | GMQDisplay 대한민국">
 	<meta name="twitter:description"
 		content="GMQDisplay 게이밍 모니터에 대한 모든 궁금증을 해결하세요. 디자인과 기능, 사용 방법 등을 한눈에 비교하고 확인할 수 있어 제품 선택이 한결 쉬워집니다.">
@@ -542,7 +542,7 @@
 				}
 			}
 
-			// 로그인 상태 GNB 메뉴 세팅
+						// 로그인 상태 GNB 메뉴 세팅
 			function setLoginGnbMenu() {
 				if (device.agent.indexOf("mobi") >= 0 || device.isGnb === false) {
 					//mobile web
@@ -550,21 +550,21 @@
 					htmlMoLoginAfter += '<li class="welcomeMsg">';
 					htmlMoLoginAfter += '<a href="#" target="_blank" title="새창열림">안녕하세요!</a></li>';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-myinfo">';
-					htmlMoLoginAfter += '<a href="#" data-omni=\'my account\'>회원 통합 목록</a></li>';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/Step/MemberList.jsp" data-omni=\'my account\'>회원 통합 목록</a></li>';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-myDeviceList">';
-					htmlMoLoginAfter += '<a href="#" data-omni=\'my divice\'>상품 통합 목록</a></li>';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/Step/ProductList.jsp" data-omni=\'my divice\'>상품 통합 목록</a></li>';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-prdctRvw">';
-					htmlMoLoginAfter += '<a href="#" data-omni=\'my comment\'>주문 통합 목록</a></li>';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/Step/OrderList.jsp" data-omni=\'my comment\'>주문 통합 목록</a></li>';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-tracking">';
-					htmlMoLoginAfter += '<a href="#" data-omni=\'orders\'>리뷰 통합 목록</a></li>';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/Step/ReviewList.jsp" data-omni=\'orders\'>상품평 통합 목록</a></li>';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-cpnZone">';
-					htmlMoLoginAfter += '<a href="#" data-omni=\'FAQ\'>1 : 1 문의 목록</a></li>';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/Step/ReportList.jsp" data-omni=\'FAQ\'>1 : 1 문의 목록</a></li>';
 					htmlMoLoginAfter += '';
 					htmlMoLoginAfter += '';
 					htmlMoLoginAfter += '';
 					htmlMoLoginAfter += '';
 					htmlMoLoginAfter += '<li class="mob-onlyMenu-logout">';
-					htmlMoLoginAfter += '<a href="./xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></li>';
+					htmlMoLoginAfter += '<a href="/GMQDisplay-master/xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></li>';
 					htmlMoLoginAfter += '</ul>';
 
 					$("#useLogin").after(htmlMoLoginAfter);
@@ -573,15 +573,15 @@
 					var htmlLoginAfter = '<div class="gnbSubRound loginAfter"><div>';
 					htmlLoginAfter += '<dl>';
 					htmlLoginAfter += '<dt><a href="#"><span class="greet-txt">안녕하세요!</span></a></dt>';
-					htmlLoginAfter += '<dd><a href="#" data-omni=\'my account\'>회원 통합 목록</a></dd>';
-					htmlLoginAfter += '<dd><a href="#" data-omni=\'my divice\'>상품 통합 목록</a></dd>';
-					htmlLoginAfter += '<dd><a href="#" data-omni=\'my comment\'>주문 통합 목록</a></dd>';
-					htmlLoginAfter += '<dd><a href="#" data-omni=\'orders\'>리뷰 통합 목록</a></dd>';
-					htmlLoginAfter += '<dd><a href="#" data-omni=\'FAQ\'>1 : 1 문의 목록</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/Step/MemberList.jsp" data-omni=\'my account\'>회원 통합 목록</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/Step/ProductList.jsp" data-omni=\'my divice\'>상품 통합 목록</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/Step/OrderList.jsp" data-omni=\'my comment\'>주문 통합 목록</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/Step/ReviewList.jsp" data-omni=\'orders\'>상품평 통합 목록</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/Step/ReportList.jsp" data-omni=\'FAQ\'>1 : 1 문의 목록</a></dd>';
 					htmlLoginAfter += '';
 					htmlLoginAfter += '';
 					htmlLoginAfter += '';
-					htmlLoginAfter += '<dd><a href="./xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></dd>';
+					htmlLoginAfter += '<dd><a href="/GMQDisplay-master/xhr/logout.jsp;" data-omni=\'logout\'>로그아웃</a></dd>';
 					htmlLoginAfter += '</dl>';
 					htmlLoginAfter += '</div></div>';
 
@@ -1660,7 +1660,7 @@
 													</h2>
 													<ul class="item-list">
 														<li class="box">
-															<a href="#"
+															<a href="/GMQDisplay-master/Step/MemberList.jsp"
 																data-omni="pcd:it:monitor:gaming:all_about:support">
 																<div>
 																	<center class="img">
@@ -1672,16 +1672,16 @@
 														</li>
 														
 														<li class="box">
-															<a href="#" data-omni="pcd:it:monitor:gaming:all_about:video_papercup" >
+															<a href="/GMQDisplay-master/Step/ReviewList.jsp" data-omni="pcd:it:monitor:gaming:all_about:video_papercup" >
 																<div>
 																	<center class="img"><img src="/GMQDisplay-master/static/images/explain/review.png" alt="1:1문의" style="width:60%;">
-																	<strong class="tit">리뷰 통합 목록</strong></center>
+																	<strong class="tit">상품평 통합 목록</strong></center>
 																</div>
 															</a>
 														</li>
 
 														<li class="box">
-															<a href="#" data-omni="pcd:it:monitor:gaming:all_about:video_papercup" >
+															<a href="/GMQDisplay-master/Step/ProductList.jsp" data-omni="pcd:it:monitor:gaming:all_about:video_papercup" >
 																<div>
 																	<center class="img" >
 																	<img src="/GMQDisplay-master/static/images/explain/monitor.png" alt="추천 케어 서비스" style="width:60%;">
@@ -1704,7 +1704,7 @@
 														</li>
 
 														<li class="box" style="float:right;">
-															<a href="#" data-omni="pcd:it:monitor:gaming:all_about:design_story">
+															<a href="/GMQDisplay-master/Step/OrderList.jsp" data-omni="pcd:it:monitor:gaming:all_about:design_story">
 																<div>
 																	<center class="img">
 																	<img src="/GMQDisplay-master/static/images/explain/order.png"
@@ -1715,7 +1715,7 @@
 														</li>
 
 														<li class="box" style="float:right;">
-															<a href="#" data-omni="pcd:it:monitor:gaming:all_about:design_story">
+															<a href="/GMQDisplay-master/Step/ReportList.jsp" data-omni="pcd:it:monitor:gaming:all_about:design_story">
 																<div>
 																	<center class="img"><img
 																			src="/GMQDisplay-master/static/images/explain/call.png"
@@ -2481,8 +2481,10 @@
 														<li><a href="/GMQDisplay-master/monitors.html?genre=videogame" data-omni="product_videogame">비디오/콘솔용</a></li>
 													</ul>
 												</li>
-												<li class="productLine2">
-													<h3>추천 케어</h3>
+												<li>
+													<h3>
+														<a href="javascript:void(0);">추천 케어</a>
+													</h3>
 													<ul>
 														<li><a href="/GMQDisplay-master/recommend/index_game.html;"
 																data-omni="product_smartphones">게임용 추천케어</a></li>

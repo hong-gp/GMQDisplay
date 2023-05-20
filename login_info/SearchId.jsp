@@ -7,13 +7,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Join GMQDisplay member to get the latest information on sales and promotions, be the first to know about product launches, and receive support and service for your GMQDisplay Products." />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>GMQDisplay 회원 로그인 | GMQDisplay 한국</title>
+    <title>GMQDisplay 아이디 찾기 | GMQDisplay 한국</title>
     <meta property="og:title" content="GMQDisplay" />
     <meta property="og:description" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <link rel="apple-touch-icon" href="" />
-    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="/GMQDisplay-master/static/images/favicon.png">
     <link href="./G5/css/plugInAll.css" rel="stylesheet" type="text/css" />
     <link href="./G5/css/icon_fonts/style.css" rel="stylesheet" type="text/css" />
         <link href="./G5/css/all.css" rel="stylesheet" type="text/css" />
